@@ -6,6 +6,8 @@ class JamRoom extends Component {
     return (
       <div id="jamroom">
       Welcome to the JamRoom!!
+
+      <img id='userPiano' src="http://bit.ly/2aTy5ik"/>
       </div>
     );
   }

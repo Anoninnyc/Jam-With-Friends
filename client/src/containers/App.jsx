@@ -1,4 +1,3 @@
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import React, { Component } from 'react';
 import LandingPage from './LandingPage';
 import Nav from './Nav';
@@ -10,6 +9,11 @@ import JamRoom from './JamRoom';
 
 class App extends Component {
   constructor(props) {
+    super(props)
+    this.toggleRoom = this.toggleRoom.bind(this);
+    this.toggleView = this.toggleView.bind(this);
+    this.toggleInstrument=this.toggleInstrument.bind(this);
+
     super(props);
     this.state = {
       view: "LandingPage",
@@ -44,10 +48,10 @@ class App extends Component {
       return (
         < div >
           < Nav
-            change={this.toggleView.bind(this)}
+            change={this.toggleView}
           / >
           < LandingPage
-            change={this.toggleView.bind(this)}
+            change={this.toggleView}
           / >
         < /div>
       );
@@ -55,7 +59,7 @@ class App extends Component {
       return (
         < div >
           <Login
-            change={this.toggleView.bind(this)}
+            change={this.toggleView}
           />
         < /div>
       );
@@ -63,7 +67,7 @@ class App extends Component {
       return (
         < div >
           <Signup
-            change={this.toggleView.bind(this)}
+            change={this.toggleView}
           />
         < /div>
       );
@@ -71,9 +75,9 @@ class App extends Component {
       return (
         < div >
           <SelectInstrument
-            sel={this.toggleInstrument.bind(this)}
+            sel={this.toggleInstrument}
             inst={this.state.instrument}
-            change={this.toggleView.bind(this)}
+            change={this.toggleView}
           />
         < /div>
       );
@@ -81,7 +85,7 @@ class App extends Component {
       return (
         <div>
           <SelectRoom
-            rooms={this.toggleRoom.bind(this)}
+            rooms={this.toggleRoom}
           />
         </ div>
 

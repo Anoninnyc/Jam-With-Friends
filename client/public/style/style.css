@@ -1,6 +1,6 @@
 #roche{
-background-image: url('http://bit.ly/2aMzQ3b');
- position: absolute;
+  background-image: url('http://bit.ly/2aMzQ3b');
+  position: absolute;
   width: 100%;
   height: 100%;
   background-size: 100%;
@@ -8,10 +8,16 @@ background-image: url('http://bit.ly/2aMzQ3b');
 }
 
 #jamroom{
-background-image: url('./JamRoomBG.gif');
- position: absolute;
+  background-image: url('./JamRoomBG.gif');
+  position: absolute;
   width: 100%;
   height: 100%;
   background-size: 100%;
   background-size: cover;
+}
+
+#userPiano{
+  position: relative;
+  top:100px;
+  left:50px;
 }
