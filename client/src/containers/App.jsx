@@ -87,9 +87,7 @@ class App extends Component {
           <SelectRoom
             rooms={this.toggleRoom}
           />
-        </div>
-
-      );
+        </div>)
     } else if (this.state.view==='JamRoom') {
       return (
         <div>
