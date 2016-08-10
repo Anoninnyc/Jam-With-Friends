@@ -1,3 +1,4 @@
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import React, { Component } from 'react';
 import LandingPage from './LandingPage';
 import Nav from './Nav';
