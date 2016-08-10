@@ -4,7 +4,7 @@ class JamRoom extends Component {
 
   render() {
     return (
-      <div>
+      <div id="jamroom">
       Welcome to the JamRoom!!
       </div>
     );
