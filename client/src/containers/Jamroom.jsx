@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-class SelectInstrument extends Component {
+class JamRoom extends Component {
 
   render() {
     return (
       <div>
-      
+      Welcome to the JamRoom!!
       </div>
     );
   }
 }
 
-export default SelectInstrument;
+export default JamRoom;

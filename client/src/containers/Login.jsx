@@ -6,8 +6,8 @@ class Login extends Component {
       <div>
         Username:<input type="text" /><br />
         Pass:<input type="password" /><br />
-          <button onClick={() =>{this.props.change('selectInstrument')}}>Login</button>
-          <button onClick={() =>{this.props.change('signup')}}>Click to signup</button>
+          <button onClick={() =>{this.props.change('SelectRoom')}}>Login</button>
+          <button onClick={() =>{this.props.change('SelectRoom')}}>Click to signup</button>
       </div>
     );
   }
