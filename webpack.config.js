@@ -10,10 +10,10 @@ const config = {
     modulesDirectories: ['node_modules', 'components'],
     extensions: ['', '.js', '.jsx']
   },
-  entry: path.join(SRC_DIR, 'index.js'),
+  entry: [path.join(SRC_DIR, 'index.js'), path.join(SRC_DIR, 'peer.js')],
   output: {
     path: DIST_DIR,
-    filename: 'index.js'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [

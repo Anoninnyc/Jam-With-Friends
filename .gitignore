@@ -18,6 +18,7 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 client/public/*.bundle.js
+client/public/bundle.js
 
 # Dependency directorys
 node_modules/
