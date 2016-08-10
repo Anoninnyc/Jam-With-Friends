@@ -5,10 +5,11 @@
   "main": "server/index.js",
   "scripts": {
     "prestart": "npm install",
-    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
+    "postinstall": "curl -s https://raw.githubusercontent.com/NerdDiffer/pomander/colossalBubble/bin/install | bash",
     "start": "npm run front-end & npm run back-end",
     "front-end": "webpack --watch",
-    "back-end": "nodemon server/index.js"
+    "back-end": "nodemon server/index.js",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,10 @@
     "morgan": "^1.7.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "simple-peer": "^6.0.5",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "tone": "^0.7.1",
     "webpack": "^1.13.1"
   }
 }
