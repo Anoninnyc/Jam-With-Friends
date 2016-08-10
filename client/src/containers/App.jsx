@@ -9,14 +9,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "LandingPage"
-    }
+      view: "LandingPage",
+      instrument: "start"
+    };
+  }
+
+  toggleInstrument(inst) {
+    this.setState({
+      instrument: inst
+    });
   }
 
   toggleView(viewChange) {
     this.setState({
-      view:viewChange
-    })
+      view: viewChange
+    });
   }
 
 
@@ -43,7 +50,9 @@ class App extends Component {
    }else if ( this.state.view==='selectInstrument'){
     return ( 
       < div >
-        <SelectInstrument />
+        <SelectInstrument sel = {this.toggleInstrument.bind(this)} 
+          inst = {this.state.instrument}
+        />
       < /div>
     )
    }
