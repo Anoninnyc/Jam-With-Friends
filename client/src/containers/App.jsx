@@ -46,40 +46,40 @@ class App extends Component {
   render() {
     if (this.state.view==='LandingPage') {
       return (
-        < div >
-          < Nav
+        <div>
+          <Nav
             change={this.toggleView}
-          / >
-          < LandingPage
+          />
+          <LandingPage
             change={this.toggleView}
-          / >
-        < /div>
+          />
+        </div>
       );
     } else if (this.state.view==='login') {
       return (
-        < div >
+        <div>
           <Login
             change={this.toggleView}
           />
-        < /div>
+        </div>
       );
     } else if (this.state.view==='signup') {
       return (
-        < div >
+        <div>
           <Signup
             change={this.toggleView}
           />
-        < /div>
+        </div>
       );
     } else if (this.state.view==='selectInstrument') {
       return (
-        < div >
+        <div>
           <SelectInstrument
             sel={this.toggleInstrument}
             inst={this.state.instrument}
             change={this.toggleView}
           />
-        < /div>
+        </div>
       );
     } else if (this.state.view==='SelectRoom') {
       return (
@@ -87,7 +87,7 @@ class App extends Component {
           <SelectRoom
             rooms={this.toggleRoom}
           />
-        </ div>
+        </div>
 
       );
     } else if (this.state.view==='JamRoom') {
@@ -96,7 +96,7 @@ class App extends Component {
           <JamRoom
             inst={this.state.instrument}
           />
-        </ div>
+        </div>
       );
     }
   }

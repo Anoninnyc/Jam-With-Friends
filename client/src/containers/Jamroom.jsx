@@ -5,7 +5,8 @@ class JamRoom extends Component {
   render() {
     return (
       <div id="jamroom">
-      Welcome to the JamRoom!!
+      <h1>Welcome to the JamRoom!</h1>
+      
 
       <img id='userPiano' src="http://bit.ly/2aTy5ik"/>
       </div>

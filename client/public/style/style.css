@@ -18,6 +18,9 @@
 
 #userPiano{
   position: relative;
-  top:100px;
-  left:50px;
+  top: 50%;
+  left:170px;
+  margin:auto;
+ 
+
 }
