@@ -10,7 +10,6 @@ class JamRoom extends Component {
         <h1>Welcome to the JamRoom!</h1>
         <div id="friendMesh">
           <FriendInstrument />
-          <FriendInstrument /><br />
           <FriendInstrument />
           <FriendInstrument />
         </div>
