@@ -6,8 +6,8 @@ const socket = io();
 
 const peerConnections = {};
 
-const options = { config: { iceServers: [{ url: 'stun.l.google.com:19302' }] }, trickle: true };
-
+// const options = { config: { iceServers: [{ url: 'stun.l.google.com:19302' }] }, trickle: true };
+const options = { trickle: true };
 // someone has joined the room
 socket.on('new.peer', sockets => {
   const length = sockets.length;
