@@ -57,7 +57,6 @@ class App extends Component {
     if (this.state.view==='LandingPage') {
       return (
         <div>
-
           <Nav
             change={this.toggleView}
           />
