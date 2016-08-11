@@ -75,7 +75,6 @@ function startConnection(sockets, number) {
         delete peerConnections[keys[i]];
       }
     }
-    peer.destroy();
   });
 }
 
@@ -104,14 +103,13 @@ function receiveConnection(initiatorId) {
   });
 
   peer.on('close', () => {
-    // remove referende to peer
+    // remove reference to peer
     const keys = Object.keys(peerConnections);
     for (let i = 0; i < keys.length; i++) {
       if (peerConnections[keys[i]].peer === peer) {
         delete peerConnections[keys[i]];
       }
     }
-    peer.destroy();
   });
 }
 
