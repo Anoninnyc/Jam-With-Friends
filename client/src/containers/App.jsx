@@ -1,5 +1,3 @@
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import React, { Component } from 'react';
 import LandingPage from './LandingPage';
 import Nav from './Nav';
@@ -8,7 +6,10 @@ import Signup from './Signup';
 import SelectInstrument from './SelectInstrument';
 import SelectRoom from './SelectRoom';
 import JamRoom from './JamRoom';
+
 // for future material ui use
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class App extends Component {
   constructor(props) {
@@ -16,16 +17,13 @@ class App extends Component {
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
+
     this.state = {
       view: "LandingPage",
       instrument: "start",
       roomType: "start",
       roomId: "start",
     };
-
-    this.toggleRoom = this.toggleRoom.bind(this);
-    this.toggleView = this.toggleView.bind(this);
-    this.toggleInstrument=this.toggleInstrument.bind(this);
   }
 
   getChildContext() {
