@@ -32,7 +32,18 @@
 }
 
 .friendInstrument{
-border:10 px black solid;
+  border-style: solid;
+  border-color: black;
+  border-width: 5px 5px 10px 10px;
+  display: inline-block;
 }
 
+#friendMesh{
+  margin:auto;
+  position: relative;
+  left:280px;
+}
 
+#navBar{
+  background-color: lightblue;
+}
