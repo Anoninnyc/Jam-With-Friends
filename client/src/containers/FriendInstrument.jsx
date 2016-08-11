@@ -5,7 +5,7 @@ class FriendInstrument extends Component {
   render() {
     return (
       <div className='friendInstrument'>
-        Friends instrument goes here
+        <h1>Inivite a friend to play!</h1>
       </div>
     );
   }
