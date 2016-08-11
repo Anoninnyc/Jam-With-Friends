@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import Piano from './Piano';
 
-class userInstrument extends Component {
+class UserInstrument extends Component {
 
   render() {
     if (this.props.inst==="piano") {
+      console.log('you selected piano');
       return (
         <div>
-          <img id="userPiano" src="http://bit.ly/2aTy5ik" />
+          <Piano id="userPiano" />
         </div>
       );
     } else {
@@ -19,4 +21,4 @@ class userInstrument extends Component {
   }
 }
 
-export default userInstrument;
+export default UserInstrument;
