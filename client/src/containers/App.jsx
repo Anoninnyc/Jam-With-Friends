@@ -1,3 +1,5 @@
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import React, { Component } from 'react';
 import LandingPage from './LandingPage';
 import Nav from './Nav';
@@ -6,42 +8,35 @@ import Signup from './Signup';
 import SelectInstrument from './SelectInstrument';
 import SelectRoom from './SelectRoom';
 import JamRoom from './JamRoom';
-//for future material ui use
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-const style = {
-  margin: 12,
-};
-
+// for future material ui use
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
-
-    super(props);
     this.state = {
       view: "LandingPage",
       instrument: "start",
       roomType: "start",
-      roomId: "start"
+      roomId: "start",
     };
   }
-   getChildContext() {
+
+  getChildContext() {
     return { muiTheme: getMuiTheme(baseTheme) };
-        }
+  }
+
   toggleInstrument(inst) {
     this.setState({
-      instrument: inst
+      instrument: inst,
     });
   }
 
   toggleView(viewChange) {
     this.setState({
-      view: viewChange
+      view: viewChange,
     });
   }
 
@@ -49,7 +44,7 @@ class App extends Component {
     this.setState({
       roomType: roomType,
       RoomId: RoomId?this.state.RoomId:RoomId,
-      view: "selectInstrument"
+      view: "selectInstrument",
     });
   }
 
@@ -109,9 +104,9 @@ class App extends Component {
     }
   }
 }
-//for material ui
-   App.childContextTypes = {
-          muiTheme: React.PropTypes.object.isRequired,
-        };
+// For material ui
+App.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
 
 export default App;

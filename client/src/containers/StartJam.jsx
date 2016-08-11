@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class StartJam extends Component {
@@ -9,7 +7,7 @@ class StartJam extends Component {
     if (this.props.inst==='start') {
       return (
         <div>
-          <RaisedButton label="Choose an instrument"/>
+          <RaisedButton label="Choose an instrument" />
         </div>
       );
     } else {
@@ -23,7 +21,7 @@ class StartJam extends Component {
 }
 
 StartJam.childContextTypes = {
-          muiTheme: React.PropTypes.object.isRequired,
-        };
+  muiTheme: React.PropTypes.object.isRequired,
+};
 
 export default StartJam;

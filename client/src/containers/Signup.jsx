@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 class Signup extends Component {
 
   render() {
     return (
       <div>
-        Username:<input type="text" /><br />
-        Pass:<input type="password" /><br />
-        <button onClick={() => { this.props.change('selectInstrument')}}>Signup</button>
-        <button onClick={() => { this.props.change('login')}}>Click to Login Instead</button>
+        Username:<TextField type="text" /><br />
+        Password:<TextField type="password" /><br />
+        <RaisedButton label="Signup" onClick={() => { this.props.change('selectInstrument')}} />
+        <RaisedButton label="Click to Login Instead" onClick={() => { this.props.change('login')}} />
       </div>
     );
   }
 }
+
+Signup.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
 
 export default Signup;

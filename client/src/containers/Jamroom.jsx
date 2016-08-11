@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserInstrument from './UserInstrument';
-import FriendInstrument from './FriendInstrument'
+import FriendInstrument from './FriendInstrument';
 
 class JamRoom extends Component {
 
@@ -8,11 +8,11 @@ class JamRoom extends Component {
     return (
       <div id="jamroom">
         <h1>Welcome to the JamRoom!</h1>
-        <div id='friendMesh'>
-        <FriendInstrument />
-        <FriendInstrument /><br />								
-        <FriendInstrument />
-        <FriendInstrument />
+        <div id="friendMesh">
+          <FriendInstrument />
+          <FriendInstrument /><br />
+          <FriendInstrument />
+          <FriendInstrument />
         </div>
         <UserInstrument inst={this.props.inst} />
       </div>
