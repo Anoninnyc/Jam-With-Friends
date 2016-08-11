@@ -63,7 +63,7 @@ function makePeerConnections(cb) {
       if (number < sockets.length - 2) {
         startConnection(sockets, number + 1);
       } else {
-        cb();
+        cb(peerConnections);
       }
     });
 
