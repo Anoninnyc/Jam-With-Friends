@@ -13,6 +13,7 @@ import JamRoom from './JamRoom';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
@@ -22,6 +23,10 @@ class App extends Component {
       roomType: "start",
       roomId: "start",
     };
+
+    this.toggleRoom = this.toggleRoom.bind(this);
+    this.toggleView = this.toggleView.bind(this);
+    this.toggleInstrument=this.toggleInstrument.bind(this);
   }
 
   getChildContext() {
@@ -42,66 +47,50 @@ class App extends Component {
 
   toggleRoom(roomType, RoomId) {
     this.setState({
-      roomType: roomType,
-      RoomId: RoomId?this.state.RoomId:RoomId,
+      roomType,
+      RoomId: RoomId ? this.state.RoomId : RoomId,
       view: "selectInstrument",
     });
   }
 
   render() {
-    if (this.state.view==='LandingPage') {
-      return (
-        <div>
-          <Nav
-            change={this.toggleView}
-          />
-          <LandingPage
-            change={this.toggleView}
-          />
-        </div>
-      );
-    } else if (this.state.view==='login') {
-      return (
-        <div>
-          <Login
-            change={this.toggleView}
-          />
-        </div>
-      );
-    } else if (this.state.view==='signup') {
-      return (
-        <div>
-          <Signup
-            change={this.toggleView}
-          />
-        </div>
-      );
-    } else if (this.state.view==='selectInstrument') {
-      return (
-        <div>
+    return (
+      <div>
+        {this.state.view === 'LandingPage' ?
+          <div>
+            <Nav change={this.toggleView} />
+            <LandingPage change={this.toggleView} />
+          </div>
+          : null
+        }
+        {this.state.view === 'login' ?
+          <Login change={this.toggleView} />
+          : null
+        }
+        {this.state.view === 'signup' ?
+          <Signup change={this.toggleView} />
+          : null
+        }
+        {this.state.view==='selectInstrument' ?
           <SelectInstrument
             sel={this.toggleInstrument}
             inst={this.state.instrument}
             change={this.toggleView}
           />
-        </div>
-      );
-    } else if (this.state.view==='SelectRoom') {
-      return (
-        <div>
-          <SelectRoom
-            rooms={this.toggleRoom}
-          />
-        </div>);
-    } else if (this.state.view==='JamRoom') {
-      return (
-        <div>
+          : null
+        }
+        {this.state.view==='SelectRoom' ?
+          <SelectRoom rooms={this.toggleRoom} />
+          : null
+        }
+        {this.state.view==='JamRoom' ?
           <JamRoom
             inst={this.state.instrument}
           />
-        </div>
-      );
-    }
+          : null
+        }
+      </div>
+    );
   }
 }
 // For material ui

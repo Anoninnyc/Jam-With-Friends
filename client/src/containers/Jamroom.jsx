@@ -3,7 +3,6 @@ import UserInstrument from './UserInstrument';
 import FriendInstrument from './FriendInstrument';
 
 class JamRoom extends Component {
-
   render() {
     return (
       <div id="jamroom">
