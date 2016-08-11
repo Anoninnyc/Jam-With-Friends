@@ -48,7 +48,10 @@ function startConnection(sockets, number) {
   peerConnections[sockets[number]] = { peer, connected: false, by: socket.id, to: sockets[number] };
 
   peer.on('signal', data => {
-    socket.emit('offer', { offer: data, by: socket.id, to: sockets[number] });
+    // prevent destroyed peers from sending signals, janky fix
+    if (!peer.destroyed) {
+      socket.emit('offer', { offer: data, by: socket.id, to: sockets[number] });
+    }
   });
 
   peer.on('connect', () => {
@@ -63,6 +66,17 @@ function startConnection(sockets, number) {
   peer.on('data', data => {
     console.log(`initiator received message: ${data}`);
   });
+
+  peer.on('close', () => {
+    // remove reference to peer
+    const keys = Object.keys(peerConnections);
+    for (let i = 0; i < keys.length; i++) {
+      if (peerConnections[keys[i]].peer === peer) {
+        delete peerConnections[keys[i]];
+      }
+    }
+    peer.destroy();
+  });
 }
 
 // act as remote
@@ -74,7 +88,8 @@ function receiveConnection(initiatorId) {
   });
 
   socket.on('offer', data => {
-    if (data.to === socket.id) {
+    // prevent destroyed peer from signalling
+    if (data.to === socket.id && !peer.destroyed) {
       peer.signal(data.offer);
     }
   });
@@ -86,6 +101,17 @@ function receiveConnection(initiatorId) {
 
   peer.on('data', data => {
     console.log(`received message: ${data}`);
+  });
+
+  peer.on('close', () => {
+    // remove referende to peer
+    const keys = Object.keys(peerConnections);
+    for (let i = 0; i < keys.length; i++) {
+      if (peerConnections[keys[i]].peer === peer) {
+        delete peerConnections[keys[i]];
+      }
+    }
+    peer.destroy();
   });
 }
 
