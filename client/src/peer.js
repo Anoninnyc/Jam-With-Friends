@@ -24,16 +24,6 @@ socket.on('new.peer', sockets => {
   }
 });
 
-socket.on('answer', data => {
-  if (data.to === socket.id) {
-    const connection = peerConnections[data.by];
-    if (!connection.connected) {
-      connection.peer.signal(data.answer);
-      connection.connected = true;
-    }
-  }
-});
-
 socket.on('full', () => {
   console.log('room is full');
 });
@@ -51,6 +41,16 @@ function startConnection(sockets, number) {
     // prevent destroyed peers from sending signals, janky fix
     if (!peer.destroyed) {
       socket.emit('offer', { offer: data, by: socket.id, to: sockets[number] });
+    }
+  });
+
+  socket.on('answer', data => {
+    if (data.to === socket.id) {
+      const connection = peerConnections[data.by];
+      if (!connection.connected) {
+        connection.peer.signal(data.answer);
+        connection.connected = true;
+      }
     }
   });
 
