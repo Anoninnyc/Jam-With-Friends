@@ -1,0 +1,38 @@
+#roche{
+  background-image: url('http://bit.ly/2aMzQ3b');
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-size: cover;
+}
+
+#jamroom{
+  background-image: url('./JamRoomBG.gif');
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-size: cover;
+}
+
+#userPiano{
+  position: relative;
+  top: 370px;
+  left:280px;
+  margin:auto;
+
+}
+
+#userDrums{
+  position: relative;
+  top: 370px;
+  left:450px;
+  margin:auto;
+}
+
+.friendInstrument{
+border:10 px black solid;
+}
+
+
