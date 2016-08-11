@@ -56,7 +56,7 @@ function makePeerConnections(cb) {
         }
       }
     });
-    
+
     peer.on('connect', () => {
       peer.send(`initiator ${socket.id} saying hello`);
       // check if need to make more connections
@@ -94,6 +94,7 @@ function makePeerConnections(cb) {
       // prevent destroyed peer from signalling
       if (data.to === socket.id && !peer.destroyed) {
         peer.signal(data.offer);
+      }
     });
 
     socket.on('answer', data => {
@@ -106,8 +107,9 @@ function makePeerConnections(cb) {
       }
     });
 
-    socket.on('full', () => {
-      console.log('room is full');
+    peer.on('connect', () => {
+      peerConnections[initiatorId].connected = true;
+      peer.send(`i am ${socket.id} saying hello`);
     });
 
     peer.on('data', data => {
