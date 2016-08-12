@@ -38,6 +38,7 @@ class Room extends React.Component {
     if (this.state.peerConnections.length > 0) {
       this.state.peerConnections.forEach(peer => { peer.send(e.key); });
     }
+    playNote(e.key);
   }
 
   render() {
