@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 
-// import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import { AppBar, IconButton, IconMenu, Menu, MenuItem, MoreVertIcon, NavigationClose} from 'material-ui';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import Paper from 'material-ui/Paper';
-
 import UserInstrument from './UserInstrument';
 import FriendInstrument from './FriendInstrument';
 import Piano from './Piano';
@@ -73,23 +63,6 @@ class JamRoom extends Component {
   render() {
     return (
       <div id="jamroom">
-        <AppBar
-          title="Jam App"
-          showMenuIconButton={false}
-          iconElementRight={
-            <IconMenu
-              iconButtonElement={
-                <IconButton><MoreVertIcon /></IconButton>
-              }
-              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            >
-              <MenuItem primaryText="Login" />
-              <MenuItem primaryText="Sign up" />
-              <MenuItem primaryText="Sign out" />
-            </IconMenu>
-          }
-        />
         <div id="display-inst-name"><h1>You are playing the {this.props.inst}</h1></div>
         <div className="peer-bar">
           <div id="peer-bar1"><div id="peer-name">You</div></div>
