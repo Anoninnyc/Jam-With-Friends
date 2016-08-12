@@ -68,11 +68,12 @@ function makePeerConnections(done, onData, onConnect, onClose) {
     });
 
     peer.on('connect', () => {
+      onConnect(peer);
       // check if need to make more connections
       if (number < sockets.length - 2) {
         startConnection(sockets, number + 1);
       } else {
-        done(peerConnections);
+        done();
       }
     });
 
