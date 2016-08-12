@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 // Extra options, as dots on RH-side
-const NavIconMenu = () => (
+const NavMenuIcon = () => (
   <IconMenu
     iconButtonElement={
       <IconButton>
@@ -22,4 +22,4 @@ const NavIconMenu = () => (
   </IconMenu>
 );
 
-export default NavIconMenu;
+export default NavMenuIcon;
