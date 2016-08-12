@@ -10,7 +10,7 @@ const config = {
     modulesDirectories: ['node_modules', 'components'],
     extensions: ['', '.js', '.jsx']
   },
-  entry: [path.join(SRC_DIR, 'index.js'), path.join(SRC_DIR, 'peer.js')],
+  entry: [path.join(SRC_DIR, 'index.jsx'), path.join(SRC_DIR, 'peer.js')],
   output: {
     path: DIST_DIR,
     filename: 'bundle.js'
