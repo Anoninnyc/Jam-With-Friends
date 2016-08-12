@@ -7,7 +7,8 @@ const DIST_DIR = path.join(__dirname, 'client', 'public');
 const config = {
   devtool: 'inline-sourcemap',
   resolve: {
-    modulesDirectories: ['node_modules', 'components'],
+    root: __dirname,
+    modulesDirectories: ['node_modules', 'components', 'instruments'],
     extensions: ['', '.js', '.jsx']
   },
   entry: [path.join(SRC_DIR, 'index.jsx'), path.join(SRC_DIR, 'peer.js')],

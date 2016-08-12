@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import makePeerConnections from '../peer.js';
+import makePeerConnections from '../peer';
+import playNote from 'sounds';
 
 class Room extends React.Component {
   constructor(props) {
@@ -14,7 +15,14 @@ class Room extends React.Component {
   }
 
   componentDidMount() {
-    makePeerConnections(this.connectedCallback);
+    const self = this;
+
+    // pass lots of callbacks; set state and deal with receiving data
+    makePeerConnections(
+      this.connectedCallback,
+      keyPressed => { playNote(keyPressed); },
+      peer => { self.setState({ peerConnections: self.state.peerConnections.concat([peer]) }); }
+    );
     // event listener for keydown
     window.addEventListener('keydown', this.handleKeydown);
   }
@@ -28,8 +36,9 @@ class Room extends React.Component {
 
   handleKeydown(e) {
     if (this.state.peerConnections.length > 0) {
-      this.state.peerConnections[0].send(e.key);
+      this.state.peerConnections.forEach(peer => { peer.send(e.key); });
     }
+    playNote(e.key);
   }
 
   render() {
