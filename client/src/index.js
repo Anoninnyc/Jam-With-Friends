@@ -5,6 +5,6 @@ import App from './containers/App.jsx';
 injectTapEventPlugin();
 
 render(
-  <App />, 
+  <App />,
   document.getElementById('app')
 );

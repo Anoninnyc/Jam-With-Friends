@@ -13,7 +13,6 @@ import JamRoom from './JamRoom';
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
@@ -27,6 +26,10 @@ class App extends Component {
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
+  }
+
+  getChildContext() {
+    return { muiTheme: getMuiTheme(baseTheme) };
   }
 
   getChildContext() {
