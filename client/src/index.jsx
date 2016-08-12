@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './containers/App';
-import LandingPage from './containers/LandingPage';
+import LandingPage from './components/LandingPage';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import SelectInstrument from './containers/SelectInstrument';
