@@ -247,7 +247,7 @@ left:35%;
 
   position: absolute;
   display:inline-block;
-   top:37%;
+  top:37%;
   left:20%;
   opacity: 0.5;
 }
@@ -289,9 +289,9 @@ left:35%;
 }
 
 #jamButton{
-position: absolute;
-top:80%;
-left:40%;
+  position: absolute;
+  top:80%;
+  left:40%;
 }
 
 
