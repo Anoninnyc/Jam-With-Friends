@@ -109,5 +109,8 @@ class JamRoom extends Component {
   }
 }
 
+JamRoom.propTypes = {
+  inst: React.PropTypes.string
+};
 
 export default JamRoom;
