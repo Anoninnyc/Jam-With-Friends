@@ -5,7 +5,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './containers/App';
 import LandingPage from './containers/LandingPage';
-import Nav from './containers/Nav';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import SelectInstrument from './containers/SelectInstrument';
@@ -16,19 +15,10 @@ import JamRoom from './containers/JamRoom';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-const NavAndLandingPage = () => {
-  return (
-    <div>
-      <Nav />
-      <LandingPage />
-    </div>
-  );
-};
-
 render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={NavAndLandingPage} />
+      <IndexRoute component={LandingPage} />
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />
       <Route path="selectInstrument" component={SelectInstrument} />
