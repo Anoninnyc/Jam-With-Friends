@@ -15,6 +15,7 @@ class App extends Component {
 
     this.state = {
       view: "LandingPage",
+      // view: "JamRoom",
       instrument: "start",
       roomType: "start",
       roomId: "start",
