@@ -69,13 +69,13 @@ body: {
   display: inline-block;
   background-color: white;
   height:250px;
-  width:40px;
+  width:50px;
 }
 
 #user-instrument {
   position: absolute;
   top: 20%;
-  left: 40%;
+  left: 25%;
   margin: 0 auto;
 }
 
@@ -295,6 +295,71 @@ body: {
 }
 
 
+.blackKey{
+  border-style: solid;
+  border-color: white;
+  border-width: 2px 2px 2px 1px;
+  display: inline-block;
+  background-color: black;
+  height:150px;
+  width:33px;
+}
+
+#thir{
+ position: absolute;
+  left:5.2%;
+  top:-0.59%;
+}
+
+#fourt{
+  position: absolute;
+  left:13.7%;
+  top:-0.59%;
+}
+
+#fift{
+  position: absolute;
+  left:30.7%;
+  top:-0.59%;
+
+}
+
+#sixt{
+  position: absolute;
+  left:38.5%;
+  top:-0.59%;
+}
+
+#sevent{
+  position: absolute;
+  left:47%;
+  top:-0.59%;
+}
+
+#eight{
+  position: absolute;
+  left:64%;
+  top:-0.59%;
+}
+
+#ninet{
+  position: absolute;
+  left:72%;
+  top:-0.59%;
+}
+
+#twenty{
+  position: absolute;
+  left:89%;
+  top:-0.59%;
+}
+
+#pianoInst{
+  position: absolute;
+  color:red;
+  background-color: red;
+ left:20%;
+}
 
 
 

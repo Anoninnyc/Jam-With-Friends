@@ -76,6 +76,7 @@ class JamRoom extends Component {
             src="../../../style/drums.png"
           /> : null}
           {this.props.inst === 'piano' ? <Piano /> : null }
+           <Piano />
         </div>
       </div>
     );
