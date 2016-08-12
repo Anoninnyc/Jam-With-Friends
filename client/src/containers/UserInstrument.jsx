@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Piano from './Piano';
+import Piano from './Piano';
 
 class UserInstrument extends Component {
 
@@ -8,7 +8,7 @@ class UserInstrument extends Component {
       console.log('you selected piano');
       return (
         <div>
-          // <Piano id="userPiano" />
+          <Piano id="userPiano" />
         </div>
       );
     } else {
