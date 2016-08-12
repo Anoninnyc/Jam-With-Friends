@@ -1,14 +1,10 @@
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+// for future material ui use
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import React, { Component } from 'react';
-import LandingPage from './LandingPage';
+
 import Nav from './Nav';
-import Login from './Login';
-import Signup from './Signup';
-import SelectInstrument from './SelectInstrument';
-import SelectRoom from './SelectRoom';
-import JamRoom from './JamRoom';
-// for future material ui use
 
 class App extends Component {
   constructor(props) {
@@ -16,20 +12,13 @@ class App extends Component {
     this.toggleRoom = this.toggleRoom.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.toggleInstrument=this.toggleInstrument.bind(this);
+
     this.state = {
       view: "LandingPage",
       instrument: "start",
       roomType: "start",
       roomId: "start",
     };
-
-    this.toggleRoom = this.toggleRoom.bind(this);
-    this.toggleView = this.toggleView.bind(this);
-    this.toggleInstrument=this.toggleInstrument.bind(this);
-  }
-
-  getChildContext() {
-    return { muiTheme: getMuiTheme(baseTheme) };
   }
 
   getChildContext() {
@@ -59,43 +48,44 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.state.view === 'LandingPage' ?
-          <div id="roche">
-            <Nav change={this.toggleView} />
-            <LandingPage change={this.toggleView} />
-          </div>
-          : null
-        }
-        {this.state.view === 'login' ?
-          <Login change={this.toggleView} />
-          : null
-        }
-        {this.state.view === 'signup' ?
-          <Signup change={this.toggleView} />
-          : null
-        }
-        {this.state.view==='selectInstrument' ?
+        <Nav />
+        <Link to="/">Home</Link>
+        <Link to="login">Login</Link>
+        <Link to="signup">Signup</Link>
+        <Link to="selectInstrument">Select Instrument</Link>
+        {/*
+          this.state.view==='selectInstrument' ?
           <SelectInstrument
             sel={this.toggleInstrument}
             inst={this.state.instrument}
             change={this.toggleView}
           />
           : null
-        }
-        {this.state.view==='SelectRoom' ?
-          <SelectRoom rooms={this.toggleRoom} />
-          : null
-        }
-        {this.state.view==='JamRoom' ?
-          <JamRoom
-            inst={this.state.instrument}
-          />
-          : null
-        }
+        */}
+        <Link to="selectRoom">Select Room</Link>
+        {/*
+          this.state.view==='SelectRoom' ?
+            <SelectRoom rooms={this.toggleRoom} />
+            : null
+        */}
+        <Link to="jam">Jam!</Link>
+        {/*
+          this.state.view==='JamRoom' ?
+            <JamRoom
+              inst={this.state.instrument}
+            />
+            : null
+        */}
+        { this.props.children }
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: React.PropTypes.element
+};
+
 // For material ui
 App.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
