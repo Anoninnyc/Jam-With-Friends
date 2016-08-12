@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import App from './containers/App';
@@ -19,14 +19,14 @@ injectTapEventPlugin();
 const NavAndLandingPage = () => {
   return (
     <div>
-      <Nav change={this.toggleView} />
-      <LandingPage change={this.toggleView} />
+      <Nav />
+      <LandingPage />
     </div>
   );
 };
 
 render((
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={NavAndLandingPage} />
       <Route path="login" component={Login} />
