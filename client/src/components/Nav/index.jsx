@@ -3,12 +3,16 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import NavIconMenu from './AppIconMenu';
 
-const AppNavBar = () => (
+const AppNavBar = ({ title }) => (
   <AppBar
-    title="Jam App"
+    title={title}
     showMenuIconButton={false}
     iconElementRight={<NavIconMenu />}
   />
 );
+
+AppNavBar.propTypes = {
+  title: React.PropTypes.string.isRequired
+};
 
 export default AppNavBar;

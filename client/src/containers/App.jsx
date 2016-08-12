@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import Nav from './Nav';
+import Nav from '../components/Nav';
 
 class App extends Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav title={'tbd'} />
         <Link to="/">Home</Link>
         <Link to="login">Login</Link>
         <Link to="signup">Signup</Link>
