@@ -2,13 +2,23 @@ const SimplePeer = require('simple-peer');
 
 const io = require('socket.io-client');
 
-function makePeerConnections(done, onData, onConnect) {
+function makePeerConnections(done, onData, onConnect, onClose) {
   const socket = io();
 
   const peerConnections = {};
 
-  // const options = { config: { iceServers: [{ url: 'stun.l.google.com:19302' }] }, trickle: true };
-  const options = { trickle: true };
+  const options = {
+    trickle: true,
+    config: {
+      iceServers: [
+        { url: "stun:stun.l.google.com:19302" },
+        { url: "stun:stun1.l.google.com:19302" },
+        { url: "stun:stun2.l.google.com:19302" },
+        { url: "stun:stun3.l.google.com:19302" },
+        { url: "stun:stun4.l.google.com:19302" },
+      ]
+    }
+  };
   // someone has joined the room
   socket.on('new.peer', sockets => {
     const length = sockets.length;
@@ -76,6 +86,7 @@ function makePeerConnections(done, onData, onConnect) {
           delete peerConnections[keys[i]];
         }
       }
+      onClose(peer);
     });
   }
 
@@ -119,6 +130,7 @@ function makePeerConnections(done, onData, onConnect) {
           delete peerConnections[keys[i]];
         }
       }
+      onClose(peer);
     });
   }
 }

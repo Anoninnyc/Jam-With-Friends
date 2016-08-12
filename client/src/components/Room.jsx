@@ -15,13 +15,18 @@ class Room extends React.Component {
   }
 
   componentDidMount() {
-    const self = this;
-
     // pass lots of callbacks; set state and deal with receiving data
     makePeerConnections(
       this.connectedCallback,
       keyPressed => { playNote(keyPressed); },
-      peer => { self.setState({ peerConnections: self.state.peerConnections.concat([peer]) }); }
+      peer => { this.setState({ peerConnections: this.state.peerConnections.concat([peer]) }); },
+      peer => {
+        const pcs = this.state.peerConnections;
+        const index = pcs.indexOf(peer);
+        this.setState({
+          peerConnections: [...pcs.slice(0, index), ...pcs.slice(index + 1)]
+        });
+      }
     );
     // event listener for keydown
     window.addEventListener('keydown', this.handleKeydown);
