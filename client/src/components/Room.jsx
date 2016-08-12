@@ -10,28 +10,29 @@ class Room extends React.Component {
       finished: false,
       peerConnections: []
     };
-    this.connectedCallback = this.connectedCallback.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
   }
 
   componentDidMount() {
-    const self = this;
-
-    // pass lots of callbacks; set state and deal with receiving data
+    // setup peer connections, give it lots of callbacks
     makePeerConnections(
-      this.connectedCallback,
+      // set state when all connection are made
+      peerConnections => { this.setState({ finished: true }); },
+      // play sound when peer connection receives data
       keyPressed => { playNote(keyPressed); },
-      peer => { self.setState({ peerConnections: self.state.peerConnections.concat([peer]) }); }
+      // add peer connection to state whenever it's made
+      peer => { this.setState({ peerConnections: this.state.peerConnections.concat([peer]) }); },
+      // remove connection from state when destroyed
+      peer => {
+        const pcs = this.state.peerConnections;
+        const index = pcs.indexOf(peer);
+        this.setState({
+          peerConnections: [...pcs.slice(0, index), ...pcs.slice(index + 1)]
+        });
+      }
     );
     // event listener for keydown
     window.addEventListener('keydown', this.handleKeydown);
-  }
-
-  connectedCallback(peerConnections) {
-    this.setState({
-      finished: true,
-      peerConnections: _.map(peerConnections, 'peer')
-    });
   }
 
   handleKeydown(e) {
