@@ -237,9 +237,9 @@ body: {
   background-size: cover;
 }
 #instLogo{
-position: absolute;
-top:5%;
-left:35%;
+  position: absolute;
+  top:5%;
+  left:35%;
 }
 
 

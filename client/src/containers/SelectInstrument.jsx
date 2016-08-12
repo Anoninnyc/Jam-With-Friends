@@ -5,15 +5,15 @@ import StartJam from './StartJam';
 class SelectInstrument extends Component {
 
   choose(instrument) {
-     document.getElementById(instrument).style.opacity=1;
-
+    document.getElementById(instrument).style.opacity = 1;
     if (instrument==="drumsChoose") {
-     document.getElementById("pianoChoose").style.opacity=0.5;
+      document.getElementById("pianoChoose").style.opacity = 0.5;
     }
     if (instrument==="pianoChoose") {
-     document.getElementById("drumsChoose").style.opacity=0.5;
+      document.getElementById("drumsChoose").style.opacity = 0.5;
     }
   }
+
   render() {
     return (
       <div id="selectInstrumentRoom">
