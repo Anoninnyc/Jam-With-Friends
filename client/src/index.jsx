@@ -10,6 +10,7 @@ import Signup from './containers/Signup';
 import SelectInstrument from './containers/SelectInstrument';
 import SelectRoom from './containers/SelectRoom';
 import JamRoom from './containers/JamRoom';
+import Room from 'Room';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -24,6 +25,8 @@ render((
       <Route path="selectInstrument" component={SelectInstrument} />
       <Route path="selectRoom" component={SelectRoom} />
       <Route path="jam" component={JamRoom} />
+      { /* for testing sounds */ }
+      <Route path="room" component={Room} />
     </Route>
   </Router>
 ), document.getElementById('app'));
