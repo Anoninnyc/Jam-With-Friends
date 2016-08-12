@@ -2,7 +2,7 @@ const SimplePeer = require('simple-peer');
 
 const io = require('socket.io-client');
 
-function makePeerConnections(cb) {
+function makePeerConnections(done, onData, onConnect) {
   const socket = io();
 
   const peerConnections = {};
@@ -23,7 +23,7 @@ function makePeerConnections(cb) {
         receiveConnection(initiatorId);
       }
     } else {
-      cb();
+      done();
     }
   });
 
@@ -58,18 +58,15 @@ function makePeerConnections(cb) {
     });
 
     peer.on('connect', () => {
-      peer.send(`initiator ${socket.id} saying hello`);
       // check if need to make more connections
       if (number < sockets.length - 2) {
         startConnection(sockets, number + 1);
       } else {
-        cb(peerConnections);
+        done(peerConnections);
       }
     });
 
-    peer.on('data', data => {
-      console.log(`initiator received message: ${data}`);
-    });
+    peer.on('data', onData);
 
     peer.on('close', () => {
       // remove reference to peer
@@ -109,12 +106,10 @@ function makePeerConnections(cb) {
 
     peer.on('connect', () => {
       peerConnections[initiatorId].connected = true;
-      peer.send(`i am ${socket.id} saying hello`);
+      onConnect(peer);
     });
 
-    peer.on('data', data => {
-      console.log(`received message: ${data}`);
-    });
+    peer.on('data', onData);
 
     peer.on('close', () => {
       // remove reference to peer
