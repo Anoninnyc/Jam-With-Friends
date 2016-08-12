@@ -19,9 +19,9 @@ class Piano extends Component {
 function keyHelper(ID) {
   $(ID).animate({
     backgroundColor: "black",
-  }, 100).animate({
+  }, 20).animate({
     backgroundColor: "white",
-  }, 100);
+  }, 20);
 }
 
 
