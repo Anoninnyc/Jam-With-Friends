@@ -227,3 +227,75 @@ body: {
   animation: bounce 1s;
 }
 
+
+#selectInstrumentRoom{
+  background-image: url("http://bit.ly/1zPhvmk");
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-size: cover;
+}
+#instLogo{
+  position: absolute;
+  top:5%;
+  left:35%;
+}
+
+
+#pianoChoose{
+
+  position: absolute;
+  display:inline-block;
+  top:37%;
+  left:20%;
+  opacity: 0.5;
+}
+
+#pianoChoose:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+
+#drumsChoose{
+  position: absolute;
+  display:inline-block;
+  top:30%;
+  left:50%;
+  opacity: 0.5
+}
+
+
+#drumsChoose:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+#jamButton{
+  position: absolute;
+  top:80%;
+  left:40%;
+}
+
+
+
+
+
+
