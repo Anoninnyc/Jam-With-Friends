@@ -29,6 +29,7 @@ body {
   outline: 1px dashed red;
   width: 100%;
   margin: 5% auto;
+  padding-bottom: 2%;
 }
 
 #landingPage h1 {
@@ -37,8 +38,13 @@ body {
   text-align: center;
 }
 
-.joinOrCreateRoom {
-    margin-top: 5%;
+.joinRoom, .createRoom {
+  margin: 2% auto;
+}
+
+#landingPage .divider {
+  width: 25%;
+  margin: 2% auto;
 }
 
 /*#jamroom{

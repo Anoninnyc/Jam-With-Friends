@@ -1,6 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Divider from 'material-ui/Divider';
 
 const materialStyles = {
   margin: '0 auto',
@@ -14,14 +15,17 @@ const LandingPage = (props) => (
     <section className="title">
       <h1>WELCOME TO TBD!</h1>
     </section>
-    <section className="joinOrCreateRoom">
+    <section className="joinRoom">
+      <TextField style={materialStyles} />
       <RaisedButton
         label="Join Room"
         style={materialStyles}
       />
-      <br />
-      <TextField style={materialStyles} />
-      <br />
+    </section>
+    <section className="divider">
+      <Divider />
+    </section>
+    <section className="createRoom">
       <RaisedButton
         label="Create Room"
         style={materialStyles}
