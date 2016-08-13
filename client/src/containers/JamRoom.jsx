@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import UserInstrument from './UserInstrument';
 import FriendInstrument from './FriendInstrument';
 import Piano from './Piano';
@@ -77,7 +76,7 @@ class JamRoom extends Component {
             src="../../../style/drums.png"
           /> : null}
           {this.props.inst === 'piano' ? <Piano /> : null }
-           <Drums />
+           <Piano />
         </div>
       </div>
     );
