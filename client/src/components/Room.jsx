@@ -1,11 +1,15 @@
+// Modules
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import classnames from 'classnames';
 
+// Components
 import SelectInstrument from 'SelectInstrument';
-import playNote from 'sounds';
+import JamRoom from '../containers/JamRoom';
 
+// Util
 import { makePeerConnections, socket } from '../peer';
+import store from 'store';
 
 class Room extends React.Component {
   constructor(props) {
@@ -14,8 +18,11 @@ class Room extends React.Component {
       finished: false,
       peerConnections: [],
       instrument: null,
-      startJam: false 
+      startJam: false
     };
+
+    // play notes from peers
+
     this.selectInstrument = this.selectInstrument.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
     this.handleStart = this.handleStart.bind(this);
@@ -29,7 +36,10 @@ class Room extends React.Component {
       // set state when all connection are made
       peerConnections => { this.setState({ finished: true }); },
       // play sound when peer connection receives data
-      keyPressed => { playNote(keyPressed); },
+      data => {
+        const { instrument, keyPressed } = JSON.parse(data);
+        store[instrument](keyPressed);
+      },
       // add peer connection to state whenever it's made
       peer => { this.setState({ peerConnections: this.state.peerConnections.concat([peer]) }); },
       // remove connection from state when destroyed
@@ -56,9 +66,14 @@ class Room extends React.Component {
 
   handleKeydown(e) {
     if (this.state.peerConnections.length > 0) {
-      this.state.peerConnections.forEach(peer => { peer.send(e.key); });
+      this.state.peerConnections.forEach(peer => {
+        peer.send(JSON.stringify({
+          instrument: this.state.instrument,
+          keyPressed: e.key
+        }));
+      });
     }
-    playNote(e.key);
+    store[this.state.instrument](e.key);
   }
 
   handleStart() {
@@ -71,7 +86,7 @@ class Room extends React.Component {
       <div>
         {
           this.state.startJam ?
-            <p>Playing</p> :
+            <JamRoom instrument={this.state.instrument} peers={this.state.peerConnections} />:
             <div>
               <SelectInstrument handleClick={this.selectInstrument} opacity={opacity} />
               <RaisedButton
