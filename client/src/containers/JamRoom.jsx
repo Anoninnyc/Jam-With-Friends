@@ -5,6 +5,20 @@ import FriendInstrument from './FriendInstrument';
 import Piano from './Piano';
 import Drums from './Drums';
 
+const AudioSynth =require('audiosynth');
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const context = new AudioContext();
+const Synth = new AudioSynth(context);
+
+
+
+
+
+
+
+
+
+
 const style1 = {
   height: 200,
   width: 200,
@@ -77,7 +91,7 @@ class JamRoom extends Component {
             src="../../../style/drums.png"
           /> : null}
           {this.props.inst === 'piano' ? <Piano /> : null }
-           <Drums />
+           <Piano />
         </div>
       </div>
     );
