@@ -80,7 +80,7 @@ $(document).keypress(function key(e) {
   } else if (e.which=== 13) {
     keyHelper("#12");
   }
-  else if (e.which=== 119) {
+    else if (e.which=== 119) {
     blackKeyHelper("#thir");
   } else if (e.which=== 101) {
     blackKeyHelper("#fourt");

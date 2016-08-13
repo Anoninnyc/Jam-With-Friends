@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import UserInstrument from './UserInstrument';
 import FriendInstrument from './FriendInstrument';
 import Piano from './Piano';
+import Drums from './Drums';
 
 const style1 = {
   height: 200,
@@ -76,7 +77,7 @@ class JamRoom extends Component {
             src="../../../style/drums.png"
           /> : null}
           {this.props.inst === 'piano' ? <Piano /> : null }
-           <Piano />
+           <Drums />
         </div>
       </div>
     );
