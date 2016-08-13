@@ -25,6 +25,14 @@ const SelectInstrument = ({ handleClick, opacity }) => (
         onClick={handleClick.bind(null, 'drums')}
       />
     </div>
+    <div className={opacity('fry')}>
+      <img
+        id="fryChoose"
+        src="http://i.stack.imgur.com/STEuc.png"
+        alt="fry"
+        onClick={handleClick.bind(null, 'fry')}
+      />
+    </div>
   </div>
 );
 
