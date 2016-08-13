@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-
 import UserInstrument from './UserInstrument';
 import FriendInstrument from './FriendInstrument';
 import Piano from './Piano';
 import Drums from './Drums';
-
-
 
 const style1 = {
   height: 200,

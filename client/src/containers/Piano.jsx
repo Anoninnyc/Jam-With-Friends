@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const AudioSynth =require('audiosynth');
+import AudioSynth from 'audiosynth';
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 const Synth = new AudioSynth(context);
