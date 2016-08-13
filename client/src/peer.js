@@ -2,9 +2,9 @@ const SimplePeer = require('simple-peer');
 
 const io = require('socket.io-client');
 
-function makePeerConnections(done, onData, onConnect, onClose) {
-  const socket = io();
+const socket = io();
 
+function makePeerConnections(room, done, onData, onConnect, onClose) {
   const peerConnections = {};
 
   const options = {
@@ -42,7 +42,6 @@ function makePeerConnections(done, onData, onConnect, onClose) {
   });
 
   // join a room
-  const room = 'test';
   socket.emit('join', room);
 
   // set up connection as initiator
@@ -136,4 +135,4 @@ function makePeerConnections(done, onData, onConnect, onClose) {
   }
 }
 
-export default makePeerConnections;
+export { makePeerConnections, socket };

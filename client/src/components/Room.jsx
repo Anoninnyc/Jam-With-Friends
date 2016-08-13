@@ -1,7 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
-import makePeerConnections from '../peer';
 import playNote from 'sounds';
+
+import { makePeerConnections, socket } from '../peer';
 
 class Room extends React.Component {
   constructor(props) {
@@ -10,12 +10,15 @@ class Room extends React.Component {
       finished: false,
       peerConnections: []
     };
+
     this.handleKeydown = this.handleKeydown.bind(this);
   }
 
   componentDidMount() {
     // setup peer connections, give it lots of callbacks
     makePeerConnections(
+      // roomId
+      this.props.params.roomId,
       // set state when all connection are made
       peerConnections => { this.setState({ finished: true }); },
       // play sound when peer connection receives data
@@ -31,6 +34,11 @@ class Room extends React.Component {
         });
       }
     );
+
+    socket.on('invalid room', () => {
+      console.log('NOT A VALID ROOM');
+      this.context.router.push('/invalid');
+    });
     // event listener for keydown
     window.addEventListener('keydown', this.handleKeydown);
   }
@@ -50,5 +58,13 @@ class Room extends React.Component {
     );
   }
 }
+
+Room.propTypes = {
+  params: React.PropTypes.object
+};
+
+Room.contextTypes = {
+  router: React.PropTypes.object
+};
 
 export default Room;
