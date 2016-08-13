@@ -10,7 +10,7 @@ body {
   padding: 0 5%;
 }
 
-#roche{
+#roche {
   background-image: url('http://bit.ly/2aMzQ3b');
   position: absolute;
   width: 100%;
@@ -18,6 +18,7 @@ body {
   background-size: 100%;
   background-size: cover;
 }
+
 
 .child {
   margin: 0 auto;
@@ -43,17 +44,7 @@ body {
   margin: 2% auto;
 }
 
-/*#jamroom{
-  background-image: url('./JamRoomBG.gif');
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-size: 100%;
-  background-size: cover;
-}*/
-
 #jamroom{
-  /*background-image: url('./JamRoomBG.gif');*/
   position: absolute;
   width: 100%;
   height: 100%;
@@ -61,7 +52,7 @@ body {
   background-size: cover;
 }
 
-#userPiano{
+#userPiano {
   position: relative;
   top: 370px;
   left:280px;
@@ -69,21 +60,21 @@ body {
 
 }
 
-#userDrums{
+#userDrums {
   position: relative;
   top: 370px;
   left:450px;
   margin:auto;
 }
 
-.friendInstrument{
+.friendInstrument {
   border-style: solid;
   border-color: black;
   border-width: 5px 5px 10px 10px;
   display: inline-block;
 }
 
-#friendMesh{
+#friendMesh {
   margin:auto;
   position: relative;
   left:280px;
@@ -94,7 +85,7 @@ body {
   background-color: #00ccff;
 }
 
-.key{
+.key {
   border-style: solid;
   border-color: black;
   border-width: 2px 2px 2px 1px;
@@ -113,12 +104,9 @@ body {
 
 #display-inst-name {
   position: absolute;
-  /*top: 50%;*/
   left: 40%;
-  /*transform: translate(0, -50%);*/
   margin: 0 auto;
   color: #2FD2DE;
-  /*background-color: #696969;*/
   text-shadow: #2e2e2e 0 4px 5px;
 }
 
@@ -194,12 +182,11 @@ body {
   position: relative;
   background-color: #2FD2DE;
   width: 200px;
-  height: 100px; /* as the half of the width */
-  border-top-left-radius: 110px;  /* 100px of height + 10px of border */
-  border-top-right-radius: 110px; /* 100px of height + 10px of border */
+  height: 100px; 
+  border-top-left-radius: 110px; 
+  border-top-right-radius: 110px; 
   border: 2px;
   border-color:#0066ff;
-  /*border-bottom: 0;*/
   bottom: 0;
   border-style: solid;
   border-width: 4px;
@@ -211,12 +198,11 @@ body {
   position: relative;
   background-color: #2FD2DE;
   width: 200px;
-  height: 100px; /* as the half of the width */
-  border-top-left-radius: 110px;  /* 100px of height + 10px of border */
-  border-top-right-radius: 110px; /* 100px of height + 10px of border */
+  height: 100px; 
+  border-top-left-radius: 110px;  
+  border-top-right-radius: 110px; 
   border: 2px;
   border-color:#0066ff;
-  /*border-bottom: 0;*/
   bottom: 0;
   border-style: solid;
   border-width: 4px;
@@ -226,17 +212,12 @@ body {
 #peer-bar3 {
   position: relative;
   background-color: #2FD2DE;
-  /*height: 250px;
   width: 200px;
-  border-radius: 100px;
-  bottom: -760px;*/
-  width: 200px;
-  height: 100px; /* as the half of the width */
-  border-top-left-radius: 110px;  /* 100px of height + 10px of border */
-  border-top-right-radius: 110px; /* 100px of height + 10px of border */
+  height: 100px; 
+  border-top-left-radius: 110px; 
+  border-top-right-radius: 110px; 
   border: 2px;
   border-color:#0066ff;
-  /*border-bottom: 0;*/
   bottom: 0;
   border-style: solid;
   border-width: 4px;
@@ -247,12 +228,11 @@ body {
   position: relative;
   background-color: #2FD2DE;
   width: 200px;
-  height: 100px; /* as the half of the width */
-  border-top-left-radius: 110px;  /* 100px of height + 10px of border */
-  border-top-right-radius: 110px; /* 100px of height + 10px of border */
+  height: 100px; 
+  border-top-left-radius: 110px;  
+  border-top-right-radius: 110px; 
   border: 2px;
   border-color:#0066ff;
-  /*border-bottom: 0;*/
   bottom: 0;
   border-style: solid;
   border-width: 4px;
@@ -260,7 +240,7 @@ body {
 }
 
 
-#selectInstrumentRoom{
+#selectInstrumentRoom {
   background-image: url("http://bit.ly/1zPhvmk");
   position: absolute;
   width: 100%;
@@ -268,15 +248,15 @@ body {
   background-size: 100%;
   background-size: cover;
 }
-#instLogo{
+
+#instLogo {
   position: absolute;
   top:5%;
   left:35%;
 }
 
 
-#pianoChoose{
-
+#pianoChoose {
   position: absolute;
   display:inline-block;
   top:37%;
@@ -284,12 +264,12 @@ body {
   opacity: 0.5;
 }
 
-#pianoChoose:hover{
+#pianoChoose:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 
-#drumsChoose{
+#drumsChoose {
   position: absolute;
   display:inline-block;
   top:30%;
@@ -298,7 +278,7 @@ body {
 }
 
 
-#drumsChoose:hover{
+#drumsChoose:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
@@ -320,7 +300,7 @@ body {
   }
 }
 
-#jamButton{
+#jamButton {
   position: absolute;
   top:80%;
   left:40%;
@@ -336,56 +316,56 @@ body {
   width:33px;
 }
 
-#thir{
+#thir {
  position: absolute;
   left:5.2%;
   top:-0.59%;
 }
 
-#fourt{
+#fourt {
   position: absolute;
   left:13.7%;
   top:-0.59%;
 }
 
-#fift{
+#fift {
   position: absolute;
   left:30.7%;
   top:-0.59%;
 
 }
 
-#sixt{
+#sixt {
   position: absolute;
   left:38.5%;
   top:-0.59%;
 }
 
-#sevent{
+#sevent {
   position: absolute;
   left:47%;
   top:-0.59%;
 }
 
-#eight{
+#eight {
   position: absolute;
   left:64%;
   top:-0.59%;
 }
 
-#ninet{
+#ninet {
   position: absolute;
   left:72%;
   top:-0.59%;
 }
 
-#twenty{
+#twenty {
   position: absolute;
   left:89%;
   top:-0.59%;
 }
 
-#pianoInst{
+#pianoInst {
   position: absolute;
   color:red;
   background-color: red;
@@ -394,9 +374,7 @@ body {
 
 
 /*DRUMS!!!*/
-
-
-#urC{
+#urC {
  position:absolute;
  border-radius:100%;
  background-color: none;
@@ -405,9 +383,9 @@ body {
  border:0.0001px solid transparent;
  top:8%;
  left:14%;
-
 }
-#nextC{
+
+#nextC {
  position:absolute;
  border-radius:100%;
  background-color: none;
@@ -418,8 +396,8 @@ body {
  left:13%;
 }
 
-#brDrum{
-position:absolute;
+#brDrum {
+ position:absolute;
  border-radius:100%;
  background-color: none;
  width:102px;
@@ -429,8 +407,7 @@ position:absolute;
  left:24%;
 }
 
-
-#rsDrum{
+#rsDrum {
  position:absolute;
  border-radius:100%;
  background-color: none;
@@ -439,11 +416,9 @@ position:absolute;
  border:0.0001px solid transparent;
  top:43%;
  left:36%;
-
-
 }
 
-#lsDrum{
+#lsDrum {
  position:absolute;
  border-radius:100%;
  background-color: none;
@@ -463,7 +438,6 @@ position:absolute;
  border:0.0001px solid transparent;
  top:56%;
  left:62%;
-
 }
 
 #urCymbal{
