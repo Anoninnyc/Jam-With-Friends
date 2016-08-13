@@ -1,4 +1,8 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import classnames from 'classnames';
+
+import SelectInstrument from 'SelectInstrument';
 import playNote from 'sounds';
 
 import { makePeerConnections, socket } from '../peer';
@@ -8,10 +12,13 @@ class Room extends React.Component {
     super(props);
     this.state = {
       finished: false,
-      peerConnections: []
+      peerConnections: [],
+      instrument: null,
+      startJam: false 
     };
-
+    this.selectInstrument = this.selectInstrument.bind(this);
     this.handleKeydown = this.handleKeydown.bind(this);
+    this.handleStart = this.handleStart.bind(this);
   }
 
   componentDidMount() {
@@ -36,11 +43,15 @@ class Room extends React.Component {
     );
 
     socket.on('invalid room', () => {
-      console.log('NOT A VALID ROOM');
       this.context.router.push('/invalid');
     });
+
     // event listener for keydown
     window.addEventListener('keydown', this.handleKeydown);
+  }
+
+  selectInstrument(instrument) {
+    this.setState({ instrument });
   }
 
   handleKeydown(e) {
@@ -50,10 +61,26 @@ class Room extends React.Component {
     playNote(e.key);
   }
 
+  handleStart() {
+    this.setState({ startJam: true });
+  }
+
   render() {
+    const opacity = instrument => classnames({ selected: this.state.instrument === instrument }, 'instrument');
     return (
       <div>
-        { this.state.finished ? <p>Playing</p> : <p>Loading</p> }
+        {
+          this.state.startJam ?
+            <p>Playing</p> :
+            <div>
+              <SelectInstrument handleClick={this.selectInstrument} opacity={opacity} />
+              <RaisedButton
+                label="Start"
+                onClick={this.handleStart}
+                disabled={!this.state.finished || !this.state.instrument}
+              />
+            </div>
+        }
       </div>
     );
   }
