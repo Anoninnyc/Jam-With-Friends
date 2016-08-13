@@ -12,6 +12,7 @@ import SelectRoom from './containers/SelectRoom';
 import JamRoom from './containers/JamRoom';
 import Room from 'Room';
 import TestPicker from 'TestPicker';
+import Invalid from 'Invalid';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -27,9 +28,10 @@ render((
       <Route path="selectRoom" component={SelectRoom} />
       <Route path="jam" component={JamRoom} />
       { /* for testing sounds */ }
-      <Route path="room" component={Room} />
+      <Route path="room/:roomId" component={Room} />
       { /* for testing unique links */}
       <Route path="testpicker" component={TestPicker} />
+      <Route path="*" component={Invalid} />
     </Route>
   </Router>
 ), document.getElementById('app'));
