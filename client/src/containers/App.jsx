@@ -77,7 +77,9 @@ class App extends Component {
             />
             : null
         */}
-        { this.props.children }
+        <section className="child">
+          { this.props.children }
+        </section>
       </div>
     );
   }

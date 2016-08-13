@@ -1,6 +1,13 @@
-body: {
+body {
   width:100%;
   height:100%;
+  margin: 0 2%;
+}
+
+#app {
+  margin: 0 auto;
+  width: 85%;
+  padding: 0 5%;
 }
 
 #roche{
@@ -12,6 +19,30 @@ body: {
   background-size: cover;
 }
 
+.child {
+  margin: 0 auto;
+}
+
+#landingPage {
+  width: 100%;
+  margin: 5% auto;
+  padding-bottom: 2%;
+}
+
+#landingPage h1 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.joinRoom, .createRoom {
+  margin: 2% auto;
+}
+
+#landingPage .divider {
+  width: 25%;
+  margin: 2% auto;
+}
+
 /*#jamroom{
   background-image: url('./JamRoomBG.gif');
   position: absolute;
@@ -20,6 +51,7 @@ body: {
   background-size: 100%;
   background-size: cover;
 }*/
+
 #jamroom{
   /*background-image: url('./JamRoomBG.gif');*/
   position: absolute;
@@ -274,7 +306,7 @@ body: {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
+
   20%, 80% {
     transform: translate3d(2px, 0, 0);
   }
@@ -293,7 +325,6 @@ body: {
   top:80%;
   left:40%;
 }
-
 
 .blackKey{
   border-style: solid;
@@ -360,7 +391,3 @@ body: {
   background-color: red;
  left:20%;
 }
-
-
-
-
