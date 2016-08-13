@@ -1,5 +1,5 @@
-import wimbal from 'wimbal';
-import zwill from 'zwill';
+import wimbal from './sounds/wimbal';
+import zwill from './sounds/zwill';
 
 const lowConfig = {
   pitchDecay: 0.05,
@@ -45,4 +45,4 @@ function playNote(keyPressed) {
   }
 }
 
-export default playNote;
+export default { playNote };
