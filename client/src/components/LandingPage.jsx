@@ -5,7 +5,6 @@ import Divider from 'material-ui/Divider';
 
 const materialStyles = {
   margin: '0 auto',
-  outline: '1px dashed black',
   display: 'block',
   width: '25%'
 };

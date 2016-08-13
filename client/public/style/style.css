@@ -6,9 +6,8 @@ body {
 
 #app {
   margin: 0 auto;
-  width: 90%;
+  width: 85%;
   padding: 0 5%;
-  outline: 1px dashed black;
 }
 
 #roche{
@@ -21,12 +20,10 @@ body {
 }
 
 .child {
-  outline: 1px dashed green;
   margin: 0 auto;
 }
 
 #landingPage {
-  outline: 1px dashed red;
   width: 100%;
   margin: 5% auto;
   padding-bottom: 2%;
@@ -34,7 +31,6 @@ body {
 
 #landingPage h1 {
   margin: 0 auto;
-  outline: 1px dashed red;
   text-align: center;
 }
 
