@@ -403,19 +403,19 @@ body {
  width:142px;
  height:142px;
  border:0.0001px solid transparent;
-  top:8%;
-  left:14%;
+ top:8%;
+ left:14%;
 
 }
 #nextC{
-  position:absolute;
+ position:absolute;
  border-radius:100%;
  background-color: none;
  width:95px;
  height:95px;
  border:0.0001px solid transparent;
-   top:44%;
-  left:13%;
+ top:44%;
+ left:13%;
 }
 
 #brDrum{
@@ -425,13 +425,13 @@ position:absolute;
  width:102px;
  height:102px;
  border:0.0001px solid transparent;
-  top:61%;
+ top:61%;
  left:24%;
 }
 
 
 #rsDrum{
-position:absolute;
+ position:absolute;
  border-radius:100%;
  background-color: none;
  width:63px;
@@ -449,7 +449,7 @@ position:absolute;
  background-color: none;
  width:77px;
  height:77px;
-  border:0.0001px solid transparent;
+ border:0.0001px solid transparent;
  top:41%;
  left:52%;
 }
@@ -460,7 +460,7 @@ position:absolute;
  background-color: none;
  width:135px;
  height:135px;
-  border:0.0001px solid transparent;
+ border:0.0001px solid transparent;
  top:56%;
  left:62%;
 
@@ -475,8 +475,5 @@ position:absolute;
  border:0.0001px solid transparent;
  top:18%;
  left:65.5%;
-
-
-
 }
 
