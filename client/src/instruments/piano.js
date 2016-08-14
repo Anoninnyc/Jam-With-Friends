@@ -1,5 +1,6 @@
 import Piano from '../containers/Piano';
 import AudioSynth from 'audiosynth';
+
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 const Synth = new AudioSynth(context);
