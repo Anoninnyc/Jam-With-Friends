@@ -1,17 +1,6 @@
-const keyToNote = {
-  z: 'C6',
-  x: 'D6',
-  c: 'E6',
-  v: 'F6',
-  b: 'G6',
-  n: 'A6',
-  m: 'B6',
-  j: 'C7',
-  k: 'D7',
-  l: 'E7'
-};
+import { MembraneSynth } from 'tone';
 
-const zimitsConfig = {
+const config = {
   pitchDecay: 0.1,
   octaves: 7,
   oscillator: {
@@ -26,6 +15,19 @@ const zimitsConfig = {
   }
 };
 
-const zimit = new Tone.MembraneSynth(zimitsConfig).toMaster();
+const keyToNote = {
+  z: 'C6',
+  x: 'D6',
+  c: 'E6',
+  v: 'F6',
+  b: 'G6',
+  n: 'A6',
+  m: 'B6',
+  j: 'C7',
+  k: 'D7',
+  l: 'E7'
+};
 
-export default keyPressed => { zimit.triggerAttackRelease(keyToNote[keyPressed], '8n'); };
+const zimit = new MembraneSynth(config).toMaster();
+
+export default keyPressed => zimit.triggerAttackRelease(keyToNote[keyPressed], '8n');

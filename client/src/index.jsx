@@ -12,6 +12,7 @@ import SelectRoom from './containers/SelectRoom';
 import JamRoom from './containers/JamRoom';
 import Room from 'Room';
 import Invalid from 'Invalid';
+import Metronome from './components/Metronome';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -27,6 +28,7 @@ render((
       <Route path="selectRoom" component={SelectRoom} />
       <Route path="jam" component={JamRoom} />
       <Route path="room/:roomId" component={Room} />
+      <Route path="metronome" component={Metronome} />
       <Route path="*" component={Invalid} />
     </Route>
   </Router>

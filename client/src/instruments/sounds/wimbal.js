@@ -1,3 +1,5 @@
+import { MonoSynth } from 'tone';
+
 const config = {
   oscillator: {
     type: 'triangle',
@@ -19,8 +21,6 @@ const config = {
   }
 };
 
-const synth = new Tone.MonoSynth(config).toMaster();
-
 const keyToNote = {
   q: 'F4',
   w: 'G4',
@@ -34,5 +34,6 @@ const keyToNote = {
   p: 'A5'
 };
 
+const synth = new MonoSynth(config).toMaster();
 
-export default keyPressed => { synth.triggerAttackRelease(keyToNote[keyPressed], '8n'); };
+export default keyPressed => synth.triggerAttackRelease(keyToNote[keyPressed], '8n');
