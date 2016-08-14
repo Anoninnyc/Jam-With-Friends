@@ -12,9 +12,12 @@ const AppNavBar = () => (
       showMenuIconButton={false}
     >
       <Link to="/">
-        <img id="logo" src="http://bit.ly/2beSCQg" /></Link>
-      <Link to="login" ><button className="navButtons"> Login!</button></Link>
-      <Link to="signup"><button className="navButtons"> Signup!</button></Link>
+        <img id="logo" src="http://bit.ly/2beSCQg" />
+      </Link>
+      <Link to="login" ><button className="navButtons"> Login!</button>
+      </Link>
+      <Link to="signup"><button className="navButtons"> Signup!</button>
+      </Link>
     </AppBar >
   </div>
 );
