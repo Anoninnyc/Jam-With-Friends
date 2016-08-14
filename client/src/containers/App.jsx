@@ -32,6 +32,7 @@ class App extends Component {
             </section> :
             null
         }
+
       </div>
     );
   }
