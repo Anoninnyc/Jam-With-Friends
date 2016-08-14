@@ -19,12 +19,6 @@ class App extends Component {
     return (
       <div>
         <Nav title={'tbd'} />
-        <Link to="/">Home</Link>
-        <Link to="login">Login</Link>
-        <Link to="signup">Signup</Link>
-        <Link to="selectInstrument">Select Instrument</Link>
-        <Link to="selectRoom">Select Room</Link>
-        <Link to="jam">Jam!</Link>
         {
           this.props.children ?
             <section className="child">
@@ -32,6 +26,7 @@ class App extends Component {
             </section> :
             null
         }
+
       </div>
     );
   }
