@@ -90,6 +90,7 @@ class Room extends React.Component {
             <div>
               <SelectInstrument handleClick={this.selectInstrument} opacity={opacity} />
               <RaisedButton
+                style={{ bottom: 0, position: "absolute" }}
                 label="Start"
                 onClick={this.handleStart}
                 disabled={!this.state.finished || !this.state.instrument}
