@@ -16,8 +16,12 @@ class JamRoom extends Component {
     super(props);
 
     this.state = {
-
+      showAddView: false
     };
+  }
+
+  handleAddClick() {
+
   }
 
   render() {
@@ -25,14 +29,10 @@ class JamRoom extends Component {
       <div id="jamroom">
         <div id="display-inst-name"><h1>You are playing the {this.props.instrument}</h1></div>
         <div className="peer-bar">
-          <div id="peer-bar1"><div id="peer-name">You</div></div>
-          {
-            this.props.peers ?
-            this.props.peers.map((peer, index) =>
-              <div id={`peer-bar${index + 1}`} key={peer.channelName}><div id="peer-name">Friend {index + 1}</div></div>
-            )
-            : null
-          }
+          <div id="peer-bar1"><div id="peer-name">You : {this.props.instrument}</div></div>
+          <div id="peer-bar1"><div id="peer-name"> {this.props.peers[0] ? "peer1" : "+" } </div></div>
+          <div id="peer-bar1"><div id="peer-name"> {this.props.peers[1] ? "peer2" : "+" } </div></div>
+          <div id="peer-bar1"><div id="peer-name"> {this.props.peers[2] ? "peer3" : "+" } </div></div>
         </div>
         <div id="user-instrument">
           {this.props.instrument === 'drums' ? <Drums /> : null}
@@ -42,6 +42,13 @@ class JamRoom extends Component {
     );
   }
 }
+// {
+//   this.props.peers ?
+//   this.props.peers.map((peer, index) =>
+//     <div id={`peer-bar${index + 1}`} key={peer.channelName}><div id="peer-name">Friend {index + 1}</div></div>
+//   )
+//   : null
+// }
 
 JamRoom.propTypes = {
   instrument: React.PropTypes.string,
