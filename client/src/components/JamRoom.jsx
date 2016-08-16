@@ -28,11 +28,7 @@ class JamRoom extends Component {
       this.setState({ showLinkView: true });
     }
   }
-
-  // <div onClick={this.toggleLinkView} id="peer-bar1"><div id="peer-name"> {this.props.peers[0] ? "peer1" : "+" } </div></div>
-  // <div onClick={this.toggleLinkView} id="peer-bar1"><div id="peer-name"> {this.props.peers[1] ? "peer2" : "+" } </div></div>
-  // <div onClick={this.toggleLinkView} id="peer-bar1"><div id="peer-name"> {this.props.peers[2] ? "peer3" : "+" } </div></div>
-  // TO DO: refactor card to seperate component
+  //TO DO: refactor "peerbars" and card into their own components
   render() {
     return (
       <div id="jamroom">
