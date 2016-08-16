@@ -4,12 +4,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import classnames from 'classnames';
 
 // Components
-import SelectInstrument from 'SelectInstrument';
-import JamRoom from '../containers/JamRoom';
+import SelectInstrument from '../components/SelectInstrument';
+import JamRoom from '../components/JamRoom';
 
 // Util
 import { makePeerConnections, socket } from '../peer';
-import store from 'store';
+import store from '../instruments/store';
 
 class Room extends React.Component {
   constructor(props) {

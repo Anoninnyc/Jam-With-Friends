@@ -8,7 +8,7 @@ const config = {
   devtool: 'inline-sourcemap',
   resolve: {
     root: __dirname,
-    modulesDirectories: ['node_modules', 'components', 'instruments'],
+    modulesDirectories: ['node_modules'],
     extensions: ['', '.js', '.jsx']
   },
   entry: [path.join(SRC_DIR, 'index.jsx'), path.join(SRC_DIR, 'peer.js')],
