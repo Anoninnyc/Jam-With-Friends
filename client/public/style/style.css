@@ -183,7 +183,7 @@
   animation: bounce 1s;
 }
 
-#peer-bar1:hover {
+.clickable:hover {
   cursor: pointer;
   /*z-index: 10;*/
 }
