@@ -183,6 +183,11 @@
   animation: bounce 1s;
 }
 
+#peer-bar1:hover {
+  cursor: pointer;
+  /*z-index: 10;*/
+}
+
 
 #peer-bar2 {
   position: relative;
@@ -517,4 +522,15 @@ font-size: 30px;
   size:20px;
 
 }
+
+#link-window {
+  background-color: blue;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
