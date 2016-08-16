@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -22,7 +23,9 @@ class JamRoom extends Component {
     super(props);
 
     this.state = {
-      showLinkView: false
+      showLinkView: false,
+      copied: false,
+      url: window.location.href,
     };
 
     if (this.props.peers) {
@@ -74,15 +77,26 @@ class JamRoom extends Component {
                 actAsExpander={false}
                 showExpandableButton={false}
               />
-              <FloatingActionButton mini={true} onClick={this.toggleLinkView} style={{ top: '10%', right: '10%', position: 'absolute', transform: 'translate(-10%, -10%)' }} >
+              <FloatingActionButton
+                mini
+                onClick={this.toggleLinkView}
+                style={{ top: '10%', right: '5%', position: 'absolute', transform: 'translate(-10%, -5%)' }}
+              >
                 <ActionDone />
               </FloatingActionButton>
               <CardText expandable={false} style={{ float: 'left' }} >
                 {window.location.href}
               </CardText>
-              <CardActions >
-                <FlatButton label="Copy" style={{ float: 'right' }} />
-              </CardActions>
+
+              <CopyToClipboard
+                text={this.state.url}
+                onCopy={() => this.setState({ copied: true })}
+                style={{ float: 'left' }}
+              >
+                <CardActions >
+                  <FlatButton label="Copy" />
+                </CardActions>
+              </CopyToClipboard>
             </Card>
           : null
         }
@@ -90,21 +104,6 @@ class JamRoom extends Component {
     );
   }
 }
-
-// <FloatingActionButton onClick={this.toggleLinkView} style={{ clear: 'both' }}>
-//                 <ActionDone />
-//               </FloatingActionButton>
-
-// <FlatButton style={{ clear: 'both' }}>Done <i className="material-icons">done</i></FlatButton>
-// { this.state.showLinkView ? <div id="link-window" onClick={this.toggleLinkView} style={{ 'background-color': 'blue' }} >ECH</div> : null}
-
-// {
-//   this.props.peers ?
-//   this.props.peers.map((peer, index) =>
-//     <div id={`peer-bar${index + 1}`} key={peer.channelName}><div id="peer-name">Friend {index + 1}</div></div>
-//   )
-//   : null
-// }
 
 JamRoom.propTypes = {
   instrument: React.PropTypes.string,
