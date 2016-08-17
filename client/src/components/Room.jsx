@@ -19,7 +19,7 @@ class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      connected: connectionManager.isConnected,
+      connected: connectionManager.isConnected(),
       instrument: null,
       startJam: false
     };
@@ -49,11 +49,12 @@ class Room extends React.Component {
   }
 
   updateConnection() {
-    this.setState({ connected: connectionManager.isConnected });
+    this.setState({ connected: connectionManager.isConnected() });
   }
 
   selectInstrument(instrument) {
     this.setState({ instrument });
+
   }
 
   handleKeypress(e) {
