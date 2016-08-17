@@ -4,7 +4,9 @@ import Divider from 'material-ui/Divider';
 import shortid from 'shortid';
 import Paper from 'material-ui/Paper';
 
-import { socket } from '../peer';
+const io = require('socket.io-client');
+
+const socket = io();
 
 const materialStyles = {
   position: 'absolute',
@@ -69,7 +71,7 @@ class LandingPage extends React.Component {
             </Paper>
             <p id="callToAction"> What are you waiting for?</p>
           </div>
-          <img src="/Users/loaner/Desktop/tbd/client/public/style/RocheFace.png" />
+          <img src="/Users/loaner/Desktop/tbd/client/public/style/RocheFace.png" alt="roche" />
           <RaisedButton
             label={<span style={{ fontSize: '30px', textTransform: 'none' }}>Jam Now!</span>}
             style={materialStyles}
