@@ -4,9 +4,32 @@ import shortid from 'shortid';
 
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
-
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 // Local file imports
 import { socket } from '../peer';
+
+const tableData = [
+  {
+    roomName: 'Foobar',
+    numPeople: '1 out of 4',
+    instruments: 'Piano, Piano, Fry',
+  },
+  {
+    roomName: 'Jamapp',
+    numPeople: '3 out of 4',
+    instruments: 'Fry, Fry, Fry',
+  },
+  {
+    roomName: 'Rock Studio',
+    numPeople: '2 out of 4',
+    instruments: 'Fry, Drums',
+  },
+  {
+    roomName: 'Boosh',
+    numPeople: '2 out of 4',
+    instruments: 'Piano',
+  },
+];
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -80,7 +103,7 @@ class CreateOrJoin extends Component {
   render() {
     return (
       <div>
-        <div id="createView" style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }}>
+        <div id="create-room-view" style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }}>
           <div>
             If you can't think of a good room name, just click "Create Room brog"
              and we will provide you with a random room name.
@@ -112,9 +135,63 @@ class CreateOrJoin extends Component {
             : null
           }
         </div>
-        <div id="join-view" style={{ position: 'absolute', top: '40%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }} >
+        <div id="join-room-view" style={{ position: 'absolute', top: '60%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }} >
           <div>
             Have a link already?  Just paste it into your url bar!  Otherwise, checkout the open rooms below.  Click to join!
+          </div>
+          <div>
+            <Table
+              
+              fixedHeader
+              fixedFooter
+              selectable={false}
+              multiSelectable={false}
+            >
+              <TableHeader
+                displaySelectAll={false}
+                adjustForCheckbox={false}
+                enableSelectAll={false}
+              >
+                <TableRow>
+                  <TableHeaderColumn colSpan="3" tooltip="Join Open Room" style={{ textAlign: 'center' }}>
+                    Join Open Room
+                  </TableHeaderColumn>
+                </TableRow>
+                <TableRow>
+                  <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Room Name">Room Name</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Number Of People">Number Of People</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Instruments Being Played">Instruments Being Played</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody
+                displayRowCheckbox={false}
+                deselectOnClickaway
+                showRowHover
+                stripedRows={false}
+              >
+                {tableData.map((row, index) => (
+                  <TableRow key={index} selected={row.selected}>
+                    <TableRowColumn>{index}</TableRowColumn>
+                    <TableRowColumn>{row.roomName}</TableRowColumn>
+                    <TableRowColumn>{row.numPeople}</TableRowColumn>
+                    <TableRowColumn>{row.instruments}</TableRowColumn>
+                  </TableRow>
+                  ))}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TableRowColumn>Room Name</TableRowColumn>
+                  <TableRowColumn>Number Of People</TableRowColumn>
+                  <TableRowColumn>Instruments Being Played</TableRowColumn>
+                </TableRow>
+                <TableRow>
+                  <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
+                    Join Open Room
+                  </TableRowColumn>
+                </TableRow>
+              </TableFooter>
+            </Table>
           </div>
         </div>
       </div>
