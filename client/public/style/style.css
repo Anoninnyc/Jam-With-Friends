@@ -531,4 +531,11 @@ font-size: 30px;
   transform: translate(-50%, -50%);
 }
 
+input:invalid {
+  border: 1px solid red;
+}
+
+input:valid {
+  border: 1px solid green;
+}
 
