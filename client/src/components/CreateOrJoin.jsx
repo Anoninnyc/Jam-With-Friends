@@ -15,7 +15,18 @@ class CreateOrJoin extends Component {
     this.state = {
       createRoomVal: '',
       showValidateError: false,
+      showRoomTakenMessage: false,
     };
+
+    socket.on('room created', (roomName) => {
+      this.context.router.push(`room/${roomName}`);
+    });
+
+    socket.on('room name taken', () => {
+      this.setState({
+        showRoomTakenMessage: true,
+      });
+    });
 
     this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
@@ -40,13 +51,30 @@ class CreateOrJoin extends Component {
     }
 
     socket.emit('create room', roomName);
-    this.context.router.push(`room/${roomName}`);
   }
   // match nothing: ^(?![\s\S])
   handleCreateRoomChange(e) {
-    this.setState({
-      createRoomVal: e.target.value
-    });
+    if (!this.state.showValidateError && !this.state.showRoomTakenMessage) {
+      this.setState({
+        createRoomVal: e.target.value,
+        showValidateError: false,
+        showRoomTakenMessage: false,
+      });
+    } else if (!this.state.showValidateError) {
+      this.setState({
+        createRoomVal: e.target.value,
+        showValidateError: false,
+      });
+    } else if (!this.state.showRoomTakenMessage) {
+      this.setState({
+        createRoomVal: e.target.value,
+        showRoomTakenMessage: false,
+      });
+    } else {
+      this.setState({
+        createRoomVal: e.target.value,
+      });
+    }
   }
 
   render() {
@@ -73,6 +101,13 @@ class CreateOrJoin extends Component {
             ? <div>
               Room names can only contain letters or numbers.
                Please enter correct combination of character to make room
+            </div>
+            : null
+          }
+          {
+            this.state.showRoomTakenMessage
+            ? <div>
+              Room name is taken
             </div>
             : null
           }

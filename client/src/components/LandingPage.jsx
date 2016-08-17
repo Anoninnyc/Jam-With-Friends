@@ -35,8 +35,8 @@ class LandingPage extends React.Component {
   }
 
   handleClick() {
-    const hash = shortid.generate();
-    socket.emit('create room', hash);
+    // const hash = shortid.generate();
+    // socket.emit('create room', hash);
     // this.context.router.push(`room/${hash}`);
     this.context.router.push(`createorjoin`);
   }
