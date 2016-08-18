@@ -48,6 +48,8 @@ export default function(room) {
   });
 
   return {
+    // socket
+    socket,
     // called when peer connections are established
     onReady: cb => {
       emitter.on('connected', cb);
