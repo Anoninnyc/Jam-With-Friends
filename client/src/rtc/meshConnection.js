@@ -21,7 +21,7 @@ const options = {
 
 const socket = io();
 
-export default function(room) {
+export default function (room) {
   let selfId;
 
   socket.emit('join', room);
