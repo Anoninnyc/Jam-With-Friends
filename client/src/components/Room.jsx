@@ -21,7 +21,8 @@ class Room extends React.Component {
     this.state = {
       connected: connectionManager.isConnected(),
       instrument: null,
-      startJam: false
+      startJam: false,
+      peers: [],
     };
 
     this.updateConnection = this.updateConnection.bind(this);
@@ -54,7 +55,6 @@ class Room extends React.Component {
 
   selectInstrument(instrument) {
     this.setState({ instrument });
-
   }
 
   handleKeypress(e) {
@@ -70,10 +70,48 @@ class Room extends React.Component {
   }
 
   handleStart() {
+    // username could go in here
+    const peerInfo = {
+      instrument: this.state.instrument,
+      peerId: connectionManager.peerSocket().id,
+      roomId: this.props.params.roomId,
+    };
+    // send own info out
+    connectionManager.peerSocket().emit('peer info', peerInfo);
+    // ask for info
+    connectionManager.peerSocket().emit('ask for peer info', peerInfo);
+
     this.setState({ startJam: true });
     connectionManager.onMessage(data => {
       data = JSON.parse(data);
       store[data.instrument](data.keyPressed);
+    });
+
+    // update/add peer connections
+    connectionManager.peerSocket().on('peer info', (newPeerInfo) => {
+      let newPeer = true;
+
+      const arr = this.state.peers.slice();
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].peerId === newPeerInfo.peerId) {
+          arr[i] = newPeerInfo;
+          this.setState({
+            peers: arr,
+          });
+          newPeer = false;
+          break;
+        }
+      }
+      if (newPeer) {
+        this.setState({
+          peers: this.state.peers.concat(newPeerInfo)
+        });
+      }
+    });
+
+    connectionManager.peerSocket().on('ask for peer info', (info) => {
+      peerInfo.sendTo = info.peerId;
+      connectionManager.peerSocket().emit('give peer info', peerInfo);
     });
   }
 
@@ -83,7 +121,7 @@ class Room extends React.Component {
       <div>
         {
           this.state.startJam ?
-            <JamRoom instrument={this.state.instrument} peers={this.state.peerConnections} /> :
+            <JamRoom instrument={this.state.instrument} peers={this.state.peers} /> :
             <div>
               <SelectInstrument handleClick={this.selectInstrument} opacity={opacity} />
               <RaisedButton
