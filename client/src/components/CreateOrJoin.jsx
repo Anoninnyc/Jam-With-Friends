@@ -1,13 +1,12 @@
 // Modules
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import io from 'socket.io-client'
+import io from 'socket.io-client';
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 // Local file imports/Utils
-import connectionManager from '../rtc';
 
 const socket = io();
 
@@ -208,7 +207,7 @@ class CreateOrJoin extends Component {
                   <TableRowColumn>Instruments Being Played</TableRowColumn>
                 </TableRow>
                 <TableRow>
-                  <TableRowColumn colSpan="3" style={{ textAlign: 'center' }}>
+                  <TableRowColumn colSpan="4" style={{ textAlign: 'center' }}>
                     Join Open Room
                   </TableRowColumn>
                 </TableRow>
