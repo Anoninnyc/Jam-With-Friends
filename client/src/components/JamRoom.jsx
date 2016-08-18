@@ -17,7 +17,6 @@ class JamRoom extends Component {
       showLinkView: false,
       copied: false,
     };
-
     this.toggleLinkView = this.toggleLinkView.bind(this);
   }
 
@@ -28,7 +27,7 @@ class JamRoom extends Component {
       this.setState({ showLinkView: true });
     }
   }
-  //TO DO: refactor "peerbars" and card into their own components
+  // TO DO: refactor "peerbars" and card into their own components
   render() {
     return (
       <div id="jamroom">
@@ -38,17 +37,17 @@ class JamRoom extends Component {
           {
             !this.props.peers[0]
             ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Peer 1</div></div>
+            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
           }
           {
             !this.props.peers[1]
             ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Peer 2</div></div>
+            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
           }
           {
             !this.props.peers[2]
             ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Peer 3</div></div>
+            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
           }
         </div>
         <div id="user-instrument">
