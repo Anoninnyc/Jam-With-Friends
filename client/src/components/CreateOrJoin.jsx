@@ -15,7 +15,7 @@ const tableData = [
   {
     roomName: 'Foobar',
     numPeople: '1 out of 4',
-    instruments: 'Piano, Piano, Fry',
+    instruments: 'Piano',
   },
   {
     roomName: 'Jamapp',
@@ -29,8 +29,8 @@ const tableData = [
   },
   {
     roomName: 'Boosh',
-    numPeople: '2 out of 4',
-    instruments: 'Piano',
+    numPeople: '3 out of 4',
+    instruments: 'Piano, Piano, Fry',
   },
 ];
 
@@ -44,6 +44,11 @@ class CreateOrJoin extends Component {
       showRoomTakenMessage: false,
     };
 
+    this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
+    this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
+  }
+
+  componentDidMount() {
     socket.on('room created', (roomName) => {
       this.context.router.push(`room/${roomName}`);
     });
@@ -53,9 +58,6 @@ class CreateOrJoin extends Component {
         showRoomTakenMessage: true,
       });
     });
-
-    this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
-    this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
   }
 
   handleCreateRoomClick(e) {
@@ -165,7 +167,7 @@ class CreateOrJoin extends Component {
             <Table
               fixedHeader
               fixedFooter
-              selectable={false}
+              selectable
               multiSelectable={false}
             >
               <TableHeader
@@ -202,13 +204,8 @@ class CreateOrJoin extends Component {
               </TableBody>
               <TableFooter>
                 <TableRow>
-                  <TableRowColumn>Room Name</TableRowColumn>
-                  <TableRowColumn>Number Of People</TableRowColumn>
-                  <TableRowColumn>Instruments Being Played</TableRowColumn>
-                </TableRow>
-                <TableRow>
                   <TableRowColumn colSpan="4" style={{ textAlign: 'center' }}>
-                    Join Open Room
+                    <RaisedButton label="Join Room" />
                   </TableRowColumn>
                 </TableRow>
               </TableFooter>
