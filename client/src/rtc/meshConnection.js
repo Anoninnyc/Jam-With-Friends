@@ -21,7 +21,7 @@ const options = {
 
 const socket = io();
 
-export default function(room) {
+export default function (room) {
   let selfId;
 
   socket.emit('join', room);
@@ -48,6 +48,8 @@ export default function(room) {
   });
 
   return {
+    // socket
+    socket,
     // called when peer connections are established
     onReady: cb => {
       emitter.on('connected', cb);

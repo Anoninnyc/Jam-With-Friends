@@ -19,24 +19,22 @@ class Room extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      connected: connectionManager.isConnected,
+      connected: connectionManager.isConnected(),
       instrument: null,
-      startJam: false
+      startJam: false,
+      peers: [],
     };
 
     this.updateConnection = this.updateConnection.bind(this);
     this.selectInstrument = this.selectInstrument.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
     this.handleStart = this.handleStart.bind(this);
+    this.handlePeerInfo = this.handlePeerInfo.bind(this);
   }
 
   componentDidMount() {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
-
-    socket.on('invalid room', () => {
-      this.context.router.push('/invalid');
-    });
 
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
@@ -48,12 +46,23 @@ class Room extends React.Component {
     connectionManager.closeConnection();
   }
 
-  updateConnection() {
-    this.setState({ connected: connectionManager.isConnected });
-  }
+  setSocketListeners() {
+    socket.on('invalid room', () => {
+      this.context.router.push('/invalid');
+    });
 
-  selectInstrument(instrument) {
-    this.setState({ instrument });
+    connectionManager.peerSocket().on('remove connection', id => {
+      const dummyArr = this.state.peers.slice();
+      for (let i = 0; i < dummyArr.length; i++) {
+        if (dummyArr[i].peerId === id) {
+          dummyArr.splice(i, 1);
+          break;
+        }
+      }
+      this.setState({
+        peers: dummyArr,
+      });
+    });
   }
 
   handleKeypress(e) {
@@ -74,6 +83,58 @@ class Room extends React.Component {
       data = JSON.parse(data);
       store[data.instrument](data.keyPressed);
     });
+
+    this.handlePeerInfo();
+    this.setSocketListeners();
+  }
+
+  selectInstrument(instrument) {
+    this.setState({ instrument });
+  }
+
+  updateConnection() {
+    this.setState({ connected: connectionManager.isConnected() });
+  }
+
+  handlePeerInfo() {
+    // username could go in here
+    const peerInfo = {
+      instrument: this.state.instrument,
+      peerId: connectionManager.peerSocket().id,
+      roomId: this.props.params.roomId,
+    };
+    // send own info out
+    connectionManager.peerSocket().emit('peer info', peerInfo);
+    // ask for info
+    connectionManager.peerSocket().emit('ask for peer info', peerInfo);
+    // update/add peer connections
+    connectionManager.peerSocket().on('peer info', newPeerInfo => {
+      let newPeer = true;
+
+      const arr = this.state.peers.slice();
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].peerId === newPeerInfo.peerId) {
+          arr[i] = newPeerInfo;
+          this.setState({
+            peers: arr,
+          });
+          newPeer = false;
+          break;
+        }
+      }
+      if (newPeer) {
+        this.setState({
+          peers: this.state.peers.concat(newPeerInfo)
+        });
+      }
+    });
+
+    // send peer info to peer that requested it
+    connectionManager.peerSocket().on('ask for peer info', info => {
+      // include peer id of peer that requested info
+      peerInfo.sendTo = info.peerId;
+      connectionManager.peerSocket().emit('give peer info', peerInfo);
+    });
   }
 
   render() {
@@ -82,7 +143,7 @@ class Room extends React.Component {
       <div>
         {
           this.state.startJam ?
-            <JamRoom instrument={this.state.instrument} peers={this.state.peerConnections} /> :
+            <JamRoom instrument={this.state.instrument} peers={this.state.peers} /> :
             <div>
               <SelectInstrument handleClick={this.selectInstrument} opacity={opacity} />
               <RaisedButton
