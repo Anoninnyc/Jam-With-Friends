@@ -1,13 +1,17 @@
 // Modules
 import React, { Component } from 'react';
 import shortid from 'shortid';
-
+import io from 'socket.io-client'
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-// Local file imports
-import { socket } from '../peer';
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
+// Local file imports/Utils
+import connectionManager from '../rtc';
+
+const socket = io();
+
+// dummyData
 const tableData = [
   {
     roomName: 'Foobar',
@@ -103,7 +107,16 @@ class CreateOrJoin extends Component {
   render() {
     return (
       <div>
-        <div id="create-room-view" style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }}>
+        <div
+          id="create-room-view"
+          style={{
+            position: 'absolute',
+            top: '20%',
+            left: '50%',
+            transform: 'translate(-65%, -50%)',
+            textAlign: 'center',
+          }}
+        >
           <div>
             If you can't think of a good room name, just click "Create Room brog"
              and we will provide you with a random room name.
@@ -135,13 +148,22 @@ class CreateOrJoin extends Component {
             : null
           }
         </div>
-        <div id="join-room-view" style={{ position: 'absolute', top: '60%', left: '50%', transform: 'translate(-65%, -50%)', textAlign: 'center' }} >
+        <div
+          id="join-room-view"
+          style={{
+            position: 'absolute',
+            top: '60%',
+            left: '50%',
+            transform: 'translate(-65%, -50%)',
+            textAlign: 'center'
+          }}
+        >
           <div>
-            Have a link already?  Just paste it into your url bar!  Otherwise, checkout the open rooms below.  Click to join!
+            Have a link already?  Just paste it into your url bar!
+            Otherwise, checkout the open rooms below.  Click to join!
           </div>
           <div>
             <Table
-              
               fixedHeader
               fixedFooter
               selectable={false}
@@ -153,7 +175,7 @@ class CreateOrJoin extends Component {
                 enableSelectAll={false}
               >
                 <TableRow>
-                  <TableHeaderColumn colSpan="3" tooltip="Join Open Room" style={{ textAlign: 'center' }}>
+                  <TableHeaderColumn colSpan="4" tooltip="Join Open Room" style={{ textAlign: 'center' }}>
                     Join Open Room
                   </TableHeaderColumn>
                 </TableRow>
@@ -186,7 +208,7 @@ class CreateOrJoin extends Component {
                   <TableRowColumn>Instruments Being Played</TableRowColumn>
                 </TableRow>
                 <TableRow>
-                  <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
+                  <TableRowColumn colSpan="3" style={{ textAlign: 'center' }}>
                     Join Open Room
                   </TableRowColumn>
                 </TableRow>
