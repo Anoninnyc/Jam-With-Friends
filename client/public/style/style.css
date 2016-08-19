@@ -482,9 +482,24 @@ input:invalid {
 
 input:valid {
   border: 1px solid green;
+.child {
+  margin: 0 auto;
+  padding: 5%;
 }
 
-#signupContent { 
+.beatSequencer {
+  margin: 0 auto;
+  width: 80%;
+  height: 200px;
+  outline: 1px solid black;
+}
+
+.beatSequence.row {
+  display: block;
+  height: 100%;
+}
+
+#signupContent {
    position:absolute;
    top:30%;
  }
@@ -506,11 +521,21 @@ input:valid {
    top:30%;
   left:50%;
  }
- 
+
  #Welcome {
   position:absolute;
   color:white;
   left:20%;
   top: 35%;
   font-size: 20px;
+.beatBox {
+  height: 100%;
+  width: 24%;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0.25%;
+}
+
+.beatBox.selected {
+  background-color: black;
 }
