@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sequence from './Sequence';
 
 /**
  * logic of:
@@ -7,6 +8,20 @@ import React, { Component } from 'react';
  * - pass sounds to sequence
  */
 class BeatSequencer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    };
+  }
+  render() {
+    return (
+      <div className="beatSequencer">
+        <Sequence />
+      </div>
+    );
+  }
 };
 
 export default BeatSequencer;
