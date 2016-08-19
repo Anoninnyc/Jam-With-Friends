@@ -104,7 +104,7 @@ class CreateOrJoin extends Component {
 
   render() {
     return (
-      <div>
+      <div className="create-or-join-view">
         <div
           id="create-room-view"
           style={{
@@ -160,7 +160,7 @@ class CreateOrJoin extends Component {
             Have a link already?  Just paste it into your url bar!
             Otherwise, checkout the open rooms below.  Click to join!
           </div>
-          <div>
+          <div id="join-view-room">
             <Table
               fixedHeader
               fixedFooter
@@ -194,7 +194,7 @@ class CreateOrJoin extends Component {
                 {
                   this.state.rooms.map((row, index) => (
                     <TableRow key={index} selected={row.selected}>
-                      <TableRowColumn>{index}</TableRowColumn>
+                      <TableRowColumn>{index + 1}</TableRowColumn>
                       <TableRowColumn>{row.roomName}</TableRowColumn>
                       <TableRowColumn>{`${row.numPeople} out of 4`}</TableRowColumn>
                       <TableRowColumn>{row.instruments.join(', ')}</TableRowColumn>
