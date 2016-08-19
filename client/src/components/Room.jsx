@@ -100,6 +100,11 @@ class Room extends React.Component {
       peerId: connectionManager.peerSocket().id,
       roomId: this.props.params.roomId,
     };
+
+    // for join room update
+    console.log('sending a thing');
+    connectionManager.peerSocket().emit('instrument select', peerInfo);
+
     // send own info out
     connectionManager.peerSocket().emit('peer info', peerInfo);
     // ask for info
