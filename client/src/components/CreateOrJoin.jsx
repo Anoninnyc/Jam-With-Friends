@@ -116,7 +116,7 @@ class CreateOrJoin extends Component {
             If you can't think of a good room name, just click "Create Room broh"
              and we will provide you with a random room name.
           </div>
-          <form>
+          <form onSubmit={this.handleCreateRoomClick}>
             <input
               type="text"
               value={this.state.createRoomVal}
