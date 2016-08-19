@@ -13,6 +13,7 @@ const SelectInstrument = ({ handleSelect, handleClick }) => {
         width="500px"
         framePadding="0px 60px"
         style={{ margin: "auto" }}
+        wrapAround
       >
         <img
           src="/assets/piano.svg"
