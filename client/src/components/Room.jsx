@@ -102,7 +102,6 @@ class Room extends React.Component {
     };
 
     // for join room update
-    console.log('sending a thing');
     connectionManager.peerSocket().emit('instrument select', peerInfo);
 
     // send own info out
