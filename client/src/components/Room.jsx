@@ -2,8 +2,9 @@
 import React from 'react';
 
 // Components
-import SelectInstrument from '../components/SelectInstrument';
-import JamRoom from '../components/JamRoom';
+import SelectInstrument from './SelectInstrument';
+import JamRoom from './JamRoom';
+import Help from './Help';
 
 // Util
 import connectionManager from '../rtc';
@@ -21,6 +22,7 @@ class Room extends React.Component {
       instrument: 'piano',
       startJam: false,
       peers: [],
+      showPopover: false
     };
 
     this.updateConnection = this.updateConnection.bind(this);
@@ -28,6 +30,8 @@ class Room extends React.Component {
     this.handleKeypress = this.handleKeypress.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePeerInfo = this.handlePeerInfo.bind(this);
+    this.handleHelp = this.handleHelp.bind(this);
+    this.closePopover = this.closePopover.bind(this);
   }
 
   componentDidMount() {
@@ -138,9 +142,27 @@ class Room extends React.Component {
     });
   }
 
+  handleHelp(event) {
+    event.preventDefault();
+    this.setState({
+      showPopover: true,
+      anchorEl: event.target
+    });
+  }
+
+  closePopover() {
+    this.setState({ showPopover: false });
+  }
+
   render() {
     return (
       <div>
+        <Help
+          handleOpen={this.handleHelp}
+          showPopover={this.state.showPopover}
+          anchorEl={this.state.anchorEl}
+          handleClose={this.closePopover}
+        />
         {
           this.state.startJam ?
             <JamRoom instrument={this.state.instrument} peers={this.state.peers} /> :
