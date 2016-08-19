@@ -28,7 +28,7 @@ export default function (room) {
 
   // socket joined a room, start making connections
   socket.on('joined', sockets => {
-    selfId = sockets.pop();
+    selfId = sockets.pop().peerId;
     // if first one in room, done
     if (sockets.length === 0) {
       emitter.emit('connected');
@@ -82,17 +82,17 @@ function startConnection(sockets, number, selfId) {
   const peer = new SimplePeer(Object.assign(options, { initiator: true }));
   const remote = sockets[number];
   peer.on('signal', data => {
-    socket.emit('offer', { offer: data, by: socket.id, to: remote });
+    socket.emit('offer', { offer: data, by: socket.id, to: remote.peerId });
   });
 
   socket.on('answer', data => {
-    if (data.to === selfId && data.by === remote) {
+    if (data.to === selfId && data.by === remote.peerId) {
       peer.signal(data.answer);
     }
   });
 
   peer.on('connect', () => {
-    peers[remote] = peer;
+    peers[remote.peerId] = peer;
     if (number < sockets.length - 1) {
       startConnection(sockets, ++number, selfId);
     } else {
