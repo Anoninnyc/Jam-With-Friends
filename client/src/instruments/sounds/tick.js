@@ -1,18 +1,27 @@
-import { Loop, MembraneSynth } from 'tone';
+import { MembraneSynth, MetalSynth } from 'tone';
 
-const beat = new MembraneSynth({
+const membrane = new MembraneSynth({
   envelope: {
     sustain: 0,
     attack: 0.02,
-    decay: 0.8
+    decay: 0.8,
+    attackCurve: 'bounce'
   },
-  octaves: 10
+  octaves: 1,
+  oscillator: { type: 'sine' }
 }).toMaster();
 
-const tick = () => (
-  new Loop(time => {
-    beat.triggerAttackRelease('C2', '8n', time);
-  })
-);
+const metal = new MetalSynth({
+  frequency: 60, // 200
+  envelope: {
+    attack: 0.0015,
+    decay: 0.1, // 1.4
+    release: 0.2 // 0.2
+  },
+  harmonicity: 5.1, // 5.1
+  modulationIndex: 32, // 32
+  resonance: 4000, // 4000
+  octaves: 1.5
+}).toMaster();
 
-export default tick;
+export { membrane, metal };
