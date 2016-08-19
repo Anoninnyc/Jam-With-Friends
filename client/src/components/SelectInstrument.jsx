@@ -1,44 +1,44 @@
 import React from 'react';
+import Carousel from 'nuka-carousel';
+import RaisedButton from 'material-ui/RaisedButton';
 
-const SelectInstrument = ({ handleClick, opacity }) => (
-  <div id="selectInstrumentRoom">
-    <div>
-      <img
-        id="instLogo"
-        src="../../../style/InstrumentRoomLogo.png"
-        alt="logo"
-      />
+const SelectInstrument = ({ handleSelect, handleClick }) => {
+  const fixCarouselHeight = () => { window.dispatchEvent(new Event('resize')); };
+  return (
+    <div style={{ textAlign: "center" }}>
+      <Carousel
+        afterSlide={handleSelect}
+        InitialSlideWidth="500px"
+        InitialSlideHeight="350px"
+        width="500px"
+        framePadding="0px 60px"
+        style={{ margin: "auto" }}
+        wrapAround
+      >
+        <img
+          src="/assets/piano.svg"
+          alt="piano"
+          onLoad={fixCarouselHeight}
+        />
+        <img
+          src="/assets/drums.svg"
+          alt="drums"
+          onLoad={fixCarouselHeight}
+        />
+        <img
+          src="/assets/synth.svg"
+          alt="laserbells"
+          onLoad={fixCarouselHeight}
+        />
+      </Carousel>
+      <RaisedButton label="Start" onTouchTap={handleClick} style={{ margin: "auto" }} />
     </div>
-    <div className={opacity('piano')}>
-      <img
-        id="pianoChoose"
-        src="http://handlinpiano2.codyhandlin.com/wp-content/uploads/2016/06/grandepiano_2.png"
-        alt="piano"
-        onClick={handleClick.bind(null, 'piano')}
-      />
-    </div>
-    <div className={opacity('drums')}>
-      <img
-        id="drumsChoose"
-        src="http://www.vancouvertop40radio.com/Images/Clip%20Art/drumset.gif"
-        alt="drums"
-        onClick={handleClick.bind(null, 'drums')}
-      />
-    </div>
-    <div className={opacity('fry')}>
-      <img
-        id="fryChoose"
-        src="http://i.stack.imgur.com/STEuc.png"
-        alt="fry"
-        onClick={handleClick.bind(null, 'fry')}
-      />
-    </div>
-  </div>
-);
+  );
+};
 
 SelectInstrument.propTypes = {
-  handleClick: React.PropTypes.func.isRequired,
-  opacity: React.PropTypes.func
+  handleSelect: React.PropTypes.func.isRequired,
+  handleClick: React.PropTypes.func.isRequired
 };
 
 // SelectInstrument.childContextTypes = {

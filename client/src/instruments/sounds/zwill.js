@@ -16,16 +16,32 @@ const config = {
 };
 
 const keyToNote = {
-  z: 'C6',
-  x: 'D6',
-  c: 'E6',
-  v: 'F6',
-  b: 'G6',
-  n: 'A6',
-  m: 'B6',
-  j: 'C7',
-  k: 'D7',
-  l: 'E7'
+  z: 'E4',
+  x: 'F4',
+  c: 'G4',
+  v: 'A4',
+  b: 'B4',
+  n: 'C5',
+  m: 'D5',
+  a: 'E5',
+  s: 'F5',
+  d: 'G5',
+  f: 'A5',
+  g: 'B5',
+  h: 'C6',
+  j: 'D6',
+  k: 'E6',
+  l: 'F6',
+  q: 'G6',
+  w: 'A6',
+  e: 'B6',
+  r: 'C7',
+  t: 'D7',
+  y: 'E7',
+  u: 'F7',
+  i: 'G7',
+  o: 'A7',
+  p: 'B7'
 };
 
 const zimit = new MembraneSynth(config).toMaster();
