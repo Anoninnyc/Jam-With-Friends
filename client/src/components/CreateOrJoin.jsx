@@ -42,13 +42,18 @@ class CreateOrJoin extends Component {
       createRoomVal: '',
       showValidateError: false,
       showRoomTakenMessage: false,
+      rooms: [],
     };
 
     this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
+    this.handleRowClick = this.handleRowClick.bind(this);
+    this.updateRooms = this.updateRooms.bind(this);
   }
 
   componentDidMount() {
+    this.getRoomsInfo();
+
     socket.on('room created', (roomName) => {
       this.context.router.push(`room/${roomName}`);
     });
@@ -57,6 +62,68 @@ class CreateOrJoin extends Component {
       this.setState({
         showRoomTakenMessage: true,
       });
+    });
+
+    // socket.emit('get rooms', `/#${socket.id}`);
+
+    // socket.on('give rooms', (rooms) => {
+    //   const roomIds = Object.keys(rooms);
+    //   for (let i = 0; i < roomIds.length; i++) {
+    //   }
+    //   console.log(this.state.rooms);
+    // });
+    // console.log(this.state.rooms);
+  }
+
+  // componentWillUpdate() {
+  //   const socketId = socket.id;
+
+  //   socket.emit('get rooms', socketId);
+  // }
+
+  componentWillUnmount() {
+    socket.removeListener('rooms', this.updateRooms);
+  }
+
+  getRoomsInfo() {
+    const rooms = [];
+    // const socketId = `/#${socket.id}`;
+    let counter = 0;
+    const socketId = socket.id;
+
+    socket.emit('get rooms', socketId);
+
+    socket.on('give rooms', info => {
+      const roomIds = Object.keys(info);
+      for (let i = 0; i < roomIds.length; i++) {
+        counter++;
+        rooms.push({ roomName: roomIds[i], numPeople: 0, instruments: [] });
+        // hijak ask for peer info
+        socket.emit('ask for peer info', { peerId: socketId, roomId: roomIds[i] });
+      }
+    });
+
+    socket.on('peer info', info => {
+      counter--;
+      for (let i = 0; i < rooms.length; i++) {
+        console.log('bool check: ', rooms[i].roomName === info.roomId);
+        if (rooms[i].roomName === info.roomId) {
+          rooms[i].numPeople++;
+          rooms[i].instruments.push(info.instrument);
+        }
+      }
+      if (counter === 0) {
+        socket.emit('rooms', rooms);
+      }
+    });
+
+    socket.on('rooms', this.updateRooms);
+  }
+
+  updateRooms(rooms) {
+    console.log('update rooms: ', rooms);
+    this.setState({
+      rooms,
     });
   }
 
@@ -103,6 +170,10 @@ class CreateOrJoin extends Component {
         createRoomVal: e.target.value,
       });
     }
+  }
+
+  handleRowClick(rowNum, colNum) {
+    this.context.router.push(`room/${this.state.rooms[rowNum].roomName}`);
   }
 
   render() {
@@ -168,6 +239,7 @@ class CreateOrJoin extends Component {
               fixedHeader
               fixedFooter
               selectable
+              onCellClick={this.handleRowClick}
               multiSelectable={false}
             >
               <TableHeader
@@ -181,10 +253,10 @@ class CreateOrJoin extends Component {
                   </TableHeaderColumn>
                 </TableRow>
                 <TableRow>
-                  <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Room Name">Room Name</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Number Of People">Number Of People</TableHeaderColumn>
-                  <TableHeaderColumn tooltip="Instruments Being Played">Instruments Being Played</TableHeaderColumn>
+                  <TableHeaderColumn>ID</TableHeaderColumn>
+                  <TableHeaderColumn>Room Name</TableHeaderColumn>
+                  <TableHeaderColumn>Number Of People</TableHeaderColumn>
+                  <TableHeaderColumn>Instruments Being Played</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody
@@ -193,14 +265,16 @@ class CreateOrJoin extends Component {
                 showRowHover
                 stripedRows={false}
               >
-                {tableData.map((row, index) => (
-                  <TableRow key={index} selected={row.selected}>
-                    <TableRowColumn>{index}</TableRowColumn>
-                    <TableRowColumn>{row.roomName}</TableRowColumn>
-                    <TableRowColumn>{row.numPeople}</TableRowColumn>
-                    <TableRowColumn>{row.instruments}</TableRowColumn>
-                  </TableRow>
-                  ))}
+                {
+                  this.state.rooms.map((row, index) => (
+                    <TableRow key={index} selected={row.selected}>
+                      <TableRowColumn>{index}</TableRowColumn>
+                      <TableRowColumn>{row.roomName}</TableRowColumn>
+                      <TableRowColumn>{`${row.numPeople} out of 4`}</TableRowColumn>
+                      <TableRowColumn>{row.instruments.join(', ')}</TableRowColumn>
+                    </TableRow>
+                  ))
+                }
               </TableBody>
               <TableFooter>
                 <TableRow>
@@ -216,6 +290,11 @@ class CreateOrJoin extends Component {
     );
   }
 }
+
+// <TableHeaderColumn tooltip="ID">ID</TableHeaderColumn>
+// <TableHeaderColumn tooltip="Room Name">Room Name</TableHeaderColumn>
+// <TableHeaderColumn tooltip="Number Of People">Number Of People</TableHeaderColumn>
+// <TableHeaderColumn tooltip="Instruments Being Played">Instruments Being Played</TableHeaderColumn>
 
 CreateOrJoin.contextTypes = {
   router: React.PropTypes.object
