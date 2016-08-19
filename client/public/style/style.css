@@ -494,9 +494,14 @@ input:valid {
   outline: 1px solid black;
 }
 
+.sequence {
+  height: 25%;
+}
+
 .beatSequence.row {
-  display: block;
+  display: inline-block;
   height: 100%;
+  width: 90%;
 }
 
 #signupContent {
@@ -530,7 +535,7 @@ input:valid {
   font-size: 20px;
 .beatBox {
   height: 100%;
-  width: 24%;
+  width: 21%;
   border: 1px solid black;
   display: inline-block;
   margin: 0.25%;
@@ -538,4 +543,8 @@ input:valid {
 
 .beatBox.selected {
   background-color: black;
+}
+
+.playStop {
+  width: 10%;
 }

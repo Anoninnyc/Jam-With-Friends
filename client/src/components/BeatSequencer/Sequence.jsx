@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Row from './Row';
+import { Sequence as ToneSequence } from 'tone';
+import { membrane } from '../../instruments/sounds/tick';
+import MuteButton from './MuteButton'
 
 /**
  * - toggles active sounds on a subdivision
@@ -12,10 +15,12 @@ class Sequence extends Component {
     super(props);
 
     this.state = {
-      sequence: [0, 0, 0, 0]
+      sequence: [0, 0, 0, 0],
+      isMute: false
     };
 
     this.toggleBeat = this.toggleBeat.bind(this);
+    this.toggleMute = this.toggleMute.bind(this);
   }
 
   toggleBeat(index) {
@@ -27,9 +32,23 @@ class Sequence extends Component {
     });
   }
 
+  toggleMute() {
+    const isMute = this.state.isMute;
+
+    this.setState({
+      isMute: !isMute
+    });
+  }
+
   render() {
     return (
-      <Row sequence={this.state.sequence} handleClick={this.toggleBeat} />
+      <div className="sequence">
+        <MuteButton
+          isMute={this.state.isMute}
+          handleClick={this.toggleMute}
+        />
+        <Row sequence={this.state.sequence} handleClick={this.toggleBeat} />
+      </div>
     );
   }
 };
