@@ -1,8 +1,8 @@
-import fry from './fry';
+import laserbells from './laserbells';
 import piano from './piano';
 
 const store = {
-  fry: fry.playNote,
+  laserbells: laserbells.playNote,
   piano: piano.playNote
 };
 
