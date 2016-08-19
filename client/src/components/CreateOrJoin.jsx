@@ -113,7 +113,7 @@ class CreateOrJoin extends Component {
           }}
         >
           <div>
-            If you can't think of a good room name, just click "Create Room brog"
+            If you can't think of a good room name, just click "Create Room broh"
              and we will provide you with a random room name.
           </div>
           <form>
@@ -202,7 +202,7 @@ class CreateOrJoin extends Component {
               <TableFooter>
                 <TableRow>
                   <TableRowColumn colSpan="4" style={{ textAlign: 'center' }}>
-                    <RaisedButton label="Join Room" />
+                    Click on a row to join!
                   </TableRowColumn>
                 </TableRow>
               </TableFooter>
