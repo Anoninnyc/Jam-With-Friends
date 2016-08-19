@@ -48,7 +48,7 @@ class CreateOrJoin extends Component {
     this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
-    // this.updateRooms = this.updateRooms.bind(this);
+    this.updateRooms = this.updateRooms.bind(this);
   }
 
   componentDidMount() {
@@ -63,11 +63,15 @@ class CreateOrJoin extends Component {
         showRoomTakenMessage: true,
       });
     });
+
+    socket.emit('get rooms info', socket.id);
+
+    socket.on('give rooms info', this.updateRooms);
   }
 
-  // componentWillUnmount() {
-    // socket.removeListener('rooms', this.updateRooms);
-  // }
+  componentWillUnmount() {
+    socket.removeListener('give rooms info', this.updateRooms);
+  }
 
   // getRoomsInfo() {
     // const rooms = [];
@@ -104,12 +108,12 @@ class CreateOrJoin extends Component {
     // socket.on('rooms', this.updateRooms);
   // }
 
-  // updateRooms(rooms) {
-  //   console.log('update rooms: ', rooms);
-  //   this.setState({
-  //     rooms,
-  //   });
-  // }
+  updateRooms(rooms) {
+    console.log('update rooms: ', rooms);
+    this.setState({
+      rooms,
+    });
+  }
 
   handleCreateRoomClick(e) {
     e.preventDefault();
