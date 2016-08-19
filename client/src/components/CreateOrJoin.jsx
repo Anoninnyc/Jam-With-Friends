@@ -6,33 +6,7 @@ import io from 'socket.io-client';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
-// Local file imports/Utils
-
 const socket = io();
-
-// dummyData
-const tableData = [
-  {
-    roomName: 'Foobar',
-    numPeople: '1 out of 4',
-    instruments: 'Piano',
-  },
-  {
-    roomName: 'Jamapp',
-    numPeople: '3 out of 4',
-    instruments: 'Fry, Fry, Fry',
-  },
-  {
-    roomName: 'Rock Studio',
-    numPeople: '2 out of 4',
-    instruments: 'Fry, Drums',
-  },
-  {
-    roomName: 'Boosh',
-    numPeople: '3 out of 4',
-    instruments: 'Piano, Piano, Fry',
-  },
-];
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -52,8 +26,6 @@ class CreateOrJoin extends Component {
   }
 
   componentDidMount() {
-    // this.getRoomsInfo();
-
     socket.on('room created', (roomName) => {
       this.context.router.push(`room/${roomName}`);
     });
@@ -63,7 +35,6 @@ class CreateOrJoin extends Component {
         showRoomTakenMessage: true,
       });
     });
-
     socket.emit('get rooms info', socket.id);
 
     socket.on('give rooms info', this.updateRooms);
@@ -73,43 +44,7 @@ class CreateOrJoin extends Component {
     socket.removeListener('give rooms info', this.updateRooms);
   }
 
-  // getRoomsInfo() {
-    // const rooms = [];
-    // // const socketId = `/#${socket.id}`;
-    // let counter = 0;
-    // const socketId = socket.id;
-
-    // socket.emit('get rooms', socketId);
-
-    // socket.on('give rooms', info => {
-    //   const roomIds = Object.keys(info);
-    //   for (let i = 0; i < roomIds.length; i++) {
-    //     counter++;
-    //     rooms.push({ roomName: roomIds[i], numPeople: 0, instruments: [] });
-    //     // hijak ask for peer info
-    //     socket.emit('ask for peer info', { peerId: socketId, roomId: roomIds[i] });
-    //   }
-    // });
-
-    // socket.on('peer info', info => {
-    //   counter--;
-    //   for (let i = 0; i < rooms.length; i++) {
-    //     console.log('bool check: ', rooms[i].roomName === info.roomId);
-    //     if (rooms[i].roomName === info.roomId) {
-    //       rooms[i].numPeople++;
-    //       rooms[i].instruments.push(info.instrument);
-    //     }
-    //   }
-    //   if (counter === 0) {
-    //     socket.emit('rooms', rooms);
-    //   }
-    // });
-
-    // socket.on('rooms', this.updateRooms);
-  // }
-
   updateRooms(rooms) {
-    console.log('update rooms: ', rooms);
     this.setState({
       rooms,
     });
