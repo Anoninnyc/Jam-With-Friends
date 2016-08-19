@@ -30,18 +30,21 @@ class CreateOrJoin extends Component {
       this.context.router.push(`room/${roomName}`);
     });
 
-    socket.on('room name taken', () => {
-      this.setState({
-        showRoomTakenMessage: true,
-      });
-    });
+    socket.on('room name taken', this.showErrorMessage);
     socket.emit('get rooms info', socket.id);
 
     socket.on('give rooms info', this.updateRooms);
   }
 
   componentWillUnmount() {
+    socket.removeListener('room name taken', this.showErrorMessage);
     socket.removeListener('give rooms info', this.updateRooms);
+  }
+
+  showErrorMessage() {
+    this.setState({
+      showRoomTakenMessage: true,
+    });
   }
 
   updateRooms(rooms) {
