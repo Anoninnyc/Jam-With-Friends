@@ -93,8 +93,7 @@
 }
 
 #display-inst-name {
-  position: absolute;
-  left: 40%;
+  text-align: center;
   margin: 0 auto;
   color: #2FD2DE;
   text-shadow: #2e2e2e 0 4px 5px;
@@ -159,13 +158,32 @@
   width: 100%;
 }
 
-#peer-name {
+.peer {
   position: relative;
-  padding: 10px;
-  padding-top: 35px;
-  text-align: center;
+  width: 250px;
+  height: auto;
+}
+
+.peer-name {
   color: white;
-  font-size: 200%;
+  position: absolute;
+  bottom: 210px;
+  text-align: center;
+  width: 100%;
+  font-size: x-large;
+}
+
+.invitePeer {
+  -webkit-filter: invert(100%);
+}
+
+.jamroom-instrument {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    bottom: 125px;
+    left: 75px;
+    -webkit-filter: invert(100%);
 }
 
 #peer-bar1 {
