@@ -25,10 +25,13 @@ class Sequence extends Component {
   constructor(props) {
     super(props);
 
+    const defaultEvents = [0, 1, 0, 1];
+    const defaultSubdivision = '4n';
+
     this.state = {
-      sequence: null,
-      events: [0, 1, 0, 1], // events for ToneSequence object
-      subdivision: '4n',
+      sequence: toneSequence(defaultEvents, defaultSubdivision),
+      events: defaultEvents, // events for ToneSequence object
+      subdivision: defaultSubdivision,
       isMute: false
     };
 
@@ -39,9 +42,14 @@ class Sequence extends Component {
   toggleBeat(index) {
     const events = this.state.events;
     const newValue = events[index] === 0 ? 1 : 0;
+    const newEvents = [
+      ...events.slice(0, index),
+      newValue,
+      ...events.slice(index + 1)
+    ];
 
     this.setState({
-      events: [...events.slice(0, index), newValue, ...events.slice(index + 1)]
+      events: newEvents
     });
   }
 
