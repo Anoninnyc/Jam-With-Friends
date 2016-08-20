@@ -4,6 +4,17 @@ import Row from './Row';
 import MuteButton from './MuteButton';
 import { membrane } from '../../instruments/sounds/tick';
 
+
+const toneSequence = (events, subdivision) => (
+  // console.log(events);
+  // console.log(subdivision);
+
+  new ToneSequence(time => {
+    // console.log(time);
+    membrane.triggerAttackRelease('Bb5', '8n');
+  }, events, subdivision)
+);
+
 /**
  * - toggles active sounds on a subdivision
  *   (generates a pattern based on user interaction)
