@@ -4,6 +4,7 @@ import shortid from 'shortid';
 import io from 'socket.io-client';
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 const socket = io();
@@ -19,10 +20,12 @@ class CreateOrJoin extends Component {
       rooms: [],
     };
 
-    this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
+    this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
     this.updateRooms = this.updateRooms.bind(this);
+    this.checkErrorStates = this.checkErrorStates.bind(this);
+    this.showRoomTakenErrorMessage = this.showRoomTakenErrorMessage.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +33,8 @@ class CreateOrJoin extends Component {
       this.context.router.push(`room/${roomName}`);
     });
 
-    socket.on('room name taken', this.showErrorMessage);
+    socket.on('room name taken', this.showRoomTakenErrorMessage);
+
     socket.emit('get rooms info', socket.id);
 
     socket.on('give rooms info', this.updateRooms);
@@ -41,10 +45,16 @@ class CreateOrJoin extends Component {
     socket.removeListener('give rooms info', this.updateRooms);
   }
 
-  showErrorMessage() {
+  showRoomTakenErrorMessage() {
     this.setState({
       showRoomTakenMessage: true,
     });
+
+    setTimeout(() => {
+      this.setState({
+        showRoomTakenMessage: false,
+      });
+    }, 5000);
   }
 
   updateRooms(rooms) {
@@ -53,43 +63,30 @@ class CreateOrJoin extends Component {
     });
   }
 
-  handleCreateRoomClick(e) {
+  handleCreateRoomSubmit(e) {
     e.preventDefault();
     let roomName;
-    if (this.state.createRoomVal.match(/[^a-zA-Z1-9]+/g)) {
-      this.setState({
-        showValidateError: true,
-      });
+    if (this.state.showValidateError) {
       return;
     }
     if (this.state.createRoomVal === '') {
       roomName = shortid.generate();
     } else {
       roomName = this.state.createRoomVal;
-      this.setState({
-        createRoomVal: '',
-      });
     }
-
     socket.emit('create room', roomName);
   }
   // match nothing: ^(?![\s\S])
   handleCreateRoomChange(e) {
-    if (!this.state.showValidateError && !this.state.showRoomTakenMessage) {
+    if (e.target.value.match(/[^a-zA-Z1-9]+/g)) {
+      this.setState({
+        showValidateError: true,
+        createRoomVal: e.target.value,
+      });
+    } else if (this.state.showValidateError && e.target.value.match(/[^a-zA-Z1-9]+/g) === null) {
       this.setState({
         createRoomVal: e.target.value,
         showValidateError: false,
-        showRoomTakenMessage: false,
-      });
-    } else if (!this.state.showValidateError) {
-      this.setState({
-        createRoomVal: e.target.value,
-        showValidateError: false,
-      });
-    } else if (!this.state.showRoomTakenMessage) {
-      this.setState({
-        createRoomVal: e.target.value,
-        showRoomTakenMessage: false,
       });
     } else {
       this.setState({
@@ -99,12 +96,22 @@ class CreateOrJoin extends Component {
   }
 
   handleRowClick(rowNum, colNum) {
-    this.context.router.push(`room/${this.state.rooms[rowNum].roomName}`);
+    this.context.router.push(`/room/${this.state.rooms[rowNum].roomName}`);
+  }
+
+  checkErrorStates() {
+    if (this.state.showValidateError) {
+      return 'Room names can only contain letters or numbers';
+    } else if (this.state.showRoomTakenMessage) {
+      return 'Room name is taken';
+    } else {
+      return false;
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="create-or-join-view">
         <div
           id="create-room-view"
           style={{
@@ -119,32 +126,17 @@ class CreateOrJoin extends Component {
             If you can't think of a good room name, just click "Create Room broh"
              and we will provide you with a random room name.
           </div>
-          <form onSubmit={this.handleCreateRoomClick}>
-            <input
-              type="text"
-              value={this.state.createRoomVal}
+          <form onSubmit={this.handleCreateRoomSubmit}>
+            <TextField
+              hintText="Enter a Room Name..."
               onChange={this.handleCreateRoomChange}
-              placeholder="Enter a Room Name..."
-              pattern="[a-zA-Z1-9]+"
-              style={{ height: '32px' }}
+              errorText={this.checkErrorStates()}
             />
-            <RaisedButton onClick={this.handleCreateRoomClick} label="Create Room broh" />
+            <RaisedButton
+              onClick={this.handleCreateRoomSubmit}
+              label="Create Room broh"
+            />
           </form>
-          {
-            this.state.showValidateError
-            ? <div>
-              Room names can only contain letters or numbers.
-               Please enter correct combination of character to make room
-            </div>
-            : null
-          }
-          {
-            this.state.showRoomTakenMessage
-            ? <div>
-              Room name is taken
-            </div>
-            : null
-          }
         </div>
         <div
           id="join-room-view"
@@ -160,7 +152,7 @@ class CreateOrJoin extends Component {
             Have a link already?  Just paste it into your url bar!
             Otherwise, checkout the open rooms below.  Click to join!
           </div>
-          <div>
+          <div id="join-view-room">
             <Table
               fixedHeader
               fixedFooter
@@ -194,7 +186,7 @@ class CreateOrJoin extends Component {
                 {
                   this.state.rooms.map((row, index) => (
                     <TableRow key={index} selected={row.selected}>
-                      <TableRowColumn>{index}</TableRowColumn>
+                      <TableRowColumn>{index + 1}</TableRowColumn>
                       <TableRowColumn>{row.roomName}</TableRowColumn>
                       <TableRowColumn>{`${row.numPeople} out of 4`}</TableRowColumn>
                       <TableRowColumn>{row.instruments.join(', ')}</TableRowColumn>
