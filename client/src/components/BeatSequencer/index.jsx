@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Transport } from 'tone';
 import Sequence from './Sequence';
-import PlayStopButton from './PlayStopButton'
+import PlayStopButton from './PlayStopButton';
 
 /**
  * logic of:
@@ -20,11 +21,22 @@ class BeatSequencer extends Component {
   }
 
   togglePlaying() {
-    const isPlaying = this.state.isPlaying;
+    let isPlaying = this.state.isPlaying;
 
     this.setState({
       isPlaying: !isPlaying
     });
+
+    isPlaying = this.state.isPlaying;
+
+    console.log('after setting state:', isPlaying);
+    console.log('Transport state', Transport.state);
+
+    if (Transport.state !== 'started') {
+      Transport.start();
+    } else {
+      Transport.stop();
+    }
   }
 
   render() {
@@ -34,10 +46,10 @@ class BeatSequencer extends Component {
           isPlaying={this.state.isPlaying}
           handleClick={this.togglePlaying}
         />
-        <Sequence />
+        <Sequence isPlaying={this.state.isPlaying} />
       </div>
     );
   }
-};
+}
 
 export default BeatSequencer;
