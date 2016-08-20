@@ -39,6 +39,16 @@ class Sequence extends Component {
     this.toggleMute = this.toggleMute.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const willBePlaying = nextProps.isPlaying;
+
+    if (willBePlaying) {
+      this.state.sequence.start();
+    } else {
+      this.state.sequence.stop();
+    }
+  }
+
   toggleBeat(index) {
     const events = this.state.events;
     const newValue = events[index] === 0 ? 1 : 0;
