@@ -1,11 +1,11 @@
 import AppBar from 'material-ui/AppBar';
 import React from 'react';
 import { Link } from 'react-router';
+import NavMenuIcon from './NavMenuIcon';
 
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
 
 const AppNavBar = () => (
-
   <div id="navBar">
     <AppBar
       style={color}
@@ -14,11 +14,9 @@ const AppNavBar = () => (
       <Link to="/">
         <img id="logo" src="http://bit.ly/2beSCQg" />
       </Link>
-      <Link to="/login" ><button className="navButtons"> Login!</button>
-      </Link>
-      <Link to="/signup"><button className="navButtons"> Signup!</button>
-      </Link>
-    </AppBar >
+      <NavMenuIcon />
+    </AppBar>
+>>>>>>> Just use Link instead of the Dashboard
   </div>
 );
 

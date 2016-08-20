@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -16,9 +16,12 @@ const NavMenuIcon = () => (
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
   >
-    <MenuItem primaryText="Login" />
-    <MenuItem primaryText="Sign up" />
-    <MenuItem primaryText="Sign out" />
+    <MenuItem primaryText="Login">
+      <Link to="login" />
+    </MenuItem>
+    <MenuItem primaryText="Sign up">
+      <Link to="signup" />
+    </MenuItem>
   </IconMenu>
 );
 
