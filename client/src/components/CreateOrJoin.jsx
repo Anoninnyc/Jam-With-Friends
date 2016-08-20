@@ -35,7 +35,11 @@ class CreateOrJoin extends Component {
 
     socket.on('room name taken', this.showRoomTakenErrorMessage);
 
-    socket.emit('get rooms info', socket.id);
+    if (socket.id) {
+      socket.emit('get rooms info', socket.id);
+    } else {
+      socket.on('connected', () => socket.emit('get rooms info', socket.id));
+    }
 
     socket.on('give rooms info', this.updateRooms);
   }
