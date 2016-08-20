@@ -12,11 +12,10 @@ const AppNavBar = () => (
       showMenuIconButton={false}
     >
       <Link to="/">
-        <img id="logo" src="http://bit.ly/2beSCQg" />
+        <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
       </Link>
       <NavMenuIcon />
     </AppBar>
->>>>>>> Just use Link instead of the Dashboard
   </div>
 );
 
