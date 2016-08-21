@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
-import { Sequence as ToneSequence } from 'tone';
 import Row from './Row';
 import MuteButton from './MuteButton';
-
-const toneSequence = ({ tone, def }, events, subdivision) => {
-  const toneEvents = events.map(event => {
-    if (event === 0) {
-      return null;
-    } else {
-      return event;
-    }
-  });
-
-  return new ToneSequence(time => {
-    def.triggerAttackRelease(tone);
-  }, toneEvents, subdivision);
-};
+import toneSequence from '../../instruments/beats/sequence';
 
 /**
  * - toggles active sounds on a subdivision
