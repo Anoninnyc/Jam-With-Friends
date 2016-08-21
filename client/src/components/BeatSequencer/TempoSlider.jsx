@@ -14,8 +14,8 @@ const TempoSlider = ({ bpm, changeBPM }) => (
 );
 
 TempoSlider.propTypes = {
-  bpm: React.PropTypes.string.isRequired,
-  changeBPM: React.PropTypes.function.isRequired
+  bpm: React.PropTypes.number.isRequired,
+  changeBPM: React.PropTypes.func.isRequired
 };
 
 export default TempoSlider;
