@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Transport } from 'tone';
 import Sequence from './Sequence';
 import PlayStopButton from './PlayStopButton';
+import AddSequenceButton from './AddSequenceButton';
 import TempoSlider from './TempoSlider';
 import { membrane } from '../../instruments/sounds/tick';
 
@@ -25,6 +26,7 @@ class BeatSequencer extends Component {
 
     this.togglePlaying = this.togglePlaying.bind(this);
     this.changeBPM = this.changeBPM.bind(this);
+    this.addSequence = this.addSequence.bind(this);
   }
 
   togglePlaying() {
@@ -42,6 +44,10 @@ class BeatSequencer extends Component {
   changeBPM(_event, value) {
     this.setState({ bpm: value });
     Transport.bpm.value = value;
+  }
+
+  addSequence() {
+    console.log('You clicked the addSequence button');
   }
 
   render() {
@@ -66,6 +72,7 @@ class BeatSequencer extends Component {
             isPlaying={this.state.isPlaying}
             sound={{ tone: 'Bb4', def: membrane }}
           />
+          <AddSequenceButton handleClick={this.addSequence} />
         </div>
       </div>
     );
