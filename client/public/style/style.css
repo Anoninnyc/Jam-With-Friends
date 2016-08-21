@@ -7,11 +7,9 @@
   background-size: cover;
 }
 
-
 .child {
-  /*margin: 0 auto;*/
-}
 
+}
 
 #landingPage {
   position:absolute;
@@ -47,7 +45,6 @@
   top: 370px;
   left:280px;
   margin: 0 auto;
-
 }
 
 #userDrums {
@@ -208,7 +205,6 @@
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-
 #drumsChoose {
   position: absolute;
   display:inline-block;
@@ -216,7 +212,6 @@
   left:50%;
   opacity: 0.5
 }
-
 
 #drumsChoose:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
@@ -311,7 +306,6 @@
   background-color: red;
  left:20%;
 }
-
 
 /*DRUMS!!!*/
 #urC {
@@ -427,7 +421,7 @@
   height:100%;
   width:64px;
   left:0%;
-  -webkit-transition: height 1s, width 1s, left 1s,top 1s; 
+  -webkit-transition: height 1s, width 1s, left 1s,top 1s;
 }
 
 #logo:hover {
@@ -480,8 +474,6 @@ input:invalid {
   border: 1px solid red;
 }
 
-input:valid {
-  border: 1px solid green;
 .child {
   margin: 0 auto;
   padding: 5%;
@@ -533,6 +525,8 @@ input:valid {
   left:20%;
   top: 35%;
   font-size: 20px;
+}
+
 .beatBox {
   height: 100%;
   width: 21%;
