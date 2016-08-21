@@ -4,16 +4,19 @@ import Row from './Row';
 import MuteButton from './MuteButton';
 import { membrane } from '../../instruments/sounds/tick';
 
+const toneSequence = (events, subdivision) => {
+  const toneEvents = events.map(event => {
+    if (event === 0) {
+      return null;
+    } else {
+      return event;
+    }
+  });
 
-const toneSequence = (events, subdivision) => (
-  // console.log(events);
-  // console.log(subdivision);
-
-  new ToneSequence(time => {
-    // console.log(time);
-    membrane.triggerAttackRelease('Bb5', '8n');
-  }, events, subdivision)
-);
+  return new ToneSequence(time => {
+    membrane.triggerAttackRelease('Bb5');
+  }, toneEvents, subdivision);
+};
 
 /**
  * - toggles active sounds on a subdivision
@@ -58,8 +61,11 @@ class Sequence extends Component {
       ...events.slice(index + 1)
     ];
 
+    const newSequence = toneSequence(newEvents, this.state.subdivision);
+
     this.setState({
-      events: newEvents
+      events: newEvents,
+      sequence: newSequence
     });
   }
 
