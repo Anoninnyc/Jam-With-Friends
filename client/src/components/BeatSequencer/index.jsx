@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Transport } from 'tone';
 import Sequence from './Sequence';
 import PlayStopButton from './PlayStopButton';
+import TempoSlider from './TempoSlider';
 import { membrane } from '../../instruments/sounds/tick';
 
 /**
@@ -14,11 +15,16 @@ class BeatSequencer extends Component {
   constructor(props) {
     super(props);
 
+    const bpm = 120;
+    Transport.bpm.value = bpm;
+
     this.state = {
+      bpm,
       isPlaying: false
     };
 
     this.togglePlaying = this.togglePlaying.bind(this);
+    this.changeBPM = this.changeBPM.bind(this);
   }
 
   togglePlaying() {
@@ -33,13 +39,25 @@ class BeatSequencer extends Component {
     }
   }
 
+  changeBPM(_event, value) {
+    this.setState({ bpm: value });
+    Transport.bpm.value = value;
+  }
+
   render() {
     return (
       <div className="beatSequencer">
-        <PlayStopButton
-          isPlaying={this.state.isPlaying}
-          handleClick={this.togglePlaying}
-        />
+        <div className="controls">
+          <PlayStopButton
+            isPlaying={this.state.isPlaying}
+            handleClick={this.togglePlaying}
+          />
+          <TempoSlider
+            bpm={this.state.bpm}
+            changeBPM={this.changeBPM}
+          />
+          Tempo: { this.state.bpm } bpm
+        </div>
         <Sequence
           isPlaying={this.state.isPlaying}
           sound={{ tone: 'Bb4', def: membrane }}
