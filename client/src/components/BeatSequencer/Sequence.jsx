@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Sequence as ToneSequence } from 'tone';
 import Row from './Row';
 import MuteButton from './MuteButton';
-import { membrane } from '../../instruments/sounds/tick';
 
-const toneSequence = (events, subdivision) => {
+const toneSequence = ({ tone, def }, events, subdivision) => {
   const toneEvents = events.map(event => {
     if (event === 0) {
       return null;
@@ -14,7 +13,7 @@ const toneSequence = (events, subdivision) => {
   });
 
   return new ToneSequence(time => {
-    membrane.triggerAttackRelease('Bb5');
+    def.triggerAttackRelease(tone);
   }, toneEvents, subdivision);
 };
 
@@ -30,9 +29,11 @@ class Sequence extends Component {
 
     const defaultEvents = [0, 1, 0, 1];
     const defaultSubdivision = '4n';
+    const sound = this.props.sound;
 
     this.state = {
-      sequence: toneSequence(defaultEvents, defaultSubdivision),
+      sound,
+      sequence: toneSequence(sound, defaultEvents, defaultSubdivision),
       events: defaultEvents, // events for ToneSequence object
       subdivision: defaultSubdivision,
       isMute: false
@@ -61,7 +62,7 @@ class Sequence extends Component {
       ...events.slice(index + 1)
     ];
 
-    const newSequence = toneSequence(newEvents, this.state.subdivision);
+    const newSequence = toneSequence(this.state.sound, newEvents, this.state.subdivision);
 
     this.setState({
       events: newEvents,
@@ -89,5 +90,9 @@ class Sequence extends Component {
     );
   }
 }
+
+Sequence.propTypes = {
+  sound: React.PropTypes.object.isRequired
+};
 
 export default Sequence;

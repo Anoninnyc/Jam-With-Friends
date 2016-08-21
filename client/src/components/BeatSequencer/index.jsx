@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Transport } from 'tone';
 import Sequence from './Sequence';
 import PlayStopButton from './PlayStopButton';
+import { membrane } from '../../instruments/sounds/tick';
 
 /**
  * logic of:
@@ -39,7 +40,10 @@ class BeatSequencer extends Component {
           isPlaying={this.state.isPlaying}
           handleClick={this.togglePlaying}
         />
-        <Sequence isPlaying={this.state.isPlaying} />
+        <Sequence
+          isPlaying={this.state.isPlaying}
+          sound={{ tone: 'Bb4', def: membrane }}
+        />
       </div>
     );
   }
