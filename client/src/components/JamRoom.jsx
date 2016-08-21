@@ -37,9 +37,7 @@ class JamRoom extends Component {
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}
         </div>
-        <div className="peer-bar">
-          <PeerBar peers={this.props.peers} toggleInviteView={this.toggleInviteView} />
-        </div>
+        <PeerBar ownInstrument={this.props.instrument} peers={this.props.peers} toggleInviteView={this.toggleInviteView} />
         {
           this.state.showInviteView ?
             <Card
