@@ -1,25 +1,31 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
+import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import { white } from 'material-ui/styles/colors';
+import InstrumentIcon, { KickDrumIcon } from '../icons';
 
 const PeerBubble = ({ peer, handleClick }) => (
   <div className="peer">
-    <img src="/assets/kick.svg" alt="kick drum" />
+    <KickDrumIcon style={{ width: 200, height: 'auto' }} />
     {
-      peer ?
+      peer.instrument ?
         <div>
-          <img src="/assets/piano.svg" className="jamroom-instrument" alt={peer.instrument} />
-          <p className="peer-name">You</p>
+          <InstrumentIcon
+            instrument={peer.instrument}
+            className="jamroom-instrument"
+            style={{ width: '100%', height: 80 }}
+            color={white}
+          />
+          <p className="peer-name">{peer.name}</p>
         </div> :
         <div>
           <p className="peer-name">Invite</p>
           <IconButton
-            className="invitePeer"
-            iconClassName="material-icons"
-            iconStyle={{ height: 60, width: 60 }}
-            style={{ height: 120, width: 120, padding: 30, position: 'absolute', bottom: '100px', left: '65px' }}
+            iconStyle={{ height: 50, width: 50 }}
+            style={{ width: '100%', height: 'auto', padding: 25, position: 'absolute', bottom: 50, left: 5 }}
             onTouchTap={handleClick}
           >
-            add_circle_outline
+            <AddCircleOutline className="circleIcon" color={white} />
           </IconButton>
         </div>
     }
@@ -28,7 +34,7 @@ const PeerBubble = ({ peer, handleClick }) => (
 
 PeerBubble.propTypes = {
   peer: React.PropTypes.object.isRequired,
-  handleClick: React.PropTypes.func.isRequired
+  handleClick: React.PropTypes.func
 };
 
 export default PeerBubble;
