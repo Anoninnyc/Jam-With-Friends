@@ -21,16 +21,9 @@ class BeatSequencer extends Component {
   }
 
   togglePlaying() {
-    let isPlaying = this.state.isPlaying;
-
     this.setState({
-      isPlaying: !isPlaying
+      isPlaying: !this.state.isPlaying
     });
-
-    isPlaying = this.state.isPlaying;
-
-    console.log('after setting state:', isPlaying);
-    console.log('Transport state', Transport.state);
 
     if (Transport.state !== 'started') {
       Transport.start();
