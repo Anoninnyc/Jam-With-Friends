@@ -48,6 +48,7 @@ class BeatSequencer extends Component {
     return (
       <div className="beatSequencer">
         <div className="controls">
+          <h2>Controls</h2>
           <PlayStopButton
             isPlaying={this.state.isPlaying}
             handleClick={this.togglePlaying}
@@ -58,10 +59,14 @@ class BeatSequencer extends Component {
           />
           Tempo: { this.state.bpm } bpm
         </div>
-        <Sequence
-          isPlaying={this.state.isPlaying}
-          sound={{ tone: 'Bb4', def: membrane }}
-        />
+        <hr />
+        <div className="sequences">
+          <h2>Sequences</h2>
+          <Sequence
+            isPlaying={this.state.isPlaying}
+            sound={{ tone: 'Bb4', def: membrane }}
+          />
+        </div>
       </div>
     );
   }

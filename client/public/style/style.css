@@ -7,10 +7,6 @@
   background-size: cover;
 }
 
-.child {
-
-}
-
 #landingPage {
   position:absolute;
   height: 100%;
@@ -481,19 +477,33 @@ input:invalid {
 
 .beatSequencer {
   margin: 0 auto;
+  padding: 1%;
   width: 80%;
-  height: 200px;
-  outline: 1px solid black;
 }
 
-.sequence {
-  height: 25%;
+.beatSequencer h2 {
+  margin-top: 0;
+}
+
+.beatSequencer .controls, .beatSequencer .sequences {
+  margin: 1%;
+  padding: 1%;
+}
+
+.sequence .muteButton {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.beatSequencer .sequence {
+  height: 3rem;
 }
 
 .beatSequence.row {
   display: inline-block;
-  height: 100%;
+  height: 2rem;
   width: 90%;
+  vertical-align: inherit;
 }
 
 #signupContent {
