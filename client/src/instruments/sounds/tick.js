@@ -1,5 +1,25 @@
 import { MembraneSynth, MetalSynth } from 'tone';
 
+const bell = new MetalSynth({
+  harmonicity: 12,
+  resonance: 800,
+  modulationIndex: 20,
+  envelope: {
+    decay: 0.4,
+  },
+  volume: -15
+}).toMaster();
+
+const conga = new MembraneSynth({
+  pitchDecay: 0.008,
+  octaves: 2,
+  envelope: {
+    attack: 0.0006,
+    decay: 0.5,
+    sustain: 0
+  }
+}).toMaster();
+
 const membrane = new MembraneSynth({
   envelope: {
     sustain: 0,
@@ -24,4 +44,4 @@ const metal = new MetalSynth({
   octaves: 1.5
 }).toMaster();
 
-export { membrane, metal };
+export { bell, conga, membrane, metal };

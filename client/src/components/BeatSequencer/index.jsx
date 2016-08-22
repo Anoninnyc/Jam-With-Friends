@@ -4,7 +4,7 @@ import Sequence from './Sequence';
 import PlayStopButton from './PlayStopButton';
 import AddSequenceButton from './AddSequenceButton';
 import TempoSlider from './TempoSlider';
-import { membrane } from '../../instruments/sounds/tick';
+import { bell, conga, membrane, metal } from '../../instruments/sounds/tick';
 
 /**
  * logic of:
