@@ -35,7 +35,7 @@ class LandingPage extends React.Component {
   }
 
   handleClick() {
-    this.context.router.push(`createorjoin`);
+    this.context.router.push(`/createorjoin`);
   }
 
   render() {
