@@ -4,7 +4,6 @@ import Sequence from './Sequence';
 import PlayStopButton from './PlayStopButton';
 import AddSequenceButton from './AddSequenceButton';
 import TempoSlider from './TempoSlider';
-import { bell, conga, membrane, metal } from '../../instruments/sounds/tick';
 
 /**
  * logic of:
@@ -70,7 +69,6 @@ class BeatSequencer extends Component {
           <h2>Sequences</h2>
           <Sequence
             isPlaying={this.state.isPlaying}
-            sound={{ tone: 'Bb4', def: membrane }}
           />
           <AddSequenceButton handleClick={this.addSequence} />
         </div>

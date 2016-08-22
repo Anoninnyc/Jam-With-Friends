@@ -44,4 +44,4 @@ const metal = new MetalSynth({
   octaves: 1.5
 }).toMaster();
 
-export { bell, conga, membrane, metal };
+export default { bell, conga, membrane, metal };

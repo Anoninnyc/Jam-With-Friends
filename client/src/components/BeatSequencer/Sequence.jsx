@@ -3,6 +3,7 @@ import Row from './Row';
 import MuteButton from './MuteButton';
 import EditSequence from './EditSequence';
 import toneSequence from '../../instruments/beats/sequence';
+import beatSounds from '../../instruments/sounds/tick';
 
 /**
  * - toggles active sounds on a subdivision
@@ -16,7 +17,7 @@ class Sequence extends Component {
 
     const defaultEvents = [1, 0, 0, 1];
     const defaultSubdivision = '4n';
-    const sound = this.props.sound;
+    const sound = { tone: 'Bb4', def: beatSounds['membrane'] };
 
     this.state = {
       sound,
