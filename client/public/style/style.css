@@ -539,3 +539,33 @@ input:valid {
   border: 1px solid green;
 }
 
+#signupContent { 
+   position:absolute;
+   top:30%;
+ }
+
+ #loginContent {
+  position:absolute;
+  top:30%;
+ }
+
+ #UserMakeInstrumentRoom {
+  position:absolute;
+  top:30%;
+  left:50%;
+ }
+
+
+ #selectKeys {
+  position:absolute;
+   top:30%;
+  left:50%;
+ }
+ 
+ #Welcome {
+  position:absolute;
+  color:white;
+  left:20%;
+  top: 35%;
+  font-size: 20px;
+}

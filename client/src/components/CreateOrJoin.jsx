@@ -30,7 +30,7 @@ class CreateOrJoin extends Component {
 
   componentDidMount() {
     socket.on('room created', (roomName) => {
-      this.context.router.push(`room/${roomName}`);
+      this.context.router.push(`/room/${roomName}`);
     });
 
     socket.on('room name taken', this.showRoomTakenErrorMessage);
