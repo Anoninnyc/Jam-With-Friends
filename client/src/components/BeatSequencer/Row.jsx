@@ -5,7 +5,7 @@ import classnames from 'classnames';
  * - receives props from parent `Sequence`
  * - renders each subdivision of the beat
  */
-const Row = ({ sound, events, handleClick }) => {
+const Row = ({ events, handleClick }) => {
   const renderBeat = (beat, index) => {
     const beatStyle = classnames({ selected: beat === 1 }, 'beatBox');
     const handleClickForIndex = handleClick.bind(null, index);
@@ -21,7 +21,6 @@ const Row = ({ sound, events, handleClick }) => {
 };
 
 Row.propTypes = {
-  sound: React.PropTypes.object.isRequired,
   events: React.PropTypes.array.isRequired,
   handleClick: React.PropTypes.func.isRequired,
 };
