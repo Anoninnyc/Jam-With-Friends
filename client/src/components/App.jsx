@@ -8,20 +8,19 @@ import Nav from '../components/Nav';
 class App extends Component {
   constructor(props) {
     super(props);
-
-     this.state={
+    this.state = {
       loggedIn: false,
       user: "",
     };
-   this.logIn=this.logIn.bind(this);
-   this.logOut=this.logOut.bind(this);
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   getChildContext() {
     return { muiTheme: getMuiTheme(baseTheme) };
   }
 
-logIn(userName) {
+  logIn(userName) {
     this.setState({
       loggedIn: true,
       user: userName,
@@ -36,8 +35,8 @@ logIn(userName) {
     });
   }
   render() {
-     const children = React.Children.map(this.props.children, child => {
-     return React.cloneElement(child, {
+    const children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
         loggedIn: this.state.loggedIn,
         logIn: this.logIn,
         logOut: this.logOut,
