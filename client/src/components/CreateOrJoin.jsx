@@ -35,7 +35,15 @@ class CreateOrJoin extends Component {
 
     socket.on('room name taken', this.showRoomTakenErrorMessage);
 
-    socket.emit('get rooms info', socket.id);
+    // on refresh, componentDidMount may fire before socket has connected to server
+    // resulting in an undefined socket.id and bug where the information needed for
+    // the open room table is not loaded.  Fixed by checking for socket.id and waiting
+    // for connection if socket.id is undefined
+    if (socket.id) {
+      socket.emit('get rooms info', socket.id);
+    } else {
+      socket.on('connected', () => socket.emit('get rooms info', socket.id));
+    }
 
     socket.on('give rooms info', this.updateRooms);
   }
