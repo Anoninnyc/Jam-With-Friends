@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Row from './Row';
 import MuteButton from './MuteButton';
+import EditSequence from './EditSequence';
 import toneSequence from '../../instruments/beats/sequence';
 
 /**
@@ -22,11 +23,14 @@ class Sequence extends Component {
       sequence: toneSequence(sound, defaultEvents, defaultSubdivision),
       events: defaultEvents, // events for ToneSequence object
       subdivision: defaultSubdivision,
-      isMute: false
+      isMute: false,
+      showPopover: false
     };
 
     this.toggleBeat = this.toggleBeat.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.closePopover = this.closePopover.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,13 +68,33 @@ class Sequence extends Component {
     });
   }
 
+  handleEdit(event) {
+    event.preventDefault();
+    this.setState({
+      showPopover: true,
+      anchorEl: event.target
+    });
+  }
+
+  closePopover() {
+    this.setState({ showPopover: false });
+  }
+
   render() {
     return (
       <div className="sequence">
-        <MuteButton
-          isMute={this.state.isMute}
-          handleClick={this.toggleMute}
-        />
+        <div className="controls">
+          <MuteButton
+            isMute={this.state.isMute}
+            handleClick={this.toggleMute}
+          />
+          <EditSequence
+            handleOpen={this.handleEdit}
+            showPopover={this.state.showPopover}
+            anchorEl={this.state.anchorEl}
+            handleClose={this.closePopover}
+          />
+        </div>
         <Row events={this.state.events} handleClick={this.toggleBeat} />
       </div>
     );
