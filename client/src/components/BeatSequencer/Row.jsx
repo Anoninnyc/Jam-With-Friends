@@ -6,14 +6,11 @@ import classnames from 'classnames';
  * - renders each subdivision of the beat
  */
 const Row = ({ sound, events, handleClick }) => {
-
   const renderBeat = (beat, index) => {
     const beatStyle = classnames({ selected: beat === 1 }, 'beatBox');
-    const _handleClick = handleClick.bind(null, index);
+    const handleClickForIndex = handleClick.bind(null, index);
 
-    return (
-      <div className={beatStyle} key={index} onClick={_handleClick}></div>
-    )
+    return <div className={beatStyle} key={index} onClick={handleClickForIndex} />;
   };
 
   return (
@@ -21,6 +18,12 @@ const Row = ({ sound, events, handleClick }) => {
       { events.map((beat, index) => renderBeat(beat, index)) }
     </div>
   );
+};
+
+Row.propTypes = {
+  sound: React.PropTypes.object.isRequired,
+  events: React.PropTypes.array.isRequired,
+  handleClick: React.PropTypes.func.isRequired,
 };
 
 export default Row;
