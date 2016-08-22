@@ -2,7 +2,7 @@ import React from 'react';
 
 import PeerBubble from './PeerBubble';
 
-const PeerBar = ({ ownInstrument, peers, toggleInviteView }) => {
+const PeerBar = ({ ownInstrument, peers, toggleInviteView, toggleSelectView }) => {
   const inviteNumber = 3 - peers.length;
   const inviteArray = [];
   for (let i = 0; i < inviteNumber; i++) {
@@ -10,7 +10,7 @@ const PeerBar = ({ ownInstrument, peers, toggleInviteView }) => {
   }
   return (
     <div className="peer-bar">
-      <PeerBubble peer={{ instrument: ownInstrument, name: 'Me' }} />
+      <PeerBubble peer={{ instrument: ownInstrument, name: 'Me' }} handleClick={toggleSelectView} />
       {
         peers.map(peer => (
           <div key={peer.peerId}>
@@ -30,9 +30,10 @@ const PeerBar = ({ ownInstrument, peers, toggleInviteView }) => {
 };
 
 PeerBar.propTypes = {
+  ownInstrument: React.PropTypes.string.isRequired,
   peers: React.PropTypes.array.isRequired,
   toggleInviteView: React.PropTypes.func.isRequired,
-  ownInstrument: React.PropTypes.string.isRequired
+  toggleSelectView: React.PropTypes.func.isRequired
 };
 
 export default PeerBar;

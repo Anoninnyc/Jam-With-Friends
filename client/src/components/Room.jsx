@@ -8,7 +8,7 @@ import Help from './Help';
 
 // Util
 import connectionManager from '../rtc';
-import store from '../instruments/store';
+import { store, instruments } from '../instruments/store';
 
 const io = require('socket.io-client');
 
@@ -19,19 +19,17 @@ class Room extends React.Component {
     super(props);
     this.state = {
       connected: connectionManager.isConnected(),
-      instrument: 'piano',
+      instrument: instruments[0],
       startJam: false,
       peers: [],
       showPopover: false
     };
 
     this.updateConnection = this.updateConnection.bind(this);
-    this.selectInstrument = this.selectInstrument.bind(this);
     this.handleKeypress = this.handleKeypress.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handlePeerInfo = this.handlePeerInfo.bind(this);
     this.handleHelp = this.handleHelp.bind(this);
-    this.closePopover = this.closePopover.bind(this);
   }
 
   componentDidMount() {
@@ -86,11 +84,6 @@ class Room extends React.Component {
 
     this.handlePeerInfo();
     this.setSocketListeners();
-  }
-
-  selectInstrument(index) {
-    const instruments = ['piano', 'drums', 'laserbells'];
-    this.setState({ instrument: instruments[index] });
   }
 
   updateConnection() {
@@ -150,10 +143,6 @@ class Room extends React.Component {
     });
   }
 
-  closePopover() {
-    this.setState({ showPopover: false });
-  }
-
   render() {
     return (
       <div>
@@ -161,12 +150,20 @@ class Room extends React.Component {
           handleOpen={this.handleHelp}
           showPopover={this.state.showPopover}
           anchorEl={this.state.anchorEl}
-          handleClose={this.closePopover}
+          handleClose={() => { this.setState({ showPopover: false }); }}
         />
         {
           this.state.startJam ?
-            <JamRoom instrument={this.state.instrument} peers={this.state.peers} /> :
-            <SelectInstrument handleSelect={this.selectInstrument} handleClick={this.handleStart} />
+            <JamRoom
+              instrument={this.state.instrument}
+              peers={this.state.peers}
+              onReselect={index => { this.setState({ instrument: instruments[index] }); }}
+            /> :
+            <SelectInstrument
+              handleSelect={index => { this.setState({ instrument: instruments[index] }); }}
+              handleClick={this.handleStart}
+              size="normal"
+            />
         }
       </div>
     );

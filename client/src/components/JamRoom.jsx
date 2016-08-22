@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Dialog from 'material-ui/Dialog';
 
 import Piano from './Piano';
 import Drums from './Drums';
 import PeerBar from './PeerBar';
 import Invite from './Invite';
+import SelectInstrument from './SelectInstrument';
 
 class JamRoom extends Component {
   constructor(props) {
@@ -11,19 +13,20 @@ class JamRoom extends Component {
 
     this.state = {
       showInviteView: false,
-      copied: false,
+      showSelectView: false
     };
     this.toggleInviteView = this.toggleInviteView.bind(this);
+    this.toggleSelectView = this.toggleSelectView.bind(this);
   }
 
   toggleInviteView() {
-    if (this.state.showInviteView) {
-      this.setState({ showInviteView: false });
-    } else {
-      this.setState({ showInviteView: true });
-    }
+    this.setState({ showInviteView: !this.state.showInviteView });
   }
- 
+
+  toggleSelectView() {
+    this.setState({ showSelectView: !this.state.showSelectView });
+  }
+
   render() {
     return (
       <div id="jamroom">
@@ -36,20 +39,29 @@ class JamRoom extends Component {
           ownInstrument={this.props.instrument}
           peers={this.props.peers}
           toggleInviteView={this.toggleInviteView}
+          toggleSelectView={this.toggleSelectView}
         />
-        {
-          this.state.showInviteView ?
-            <Invite open={this.state.showInviteView} onRequestClose={this.toggleInviteView} /> :
-            null
-        }
+        <Invite open={this.state.showInviteView} onRequestClose={this.toggleInviteView} />
+        <Dialog
+          open={this.state.showSelectView}
+          onRequestClose={this.toggleSelectView}
+        >
+          <SelectInstrument
+            handleSelect={this.props.onReselect}
+            handleClick={this.toggleSelectView}
+            size="inset"
+            ownInstrument={this.props.instrument}
+          />
+        </Dialog>
       </div>
     );
   }
 }
 
 JamRoom.propTypes = {
-  instrument: React.PropTypes.string,
-  peers: React.PropTypes.array
+  instrument: React.PropTypes.string.isRequired,
+  peers: React.PropTypes.array.isRequired,
+  onReselect: React.PropTypes.func.isRequired
 };
 
 export default JamRoom;

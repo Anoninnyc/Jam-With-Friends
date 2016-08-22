@@ -6,4 +6,6 @@ const store = {
   piano: piano.playNote
 };
 
-export default store;
+const instruments = ['piano', 'drums', 'laserbells'];
+
+export { store, instruments };

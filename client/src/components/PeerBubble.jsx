@@ -15,6 +15,7 @@ const PeerBubble = ({ peer, handleClick }) => (
             className="jamroom-instrument"
             style={{ width: '100%', height: 80 }}
             color={white}
+            onTouchTap={peer.name === 'Me' ? handleClick : () => {}}
           />
           <p className="peer-name">{peer.name}</p>
         </div> :
