@@ -122,7 +122,7 @@ class Sequence extends Component {
 }
 
 Sequence.propTypes = {
-  sound: React.PropTypes.object.isRequired
+  isPlaying: React.PropTypes.bool.isRequired
 };
 
 export default Sequence;
