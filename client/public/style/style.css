@@ -93,8 +93,7 @@
 }
 
 #display-inst-name {
-  position: absolute;
-  left: 40%;
+  text-align: center;
   margin: 0 auto;
   color: #2FD2DE;
   text-shadow: #2e2e2e 0 4px 5px;
@@ -156,84 +155,30 @@
   bottom: 0;
   display:flex;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
 }
 
-#peer-name {
+.peer {
   position: relative;
-  padding: 10px;
-  padding-top: 35px;
+  width: 250px;
+  height: auto;
   text-align: center;
+}
+
+.peer-name {
   color: white;
-  font-size: 200%;
+  position: absolute;
+  bottom: 115px;
+  left: 5px;
+  width: 100%;
+  font-size: x-large;
 }
 
-#peer-bar1 {
-  position: relative;
-  background-color: #2FD2DE;
-  width: 200px;
-  height: 100px; 
-  border-top-left-radius: 110px; 
-  border-top-right-radius: 110px; 
-  border: 2px;
-  border-color:#0066ff;
-  bottom: 0;
-  border-style: solid;
-  border-width: 4px;
-  animation: bounce 1s;
+.jamroom-instrument {
+  position: absolute;
+  bottom: 60px;
+  left: 5px;
 }
-
-.clickable:hover {
-  cursor: pointer;
-  /*z-index: 10;*/
-}
-
-
-#peer-bar2 {
-  position: relative;
-  background-color: #2FD2DE;
-  width: 200px;
-  height: 100px; 
-  border-top-left-radius: 110px;  
-  border-top-right-radius: 110px; 
-  border: 2px;
-  border-color:#0066ff;
-  bottom: 0;
-  border-style: solid;
-  border-width: 4px;
-  animation: bounce 1s;
-}
-
-#peer-bar3 {
-  position: relative;
-  background-color: #2FD2DE;
-  width: 200px;
-  height: 100px; 
-  border-top-left-radius: 110px; 
-  border-top-right-radius: 110px; 
-  border: 2px;
-  border-color:#0066ff;
-  bottom: 0;
-  border-style: solid;
-  border-width: 4px;
-  animation: bounce 1s;
-}
-
-#peer-bar4 {
-  position: relative;
-  background-color: #2FD2DE;
-  width: 200px;
-  height: 100px; 
-  border-top-left-radius: 110px;  
-  border-top-right-radius: 110px; 
-  border: 2px;
-  border-color:#0066ff;
-  bottom: 0;
-  border-style: solid;
-  border-width: 4px;
-  animation: bounce 1s;
-}
-
 
 #selectInstrumentRoom {
   background-image: url("http://bit.ly/1zPhvmk");

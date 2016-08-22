@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
 
+import PeerBar from './PeerBar';
 import Piano from './Piano';
 import Drums from './Drums';
 
@@ -14,17 +15,17 @@ class JamRoom extends Component {
     super(props);
 
     this.state = {
-      showLinkView: false,
+      showInviteView: false,
       copied: false,
     };
-    this.toggleLinkView = this.toggleLinkView.bind(this);
+    this.toggleInviteView = this.toggleInviteView.bind(this);
   }
 
-  toggleLinkView() {
-    if (this.state.showLinkView) {
-      this.setState({ showLinkView: false });
+  toggleInviteView() {
+    if (this.state.showInviteView) {
+      this.setState({ showInviteView: false });
     } else {
-      this.setState({ showLinkView: true });
+      this.setState({ showInviteView: true });
     }
   }
   // TO DO: refactor "peerbars" and card into their own components
@@ -32,30 +33,13 @@ class JamRoom extends Component {
     return (
       <div id="jamroom">
         <div id="display-inst-name"><h1>You are playing the {this.props.instrument}</h1></div>
-        <div className="peer-bar">
-          <div id="peer-bar1"><div id="peer-name">You : {this.props.instrument}</div></div>
-          {
-            !this.props.peers[0]
-            ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
-          }
-          {
-            !this.props.peers[1]
-            ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
-          }
-          {
-            !this.props.peers[2]
-            ? <div onClick={this.toggleLinkView} id="peer-bar1" className="clickable"><div id="peer-name">+</div></div>
-            : <div id="peer-bar1"><div id="peer-name">Friend: {this.props.peers[0].instrument}</div></div>
-          }
-        </div>
-        <div id="user-instrument">
+        <div>
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}
         </div>
+        <PeerBar ownInstrument={this.props.instrument} peers={this.props.peers} toggleInviteView={this.toggleInviteView} />
         {
-          this.state.showLinkView ?
+          this.state.showInviteView ?
             <Card
               style={{
                 position: 'absolute',
@@ -73,7 +57,7 @@ class JamRoom extends Component {
               />
               <FloatingActionButton
                 mini
-                onClick={this.toggleLinkView}
+                onClick={this.toggleInviteView}
                 style={{ top: '10%', right: '5%', position: 'absolute', transform: 'translate(-10%, -5%)' }}
               >
                 <ActionDone />
