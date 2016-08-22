@@ -13,7 +13,7 @@ class Sequence extends Component {
   constructor(props) {
     super(props);
 
-    const defaultEvents = [0, 1, 0, 1];
+    const defaultEvents = [1, 0, 0, 1];
     const defaultSubdivision = '4n';
     const sound = this.props.sound;
 
