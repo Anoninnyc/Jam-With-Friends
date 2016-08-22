@@ -485,24 +485,28 @@ input:invalid {
   margin-top: 0;
 }
 
-.beatSequencer .controls, .beatSequencer .sequences {
-  margin: 1%;
-  padding: 1%;
+.beatSequencer .controls {
+  display: inline-block;
+  width: 10%;
 }
 
-.sequence .muteButton {
+.sequence .muteButton, .sequence .editSequence {
   display: inline-block;
   vertical-align: bottom;
+}
+
+.playStopButton {
+  width: 10%;
 }
 
 .beatSequencer .sequence {
   height: 3rem;
 }
 
-.beatSequence.row {
+.row {
   display: inline-block;
   height: 2rem;
-  width: 90%;
+  width: 85%;
   vertical-align: inherit;
 }
 
@@ -547,8 +551,4 @@ input:invalid {
 
 .beatBox.selected {
   background-color: black;
-}
-
-.playStop {
-  width: 10%;
 }

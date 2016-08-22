@@ -17,7 +17,7 @@ const Row = ({ sound, events, handleClick }) => {
   };
 
   return (
-    <div className="beatSequence row">
+    <div className="row">
       { events.map((beat, index) => renderBeat(beat, index)) }
     </div>
   );

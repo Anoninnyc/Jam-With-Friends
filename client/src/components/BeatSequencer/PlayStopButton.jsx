@@ -3,7 +3,7 @@ import IconButton from 'material-ui/IconButton';
 
 const PlayStopButton = ({ isPlaying, handleClick }) => {
   return (
-    <div className="playStop" onClick={handleClick}>
+    <div className="playStopButton" onClick={handleClick}>
       <IconButton
         iconClassName="material-icons"
       >
