@@ -1,8 +1,11 @@
 import React from 'react';
 import Popover from 'material-ui/Popover';
 import IconButton from 'material-ui/IconButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
-const EditSequence = ({ handleOpen, showPopover, anchorEl, handleClose }) => (
+// TODO: pass in MenuItems from parent component
+const EditSequence = ({ anchorEl, showPopover, handleOpen, handleClose, handleSelect }) => (
   <div className="editSequence">
     <IconButton
       iconClassName="material-icons"
@@ -12,6 +15,7 @@ const EditSequence = ({ handleOpen, showPopover, anchorEl, handleClose }) => (
       create
     </IconButton>
     <Popover
+      className="pickSound"
       open={showPopover}
       anchorEl={anchorEl}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -19,7 +23,17 @@ const EditSequence = ({ handleOpen, showPopover, anchorEl, handleClose }) => (
       onRequestClose={handleClose}
       canAutoPosition={false}
     >
-      <p>Edit the sequence</p>
+      <SelectField
+        className="pickSound"
+        floatingLabelText="Pick a sound"
+        floatingLabelFixed
+        onChange={handleSelect}
+      >
+        <MenuItem value="bell" primaryText="Bell" />
+        <MenuItem value="conga" primaryText="Conga" />
+        <MenuItem value="membrane" primaryText="Membrane" />
+        <MenuItem value="metal" primaryText="Metal" />
+      </SelectField>
     </Popover>
   </div>
 );
@@ -28,7 +42,8 @@ EditSequence.propTypes = {
   handleOpen: React.PropTypes.func.isRequired,
   showPopover: React.PropTypes.bool.isRequired,
   anchorEl: React.PropTypes.object,
-  handleClose: React.PropTypes.func.isRequired
+  handleClose: React.PropTypes.func.isRequired,
+  handleSelect: React.PropTypes.func.isRequired
 };
 
 export default EditSequence;

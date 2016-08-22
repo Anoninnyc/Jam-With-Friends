@@ -17,7 +17,7 @@ class Sequence extends Component {
 
     const defaultEvents = [1, 0, 0, 1];
     const defaultSubdivision = '4n';
-    const sound = { tone: 'Bb4', def: beatSounds['membrane'] };
+    const sound = { tone: 'Bb4', def: beatSounds.membrane };
 
     this.state = {
       sound,
@@ -32,6 +32,7 @@ class Sequence extends Component {
     this.toggleMute = this.toggleMute.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.closePopover = this.closePopover.bind(this);
+    this.selectSequence = this.selectSequence.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -81,6 +82,23 @@ class Sequence extends Component {
     this.setState({ showPopover: false });
   }
 
+  selectSequence(_event, _key, soundName) {
+    let tone;
+
+    if (soundName === 'membrane') {
+      tone = 'Bb4';
+    } else {
+      tone = 200;
+    }
+
+    const sound = { tone, def: beatSounds[soundName] };
+
+    this.setState({
+      sound,
+      sequence: toneSequence(sound, this.state.events, this.state.subdivision)
+    });
+  }
+
   render() {
     return (
       <div className="sequence">
@@ -90,10 +108,11 @@ class Sequence extends Component {
             handleClick={this.toggleMute}
           />
           <EditSequence
-            handleOpen={this.handleEdit}
-            showPopover={this.state.showPopover}
             anchorEl={this.state.anchorEl}
+            showPopover={this.state.showPopover}
+            handleOpen={this.handleEdit}
             handleClose={this.closePopover}
+            handleSelect={this.selectSequence}
           />
         </div>
         <Row events={this.state.events} handleClick={this.toggleBeat} />
