@@ -1,8 +1,10 @@
+import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import React from 'react';
 import { Link } from 'react-router';
+import $ from "jquery";
 
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
+
 
 const AppNavBar = () => (
 

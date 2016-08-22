@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 // for future material ui use
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -9,20 +8,48 @@ import Nav from '../components/Nav';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedIn: false,
+      user: "",
+    };
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   getChildContext() {
     return { muiTheme: getMuiTheme(baseTheme) };
   }
 
+  logIn(userName) {
+    this.setState({
+      loggedIn: true,
+      user: userName,
+    });
+  }
+
+  logOut() {
+    console.log('Main logout being called');
+    this.setState({
+      loggedIn: false,
+      user: "",
+    });
+  }
   render() {
+    const children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        loggedIn: this.state.loggedIn,
+        logIn: this.logIn,
+        logOut: this.logOut,
+        user: this.state.user,
+      });
+    });
     return (
       <div>
-        <Nav title={'tbd'} />
+        <Nav user={this.state.user}  loggedIn={this.state.loggedIn} title={'tbd'} />
         {
           this.props.children ?
             <section className="child">
-              {this.props.children}
+              {children}
             </section> :
             null
         }
