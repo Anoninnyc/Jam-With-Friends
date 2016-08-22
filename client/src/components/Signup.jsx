@@ -32,7 +32,7 @@ helperSignup() {
         <TextField floatingLabelText="UserName" hintText="Must be 7+ characters" id="UserNameSignUp" type="text" /><br />
         <TextField floatingLabelText="Password" hintText="Must be 7+ characters" id="UserNamePass" type="password" /><br />
         <RaisedButton label="Signup" onClick={() => { this.helperSignup(); }} />
-        <Link to="login" ><RaisedButton label="Click to Login Instead" /> </Link >
+        <Link to="/login" ><RaisedButton label="Click to Login Instead" /> </Link >
         <div id="SIMessages"><br /> </div>
       </div>
     );
