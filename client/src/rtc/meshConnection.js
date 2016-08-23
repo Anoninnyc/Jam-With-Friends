@@ -2,9 +2,6 @@ const SimplePeer = require('simple-peer');
 const EventEmitter = require('events').EventEmitter;
 const io = require('socket.io-client');
 
-const emitter = new EventEmitter();
-const peers = {};
-
 // peer connections options
 const options = {
   trickle: true,
@@ -19,11 +16,12 @@ const options = {
   }
 };
 
-const socket = io();
-
 export default function (room) {
-  let selfId;
+  const socket = io();
+  const peers = {};
+  const emitter = new EventEmitter();
 
+  let selfId;
   socket.emit('join', room);
 
   // socket joined a room, start making connections
@@ -33,13 +31,13 @@ export default function (room) {
     if (sockets.length === 0) {
       emitter.emit('connected');
     } else {
-      startConnection(sockets, 0, selfId);
+      startConnection(sockets, 0);
     }
   });
 
   // new socket joined, receive the connection
   socket.on('new peer', () => {
-    receiveConnection(selfId);
+    receiveConnection();
   });
 
   // another client is leaving, remove this connection from peers
@@ -74,59 +72,60 @@ export default function (room) {
       });
     }
   };
-}
+  /* ------------ Helper functions ------------ */
 
-/* ------------ Helper functions ------------ */
+  function startConnection(sockets, number) {
+    const peer = new SimplePeer(Object.assign(options, { initiator: true }));
+    const remote = sockets[number];
+    peer.on('signal', data => {
+      socket.emit('offer', { offer: data, by: socket.id, to: remote });
+    });
 
-function startConnection(sockets, number, selfId) {
-  const peer = new SimplePeer(Object.assign(options, { initiator: true }));
-  const remote = sockets[number];
-  peer.on('signal', data => {
-    socket.emit('offer', { offer: data, by: socket.id, to: remote.peerId });
-  });
+    socket.on('answer', data => {
+      // bad fix for preventing signalling multiple times and with destroyed connections
+      if (data.to === selfId && data.by === remote && !peer.connected && !peer.destroyed) {
+        peer.signal(data.answer);
+      }
+    });
 
-  socket.on('answer', data => {
-    if (data.to === selfId && data.by === remote.peerId) {
-      peer.signal(data.answer);
-    }
-  });
+    peer.on('connect', () => {
+      peers[remote] = peer;
+      if (number < sockets.length - 1) {
+        startConnection(sockets, ++number, selfId);
+      } else {
+        emitter.emit('connected');
+      }
+    });
 
-  peer.on('connect', () => {
-    peers[remote.peerId] = peer;
-    if (number < sockets.length - 1) {
-      startConnection(sockets, ++number, selfId);
-    } else {
-      emitter.emit('connected');
-    }
-  });
+    peer.on('data', message => {
+      emitter.emit('message', message);
+    });
+  }
 
-  peer.on('data', message => {
-    emitter.emit('message', message);
-  });
-}
+  function receiveConnection() {
+    const peer = new SimplePeer(Object.assign(options, { initiator: false }));
+    let remote;
 
-function receiveConnection(selfId) {
-  const peer = new SimplePeer(Object.assign(options, { initiator: false }));
-  let remote;
+    socket.on('offer', data => {
+      // bad fix for preventing signalling multiple times and with destroyed connections
+      if (data.to === selfId && !peer.connected && !peer.destroyed) {
+        remote = data.by;
+        peer.signal(data.offer);
+      }
+    });
 
-  socket.on('offer', data => {
-    if (data.to === selfId && !peer.connected && !peer.destroyed) {
-      remote = data.by;
-      peer.signal(data.offer);
-    }
-  });
+    peer.on('signal', data => {
+      socket.emit('answer', { answer: data, by: socket.id, to: remote });
+    });
 
-  peer.on('signal', data => {
-    socket.emit('answer', { answer: data, by: socket.id, to: remote });
-  });
+    peer.on('connect', () => {
+      peers[remote] = peer;
+    });
 
-  peer.on('connect', () => {
-    peers[remote] = peer;
-  });
-
-  peer.on('data', message => {
-    emitter.emit('message', message);
-  });
+    peer.on('data', message => {
+      emitter.emit('message', message);
+    });
+  }
 }
 
 // each function for object
