@@ -7,6 +7,12 @@ import NavMenuIcon from './NavMenuIcon';
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
 
 class AppNavBar extends Component {
+ constructor(props, context) {
+    super(props);
+    this.logIn=this.props.logIn.bind(this);
+    this.logOut=this.clearSessions.bind(this);
+    console.log("this.props.user", this.props.user);
+  }
 
   componentDidMount() {
     $.get("/fbLoggedIn?", (response, err) => {
@@ -18,7 +24,7 @@ class AppNavBar extends Component {
 
   clearSessions() {
     $.get("/logout", (resp, err) => {
-      this.props.logOut();
+      this.logOut();
     });
   }
 
@@ -32,7 +38,11 @@ class AppNavBar extends Component {
           <Link to="/">
             <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
           </Link>
-          <NavMenuIcon />
+          Hello: {this.props.user}
+          <NavMenuIcon
+          loggedIn={this.props.loggedIn}
+          clearSessions={this.clearSessions}
+          />
         </AppBar>
       </div>
     ); }
