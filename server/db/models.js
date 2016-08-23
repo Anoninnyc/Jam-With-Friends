@@ -53,4 +53,7 @@ sequelize
   });
 
 
-module.exports.users = users;
+module.exports = {
+  users,
+  PrivateRooms,
+};
