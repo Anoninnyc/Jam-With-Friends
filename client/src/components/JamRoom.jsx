@@ -36,7 +36,7 @@ class JamRoom extends Component {
         <div>
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}
-          {this.props.instrument.slice(0, 4)==="Your"? <UserOwnInstrument /> :null}
+          {this.props.instrument.slice(0, 4) === "Your"? <UserOwnInstrument /> :null}
         </div>
         <PeerBar
           ownInstrument={this.props.instrument}

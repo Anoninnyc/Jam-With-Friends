@@ -9,13 +9,13 @@ class AppNavBar extends Component {
   constructor(props, context) {
     super(props);
     context.router;
-    console.log("this.props.user", this.props.user);
+   // console.log("this.props.user", this.props.user);
   }
 
   componentDidMount() {
     $.get("/fbLoggedIn?", (response, err) => {
-      console.log(response);
-      if (response!=="false") {
+     // console.log(response);
+      if (response !== "false") {
         this.logIn(response);
       }
     });
@@ -24,7 +24,7 @@ class AppNavBar extends Component {
   clearSessions() {
     console.log('youre trying to log out ');
     $.get("/logout", (a, b) => {
-      console.log("this is a and b",a,b);
+      console.log("this is a and b", a, b);
       this.props.logOut();
     });
   }
@@ -38,7 +38,7 @@ class AppNavBar extends Component {
         >
           {this.props.user.length?<div id="Welcome"> Hello {this.props.user}!</div>:null}
           <Link to="/"><img id="logo" src="http://bit.ly/2beSCQg" /></Link>
-          {this.props.loggedIn?null:<a href="/auth/facebook"><button onClick={() => {this.logIn("FACEBOOK USER") }} className="navButtons"> Login with FB!</button></a>}
+          {this.props.loggedIn?null:<a href="/auth/facebook"><button onClick={() => {this.logIn("FACEBOOK USER"); }} className="navButtons"> Login with FB!</button></a>}
           {this.props.loggedIn?null:<Link to="login" ><button className="navButtons"> Login!</button></Link>}
           {!this.props.loggedIn?null:<Link to="MakeInstrument"><button className="navButtons"> Make your own instrument!</button></Link>}
           {!this.props.loggedIn?null:<Link to="/"><button onClick={() => { this.logOut(); }} className="navButtons"> SignOut!</button></Link>}
@@ -53,7 +53,9 @@ AppNavBar.contextTypes = {
 };
 
 AppNavBar.propTypes = {
-  title: React.PropTypes.string.isRequired
+  title: React.PropTypes.string.isRequired,
+  loggedIn: React.PropTypes.bool.isRequired,
+  user: React.PropTypes.string.isRequired
 };
 
 export default AppNavBar;

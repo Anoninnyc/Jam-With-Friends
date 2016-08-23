@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize('tbd', 'root', '12345');
 
 const users = sequelize.define('user', {
@@ -25,12 +26,12 @@ const users = sequelize.define('user', {
 
 sequelize
   .sync({ force: false })
-  .then( () => {
+  .then(() => {
     console.log('It worked!');
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
-  
+
 const instruments = sequelize.define('instruments', {
   userName: {
     type: Sequelize.STRING

@@ -14,5 +14,4 @@ const UserOwnInstrument = () => (
   </div>
   );
 
-
 export default UserOwnInstrument;

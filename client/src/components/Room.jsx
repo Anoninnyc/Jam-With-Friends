@@ -205,7 +205,7 @@ class Room extends React.Component {
   }
 
   render() {
-  console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
+    console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
 
     return (
       <div>
@@ -227,19 +227,19 @@ class Room extends React.Component {
               handleSelect={
                 index => {
                   this.setState({
-                    mapping: this.props.userInstruments.map(a => {
-                      return {
-                        "A": JSON.parse(a.A),
-                        "S": JSON.parse(a.S),
-                        "D": JSON.parse(a.D),
-                        "F": JSON.parse(a.F),
-                        "G": JSON.parse(a.G),
-                        "H": JSON.parse(a.H),
-                        "J": JSON.parse(a.J),
-                        "K": JSON.parse(a.K),
-                        "L": JSON.parse(a.L)
-                      };
-                    })[index - 3],
+                    mapping: this.props.userInstruments.map(a => (
+                      {
+                        A: JSON.parse(a.A),
+                        S: JSON.parse(a.S),
+                        D: JSON.parse(a.D),
+                        F: JSON.parse(a.F),
+                        G: JSON.parse(a.G),
+                        H: JSON.parse(a.H),
+                        J: JSON.parse(a.J),
+                        K: JSON.parse(a.K),
+                        L: JSON.parse(a.L)
+                      }
+                    ))[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => {
                       return `Your Instrument: ${a.instrumentName}`;
                     }))[index]
@@ -256,7 +256,8 @@ class Room extends React.Component {
 }
 
 Room.propTypes = {
-  params: React.PropTypes.object
+  params: React.PropTypes.object,
+  userInstruments: React.PropTypes.func.isRequired,
 };
 
 Room.contextTypes = {

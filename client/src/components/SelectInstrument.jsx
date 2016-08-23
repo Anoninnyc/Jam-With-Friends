@@ -40,7 +40,7 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       >
         {
           instruments.concat(extraInstruments.map(a => {
-          return `Your Instrument: ${a.instrumentName}`;
+            return `Your Instrument: ${a.instrumentName}`;
           })).map(instrument => (
             <img
               src={`/assets/${instrument}.svg`}

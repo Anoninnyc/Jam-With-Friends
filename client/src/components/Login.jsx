@@ -30,14 +30,15 @@ class Login extends Component {
         <RaisedButton label="Login" onClick={() => { this.helperLogin(); }} / >
         <Link to="signup"><RaisedButton label="Click to signup" /></Link>
         <div id="LIMessages"><br /> </div>
-
       </div>
     );
   }
 }
 
 Login.propTypes = {
-  params: React.PropTypes.object
+  params: React.PropTypes.object,
+  updateUserInstrument: React.PropTypes.func.isRequired,
+  logIn: React.PropTypes.func.isRequired,
 };
 
 Login.contextTypes = {
