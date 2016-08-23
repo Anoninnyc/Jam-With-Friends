@@ -1,14 +1,13 @@
 // Modules
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import io from 'socket.io-client';
 import $ from 'jquery';
+
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-
-const socket = io();
+import { Table, TableBody, TableFooter, TableHeader,
+        TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -32,28 +31,28 @@ class CreateOrJoin extends Component {
   }
 
   componentDidMount() {
-    socket.on('room created', (roomName) => {
+    this.props.socket.on('room created', (roomName) => {
       this.context.router.push(`/room/${roomName}`);
     });
 
-    socket.on('room name taken', this.showRoomTakenErrorMessage);
+    this.props.socket.on('room name taken', this.showRoomTakenErrorMessage);
 
     // on refresh, componentDidMount may fire before socket has connected to server
     // resulting in an undefined socket.id and bug where the information needed for
     // the open room table is not loaded.  Fixed by checking for socket.id and waiting
     // for connection if socket.id is undefined
-    if (socket.id) {
-      socket.emit('get rooms info', socket.id);
+    if (this.props.socket.id) {
+      this.props.socket.emit('get rooms info', this.props.socket.id);
     } else {
-      socket.on('connected', () => socket.emit('get rooms info', socket.id));
+      this.props.socket.on('connected', () => this.props.socket.emit('get rooms info', this.props.socket.id));
     }
 
-    socket.on('give rooms info', this.updateRooms);
+    this.props.socket.on('give rooms info', this.updateRooms);
   }
 
   componentWillUnmount() {
-    socket.removeListener('room name taken', this.showErrorMessage);
-    socket.removeListener('give rooms info', this.updateRooms);
+    this.props.socket.removeListener('room name taken', this.showErrorMessage);
+    this.props.socket.removeListener('give rooms info', this.updateRooms);
   }
 
   showRoomTakenErrorMessage() {
@@ -85,7 +84,7 @@ class CreateOrJoin extends Component {
     } else {
       roomName = this.state.createRoomVal;
     }
-    socket.emit('create room', roomName);
+    this.props.socket.emit('create room', roomName);
   }
   // match nothing: ^(?![\s\S])
   handleCreateRoomChange(e) {
@@ -118,7 +117,7 @@ class CreateOrJoin extends Component {
         console.log(res);
       } else {
         console.log('SUCCESS!!!');
-        socket.emit('create room', roomName);
+        this.props.socket.emit('create room', roomName);
       }
     });
   }
@@ -142,6 +141,7 @@ class CreateOrJoin extends Component {
   }
 
   handleRowClick(rowNum, colNum) {
+    // fix to check if room is full first
     this.context.router.push(`/room/${this.state.rooms[rowNum].roomName}`);
   }
 
@@ -269,6 +269,10 @@ class CreateOrJoin extends Component {
     );
   }
 }
+
+CreateOrJoin.propTypes = {
+  socket: React.PropTypes.object
+};
 
 CreateOrJoin.contextTypes = {
   router: React.PropTypes.object
