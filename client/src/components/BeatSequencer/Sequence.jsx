@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Row from './Row';
 import MuteButton from './MuteButton';
 import EditSequence from './EditSequence';
+import RemoveSequenceButton from './RemoveSequenceButton';
 import toneSequence from '../../instruments/beats/sequence';
 import beatSounds from '../../instruments/sounds/tick';
 
@@ -103,6 +104,9 @@ class Sequence extends Component {
     return (
       <div className="sequence">
         <div className="controls">
+          <RemoveSequenceButton
+            handleClick={this.props.handleClick}
+          />
           <MuteButton
             isMute={this.state.isMute}
             handleClick={this.toggleMute}

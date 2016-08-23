@@ -487,10 +487,10 @@ input:invalid {
 
 .beatSequencer .controls {
   display: inline-block;
-  width: 10%;
+  width: 15%;
 }
 
-.sequence .muteButton, .sequence .editSequence {
+.sequence .muteButton, .sequence .editSequence, .sequence .removeSequence {
   display: inline-block;
   vertical-align: bottom;
 }

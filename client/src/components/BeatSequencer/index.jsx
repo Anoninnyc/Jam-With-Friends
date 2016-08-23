@@ -27,6 +27,7 @@ class BeatSequencer extends Component {
     this.togglePlaying = this.togglePlaying.bind(this);
     this.changeBPM = this.changeBPM.bind(this);
     this.addSequence = this.addSequence.bind(this);
+    this.removeSequence = this.removeSequence.bind(this);
   }
 
   togglePlaying() {
@@ -55,13 +56,36 @@ class BeatSequencer extends Component {
     });
   }
 
+  removeSequence(index) {
+    const sequences = this.state.sequences;
+
+    const newSequences= [
+      ...sequences.slice(0, index),
+      ...sequences.slice(index + 1)
+    ];
+
+    this.setState({
+      sequences: newSequences
+    });
+  }
 
   render() {
+    const removeSequence = this.removeSequence;
     const renderSequences = () => {
       const sequences = this.state.sequences;
       const isPlaying = this.state.isPlaying;
 
-      return sequences.map((sequence, index) => <Sequence isPlaying={isPlaying} key={index} />);
+      return sequences.map((sequence, index) => {
+        const removeThisSequence = removeSequence.bind(null, index);
+
+        return (
+          <Sequence
+            isPlaying={isPlaying}
+            key={index}
+            handleClick={removeThisSequence}
+          />
+        );
+      });
     };
 
     return (
