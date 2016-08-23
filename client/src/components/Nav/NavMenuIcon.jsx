@@ -25,6 +25,18 @@ const NavMenuIcon = () => (
       primaryText="Sign up"
       containerElement={<Link to="/signup" />}
     />
+    <MenuItem
+      primaryText="Login With Facebook"
+    />
+    <MenuItem
+      primaryText="Make your own instrument!"
+      containerElement={<Link to="/MakeInstrument" />}
+    />
+    <MenuItem
+      onClick={() => { this.props.logOut(); }}
+      primaryText="SignOut!"
+      containerElement={<Link to="/" />}
+    />
   </IconMenu>
 );
 
