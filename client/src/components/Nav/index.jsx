@@ -7,17 +7,30 @@ import NavMenuIcon from './NavMenuIcon';
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
 
 class AppNavBar extends Component {
- constructor(props, context) {
+  constructor(props, context) {
     super(props);
-    this.logIn=this.props.logIn.bind(this);
-    this.logOut=this.props.logOut.bind(this);
-    console.log("this.props.user", this.props.user);
+      this.logIn=this.props.logIn.bind(this);
+      this.logOut=this.props.logOut.bind(this);
+      console.log("this.props.user", this.props.user);
   }
 
   componentDidMount() {
+
+     $.get("/userLoggedInToMakeInst", (resp, err) => {
+      console.log('this the the resp to userloggedintomakeinst', resp);
+      if (resp[0]==null) {
+       // console.log('youre not logged in!');
+        this.context.router.push("login");
+      } else {
+       // console.log('resp1,resp2', resp[0], resp[1]);
+        this.logIn(resp[0], resp[1]);
+      }
+    });
+
     $.get("/fbLoggedIn?", (response, err) => {
       if (response !== "false") {
-        this.logIn(response);
+        console.log(response[0], typeof response[0], 'here!!!');
+        this.logIn(response[0], response[1]);
       }
     });
   }
@@ -56,10 +69,10 @@ AppNavBar.contextTypes = {
 };
 
 AppNavBar.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  loggedIn: React.PropTypes.bool.isRequired,
-  user: React.PropTypes.string.isRequired,
-  logout: React.PropTypes.func.isRequired,
+  title: React.PropTypes.string,
+  loggedIn: React.PropTypes.bool,
+  user: React.PropTypes.object,
+  logout: React.PropTypes.func,
 };
 
 export default AppNavBar;

@@ -35,17 +35,6 @@ class UserMakeInstrument extends Component {
     $('.sampleSound').click(() => {
       this.sampleSound();
     });
-
-    $.get("/userLoggedInToMakeInst", (resp, err) => {
-      console.log('this the the resp to userloggedintomakeinst', resp);
-      if (resp[0]==null) {
-       // console.log('youre not logged in!');
-        this.context.router.push("login");
-      } else {
-       // console.log('resp1,resp2', resp[0], resp[1]);
-        this.logIn(resp[0], resp[1]);
-      }
-    });
   }
 
   componentWillUnmount() {
@@ -318,10 +307,10 @@ class UserMakeInstrument extends Component {
 
 UserMakeInstrument.propTypes = {
   params: React.PropTypes.object,
-  logIn: React.PropTypes.func.isRequired,
-  userInstruments: React.PropTypes.array.isRequired,
-  updateUserInstrument: React.PropTypes.func.isRequired,
-  user: React.PropTypes.string.isRequired,
+  logIn: React.PropTypes.func,
+  userInstruments: React.PropTypes.array,
+  updateUserInstrument: React.PropTypes.func,
+  user: React.PropTypes.object,
 };
 
 UserMakeInstrument.contextTypes = {
