@@ -20,7 +20,8 @@ class BeatSequencer extends Component {
 
     this.state = {
       bpm,
-      isPlaying: false
+      isPlaying: false,
+      sequences: [<Sequence isPlaying={false} />]
     };
 
     this.togglePlaying = this.togglePlaying.bind(this);
@@ -46,10 +47,23 @@ class BeatSequencer extends Component {
   }
 
   addSequence() {
-    console.log('You clicked the addSequence button');
+    const sequences = this.state.sequences;
+    const newSequence = <Sequence isPlaying={false} />;
+
+    this.setState({
+      sequences: sequences.concat([newSequence])
+    });
   }
 
+
   render() {
+    const renderSequences = () => {
+      const sequences = this.state.sequences;
+      const isPlaying = this.state.isPlaying;
+
+      return sequences.map((sequence, index) => <Sequence isPlaying={isPlaying} key={index} />);
+    };
+
     return (
       <div className="beatSequencer">
         <div className="controls">
@@ -67,9 +81,7 @@ class BeatSequencer extends Component {
         <hr />
         <div className="sequences">
           <h2>Sequences</h2>
-          <Sequence
-            isPlaying={this.state.isPlaying}
-          />
+          { renderSequences() }
           <AddSequenceButton handleClick={this.addSequence} />
         </div>
       </div>
