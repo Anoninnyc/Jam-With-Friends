@@ -7,12 +7,6 @@
   background-size: cover;
 }
 
-
-.child {
-  /*margin: 0 auto;*/
-}
-
-
 #landingPage {
   position:absolute;
   height: 100%;
@@ -47,7 +41,6 @@
   top: 370px;
   left:280px;
   margin: 0 auto;
-
 }
 
 #userDrums {
@@ -208,7 +201,6 @@
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-
 #drumsChoose {
   position: absolute;
   display:inline-block;
@@ -216,7 +208,6 @@
   left:50%;
   opacity: 0.5
 }
-
 
 #drumsChoose:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
@@ -311,7 +302,6 @@
   background-color: red;
  left:20%;
 }
-
 
 /*DRUMS!!!*/
 #urC {
@@ -427,7 +417,7 @@
   height:100%;
   width:64px;
   left:0%;
-  -webkit-transition: height 1s, width 1s, left 1s,top 1s; 
+  -webkit-transition: height 1s, width 1s, left 1s,top 1s;
 }
 
 #logo:hover {
@@ -492,11 +482,47 @@ input:invalid {
   border: 1px solid red;
 }
 
-input:valid {
-  border: 1px solid green;
+.child {
+  margin: 0 auto;
+  padding: 5%;
 }
 
-#signupContent { 
+.beatSequencer {
+  margin: 0 auto;
+  padding: 1%;
+  width: 80%;
+}
+
+.beatSequencer h2 {
+  margin-top: 0;
+}
+
+.beatSequencer .controls {
+  display: inline-block;
+  width: 15%;
+}
+
+.sequence .muteButton, .sequence .editSequence, .sequence .removeSequence {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.playStopButton {
+  width: 10%;
+}
+
+.beatSequencer .sequence {
+  height: 3rem;
+}
+
+.row {
+  display: inline-block;
+  height: 2rem;
+  width: 85%;
+  vertical-align: inherit;
+}
+
+#signupContent {
    position:absolute;
    top:30%;
  }
@@ -524,11 +550,23 @@ input:valid {
    top:30%;
   left:50%;
  }
- 
+
  #Welcome {
   position:absolute;
   color:white;
   left:20%;
   top: 35%;
   font-size: 20px;
+}
+
+.beatBox {
+  height: 100%;
+  width: 21%;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 0.25%;
+}
+
+.beatBox.selected {
+  background-color: black;
 }
