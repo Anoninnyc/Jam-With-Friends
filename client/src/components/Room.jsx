@@ -94,7 +94,7 @@ class Room extends React.Component {
     // username could go in here
     const peerInfo = {
       instrument: this.state.instrument,
-      peerId: connectionManager.peerSocket().id,
+      peerId: connectionManager.id(),
       roomId: this.props.params.roomId,
     };
 

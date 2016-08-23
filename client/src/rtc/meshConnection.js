@@ -68,7 +68,9 @@ export default function (room) {
         peer.destroy();
         delete peers[key];
       });
-    }
+    },
+
+    id: () => selfId
   };
   /* ------------ Helper functions ------------ */
 
