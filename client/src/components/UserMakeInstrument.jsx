@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
 // import TextField from 'material-ui/TextField';
@@ -306,7 +305,9 @@ class UserMakeInstrument extends Component {
         Your current Instrument in JSON form: <br />
         {JSON.stringify(this.state.inMemObject)}<br />
         Your current Instrument in Piano form (click to try it out):
-          <UserOwnInstrument onClick={this.addKeypress} />
+        <div onClick={this.addKeypress}>
+          <UserOwnInstrument  />
+          </div>
         <div id="makeInstErrorMessages" />
       </div>
     );
