@@ -48,7 +48,7 @@ const manager = {
     connection.close();
   },
 
-  id: connection.id
+  id: () => connection.id()
 };
 
 export default manager;
