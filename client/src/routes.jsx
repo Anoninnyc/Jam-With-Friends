@@ -11,7 +11,7 @@ import Room from './components/Room';
 import CreateOrJoin from './components/CreateOrJoin';
 import Invalid from './components/Invalid';
 import Metronome from './components/Metronome';
-
+import UserMakeInstrument from './components/UserMakeInstrument';
 
 export default (
   <Route path="/" component={App}>
@@ -21,6 +21,7 @@ export default (
     <Route path="room/:roomId" component={Room} />
     <Route path="createorjoin" component={CreateOrJoin} />
     <Route path="metronome" component={Metronome} />
+    <Route path="MakeInstrument" component={UserMakeInstrument} />
     <Route path="*" component={Invalid} />
   </Route>
 );
