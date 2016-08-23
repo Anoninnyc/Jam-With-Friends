@@ -23,6 +23,8 @@ class CreateOrJoin extends Component {
 
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
+    this.handleCreatePrivateRoomSubmit = this.handleCreatePrivateRoomSubmit.bind(this);
+    this.handleCreatePrivateRoomChange = this.handleCreatePrivateRoomChange.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
     this.updateRooms = this.updateRooms.bind(this);
     this.checkErrorStates = this.checkErrorStates.bind(this);
@@ -109,15 +111,16 @@ class CreateOrJoin extends Component {
     if (this.state.showValidateError) {
       return;
     }
-    const roomName = `${shortid.generate()}/${e.target.value}`;
-    $.post('/makeprivateroom', { roomName, }, (res) => {
-      if(res === 200) {
-        console.log('NOOOOOO');
+    const roomName = `${shortid.generate()}-${this.state.createRoomVal}`;
+    // send server the roomname.  Username is taken from session
+    $.post('/makeprivateroom', { roomName }, (res) => {
+      if (res !== 'OK') {
+        console.log(res);
       } else {
         console.log('SUCCESS!!!');
+        socket.emit('create room', roomName);
       }
     });
-    socket.emit('create room', roomName);
   }
 
   handleCreatePrivateRoomChange(e) {
@@ -183,14 +186,14 @@ class CreateOrJoin extends Component {
           <div>
             Create a private room here.  Name it anything you want!
           </div>
-          <form onSubmit={this.handleCreateRoomSubmit}>
+          <form onSubmit={this.handleCreatePrivateRoomSubmit}>
             <TextField
               hintText="Enter a Private Room Name..."
-              onChange={this.handleCreateRoomChange}
+              onChange={this.handleCreatePrivateRoomChange}
               errorText={this.checkErrorStates()}
             />
             <RaisedButton
-              onClick={this.handleCreateRoomSubmit}
+              onClick={this.handleCreatePrivateRoomSubmit}
               label="Create Private Room broh"
             />
           </form>
