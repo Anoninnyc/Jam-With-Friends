@@ -23,6 +23,16 @@ const users = sequelize.define('user', {
   timestamps: false,
 });
 
+const PrivateRooms = sequelize.define('privaterooms', {
+  url: {
+    type: Sequelize.STRING
+  },
+}, {
+  tableName: 'privaterooms',
+});
+
+PrivateRooms.belongsTo(users);
+users.hasMany(PrivateRooms);
 
 sequelize
   .sync({ force: false })
@@ -31,6 +41,7 @@ sequelize
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
+<<<<<<< HEAD
 
 const instruments = sequelize.define('instruments', {
   userName: {
@@ -71,6 +82,8 @@ const instruments = sequelize.define('instruments', {
   tableName: 'instruments',
   timestamps: false,
 });
+=======
+>>>>>>> master
 
 
 sequelize
@@ -90,5 +103,12 @@ sequelize
     console.log('An error occurred while creating the table:', err);
   });
 
+<<<<<<< HEAD
 module.exports.users=users;
 module.exports.instruments=instruments;
+=======
+module.exports = {
+  users,
+  PrivateRooms,
+};
+>>>>>>> master

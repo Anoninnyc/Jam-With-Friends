@@ -39,7 +39,6 @@ class JamRoom extends Component {
           {this.props.instrument.slice(0, 4) === "Your"? <UserOwnInstrument /> :null}
         </div>
         <PeerBar
-          ownInstrument={this.props.instrument}
           peers={this.props.peers}
           toggleInviteView={this.toggleInviteView}
           toggleSelectView={this.toggleSelectView}
