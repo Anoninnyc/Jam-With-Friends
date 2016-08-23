@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize('tbd', 'root', '12345');
 
 const users = sequelize.define('user', {
@@ -22,15 +23,22 @@ const users = sequelize.define('user', {
   timestamps: false,
 });
 
+const privateRooms = sequelize.define('user', {
+  url: {
+    type: Sequelize.STRING
+  },
+}, {
+  tableName: 'users',
+  timestamps: false,
+});
 
 sequelize
   .sync({ force: false })
-  .then( () => {
+  .then(() => {
     console.log('It worked!');
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
-  
 
 
 sequelize
@@ -43,4 +51,7 @@ sequelize
   });
 
 
-module.exports.users=users;
+module.exports = {
+  users,
+  privateRooms,
+};
