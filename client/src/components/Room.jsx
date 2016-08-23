@@ -30,6 +30,7 @@ class Room extends React.Component {
     this.handleStart = this.handleStart.bind(this);
     this.handlePeerInfo = this.handlePeerInfo.bind(this);
     this.handleHelp = this.handleHelp.bind(this);
+    this.selectInstrument = this.selectInstrument.bind(this);
   }
 
   componentDidMount() {
@@ -38,12 +39,14 @@ class Room extends React.Component {
 
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
+    socket.emit('add as listener', this.props.params.roomId);
   }
 
   componentWillUnmount() {
     connectionManager.offStatusChange(this.updateConnection);
     window.removeEventListener('keypress', this.handleKeypress);
     connectionManager.closeConnection();
+    socket.removeListener('receive peer info', this.handlePeerInfo);
   }
 
   setSocketListeners() {
@@ -82,56 +85,37 @@ class Room extends React.Component {
       store[data.instrument](data.keyPressed);
     });
 
-    this.handlePeerInfo();
-    this.setSocketListeners();
+    socket.emit('select instrument', {
+      roomId: this.props.params.roomId,
+      id: connectionManager.id(),
+      instrument: this.state.instrument
+    });
+    // this.setSocketListeners();
   }
 
   updateConnection() {
     this.setState({ connected: connectionManager.isConnected() });
-  }
 
-  handlePeerInfo() {
-    // username could go in here
-    const peerInfo = {
-      instrument: this.state.instrument,
-      peerId: connectionManager.id(),
+    // get instrument info of everyone in room
+    socket.emit('request peer info', {
       roomId: this.props.params.roomId,
-    };
-
-    // for join room update
-    connectionManager.peerSocket().emit('instrument select', peerInfo);
-
-    // send own info out
-    connectionManager.peerSocket().emit('peer info', peerInfo);
-    // ask for info
-    connectionManager.peerSocket().emit('ask for peer info', peerInfo);
-    // update/add peer connections
-    connectionManager.peerSocket().on('peer info', newPeerInfo => {
-      let newPeer = true;
-
-      const arr = this.state.peers.slice();
-      for (let i = 0; i < arr.length; i++) {
-        if (arr[i].peerId === newPeerInfo.peerId) {
-          arr[i] = newPeerInfo;
-          this.setState({
-            peers: arr,
-          });
-          newPeer = false;
-          break;
-        }
-      }
-      if (newPeer) {
-        this.setState({
-          peers: this.state.peers.concat(newPeerInfo)
-        });
-      }
+      socketId: socket.id
     });
 
-    // send peer info to peer that requested it
-    connectionManager.peerSocket().on('ask for peer info', info => {
-      // include peer id of peer that requested info
-      peerInfo.sendTo = info.peerId;
-      connectionManager.peerSocket().emit('give peer info', peerInfo);
+    socket.on('receive peer info', this.handlePeerInfo);
+  }
+
+  handlePeerInfo(data) {
+    console.log('received info', data);
+    data = JSON.parse(data);
+    // move self to beginning of peers array
+    let index = 0;
+    while ((index < data.length) && (data[index].peerId !== connectionManager.id())) {
+      index++;
+    }
+    const selfInfo = data.splice(index, 1);
+    this.setState({
+      peers: selfInfo.concat(data)
     });
   }
 
@@ -141,6 +125,17 @@ class Room extends React.Component {
       showPopover: true,
       anchorEl: event.target
     });
+  }
+
+  selectInstrument(index) {
+    this.setState({ instrument: instruments[index] });
+    if (this.state.connected) {
+      socket.emit('select instrument', {
+        roomId: this.props.params.roomId,
+        id: connectionManager.id(),
+        instrument: instruments[index]
+      });
+    }
   }
 
   render() {
@@ -157,10 +152,10 @@ class Room extends React.Component {
             <JamRoom
               instrument={this.state.instrument}
               peers={this.state.peers}
-              onReselect={index => { this.setState({ instrument: instruments[index] }); }}
+              onReselect={this.selectInstrument}
             /> :
             <SelectInstrument
-              handleSelect={index => { this.setState({ instrument: instruments[index] }); }}
+              handleSelect={this.selectInstrument}
               handleClick={this.handleStart}
               size="normal"
             />
