@@ -1,6 +1,6 @@
 // Modules
 import React from 'react';
-
+import { MembraneSynth } from "tone";
 // Components
 import SelectInstrument from './SelectInstrument';
 import JamRoom from './JamRoom';
@@ -20,6 +20,7 @@ class Room extends React.Component {
     this.state = {
       connected: connectionManager.isConnected(),
       instrument: instruments[0],
+      mapping: [],
       startJam: false,
       peers: [],
       showPopover: false
@@ -66,21 +67,85 @@ class Room extends React.Component {
   }
 
   handleKeypress(e) {
-    if (this.state.startJam) {
-      connectionManager.sendMessage(JSON.stringify({
-        instrument: this.state.instrument,
-        keyPressed: e.key
-      }));
+
+    if (store[this.state.instrument]) {
+      store[this.state.instrument](e.key);
+      if (this.state.startJam) {
+        connectionManager.sendMessage(JSON.stringify({
+          instrument: this.state.instrument,
+          keyPressed: e.key,
+          notesToPlay: ['blah', 'blah blah'],
+        }));
+      }
+    } else {
+      const instMap=this.state.mapping;
+      const keyPressed= e.key.toUpperCase();
+      const note=instMap[keyPressed][1];
+      const octave=instMap[keyPressed][2];
+      const pd=instMap[keyPressed][3];
+      const type=instMap[keyPressed][4];
+      const combo= `${note}${octave}`;
+
+      const config = {
+        pitchDecay: pd||0.1,
+        octaves: 7,
+        oscillator: {
+          type: type,
+        },
+        envelope: {
+          attack: 0.001,
+          decay: 0.1,
+          sustain: 0.1,
+          release: 2,
+          attackCurve: 'linear'
+        }
+      };
+      const zimit = new MembraneSynth(config).toMaster();
+      zimit.triggerAttackRelease(combo, '8n');
+      console.log('e info', e.which);
+      if (this.state.startJam) {
+        connectionManager.sendMessage(JSON.stringify({
+          instrument: this.state.instrument,
+          keyPressed: e.key,
+          notesToPlay: [combo, pd, type],
+        }));
+      }
     }
-    store[this.state.instrument](e.key);
   }
 
   handleStart() {
     this.setState({ startJam: true });
     connectionManager.onMessage(data => {
       data = JSON.parse(data);
+      if (store[data.instrument]) {
       store[data.instrument](data.keyPressed);
+      console.log('youre OK if this is showing!', data.notesToPlay);
+      } else {
+        const info=data.notesToPlay;
+        const combo=info[0]
+        console.log('youre good if this is showing!', data.notesToPlay);
+
+      const config = {
+              pitchDecay: info[1]||0.1,
+              octaves: 7,
+              oscillator: {
+                type: info[2],
+              },
+              envelope: {
+                attack: 0.001,
+                decay: 0.1,
+                sustain: 0.1,
+                release: 2,
+                attackCurve: 'linear'
+              }
+            };
+
+      const zimit = new MembraneSynth(config).toMaster();
+      zimit.triggerAttackRelease(combo, '8n');
+      }
     });
+
+
 
     this.handlePeerInfo();
     this.setSocketListeners();
@@ -144,6 +209,8 @@ class Room extends React.Component {
   }
 
   render() {
+  console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
+
     return (
       <div>
         <Help
@@ -160,7 +227,14 @@ class Room extends React.Component {
               onReselect={index => { this.setState({ instrument: instruments[index] }); }}
             /> :
             <SelectInstrument
-              handleSelect={index => { this.setState({ instrument: instruments[index] }); }}
+              extraInstruments={this.props.userInstruments}
+              handleSelect={index => {
+                this.setState({
+                  mapping: this.props.userInstruments.map(a => {
+                    return { "A": JSON.parse(a.A), "S": JSON.parse(a.S), "D": JSON.parse(a.D), "F": JSON.parse(a.F), "G": JSON.parse(a.G), "H": JSON.parse(a.H), "J": JSON.parse(a.J), "K": JSON.parse(a.K), "L": JSON.parse(a.L) };
+                  })[index-3],
+                  instrument: instruments.concat(this.props.userInstruments.map(a => {
+                    return `Your Instrument: ${a.instrumentName}`; })) [index] }); }}
               handleClick={this.handleStart}
               size="normal"
             />
@@ -179,4 +253,3 @@ Room.contextTypes = {
 };
 
 export default Room;
-
