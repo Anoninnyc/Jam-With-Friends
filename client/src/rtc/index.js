@@ -48,7 +48,7 @@ const manager = {
     connection.close();
   },
 
-  peerSocket: () => connection.socket,
+  id: () => connection.id()
 };
 
 export default manager;
