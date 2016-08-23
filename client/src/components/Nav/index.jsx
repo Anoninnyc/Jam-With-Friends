@@ -19,8 +19,7 @@ class AppNavBar extends Component {
 
   clearSessions() {
     console.log('youre trying to log out ');
-    $.get("/logout", (a, b) => {
-      console.log("this is a and b", a, b);
+    $.get("/logout", (resp, err) => {
       this.props.logOut();
     });
   }
