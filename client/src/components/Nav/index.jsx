@@ -9,8 +9,6 @@ class AppNavBar extends Component {
   constructor(props, context) {
     super(props);
     context.router;
-    this.logIn=this.props.logIn.bind(this);
-    this.logOut=this.clearSessions.bind(this);
     console.log("this.props.user", this.props.user);
   }
 
