@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
+import $ from "jquery";
 import { Link } from 'react-router';
 import NavMenuIcon from './NavMenuIcon';
-import $ from "jquery";
 
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
 
@@ -10,7 +10,6 @@ class AppNavBar extends Component {
 
   componentDidMount() {
     $.get("/fbLoggedIn?", (response, err) => {
-      console.log(response, 'response');
       if (response !== "false") {
         this.logIn(response);
       }
@@ -18,7 +17,6 @@ class AppNavBar extends Component {
   }
 
   clearSessions() {
-    console.log('youre trying to log out ');
     $.get("/logout", (resp, err) => {
       this.props.logOut();
     });
