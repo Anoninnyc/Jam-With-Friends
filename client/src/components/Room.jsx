@@ -106,7 +106,6 @@ class Room extends React.Component {
   }
 
   handlePeerInfo(data) {
-    console.log('received info', data);
     data = JSON.parse(data);
     // move self to beginning of peers array
     let index = 0;

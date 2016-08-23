@@ -64,7 +64,7 @@ export default function (room) {
 
     // called when this client is leaving, destroy and remove all connections
     close: () => {
-      socket.emit('exit room', { room, id: selfId });
+      socket.emit('exit room', { roomId: room, id: selfId });
       each(peers, (peer, key) => {
         peer.destroy();
         delete peers[key];
