@@ -476,6 +476,18 @@ font-size: 30px;
   transform: translate(-50%, -50%);
 }
 
+#UserMakeInstrumentRoom {
+  position:absolute;
+  top:30%;
+  left:50%;
+}
+
+#selectKeys {
+  position:absolute;
+  top:30%;
+  left:50%;
+}
+
 input:invalid {
   border: 1px solid red;
 }
@@ -487,6 +499,12 @@ input:valid {
 #signupContent { 
    position:absolute;
    top:30%;
+ }
+
+#testPiano {
+  position:relative;
+  top:30%;
+  left:40%;
  }
 
  #loginContent {
