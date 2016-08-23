@@ -217,7 +217,6 @@ class Room extends React.Component {
               onReselect={this.selectInstrument}
             /> :
             <SelectInstrument
-<<<<<<< HEAD
               extraInstruments={this.props.userInstruments}
               handleSelect={
                 index => {
@@ -241,9 +240,8 @@ class Room extends React.Component {
                   });
                 }
               }
-=======
               handleSelect={this.selectInstrument}
->>>>>>> master
+
               handleClick={this.handleStart}
               size="normal"
             />
