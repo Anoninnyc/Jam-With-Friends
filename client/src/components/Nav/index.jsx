@@ -32,9 +32,7 @@ class AppNavBar extends Component {
           <Link to="/">
             <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
           </Link>
-          <NavMenuIcon
-            logout={this.props.logout}
-          />
+          <NavMenuIcon />
         </AppBar>
       </div>
     ); }
