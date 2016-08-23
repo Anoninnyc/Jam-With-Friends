@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import io from 'socket.io-client';
+import $ from 'jquery';
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -103,6 +104,40 @@ class CreateOrJoin extends Component {
     }
   }
 
+  handleCreatePrivateRoomSubmit(e) {
+    e.preventDefault();
+    if (this.state.showValidateError) {
+      return;
+    }
+    const roomName = `${shortid.generate()}/${e.target.value}`;
+    $.post('/makeprivateroom', { roomName, }, (res) => {
+      if(res === 200) {
+        console.log('NOOOOOO');
+      } else {
+        console.log('SUCCESS!!!');
+      }
+    });
+    socket.emit('create room', roomName);
+  }
+
+  handleCreatePrivateRoomChange(e) {
+    if (e.target.value.match(/[^a-zA-Z1-9]+/g)) {
+      this.setState({
+        showValidateError: true,
+        createRoomVal: e.target.value,
+      });
+    } else if (this.state.showValidateError && e.target.value.match(/[^a-zA-Z1-9]+/g) === null) {
+      this.setState({
+        createRoomVal: e.target.value,
+        showValidateError: false,
+      });
+    } else {
+      this.setState({
+        createRoomVal: e.target.value,
+      });
+    }
+  }
+
   handleRowClick(rowNum, colNum) {
     this.context.router.push(`/room/${this.state.rooms[rowNum].roomName}`);
   }
@@ -143,6 +178,20 @@ class CreateOrJoin extends Component {
             <RaisedButton
               onClick={this.handleCreateRoomSubmit}
               label="Create Room broh"
+            />
+          </form>
+          <div>
+            Create a private room here.  Name it anything you want!
+          </div>
+          <form onSubmit={this.handleCreateRoomSubmit}>
+            <TextField
+              hintText="Enter a Private Room Name..."
+              onChange={this.handleCreateRoomChange}
+              errorText={this.checkErrorStates()}
+            />
+            <RaisedButton
+              onClick={this.handleCreateRoomSubmit}
+              label="Create Private Room broh"
             />
           </form>
         </div>

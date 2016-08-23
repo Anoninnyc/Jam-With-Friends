@@ -23,14 +23,16 @@ const users = sequelize.define('user', {
   timestamps: false,
 });
 
-const privateRooms = sequelize.define('user', {
+const PrivateRooms = sequelize.define('privaterooms', {
   url: {
     type: Sequelize.STRING
   },
 }, {
-  tableName: 'users',
-  timestamps: false,
+  tableName: 'privaterooms',
 });
+
+PrivateRooms.belongsTo(users);
+users.hasMany(PrivateRooms);
 
 sequelize
   .sync({ force: false })
@@ -51,7 +53,4 @@ sequelize
   });
 
 
-module.exports = {
-  users,
-  privateRooms,
-};
+module.exports.users = users;
