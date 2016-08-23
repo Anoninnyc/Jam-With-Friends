@@ -19,8 +19,8 @@ class AppNavBar extends Component {
      $.get("/userLoggedInToMakeInst", (resp, err) => {
       console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0]==null) {
-       // console.log('youre not logged in!');
-        this.context.router.push("login");
+       console.log('youre not logged in!');
+        //this.context.router.push("login");
       } else {
        // console.log('resp1,resp2', resp[0], resp[1]);
         this.logIn(resp[0], resp[1]);
