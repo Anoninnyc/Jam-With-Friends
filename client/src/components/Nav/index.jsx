@@ -10,7 +10,7 @@ class AppNavBar extends Component {
  constructor(props, context) {
     super(props);
     this.logIn=this.props.logIn.bind(this);
-    this.logOut=this.clearSessions.bind(this);
+    this.logOut=this.props.logOut.bind(this);
     console.log("this.props.user", this.props.user);
   }
 
@@ -22,6 +22,9 @@ class AppNavBar extends Component {
     });
   }
 
+  // logOut() {
+
+  // }
   clearSessions() {
     $.get("/logout", (resp, err) => {
       this.logOut();
@@ -41,7 +44,7 @@ class AppNavBar extends Component {
           Hello: {this.props.user}
           <NavMenuIcon
           loggedIn={this.props.loggedIn}
-          clearSessions={this.clearSessions}
+          clearSessions={this.clearSessions.bind(this)}
           />
         </AppBar>
       </div>
