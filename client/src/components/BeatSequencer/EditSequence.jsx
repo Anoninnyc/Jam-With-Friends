@@ -9,7 +9,6 @@ const EditSequence = ({ anchorEl, showPopover, handleOpen, handleClose, handleSe
   <div className="editSequence">
     <IconButton
       iconClassName="material-icons"
-      iconStyle={{ height: 48, width: 48 }}
       onTouchTap={handleOpen}
     >
       create
@@ -19,7 +18,7 @@ const EditSequence = ({ anchorEl, showPopover, handleOpen, handleClose, handleSe
       open={showPopover}
       anchorEl={anchorEl}
       anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+      targetOrigin={{ horizontal: 'left', vertical: 'center' }}
       onRequestClose={handleClose}
       canAutoPosition={false}
     >

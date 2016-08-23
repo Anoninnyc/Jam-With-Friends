@@ -75,7 +75,7 @@ class Sequence extends Component {
     event.preventDefault();
     this.setState({
       showPopover: true,
-      anchorEl: event.target
+      anchorEl: event.currentTarget
     });
   }
 
