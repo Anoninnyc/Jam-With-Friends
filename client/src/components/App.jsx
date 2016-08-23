@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       user: "",
-      userInstruments: [ ],
+      userInstruments: [],
     };
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -56,7 +56,7 @@ class App extends Component {
     });
     return (
       <div>
-        <Nav user={this.state.user}  loggedIn={this.state.loggedIn} title={'tbd'} />
+        <Nav user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
         {
           this.props.children ?
             <section className="child">

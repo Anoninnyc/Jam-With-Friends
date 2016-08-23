@@ -67,14 +67,13 @@ class Room extends React.Component {
   }
 
   handleKeypress(e) {
-
     if (store[this.state.instrument]) {
       store[this.state.instrument](e.key);
       if (this.state.startJam) {
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
           keyPressed: e.key,
-          notesToPlay: ['blah', 'blah blah'],
+          notesToPlay: [null, null, null],
         }));
       }
     } else {
@@ -118,34 +117,31 @@ class Room extends React.Component {
     connectionManager.onMessage(data => {
       data = JSON.parse(data);
       if (store[data.instrument]) {
-      store[data.instrument](data.keyPressed);
-      console.log('youre OK if this is showing!', data.notesToPlay);
+        store[data.instrument](data.keyPressed);
+        console.log('youre OK if this is showing!', data.notesToPlay);
       } else {
         const info=data.notesToPlay;
-        const combo=info[0]
+        const combo=info[0];
         console.log('youre good if this is showing!', data.notesToPlay);
 
-      const config = {
-              pitchDecay: info[1]||0.1,
-              octaves: 7,
-              oscillator: {
-                type: info[2],
-              },
-              envelope: {
-                attack: 0.001,
-                decay: 0.1,
-                sustain: 0.1,
-                release: 2,
-                attackCurve: 'linear'
-              }
-            };
-
-      const zimit = new MembraneSynth(config).toMaster();
-      zimit.triggerAttackRelease(combo, '8n');
+        const config = {
+          pitchDecay: info[1]||0.1,
+          octaves: 7,
+          oscillator: {
+            type: info[2],
+          },
+          envelope: {
+            attack: 0.001,
+            decay: 0.1,
+            sustain: 0.1,
+            release: 2,
+            attackCurve: 'linear'
+          }
+        };
+        const zimit = new MembraneSynth(config).toMaster();
+        zimit.triggerAttackRelease(combo, '8n');
       }
     });
-
-
 
     this.handlePeerInfo();
     this.setSocketListeners();
@@ -228,13 +224,28 @@ class Room extends React.Component {
             /> :
             <SelectInstrument
               extraInstruments={this.props.userInstruments}
-              handleSelect={index => {
-                this.setState({
-                  mapping: this.props.userInstruments.map(a => {
-                    return { "A": JSON.parse(a.A), "S": JSON.parse(a.S), "D": JSON.parse(a.D), "F": JSON.parse(a.F), "G": JSON.parse(a.G), "H": JSON.parse(a.H), "J": JSON.parse(a.J), "K": JSON.parse(a.K), "L": JSON.parse(a.L) };
-                  })[index-3],
-                  instrument: instruments.concat(this.props.userInstruments.map(a => {
-                    return `Your Instrument: ${a.instrumentName}`; })) [index] }); }}
+              handleSelect={
+                index => {
+                  this.setState({
+                    mapping: this.props.userInstruments.map(a => {
+                      return {
+                        "A": JSON.parse(a.A),
+                        "S": JSON.parse(a.S),
+                        "D": JSON.parse(a.D),
+                        "F": JSON.parse(a.F),
+                        "G": JSON.parse(a.G),
+                        "H": JSON.parse(a.H),
+                        "J": JSON.parse(a.J),
+                        "K": JSON.parse(a.K),
+                        "L": JSON.parse(a.L)
+                      };
+                    })[index - 3],
+                    instrument: instruments.concat(this.props.userInstruments.map(a => {
+                      return `Your Instrument: ${a.instrumentName}`;
+                    }))[index]
+                  });
+                }
+              }
               handleClick={this.handleStart}
               size="normal"
             />

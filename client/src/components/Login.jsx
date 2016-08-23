@@ -11,8 +11,8 @@ class Login extends Component {
     const user=$('#UserNameLogin').val();
     const pass= $('#UserNamePass').val();
     $.post("/login", { user: user, pass: pass }, (resp) => {
-    console.log(typeof resp, resp, 'resp!');
-     if (typeof resp !=='string') {
+      console.log(typeof resp, resp, 'resp!');
+      if (typeof resp !=='string') {
         console.log(resp, this.props.updateUserInstrument);
         this.props.logIn(user, resp);
         this.context.router.push('/');
