@@ -240,9 +240,9 @@ class Room extends React.Component {
                         L: JSON.parse(a.L)
                       }
                     ))[index - 3],
-                    instrument: instruments.concat(this.props.userInstruments.map(a => {
-                      return `Your Instrument: ${a.instrumentName}`;
-                    }))[index]
+                    instrument: instruments.concat(this.props.userInstruments.map(a => (
+                       `Your Instrument: ${a.instrumentName}`
+                    )))[index]
                   });
                 }
               }

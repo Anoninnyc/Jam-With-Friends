@@ -32,7 +32,7 @@ class App extends Component {
     this.setState({
       loggedIn: true,
       user: userName,
-      userInstruments: userInstruments,
+      userInstruments,
     });
   }
 

@@ -7,14 +7,10 @@ import $ from "jquery";
 const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", opacity: 0.6 };
 
 class AppNavBar extends Component {
-  constructor(props) {
-    super(props);
-   // console.log("this.props.user", this.props.user);
-  }
 
   componentDidMount() {
     $.get("/fbLoggedIn?", (response, err) => {
-      console.log(response, 'response')
+      console.log(response, 'response');
       if (response !== "false") {
         this.logIn(response);
       }
@@ -60,8 +56,6 @@ AppNavBar.propTypes = {
 
 export default AppNavBar;
 
-
-
  // {this.props.user.length?<div id="Welcome"> Hello {this.props.user}!</div>:null}
  //          <Link to="/"><img id="logo" src="http://bit.ly/2beSCQg" /></Link>
  //          {this.props.loggedIn?null:<a href="/auth/facebook"><button onClick={() => {this.logIn("FACEBOOK USER"); }} className="navButtons"> Login with FB!</button></a>}
@@ -69,11 +63,3 @@ export default AppNavBar;
  //          {!this.props.loggedIn?null:<Link to="MakeInstrument"><button className="navButtons"> Make your own instrument!</button></Link>}
  //          {!this.props.loggedIn?null:<Link to="/"><button onClick={() => { this.logOut(); }} className="navButtons"> SignOut!</button></Link>}
  //          {this.props.loggedIn?null:<Link to="signup"><button className="navButtons"> Signup!</button></Link>}
-
-
-
-
-
-
-
-

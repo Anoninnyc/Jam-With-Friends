@@ -14,7 +14,7 @@ class Signup extends Component {
     } else if (pass.length<7) {
       showErrorMessage("#SIMessages", 'Pass must be 7+ characters', "passNotLongEnough");
     } else {
-      $.post("/signup", { user: user, pass: pass }, (resp) => {
+      $.post("/signup", { user, pass }, (resp) => {
         if (resp === "SuccessSignup") {
           this.props.logIn(user);
           this.context.router.push('/');
@@ -43,7 +43,7 @@ Signup.contextTypes = {
 };
 
 Signup.propTypes = {
-  login: React.PropTypes.func.isRequired
+  login: React.PropTypes.func.isRequired,
 };
 
 Signup.childContextTypes = {
