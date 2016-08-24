@@ -69,7 +69,7 @@ AppNavBar.contextTypes = {
 AppNavBar.propTypes = {
   title: React.PropTypes.string,
   loggedIn: React.PropTypes.bool,
-  user: React.PropTypes.object,
+  user: React.PropTypes.string,
   logout: React.PropTypes.func,
 };
 

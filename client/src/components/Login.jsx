@@ -37,8 +37,8 @@ class Login extends Component {
 
 Login.propTypes = {
   params: React.PropTypes.object,
-  updateUserInstrument: React.PropTypes.func.isRequired,
-  logIn: React.PropTypes.func.isRequired,
+  updateUserInstrument: React.PropTypes.func,
+  logIn: React.PropTypes.func,
 };
 
 Login.contextTypes = {
