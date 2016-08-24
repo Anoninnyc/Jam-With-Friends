@@ -9,14 +9,19 @@ class Signup extends Component {
   helperSignup() {
     const user = $('#UserNameSignUp').val();
     const pass = $('#UserNamePass').val();
+
+     console.log(user, pass, 'regex text', /\W/.test(user) === true, /\W/.test(pass) === true);
+
     if (user.length<7) {
       showErrorMessage("#SIMessages", 'Username must be 7+ characters', "notLongEnough");
     } else if (pass.length<7) {
       showErrorMessage("#SIMessages", 'Pass must be 7+ characters', "passNotLongEnough");
+    } else if (/\W/.test(user) === true || /\W/.test(pass) === true) {
+      showErrorMessage("#SIMessages", 'Letters and Numbers Only!', "regexError");
     } else {
       $.post("/signup", { user, pass }, (resp) => {
         if (resp === "SuccessSignup") {
-          this.props.logIn(user);
+          this.props.logIn(user, []);
           this.context.router.push('/');
         } else {
           showErrorMessage("#SIMessages", 'Username Taken', "badSignUp");
@@ -24,6 +29,7 @@ class Signup extends Component {
       });
     }
   }
+
 
   render() {
     return (

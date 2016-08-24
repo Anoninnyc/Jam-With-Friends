@@ -144,6 +144,8 @@ class UserMakeInstrument extends Component {
     } else if (empty) {
       showErrorMessage("#makeInstErrorMessages", 'Pls map some keys', 'npi');
      // console.log('youve not mapped any keys!!!');
+    } else if (/\W/.test(name)===true) {
+      showErrorMessage("#makeInstErrorMessages", 'Letters and numbers only please!', 'regexErr');
     } else {
       this.setState({
         inMemObject: {}
