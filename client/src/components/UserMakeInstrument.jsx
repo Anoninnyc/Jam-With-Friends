@@ -1,10 +1,12 @@
 // Tones
 import React, { Component } from 'react';
 import { MembraneSynth } from "tone";
-// Material.UI
+// Components
+import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
-
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
@@ -123,7 +125,7 @@ class UserMakeInstrument extends Component {
 
 
   makeInstrument() {
-    const name = $("#userInstName").val();
+    const name = this.refs.instName.getValue();
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj.name = name;
     currentInMemObj.userName = this.props.user;
@@ -175,6 +177,7 @@ class UserMakeInstrument extends Component {
   }
 
   killKeypress() {
+    
     console.log("keypress should be killed");
     $(document).off();
     $(document).off("keypress");
@@ -246,10 +249,18 @@ class UserMakeInstrument extends Component {
             </select>
           </form>
         </div>
-        <RaisedButton label="Delete key" onClick={this.deleteKey} />
+        <RaisedButton label="Delete key" onClick={this.deleteKey} /><br />
         Select Some parameters:<br />
 
         Note:
+        <DropDownMenu >
+          <MenuItem value={1} primaryText="A" />
+          <MenuItem value={2} primaryText="B" />
+          <MenuItem value={3} primaryText="C" />
+          <MenuItem value={4} primaryText="D" />
+          <MenuItem value={5} primaryText="E" />
+      </DropDownMenu>
+
         <select className="par" id="par1">
           <option value="A">A</option>
           <option value="B">B</option>
@@ -298,7 +309,12 @@ class UserMakeInstrument extends Component {
         </select> <br />
 
         <RaisedButton label="Map That" onClick={this.mapThat} /><br />
-        Name instrument:<input id="userInstName" onClick={this.killKeypress} /> <br /><br /> <br />
+        <TextField
+          ref="instName"
+          hintText="Enter instName here"
+          onChange={this.killKeypress}
+        /><br />
+
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
         Your current Instrument in Piano form:
