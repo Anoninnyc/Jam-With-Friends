@@ -1,6 +1,4 @@
-const Sequelize = require('sequelize');
-
-const sequelize = new Sequelize('tbd', 'root', '12345');
+const { Sequelize, sequelize } = require('./connection');
 
 const users = sequelize.define('user', {
   userName: {
@@ -108,7 +106,6 @@ sequelize
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
-
 
 module.exports = {
   users,
