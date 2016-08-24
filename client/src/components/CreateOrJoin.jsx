@@ -18,6 +18,7 @@ class CreateOrJoin extends Component {
 
     this.state = {
       createRoomVal: '',
+      createPrivRoomVal: '',
       showValidateError: false,
       showRoomTakenMessage: false,
       rooms: [],
@@ -110,7 +111,11 @@ class CreateOrJoin extends Component {
     } else {
       roomName = this.state.createRoomVal;
     }
-    this.props.socket.emit('create room', roomName);
+    const data = {
+      roomId: roomName,
+      isPrivate: false,
+    };
+    this.props.socket.emit('create room', data);
   }
   // match nothing: ^(?![\s\S])
   handleCreateRoomChange(e) {
@@ -136,14 +141,23 @@ class CreateOrJoin extends Component {
     if (this.state.showValidateError) {
       return;
     }
-    const roomName = `${shortid.generate()}-${this.state.createRoomVal}`;
+    let roomName;
+    if (this.state.createRoomVal !== '') {
+      roomName = `${shortid.generate()}-${this.state.createPrivRoomVal}`;
+    } else {
+      roomName = `${shortid.generate()}-${shortid.generate()}`;
+    }
     // send server the roomname.  Username is taken from session
     $.post('/makeprivateroom', { roomName }, (res) => {
       if (res !== 'OK') {
         console.log(res);
       } else {
         console.log('SUCCESS!!!');
-        this.props.socket.emit('create room', roomName);
+        const data = {
+          roomId: roomName,
+          isPrivate: true,
+        };
+        this.props.socket.emit('create room', data);
       }
     });
   }
@@ -152,16 +166,16 @@ class CreateOrJoin extends Component {
     if (e.target.value.match(/[^a-zA-Z1-9]+/g)) {
       this.setState({
         showValidateError: true,
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
       });
     } else if (this.state.showValidateError && e.target.value.match(/[^a-zA-Z1-9]+/g) === null) {
       this.setState({
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
         showValidateError: false,
       });
     } else {
       this.setState({
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
       });
     }
   }
