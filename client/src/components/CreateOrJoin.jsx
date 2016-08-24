@@ -352,6 +352,7 @@ class CreateOrJoin extends Component {
 CreateOrJoin.propTypes = {
   socket: React.PropTypes.object,
   loggedIn: React.PropTypes.bool,
+  userInstruments: React.PropTypes.array,
 };
 
 CreateOrJoin.contextTypes = {
