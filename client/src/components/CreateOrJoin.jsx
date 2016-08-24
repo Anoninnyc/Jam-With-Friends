@@ -11,6 +11,7 @@ import { Table, TableBody, TableFooter, TableHeader,
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class CreateOrJoin extends Component {
       rooms: [],
       privateRooms: [],
       openPrivRoomMenu: false,
+      togglePrivateRoom: false,
     };
     // create room form logic
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
@@ -33,6 +35,8 @@ class CreateOrJoin extends Component {
     this.showRoomTakenErrorMessage = this.showRoomTakenErrorMessage.bind(this);
     // create a private room
     this.handleSendToPrivRoom = this.handleSendToPrivRoom.bind(this);
+    // toggle create public/private rooms
+    this.handlePrivateRoomToggle = this.handlePrivateRoomToggle.bind(this);
 
     // join a room on click
     this.handleRowClick = this.handleRowClick.bind(this);
@@ -222,6 +226,20 @@ class CreateOrJoin extends Component {
     this.props.socket.emit('create room', data);
   }
 
+  handlePrivateRoomToggle() {
+    if (this.state.togglePrivateRoom) {
+      this.setState({
+        togglePrivateRoom: false,
+      });
+      console.log(this.state.togglePrivateRoom);
+    } else {
+      this.setState({
+        togglePrivateRoom: true,
+      });
+      console.log(this.state.togglePrivateRoom);
+    }
+  }
+
   render() {
     return (
       <div className="create-or-join-view">
@@ -229,41 +247,60 @@ class CreateOrJoin extends Component {
           id="create-room-view"
           style={{
             position: 'absolute',
-            top: '20%',
+            top: '40%',
             left: '50%',
             transform: 'translate(-65%, -50%)',
             textAlign: 'center',
           }}
         >
-          <div>
-            If you can't think of a good room name, just click "Create Room broh"
-             and we will provide you with a random room name.
-          </div>
-          <form onSubmit={this.handleCreateRoomSubmit}>
-            <TextField
-              hintText="Enter a Room Name..."
-              onChange={this.handleCreateRoomChange}
-              errorText={this.checkErrorStates()}
+          <RadioButtonGroup name="shipSpeed" defaultSelected="public" onChange={this.handlePrivateRoomToggle}>
+            <RadioButton
+              value="public"
+              label="Make public room.  This room is open to the public for anyone to join.  It will be displayed in the open room table below."
             />
-            <RaisedButton
-              onClick={this.handleCreateRoomSubmit}
-              label="Create Room broh"
+            <RadioButton
+              value="private"
+              label="Make private room.  Noone will be able to join this room unless you give them the link personally.  We will store the url created for you and you can reuse the room as long as you are signed in"
             />
-          </form>
-          <div>
-            Create a private room here.  Name it anything you want!
-          </div>
-          <form onSubmit={this.handleCreatePrivateRoomSubmit}>
-            <TextField
-              hintText="Enter a Private Room Name..."
-              onChange={this.handleCreatePrivateRoomChange}
-              errorText={this.checkErrorStates()}
-            />
-            <RaisedButton
-              onClick={this.handleCreatePrivateRoomSubmit}
-              label="Create Private Room broh"
-            />
-          </form>
+          </RadioButtonGroup>
+          {
+            !this.state.togglePrivateRoom
+            ?
+              <div className="create-public-room">
+                <div>
+                  If you can't think of a good room name, just click "Create Room broh"
+                   and we will provide you with a random room name.
+                </div>
+                <form onSubmit={this.handleCreateRoomSubmit}>
+                  <TextField
+                    hintText="Enter a Room Name..."
+                    onChange={this.handleCreateRoomChange}
+                    errorText={this.checkErrorStates()}
+                  />
+                  <RaisedButton
+                    onClick={this.handleCreateRoomSubmit}
+                    label="Create Public Room"
+                  />
+                </form>
+              </div>
+            :
+              <div className="create-private-room">
+                <div>
+                  Create a private room here.  Name it anything you want!
+                </div>
+                <form onSubmit={this.handleCreatePrivateRoomSubmit}>
+                  <TextField
+                    hintText="Enter a Private Room Name..."
+                    onChange={this.handleCreatePrivateRoomChange}
+                    errorText={this.checkErrorStates()}
+                  />
+                  <RaisedButton
+                    onClick={this.handleCreatePrivateRoomSubmit}
+                    label="Create Private Room"
+                  />
+                </form>
+              </div>
+          }
           {
             this.props.loggedIn
             ?
@@ -295,7 +332,7 @@ class CreateOrJoin extends Component {
           id="join-room-view"
           style={{
             position: 'absolute',
-            top: '60%',
+            top: '75%',
             left: '50%',
             transform: 'translate(-65%, -50%)',
             textAlign: 'center'
