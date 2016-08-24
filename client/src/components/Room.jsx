@@ -103,7 +103,7 @@ class Room extends React.Component {
       const pd=sequence[3];
       const type=sequence[4];
       const combo= `${note}${octave}`;
-console.log(sequence, note, octave, pd, type, combo);
+      // console.log(sequence, note, octave, pd, type, combo);
       const config = {
         pitchDecay: pd||0.1,
         octaves: 7,
@@ -118,7 +118,7 @@ console.log(sequence, note, octave, pd, type, combo);
           attackCurve: 'linear'
         }
       };
-      console.log(instMap, keyPressed, note, octave, pd, type, combo);
+      // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
       const zimit = new MembraneSynth(config).toMaster();
       zimit.triggerAttackRelease(combo, '8n');
@@ -217,7 +217,7 @@ console.log(sequence, note, octave, pd, type, combo);
   }
 
   render() {
-    console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
+    // console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
 
     return (
       <div>
@@ -245,12 +245,12 @@ console.log(sequence, note, octave, pd, type, combo);
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
                         D: typeof a === 'string'?JSON.parse(a.D): a.D,
-                        F: JSON.parse(a.F),
-                        G: JSON.parse(a.G),
-                        H: JSON.parse(a.H),
-                        J: JSON.parse(a.J),
-                        K: JSON.parse(a.K),
-                        L: JSON.parse(a.L)
+                        F: typeof a === 'string'?JSON.parse(a.F): a.F,
+                        G: typeof a === 'string'?JSON.parse(a.G): a.G,
+                        H: typeof a === 'string'?JSON.parse(a.H): a.H,
+                        J: typeof a === 'string'?JSON.parse(a.J): a.J,
+                        K: typeof a === 'string'?JSON.parse(a.K): a.K,
+                        L: typeof a === 'string'?JSON.parse(a.L): a.L,
                       }
                     })[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (

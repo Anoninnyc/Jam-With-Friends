@@ -9,18 +9,18 @@ const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", op
 class AppNavBar extends Component {
   constructor(props, context) {
     super(props);
-      this.logIn=this.props.logIn.bind(this);
-      this.logOut=this.props.logOut.bind(this);
-      console.log("this.props.user", this.props.user);
+    this.logIn=this.props.logIn.bind(this);
+    this.logOut=this.props.logOut.bind(this);
+    this.clearSessions=this.clearSessions.bind(this);
+    console.log("this.props.user", this.props.user);
   }
 
   componentDidMount() {
-    
-     $.get("/userLoggedInToMakeInst", (resp, err) => {
+    $.get("/userLoggedInToMakeInst", (resp, err) => {
       console.log('this the the resp to userloggedintomakeinst', resp);
-      if (resp[0]==null) {
-       console.log('youre not logged in!');
-        //this.context.router.push("login");
+      if (resp[0] == null) {
+        console.log('youre not logged in!');
+        // this.context.router.push("login");
       } else {
        // console.log('resp1,resp2', resp[0], resp[1]);
         this.logIn(resp[0], resp[1]);
@@ -29,15 +29,12 @@ class AppNavBar extends Component {
 
     $.get("/fbLoggedIn?", (response, err) => {
       if (response !== "false") {
-        console.log(response[0], typeof response[0], 'here!!!');
+       // console.log(response[0], typeof response[0], 'here!!!');
         this.logIn(response[0], response[1]);
       }
     });
   }
 
-  // logOut() {
-
-  // }
   clearSessions() {
     $.get("/logout", (resp, err) => {
       this.logOut();
@@ -45,7 +42,7 @@ class AppNavBar extends Component {
   }
 
   render() {
-    console.log('tpu', this.props.userInstruments);
+    // console.log('tpu', this.props.userInstruments);
     return (
       <div id="navBar">
         <AppBar
@@ -57,8 +54,8 @@ class AppNavBar extends Component {
           </Link>
           Hello: {this.props.user}
           <NavMenuIcon
-          loggedIn={this.props.loggedIn}
-          clearSessions={this.clearSessions.bind(this)}
+            loggedIn={this.props.loggedIn}
+            clearSessions={this.clearSessions}
           />
         </AppBar>
       </div>
