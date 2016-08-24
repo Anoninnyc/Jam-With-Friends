@@ -49,7 +49,7 @@ class UserMakeInstrument extends Component {
   //  console.log(this.state.tryingToName);
     if (!this.state.tryingToName) {
      // console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
-      const keyInfo = this.state.inMemObject[mapIdsToKeys[ID]];
+      const keyInfo = JSON.parse(this.state.inMemObject[mapIdsToKeys[ID]]);
      // console.log('keyinfo', keyInfo, keyInfo===undefined);
       if (keyInfo === undefined) {
         showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
