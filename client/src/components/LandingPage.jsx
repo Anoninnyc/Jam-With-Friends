@@ -1,12 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+// material ui components
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
-import shortid from 'shortid';
 import Paper from 'material-ui/Paper';
-
-const io = require('socket.io-client');
-
-const socket = io();
 
 const materialStyles = {
   position: 'absolute',
@@ -28,69 +26,40 @@ const paperStyle = {
   fontFamily: '"Trebuchet MS", Helvetica, sansSerif'
 };
 
-class LandingPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    this.context.router.push(`/createorjoin`);
-  }
-
-  render() {
-    return (
-      <div id="landingPage">
-
-        <section className="title">
-          <h1>WELCOME TO TBD!</h1>
-        </section>
-        {/*
-        <section className="joinRoom">
-          <TextField style={materialStyles} />
-          <RaisedButton
-            label="Join Room"
-            style={materialStyles}
-          />
-        </section>
-        */}
-        <section className="divider">
-          <Divider />
-        </section>
-        <section className="createRoom">
-          <div>
-            <Paper style={paperStyle} zDepth={5} >
-              <div id="introText">
-                <p>LiveJam allows music aficianados to collaboratively jam out using virtual instruments.</p>
-                <p>The app lets “Jammers” form or join dedicated rooms where they can create tracks (and lifetime memories) with one another.</p>
-                <p>LiveJam’s rooms currently allow for up to four Jammers to collab per session.</p>
-                <p>The app's use of direct peer-to-peer (serverless) communication, via WebRTC, allows users within 100 miles of one another to jam without lag, emulating the experience of using a real studio.</p>
-              </div>
-            </Paper>
-            <p id="callToAction"> What are you waiting for?</p>
+const LandingPage = () => (
+  <div id="landingPage">
+    <section className="title">
+      <h1>WELCOME TO TBD!</h1>
+    </section>
+    <section className="divider">
+      <Divider />
+    </section>
+    <section className="createRoom">
+      <div>
+        <Paper style={paperStyle} zDepth={5} >
+          <div id="introText">
+            <p>LiveJam allows music aficianados to collaboratively jam out using virtual instruments.</p>
+            <p>The app lets “Jammers” form or join dedicated rooms where they can create tracks
+               (and lifetime memories) with one another.
+            </p>
+            <p>LiveJam’s rooms currently allow for up to four Jammers to collab per session.</p>
+            <p>The app's use of direct peer-to-peer (serverless) communication, via WebRTC, allows users
+               within 100 miles of one another to jam without lag, emulating the experience of using a real studio.
+            </p>
           </div>
-          <img src="/Users/loaner/Desktop/tbd/client/public/style/RocheFace.png" alt="roche" />
-          <RaisedButton
-            label={<span style={{ fontSize: '30px', textTransform: 'none' }}>Jam Now!</span>}
-            style={materialStyles}
-            onClick={this.handleClick}
-          />
-        </section>
+        </Paper>
+        <p id="callToAction"> What are you waiting for?</p>
       </div>
-    );
-  }
-}
-
-LandingPage.contextTypes = {
-  router: React.PropTypes.object
-};
+      <img src="/Users/loaner/Desktop/tbd/client/public/style/RocheFace.png" alt="roche" />
+      <Link to="/createorjoin">
+        <RaisedButton
+          label={<span style={{ fontSize: '30px', textTransform: 'none' }}>Jam Now!</span>}
+          style={materialStyles}
+        />
+      </Link>
+    </section>
+  </div>
+);
 
 export default LandingPage;
-
-
-// <img src="http://bit.ly/2aQnqlf" />
-//         <img src="http://bit.ly/2aUzQtW" />
-//         <img src="http://bit.ly/2bene30" />
-//         <img src=" http://bit.ly/2aRmWLh" />
-//         <img src=" http://bit.ly/2bf5qGu" />
 

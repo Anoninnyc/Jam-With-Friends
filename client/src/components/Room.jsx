@@ -10,10 +10,6 @@ import Help from './Help';
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
 
-const io = require('socket.io-client');
-
-const socket = io();
-
 class Room extends React.Component {
   constructor(props) {
     super(props);
@@ -55,18 +51,18 @@ class Room extends React.Component {
         });
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
-    socket.emit('add as listener', this.props.params.roomId);
+    this.props.socket.emit('add as listener', this.props.params.roomId);
   }
 
   componentWillUnmount() {
     connectionManager.offStatusChange(this.updateConnection);
     window.removeEventListener('keypress', this.handleKeypress);
     connectionManager.closeConnection();
-    socket.removeListener('receive peer info', this.handlePeerInfo);
+    this.props.socket.removeListener('receive peer info', this.handlePeerInfo);
   }
 
   setSocketListeners() {
-    socket.on('invalid room', () => {
+    this.props.socket.on('invalid room', () => {
       this.context.router.push('/invalid');
     });
 
@@ -164,7 +160,7 @@ class Room extends React.Component {
       }
     });
 
-    socket.emit('select instrument', {
+    this.props.socket.emit('select instrument', {
       roomId: this.props.params.roomId,
       id: connectionManager.id(),
       instrument: this.state.instrument
@@ -176,12 +172,12 @@ class Room extends React.Component {
     this.setState({ connected: connectionManager.isConnected() });
 
     // get instrument info of everyone in room
-    socket.emit('request peer info', {
+    this.props.socket.emit('request peer info', {
       roomId: this.props.params.roomId,
-      socketId: socket.id
+      socketId: this.props.socket.id
     });
 
-    socket.on('receive peer info', this.handlePeerInfo);
+    this.props.socket.on('receive peer info', this.handlePeerInfo);
   }
 
   handlePeerInfo(data) {
@@ -208,7 +204,7 @@ class Room extends React.Component {
   selectInstrument(index) {
     this.setState({ instrument: instruments[index] });
     if (this.state.connected) {
-      socket.emit('select instrument', {
+      this.props.socket.emit('select instrument', {
         roomId: this.props.params.roomId,
         id: connectionManager.id(),
         instrument: instruments[index]
@@ -240,7 +236,7 @@ class Room extends React.Component {
                 index => {
                   this.setState({
                     mapping: this.props.userInstruments.map(a => {
-                      console.log('heres the error', a);
+                      // console.log('heres the error', a);
                       return {
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
@@ -251,7 +247,7 @@ class Room extends React.Component {
                         J: typeof a === 'string'?JSON.parse(a.J): a.J,
                         K: typeof a === 'string'?JSON.parse(a.K): a.K,
                         L: typeof a === 'string'?JSON.parse(a.L): a.L,
-                      }
+                      };
                     })[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (
                        `Your Instrument: ${a.instrumentName}`
@@ -259,6 +255,7 @@ class Room extends React.Component {
                   });
                 }
               }
+
               handleClick={this.handleStart}
               size="normal"
             />
@@ -271,6 +268,7 @@ class Room extends React.Component {
 Room.propTypes = {
   params: React.PropTypes.object,
   userInstruments: React.PropTypes.func.isRequired,
+  socket: React.PropTypes.object
 };
 
 Room.contextTypes = {

@@ -23,6 +23,15 @@ const users = sequelize.define('user', {
   timestamps: false,
 });
 
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('It worked!');
+  }, err => {
+    console.log('An error occurred while creating the table:', err);
+  });
+
+
 const PrivateRooms = sequelize.define('privaterooms', {
   url: {
     type: Sequelize.STRING
@@ -41,6 +50,7 @@ sequelize
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
+
 
 const instruments = sequelize.define('instruments', {
   userName: {
@@ -81,8 +91,6 @@ const instruments = sequelize.define('instruments', {
   tableName: 'instruments',
   timestamps: false,
 });
-
-
 
 sequelize
   .authenticate()

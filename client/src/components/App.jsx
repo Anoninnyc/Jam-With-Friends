@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import io from 'socket.io-client';
+
 // for future material ui use
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -11,7 +14,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       user: "",
-      userInstruments: [],
+      userInstruments: []
     };
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -52,6 +55,7 @@ class App extends Component {
          user: this.state.user,
          userInstruments: this.state.userInstruments,
          updateUserInstrument: this.updateUserInstrument,
+        socket: io()
        })
     ));
     return (

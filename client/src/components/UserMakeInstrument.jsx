@@ -8,10 +8,6 @@ import UserOwnInstrument from './UserOwnInstrument';
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
-const io = require('socket.io-client');
-
-const socket = io();
-
 class UserMakeInstrument extends Component {
 
   constructor(props) {
@@ -151,7 +147,7 @@ class UserMakeInstrument extends Component {
         inMemObject: {}
       });
       empty = true;
-      socket.emit('newInstCreated', currentInMemObj);
+      this.props.socket.emit('newInstCreated', currentInMemObj);
       console.log(`youve created ${JSON.stringify(currentInMemObj)}`);
       // const final = this.props.userInstruments.concat([currentInMemObj]);
       // this.props.updateUserInstrument(final);
@@ -306,7 +302,7 @@ class UserMakeInstrument extends Component {
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         Your current Instrument in JSON form: <br />
         {JSON.stringify(this.state.inMemObject)}<br />
-        Your current Instrument in Piano form (click to try it out):
+        Your current Instrument in Piano form:
         <div onClick={this.addKeypress}>
           <UserOwnInstrument />
         </div>
