@@ -35,10 +35,12 @@ class Room extends React.Component {
   }
 
   componentDidMount() {
+    console.log('room did mount');
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
 
 $.get("/userLoggedInToMakeInst", (resp, err) => {
+  console.log('room did mount info', resp);
       console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0]==null) {
        console.log('youre not logged in!');
