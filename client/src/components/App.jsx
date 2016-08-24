@@ -32,7 +32,7 @@ class App extends Component {
       if (resp[0] === null) {
      // console.log('youre not logged in!');
       } else {
-        this.logIn(resp[0], resp[1]);
+        this.logIn(JSON.stringify(resp[0]), resp[1]);
       }
     });
 

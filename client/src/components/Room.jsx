@@ -40,7 +40,7 @@ class Room extends React.Component {
         console.log('youre not logged in!');
       } else {
          console.log('resp1,resp2', resp[0], resp[1]);
-        this.props.logIn(resp[0], resp[1]);
+        this.props.logIn(JSON.stringify(resp[0]), resp[1]);
       }
     });
 
