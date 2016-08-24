@@ -250,17 +250,6 @@ class CreateOrJoin extends Component {
 
   }
 
-  // <div>
-  //   If you can't think of a good room name, just click "Create Room broh"
-  //  and we will provide you with a random room name.
-  // </div>
-  // This room is open to the public for anyone to join.  It will be displayed in the open room table below
-
-  // <div>
-  //   Create a private room here.  Name it anything you want!
-  // </div>
-    // Noone will be able to join this room unless you give them the link personally.  We will store the url created for you and you can reuse the room as long as you are signed in"
-
   render() {
     return (
       <div className="create-or-join-view">
@@ -374,7 +363,7 @@ class CreateOrJoin extends Component {
         >
           <div>
             Have a link already?  Just paste it into your url bar!
-            Otherwise, checkout the open rooms below.  Click to join!
+            Otherwise, checkout the open rooms below.  Click a row to join!
           </div>
           <div id="join-view-room">
             <Table
