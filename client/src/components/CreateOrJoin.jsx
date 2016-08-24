@@ -8,6 +8,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { Table, TableBody, TableFooter, TableHeader,
         TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -15,19 +18,32 @@ class CreateOrJoin extends Component {
 
     this.state = {
       createRoomVal: '',
+      createPrivRoomVal: '',
       showValidateError: false,
       showRoomTakenMessage: false,
       rooms: [],
+      privateRooms: [],
+      openPrivRoomMenu: false,
     };
-
+    // create room form logic
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
     this.handleCreatePrivateRoomSubmit = this.handleCreatePrivateRoomSubmit.bind(this);
     this.handleCreatePrivateRoomChange = this.handleCreatePrivateRoomChange.bind(this);
+    this.showRoomTakenErrorMessage = this.showRoomTakenErrorMessage.bind(this);
+    // create a private room
+    this.handleSendToPrivRoom = this.handleSendToPrivRoom.bind(this);
+
+    // join a room on click
     this.handleRowClick = this.handleRowClick.bind(this);
+
+    // needed to remove socket event listeners
     this.updateRooms = this.updateRooms.bind(this);
     this.checkErrorStates = this.checkErrorStates.bind(this);
-    this.showRoomTakenErrorMessage = this.showRoomTakenErrorMessage.bind(this);
+
+    // Material UI popover logic
+    this.handleTapPrivRoom = this.handleTapPrivRoom.bind(this);
+    this.handleTapPrivRoomClose = this.handleTapPrivRoomClose.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +64,17 @@ class CreateOrJoin extends Component {
     }
 
     this.props.socket.on('give rooms info', this.updateRooms);
+
+    // get private rooms from server/db if user is logged in
+    if (this.props.loggedIn) {
+      $.get('/getprivaterooms')
+        .then((privateRooms) => {
+          console.log(privateRooms);
+          this.setState({
+            privateRooms,
+          });
+        });
+    }
   }
 
   componentWillUnmount() {
@@ -84,7 +111,11 @@ class CreateOrJoin extends Component {
     } else {
       roomName = this.state.createRoomVal;
     }
-    this.props.socket.emit('create room', roomName);
+    const data = {
+      roomId: roomName,
+      isPrivate: false,
+    };
+    this.props.socket.emit('create room', data);
   }
   // match nothing: ^(?![\s\S])
   handleCreateRoomChange(e) {
@@ -110,14 +141,23 @@ class CreateOrJoin extends Component {
     if (this.state.showValidateError) {
       return;
     }
-    const roomName = `${shortid.generate()}-${this.state.createRoomVal}`;
+    let roomName;
+    if (this.state.createRoomVal !== '') {
+      roomName = `${shortid.generate()}-${this.state.createPrivRoomVal}`;
+    } else {
+      roomName = `${shortid.generate()}-${shortid.generate()}`;
+    }
     // send server the roomname.  Username is taken from session
     $.post('/makeprivateroom', { roomName }, (res) => {
       if (res !== 'OK') {
         console.log(res);
       } else {
         console.log('SUCCESS!!!');
-        this.props.socket.emit('create room', roomName);
+        const data = {
+          roomId: roomName,
+          isPrivate: true,
+        };
+        this.props.socket.emit('create room', data);
       }
     });
   }
@@ -126,16 +166,16 @@ class CreateOrJoin extends Component {
     if (e.target.value.match(/[^a-zA-Z1-9]+/g)) {
       this.setState({
         showValidateError: true,
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
       });
     } else if (this.state.showValidateError && e.target.value.match(/[^a-zA-Z1-9]+/g) === null) {
       this.setState({
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
         showValidateError: false,
       });
     } else {
       this.setState({
-        createRoomVal: e.target.value,
+        createPrivRoomVal: e.target.value,
       });
     }
   }
@@ -143,6 +183,20 @@ class CreateOrJoin extends Component {
   handleRowClick(rowNum, colNum) {
     // fix to check if room is full first
     this.context.router.push(`/room/${this.state.rooms[rowNum].roomName}`);
+  }
+
+  handleTapPrivRoom(e) {
+    e.preventDefault();
+    this.setState({
+      openPrivRoomMenu: true,
+      anchorEl: e.currentTarget,
+    });
+  }
+
+  handleTapPrivRoomClose() {
+    this.setState({
+      openPrivRoomMenu: false,
+    });
   }
 
   checkErrorStates() {
@@ -153,6 +207,19 @@ class CreateOrJoin extends Component {
     } else {
       return false;
     }
+  }
+
+  handleSendToPrivRoom(e, menuItem, index) {
+    e.preventDefault();
+
+    const data = {
+      roomId: this.state.privateRooms[index],
+      // userName: this.props.user,
+      isPrivate: true,
+    };
+
+    const roomName = this.state.privateRooms[index];
+    this.props.socket.emit('create room', data);
   }
 
   render() {
@@ -198,6 +265,32 @@ class CreateOrJoin extends Component {
               label="Create Private Room broh"
             />
           </form>
+          {
+            this.props.loggedIn
+            ?
+              <div className="old-private-rooms">
+                <RaisedButton
+                  onTouchTap={this.handleTapPrivRoom}
+                  label="Click to view your old private rooms"
+                />
+                <Popover
+                  open={this.state.openPrivRoomMenu}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+                  targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                  onRequestClose={this.handleTapPrivRoomClose}
+                >
+                  <Menu onItemTouchTap={this.handleSendToPrivRoom}>
+                    {
+                      this.state.privateRooms.map((room, key) => (
+                        <MenuItem value={room.slice(9)} primaryText={room.slice(9)} />
+                      ))
+                    }
+                  </Menu>
+                </Popover>
+              </div>
+            : null
+          }
         </div>
         <div
           id="join-room-view"
@@ -271,7 +364,9 @@ class CreateOrJoin extends Component {
 }
 
 CreateOrJoin.propTypes = {
-  socket: React.PropTypes.object
+  socket: React.PropTypes.object,
+  loggedIn: React.PropTypes.bool,
+  userInstruments: React.PropTypes.array,
 };
 
 CreateOrJoin.contextTypes = {
