@@ -8,10 +8,6 @@ import UserOwnInstrument from './UserOwnInstrument';
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
-const io = require('socket.io-client');
-
-const socket = io();
-
 class UserMakeInstrument extends Component {
 
   constructor(props) {
@@ -151,7 +147,7 @@ class UserMakeInstrument extends Component {
         inMemObject: {}
       });
       empty = true;
-      socket.emit('newInstCreated', currentInMemObj);
+      this.props.socket.emit('newInstCreated', currentInMemObj);
       console.log(`youve created ${JSON.stringify(currentInMemObj)}`);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
@@ -322,6 +318,7 @@ UserMakeInstrument.propTypes = {
   userInstruments: React.PropTypes.array.isRequired,
   updateUserInstrument: React.PropTypes.func.isRequired,
   user: React.PropTypes.string.isRequired,
+  socket: React.PropTypes.object
 };
 
 UserMakeInstrument.contextTypes = {
