@@ -9,6 +9,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
+import { mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -103,7 +104,15 @@ class Room extends React.Component {
 
       const zimit = new MembraneSynth(config).toMaster();
       zimit.triggerAttackRelease(combo, '8n');
-      console.log('e info', e.which);
+      console.log('e info', e.which, e.key);
+
+      const keyBlack=e.key.toUpperCase();
+      $(mapKeysToIds[keyBlack]).animate({
+        backgroundColor: "black",
+      }, 20).animate({
+        backgroundColor: "white",
+      }, 20);
+
       if (this.state.startJam) {
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
