@@ -34,23 +34,25 @@ class Room extends React.Component {
     this.selectInstrument = this.selectInstrument.bind(this);
   }
 
+
+
   componentDidMount() {
     console.log('room did mount');
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
 
-$.get("/userLoggedInToMakeInst", (resp, err) => {
-  console.log('room did mount info', resp);
+  $.get("/userLoggedInToMakeInst", (resp, err) => {
+    console.log('room did mount info', resp);
       console.log('this the the resp to userloggedintomakeinst', resp);
-      if (resp[0]==null) {
-       console.log('youre not logged in!');
+    if (resp[0]==null) {
+      console.log('youre not logged in!');
         //this.context.router.push("login");
-      } else {
-       // console.log('resp1,resp2', resp[0], resp[1]);
-        this.props.logIn(resp[0], resp[1]);
-      }
-    });
-
+        } else {
+            console.log('youshouldseethis');
+           // console.log('resp1,resp2', resp[0], resp[1]);
+            this.props.logIn(resp[0], resp[1]);
+          }
+        });
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     socket.emit('add as listener', this.props.params.roomId);
