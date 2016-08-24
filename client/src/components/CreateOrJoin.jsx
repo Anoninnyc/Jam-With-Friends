@@ -62,7 +62,7 @@ class CreateOrJoin extends Component {
       this.props.socket.on('connected', () => this.props.socket.emit('get rooms info', this.props.socket.id));
     }
 
-    socket.on('give rooms info', this.updateRooms);
+    this.props.socket.on('give rooms info', this.updateRooms);
 
     // get private rooms from server/db if user is logged in
     if (this.props.loggedIn) {
@@ -205,7 +205,7 @@ class CreateOrJoin extends Component {
     };
 
     const roomName = this.state.privateRooms[index];
-    socket.emit('create room', data);
+    this.props.socket.emit('create room', data);
   }
 
   render() {
