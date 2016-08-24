@@ -525,6 +525,7 @@ input:invalid {
 #signupContent {
    position:absolute;
    top:30%;
+   left:40%;
  }
 
 #testPiano {
@@ -536,6 +537,7 @@ input:invalid {
  #loginContent {
   position:absolute;
   top:30%;
+  left:40%;
  }
 
  #UserMakeInstrumentRoom {
