@@ -4,9 +4,9 @@ import AddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import { white } from 'material-ui/styles/colors';
 import InstrumentIcon, { KickDrumIcon } from '../icons';
 
-const PeerBubble = ({ peer, handleClick, self }) => {
-  console.log('peer.instrument', peer, self);
-  return (<div className="peer">
+const PeerBubble = ({ peer, handleClick, self }) => (
+
+  <div className="peer">
     <KickDrumIcon style={{ width: 200, height: 'auto' }} />
     {
       peer.instrument ?
@@ -32,7 +32,8 @@ const PeerBubble = ({ peer, handleClick, self }) => {
         </div>
     }
   </div>
-)};
+);
+
 
 PeerBubble.propTypes = {
   peer: React.PropTypes.object.isRequired,
