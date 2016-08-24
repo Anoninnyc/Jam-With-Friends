@@ -32,9 +32,9 @@ class UserMakeInstrument extends Component {
       this.sampleSound();
     });
 
-    $.get("/userLoggedInToMakeInst", (resp, err) => {
+    $.get("/getUserInfo", (resp, err) => {
       console.log('this the the resp to userloggedintomakeinst', resp);
-      if (resp[0]==null) {
+      if (resp[0] === null) {
         console.log('youre not logged in!');
         this.context.router.push("login");
       }

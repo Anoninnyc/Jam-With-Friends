@@ -17,7 +17,7 @@ class AppNavBar extends Component {
 
   componentDidMount() {
     // this get request will keep the user logged with their own instruments...
-    $.get("/userLoggedInToMakeInst", (resp, err) => {
+    $.get("/getUserInfo", (resp, err) => {
       // console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0] === null) {
        // console.log('youre not logged in!');
@@ -26,12 +26,14 @@ class AppNavBar extends Component {
       }
     });
 
-    // $.get("/fbLoggedIn?", (response, err) => {
-    //   if (response !== "false") {
-    //    // console.log(response[0], typeof response[0], 'here!!!');
-    //     this.logIn(response[0], response[1]);
-    //   }
-    // });
+    $.get("/fbLoggedIn?", (response, err) => {
+      if (response !== "false") {
+        console.log(response[0], typeof response[0], 'here!!!');
+        this.logIn(response[0], response[1]);
+      } else {
+        console.log('not logged to fb');
+      }
+    });
   }
 
   clearSessions() {
