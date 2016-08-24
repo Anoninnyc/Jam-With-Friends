@@ -38,6 +38,17 @@ class Room extends React.Component {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
 
+$.get("/userLoggedInToMakeInst", (resp, err) => {
+      console.log('this the the resp to userloggedintomakeinst', resp);
+      if (resp[0]==null) {
+       console.log('youre not logged in!');
+        //this.context.router.push("login");
+      } else {
+       // console.log('resp1,resp2', resp[0], resp[1]);
+        this.props.logIn(resp[0], resp[1]);
+      }
+    });
+
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     socket.emit('add as listener', this.props.params.roomId);
