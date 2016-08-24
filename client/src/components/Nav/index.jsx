@@ -26,7 +26,7 @@ class AppNavBar extends Component {
       }
     });
 
-    $.get("/fbLoggedIn?", (response, err) => {
+    $.get("/fbLoggedIn", (response, err) => {
       if (response !== "false") {
         console.log(response[0], typeof response[0], 'here!!!');
         this.logIn(response[0], response[1]);
@@ -53,6 +53,7 @@ class AppNavBar extends Component {
           <Link to="/">
             <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
           </Link>
+          NAME:{this.props.user}
           <NavMenuIcon
             loggedIn={this.props.loggedIn}
             clearSessions={this.clearSessions}

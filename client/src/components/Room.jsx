@@ -34,13 +34,12 @@ class Room extends React.Component {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
   // this will update uniue user instruments with those made in the same session.
-    $.get("/userLoggedInToMakeInst", (resp, err) => {
+    $.get("/getUserInfo", (resp, err) => {
       console.log('Resp to RDM:', resp);
       if (resp[0]==null) {
         console.log('youre not logged in!');
       } else {
-        console.log('youshouldseethis');
-        // console.log('resp1,resp2', resp[0], resp[1]);
+         console.log('resp1,resp2', resp[0], resp[1]);
         this.props.logIn(resp[0], resp[1]);
       }
     });
