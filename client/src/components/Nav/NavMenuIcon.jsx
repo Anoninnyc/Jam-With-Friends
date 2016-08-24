@@ -14,6 +14,7 @@ const NavMenuIcon = (props) => (
         <MoreVertIcon />
       </IconButton>
     }
+
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
   >
@@ -39,5 +40,10 @@ const NavMenuIcon = (props) => (
     />:null}
   </IconMenu>
 );
+
+NavMenuIcon.propTypes = {
+  loggedIn: React.PropTypes.bool,
+  clearSessions: React.PropTypes.func,
+};
 
 export default NavMenuIcon;

@@ -10,7 +10,7 @@ class Signup extends Component {
     const user = $('#UserNameSignUp').val();
     const pass = $('#UserNamePass').val();
 
-     console.log(user, pass, 'regex text', /\W/.test(user) === true, /\W/.test(pass) === true);
+    // console.log(user, pass, 'regex text', /\W/.test(user) === true, /\W/.test(pass) === true);
 
     if (user.length<7) {
       showErrorMessage("#SIMessages", 'Username must be 7+ characters', "notLongEnough");
@@ -49,7 +49,7 @@ Signup.contextTypes = {
 };
 
 Signup.propTypes = {
-  login: React.PropTypes.func.isRequired,
+  logIn: React.PropTypes.func,
 };
 
 Signup.childContextTypes = {

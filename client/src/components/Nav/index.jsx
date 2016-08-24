@@ -9,20 +9,19 @@ const color={ backgroundImage: 'url("http://bit.ly/2b2ePzs")', width: "100%", op
 class AppNavBar extends Component {
   constructor(props, context) {
     super(props);
-    this.logIn=this.props.logIn.bind(this);
-    this.logOut=this.props.logOut.bind(this);
-    this.clearSessions=this.clearSessions.bind(this);
+    this.logIn = this.props.logIn.bind(this);
+    this.logOut = this.props.logOut.bind(this);
+    this.clearSessions = this.clearSessions.bind(this);
     console.log("this.props.user", this.props.user);
   }
 
   componentDidMount() {
+    // this get request will keep the user logged with their own instruments...
     $.get("/userLoggedInToMakeInst", (resp, err) => {
-      console.log('this the the resp to userloggedintomakeinst', resp);
+      // console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0] == null) {
-        console.log('youre not logged in!');
-        // this.context.router.push("login");
+       // console.log('youre not logged in!');
       } else {
-       // console.log('resp1,resp2', resp[0], resp[1]);
         this.logIn(resp[0], resp[1]);
       }
     });
@@ -52,7 +51,6 @@ class AppNavBar extends Component {
           <Link to="/">
             <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
           </Link>
-          
           <NavMenuIcon
             loggedIn={this.props.loggedIn}
             clearSessions={this.clearSessions}
@@ -70,7 +68,8 @@ AppNavBar.propTypes = {
   title: React.PropTypes.string,
   loggedIn: React.PropTypes.bool,
   user: React.PropTypes.string,
-  logout: React.PropTypes.func,
+  logOut: React.PropTypes.func,
+  logIn: React.PropTypes.func,
 };
 
 export default AppNavBar;

@@ -35,11 +35,10 @@ class UserMakeInstrument extends Component {
     $.get("/userLoggedInToMakeInst", (resp, err) => {
       console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0]==null) {
-       console.log('youre not logged in!');
-         this.context.router.push("login");
+        console.log('youre not logged in!');
+        this.context.router.push("login");
       }
     });
-
   }
 
   componentWillUnmount() {

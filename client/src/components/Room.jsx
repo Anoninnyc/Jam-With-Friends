@@ -30,25 +30,21 @@ class Room extends React.Component {
     this.selectInstrument = this.selectInstrument.bind(this);
   }
 
-
-
   componentDidMount() {
-    console.log('room did mount');
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
+  // this will update uniue user instruments with those made in the same session.
+    $.get("/userLoggedInToMakeInst", (resp, err) => {
+      console.log('Resp to RDM:', resp);
+      if (resp[0]==null) {
+        console.log('youre not logged in!');
+      } else {
+        console.log('youshouldseethis');
+        // console.log('resp1,resp2', resp[0], resp[1]);
+        this.props.logIn(resp[0], resp[1]);
+      }
+    });
 
-  $.get("/userLoggedInToMakeInst", (resp, err) => {
-    console.log('room did mount info', resp);
-      console.log('this the the resp to userloggedintomakeinst', resp);
-    if (resp[0]==null) {
-      console.log('youre not logged in!');
-        //this.context.router.push("login");
-        } else {
-            console.log('youshouldseethis');
-           // console.log('resp1,resp2', resp[0], resp[1]);
-            this.props.logIn(resp[0], resp[1]);
-          }
-        });
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     this.props.socket.emit('add as listener', this.props.params.roomId);
@@ -135,12 +131,9 @@ class Room extends React.Component {
       data = JSON.parse(data);
       if (store[data.instrument]) {
         store[data.instrument](data.keyPressed);
-        console.log('youre OK if this is showing!', data.notesToPlay);
       } else {
         const info=data.notesToPlay;
         const combo=info[0];
-        console.log('youre good if this is showing!', data.notesToPlay);
-
         const config = {
           pitchDecay: info[1]||0.1,
           octaves: 7,
@@ -235,9 +228,9 @@ class Room extends React.Component {
               handleSelect={
                 index => {
                   this.setState({
-                    mapping: this.props.userInstruments.map(a => {
+                    mapping: this.props.userInstruments.map(a => (
                       // console.log('heres the error', a);
-                      return {
+                      {
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
                         D: typeof a === 'string'?JSON.parse(a.D): a.D,
@@ -247,8 +240,8 @@ class Room extends React.Component {
                         J: typeof a === 'string'?JSON.parse(a.J): a.J,
                         K: typeof a === 'string'?JSON.parse(a.K): a.K,
                         L: typeof a === 'string'?JSON.parse(a.L): a.L,
-                      };
-                    })[index - 3],
+                      }
+                    ))[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (
                        `Your Instrument: ${a.instrumentName}`
                     )))[index]
@@ -268,7 +261,8 @@ class Room extends React.Component {
 Room.propTypes = {
   params: React.PropTypes.object,
   userInstruments: React.PropTypes.func.isRequired,
-  socket: React.PropTypes.object
+  socket: React.PropTypes.object,
+  logIn: React.PropTypes.func
 };
 
 Room.contextTypes = {

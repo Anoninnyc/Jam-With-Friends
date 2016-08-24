@@ -2,6 +2,7 @@ import React from 'react';
 import SvgIcon from 'material-ui/SvgIcon';
 
 const InstrumentIcon = (props) => {
+  console.log('props.instrument', props.instrument);
   const propsCopy = Object.assign({}, props);
   delete propsCopy['instrument'];
   switch (props.instrument) {
