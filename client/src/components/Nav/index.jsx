@@ -46,7 +46,7 @@ AppNavBar.propTypes = {
   title: React.PropTypes.string.isRequired,
   loggedIn: React.PropTypes.bool.isRequired,
   user: React.PropTypes.string.isRequired,
-  logout: React.PropTypes.func.isRequired,
+  logOut: React.PropTypes.func.isRequired,
 };
 
 export default AppNavBar;
