@@ -14,6 +14,8 @@ class UserMakeInstrument extends Component {
 
   constructor(props) {
     super(props);
+    this.handleNoteChange=this.handleNoteChange.bind(this);
+    this.handleKeyChange=this.handleKeyChange.bind(this);
     this.deleteKey = this.deleteKey.bind(this);
     this.mapThat = this.mapThat.bind(this);
     this.changeInst = this.changeInst.bind(this);
@@ -22,9 +24,12 @@ class UserMakeInstrument extends Component {
     this.logIn = this.props.logIn.bind(this);
     this.makeInstrument = this.makeInstrument.bind(this);
     this.state = {
+      noteValue: 1,
+      keyValue:1,
       inMemObject: {},
       instrument: "MembraneSynth",
       tryingToName: true,
+
     };
   }
 
@@ -97,6 +102,7 @@ class UserMakeInstrument extends Component {
   }
 
   mapThat() {
+    console.log(this.state.noteValue);
     const par1 = $("#par1 option:selected").text();
     const par2 = $("#par2 option:selected").text();
     const par3 = $("#par3").val();
@@ -176,8 +182,14 @@ class UserMakeInstrument extends Component {
     $(idToClear).css("border", "2px solid black");
   }
 
+  handleNoteChange(event, index, value) {
+    this.setState({ noteValue: value });
+  }
+  handleKeyChange(event, index, value) {
+    this.setState({ noteValue: value });
+  }
+
   killKeypress() {
-    
     console.log("keypress should be killed");
     $(document).off();
     $(document).off("keypress");
@@ -235,41 +247,40 @@ class UserMakeInstrument extends Component {
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
            Select a Key to map to:
-          <form>
-            <select name="keys">
-              <option value="A">A</option>
-              <option value="S">S</option>
-              <option value="D">D</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-              <option value="H">H</option>
-              <option value="J">J</option>
-              <option value="K">K</option>
-              <option value="L">L</option>
-            </select>
-          </form>
+         <DropDownMenu
+          value={this.state.noteValue}
+          onChange={this.handleNoteChange}
+          autoWidth={false}
+        >
+          <MenuItem value={1} primaryText="A" />
+          <MenuItem value={2} primaryText="S" />
+          <MenuItem value={3} primaryText="D" />
+          <MenuItem value={4} primaryText="F" />
+          <MenuItem value={5} primaryText="G" />
+          <MenuItem value={6} primaryText="H" />
+          <MenuItem value={7} primaryText="J" />
+          <MenuItem value={8} primaryText="H" />
+          <MenuItem value={9} primaryText="J" />
+        </DropDownMenu>
         </div>
         <RaisedButton label="Delete key" onClick={this.deleteKey} /><br />
         Select Some parameters:<br />
 
         Note:
-        <DropDownMenu >
+        <DropDownMenu
+          value={this.state.noteValue}
+          onChange={this.handleNoteChange}
+          autoWidth={false}
+        >
           <MenuItem value={1} primaryText="A" />
           <MenuItem value={2} primaryText="B" />
           <MenuItem value={3} primaryText="C" />
           <MenuItem value={4} primaryText="D" />
           <MenuItem value={5} primaryText="E" />
-      </DropDownMenu>
+          <MenuItem value={6} primaryText="F" />
+          <MenuItem value={7} primaryText="G" />
+        </DropDownMenu>
 
-        <select className="par" id="par1">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
-        </select><br />
 
         Octave
         <select className="par" id="par2">
