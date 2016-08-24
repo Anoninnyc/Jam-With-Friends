@@ -25,6 +25,27 @@ class App extends Component {
     return { muiTheme: getMuiTheme(baseTheme) };
   }
 
+  componentDidMount() {
+
+    $.get("/getUserInfo", (resp, err) => {
+    // console.log('this the the resp to userloggedintomakeinst', resp);
+      if (resp[0] === null) {
+     // console.log('youre not logged in!');
+      } else {
+        this.logIn(resp[0], resp[1]);
+      }
+    });
+
+    $.get("/fbLoggedIn", (response, err) => {
+      if (response !== "false") {
+        console.log(response[0], typeof response[0], 'here!!!');
+        this.logIn(response[0], response[1]);
+      } else {
+        console.log('not logged to fb');
+      }
+    });
+  }
+
   updateUserInstrument(totalInstruments) {
     this.setState({
       userInstruments: totalInstruments,
