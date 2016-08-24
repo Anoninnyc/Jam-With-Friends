@@ -306,7 +306,7 @@ class UserMakeInstrument extends Component {
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         Your current Instrument in JSON form: <br />
         {JSON.stringify(this.state.inMemObject)}<br />
-        Your current Instrument in Piano form (click to try it out):
+        Your current Instrument in Piano form :
         <div onClick={this.addKeypress}>
           <UserOwnInstrument />
         </div>

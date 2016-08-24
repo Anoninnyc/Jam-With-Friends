@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 const UserOwnInstrument = () => (
   <div id="testPiano">
+  Click to play me!
     <div className="key" id="1" >A</div>
     <div className="key" id="2" >S</div>
     <div className="key" id="3" >D</div>
