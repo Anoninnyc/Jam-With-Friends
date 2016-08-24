@@ -105,7 +105,7 @@ class UserMakeInstrument extends Component {
     const par3 = $("#par3").val();
     const par4 = $("#par4 option:selected").text();
     const key = $(".selectKey option:selected").text();
-    const inst = $(".selectInst option:selected").text();
+    const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj[key] = [inst, par1, par2, par3, par4];
     if (!par1&&!par2&&!par3&&!par4) {
@@ -153,8 +153,8 @@ class UserMakeInstrument extends Component {
       empty = true;
       socket.emit('newInstCreated', currentInMemObj);
       console.log(`youve created ${JSON.stringify(currentInMemObj)}`);
-      const final = this.props.userInstruments.concat([currentInMemObj]);
-      this.props.updateUserInstrument(final);
+      // const final = this.props.userInstruments.concat([currentInMemObj]);
+      // this.props.updateUserInstrument(final);
       showErrorMessage("#makeInstErrorMessages", 'InstrumentMade!', 'makeThat');
       $("#par1").val("A");
       $("#par2").val("1");

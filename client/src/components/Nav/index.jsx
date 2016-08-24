@@ -45,6 +45,7 @@ class AppNavBar extends Component {
   }
 
   render() {
+    console.log('tpu', this.props.userInstruments);
     return (
       <div id="navBar">
         <AppBar

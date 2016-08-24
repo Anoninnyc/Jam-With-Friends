@@ -221,11 +221,12 @@ class Room extends React.Component {
               handleSelect={
                 index => {
                   this.setState({
-                    mapping: this.props.userInstruments.map(a => (
-                      {
-                        A: JSON.parse(a.A),
-                        S: JSON.parse(a.S),
-                        D: JSON.parse(a.D),
+                    mapping: this.props.userInstruments.map(a => {
+                      console.log('heres the error', a);
+                      return {
+                        A: typeof a === 'string'?JSON.parse(a.A): a.A,
+                        S: typeof a === 'string'?JSON.parse(a.S): a.S,
+                        D: typeof a === 'string'?JSON.parse(a.D): a.D,
                         F: JSON.parse(a.F),
                         G: JSON.parse(a.G),
                         H: JSON.parse(a.H),
@@ -233,7 +234,7 @@ class Room extends React.Component {
                         K: JSON.parse(a.K),
                         L: JSON.parse(a.L)
                       }
-                    ))[index - 3],
+                    })[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (
                        `Your Instrument: ${a.instrumentName}`
                     )))[index]
