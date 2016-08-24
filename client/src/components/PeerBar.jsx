@@ -11,11 +11,12 @@ const PeerBar = ({ peers, toggleInviteView, toggleSelectView }) => {
   return (
     <div className="peer-bar">
       {
-        peers.map((peer, index) => (
-          <div key={peer.peerId}>
+        peers.map((peer, index) => {
+          console.log('p&i', peer, index);
+         return ( <div key={peer.peerId}>
             <PeerBubble peer={peer} handleClick={toggleSelectView} self={index === 0} />
-          </div>
-        ))
+          </div>);
+        })
       }
       {
         inviteArray.map(index => (
