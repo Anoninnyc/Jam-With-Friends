@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
 import io from 'socket.io-client';
+import $ from 'jquery';
 // Material UI
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -22,6 +23,8 @@ class CreateOrJoin extends Component {
 
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
+    this.handleCreatePrivateRoomSubmit = this.handleCreatePrivateRoomSubmit.bind(this);
+    this.handleCreatePrivateRoomChange = this.handleCreatePrivateRoomChange.bind(this);
     this.handleRowClick = this.handleRowClick.bind(this);
     this.updateRooms = this.updateRooms.bind(this);
     this.checkErrorStates = this.checkErrorStates.bind(this);
@@ -103,6 +106,41 @@ class CreateOrJoin extends Component {
     }
   }
 
+  handleCreatePrivateRoomSubmit(e) {
+    e.preventDefault();
+    if (this.state.showValidateError) {
+      return;
+    }
+    const roomName = `${shortid.generate()}-${this.state.createRoomVal}`;
+    // send server the roomname.  Username is taken from session
+    $.post('/makeprivateroom', { roomName }, (res) => {
+      if (res !== 'OK') {
+        console.log(res);
+      } else {
+        console.log('SUCCESS!!!');
+        socket.emit('create room', roomName);
+      }
+    });
+  }
+
+  handleCreatePrivateRoomChange(e) {
+    if (e.target.value.match(/[^a-zA-Z1-9]+/g)) {
+      this.setState({
+        showValidateError: true,
+        createRoomVal: e.target.value,
+      });
+    } else if (this.state.showValidateError && e.target.value.match(/[^a-zA-Z1-9]+/g) === null) {
+      this.setState({
+        createRoomVal: e.target.value,
+        showValidateError: false,
+      });
+    } else {
+      this.setState({
+        createRoomVal: e.target.value,
+      });
+    }
+  }
+
   handleRowClick(rowNum, colNum) {
     this.context.router.push(`/room/${this.state.rooms[rowNum].roomName}`);
   }
@@ -144,6 +182,20 @@ class CreateOrJoin extends Component {
             <RaisedButton
               onClick={this.handleCreateRoomSubmit}
               label="Create Room broh"
+            />
+          </form>
+          <div>
+            Create a private room here.  Name it anything you want!
+          </div>
+          <form onSubmit={this.handleCreatePrivateRoomSubmit}>
+            <TextField
+              hintText="Enter a Private Room Name..."
+              onChange={this.handleCreatePrivateRoomChange}
+              errorText={this.checkErrorStates()}
+            />
+            <RaisedButton
+              onClick={this.handleCreatePrivateRoomSubmit}
+              label="Create Private Room broh"
             />
           </form>
         </div>
