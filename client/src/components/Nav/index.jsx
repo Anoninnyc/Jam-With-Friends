@@ -52,7 +52,7 @@ class AppNavBar extends Component {
           <Link to="/">
             <img id="logo" src="http://bit.ly/2beSCQg" alt="logo" />
           </Link>
-          Hello: {this.props.user}
+          
           <NavMenuIcon
             loggedIn={this.props.loggedIn}
             clearSessions={this.clearSessions}
