@@ -25,6 +25,10 @@ const NavMenuIcon = () => (
       primaryText="Sign up"
       containerElement={<Link to="/signup" />}
     />
+    <MenuItem
+      primaryText="Make your own instrument!"
+      containerElement={<Link to="/MakeInstrument" />}
+    />
   </IconMenu>
 );
 

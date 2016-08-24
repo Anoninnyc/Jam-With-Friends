@@ -11,8 +11,10 @@ class Login extends Component {
     const user=$('#UserNameLogin').val();
     const pass= $('#UserNamePass').val();
     $.post("/login", { user: user, pass: pass }, (resp) => {
-      if (resp==="Succ") {
-        this.props.logIn(user);
+      console.log(typeof resp, resp, 'resp!');
+      if (typeof resp !=='string') {
+        console.log(resp, this.props.updateUserInstrument);
+        this.props.logIn(user, resp);
         this.context.router.push('/');
       } else {
         showErrorMessage("#LIMessages", 'Bad login', "badLogin");
@@ -28,14 +30,15 @@ class Login extends Component {
         <RaisedButton label="Login" onClick={() => { this.helperLogin(); }} / >
         <Link to="signup"><RaisedButton label="Click to signup" /></Link>
         <div id="LIMessages"><br /> </div>
-
       </div>
     );
   }
 }
 
 Login.propTypes = {
-  params: React.PropTypes.object
+  params: React.PropTypes.object,
+  updateUserInstrument: React.PropTypes.func.isRequired,
+  logIn: React.PropTypes.func.isRequired,
 };
 
 Login.contextTypes = {

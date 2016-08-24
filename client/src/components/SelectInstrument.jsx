@@ -4,7 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import { instruments } from '../instruments/store';
 
-const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument }) => {
+const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extraInstruments }) => {
+  console.log('you also have these instruments', extraInstruments);
   size = size || 'normal';
   const fixCarouselHeight = () => { window.dispatchEvent(new Event('resize')); };
   const styleSize = {
@@ -38,7 +39,9 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument }) =>
         wrapAround
       >
         {
-          instruments.map(instrument => (
+          instruments.concat(extraInstruments.map(a => {
+            return `Your Instrument: ${a.instrumentName}`;
+          })).map(instrument => (
             <img
               src={`/assets/${instrument}.svg`}
               alt={instrument}
@@ -46,7 +49,6 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument }) =>
               key={instrument}
             />
           ))
-
         }
       </Carousel>
       <RaisedButton label={styleSize[size].buttonText} onTouchTap={handleClick} style={{ margin: "auto" }} />
@@ -58,7 +60,8 @@ SelectInstrument.propTypes = {
   handleSelect: React.PropTypes.func.isRequired,
   handleClick: React.PropTypes.func.isRequired,
   size: React.PropTypes.string,
-  ownInstrument: React.PropTypes.string
+  ownInstrument: React.PropTypes.string,
+  extraInstruments: React.PropTypes.array.isRequired,
 };
 
 // SelectInstrument.childContextTypes = {

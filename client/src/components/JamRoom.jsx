@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 
 import Piano from './Piano';
+import UserOwnInstrument from './UserOwnInstrument';
 import Drums from './Drums';
 import PeerBar from './PeerBar';
 import Invite from './Invite';
@@ -28,12 +29,14 @@ class JamRoom extends Component {
   }
 
   render() {
+    console.log('inst your currently using', this.props.instrument);
     return (
       <div id="jamroom">
-        <div id="display-inst-name"><h1>You are playing the {this.props.instrument}</h1></div>
+        <div id="display-inst-name"><h1>You are playing {this.props.instrument}</h1></div>
         <div>
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}
+          {this.props.instrument.slice(0, 4) === "Your"? <UserOwnInstrument /> :null}
         </div>
         <PeerBar
           peers={this.props.peers}
