@@ -33,7 +33,7 @@ class Room extends React.Component {
   componentDidMount() {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
-  // this will update uniue user instruments with those made in the same session.
+    // this will update uniue user instruments with those made in the same session.
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     this.props.socket.emit('add as listener', this.props.params.roomId);

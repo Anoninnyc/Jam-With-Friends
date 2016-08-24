@@ -115,7 +115,7 @@ class UserMakeInstrument extends Component {
         inMemObject: currentInMemObj
       });
     }
-console.log(currentInMemObj);
+    console.log(currentInMemObj);
     const idToAdd = mapKeysToIds[key];
     // console.log('idToAdd', idToAdd);
     $(idToAdd).css("border", "5px solid blue");
