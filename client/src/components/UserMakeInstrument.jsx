@@ -300,7 +300,6 @@ console.log(currentInMemObj);
         <RaisedButton label="Map That" onClick={this.mapThat} /><br />
         Name instrument:<input id="userInstName" onClick={this.killKeypress} /> <br /><br /> <br />
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
-        Your current Instrument in JSON form: <br />
         <br />
         Your current Instrument in Piano form:
         <div onClick={this.addKeypress}>
