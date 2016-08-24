@@ -87,14 +87,14 @@ class Room extends React.Component {
         }));
       }
     } else {
-      const instMap=this.state.mapping;
-      const keyPressed= e.key.toUpperCase();
-      const sequence=JSON.parse(instMap[keyPressed]);
-      const note=sequence[1];
-      const octave=sequence[2];
-      const pd=sequence[3];
-      const type=sequence[4];
-      const combo= `${note}${octave}`;
+      const instMap = this.state.mapping;
+      const keyPressed = e.key.toUpperCase();
+      const sequence = JSON.parse(instMap[keyPressed]);
+      const note = sequence[1];
+      const octave = sequence[2];
+      const pd = sequence[3];
+      const type = sequence[4];
+      const combo = `${note}${octave}`;
       // console.log(sequence, note, octave, pd, type, combo);
       const config = {
         pitchDecay: pd||0.1,
@@ -132,8 +132,8 @@ class Room extends React.Component {
       if (store[data.instrument]) {
         store[data.instrument](data.keyPressed);
       } else {
-        const info=data.notesToPlay;
-        const combo=info[0];
+        const info = data.notesToPlay;
+        const combo = info[0];
         const config = {
           pitchDecay: info[1]||0.1,
           octaves: 7,
