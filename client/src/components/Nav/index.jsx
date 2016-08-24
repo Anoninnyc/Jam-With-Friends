@@ -50,11 +50,3 @@ AppNavBar.propTypes = {
 };
 
 export default AppNavBar;
-
- // {this.props.user.length?<div id="Welcome"> Hello {this.props.user}!</div>:null}
- //          <Link to="/"><img id="logo" src="http://bit.ly/2beSCQg" /></Link>
- //          {this.props.loggedIn?null:<a href="/auth/facebook"><button onClick={() => {this.logIn("FACEBOOK USER"); }} className="navButtons"> Login with FB!</button></a>}
- //          {this.props.loggedIn?null:<Link to="login" ><button className="navButtons"> Login!</button></Link>}
- //          {!this.props.loggedIn?null:<Link to="MakeInstrument"><button className="navButtons"> Make your own instrument!</button></Link>}
- //          {!this.props.loggedIn?null:<Link to="/"><button onClick={() => { this.logOut(); }} className="navButtons"> SignOut!</button></Link>}
- //          {this.props.loggedIn?null:<Link to="signup"><button className="navButtons"> Signup!</button></Link>}
