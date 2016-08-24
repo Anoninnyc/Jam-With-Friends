@@ -195,22 +195,30 @@ class CreateOrJoin extends Component {
     }
   }
 
-  handleSendToPrivRoom(e) {
+  handleSendToPrivRoom(e, menuItem, index) {
     e.preventDefault();
 
-    let roomName;
+    // let roomName;
 
-    console.log(e.target.value);
+    console.log(this.state.privateRooms[index]);
+    console.log(this.props.user);
+    // for (let i = 0; i < this.state.privateRooms.length; i++) {
+    //   console.log(this.state.privateRooms[i].slice(9) === e.target.value);
+    //   if (this.state.privateRooms[i].slice(9) === e.target.value) {
+    //     roomName = this.state.privateRooms[i];
+    //   }
+    // }
 
-    for (let i = 0; i < this.state.privateRooms.length; i++) {
-      console.log(this.state.privateRooms[i].slice(9) === e.target.value);
-      if (this.state.privateRooms[i].slice(9) === e.target.value) {
-        roomName = this.state.privateRooms[i];
-      }
-    }
+    const data = {
+      roomId: this.state.privateRooms[index],
+      // userName: this.props.user,
+      isPrivate: true,
+    };
+
+    const roomName = this.state.privateRooms[index];
 
     if (roomName) {
-      socket.emit('create room', roomName);
+      socket.emit('create room', data);
     } else {
       console.log('its not working broh');
     }
@@ -274,10 +282,10 @@ class CreateOrJoin extends Component {
                   targetOrigin={{ horizontal: 'left', vertical: 'top' }}
                   onRequestClose={this.handleTapPrivRoomClose}
                 >
-                  <Menu>
+                  <Menu onItemTouchTap={this.handleSendToPrivRoom}>
                     {
                       this.state.privateRooms.map((room, key) => (
-                        <MenuItem onClick={this.handleSendToPrivRoom} value={room.slice(9)} primaryText={room.slice(9)} />
+                        <MenuItem value={room.slice(9)} primaryText={room.slice(9)} />
                       ))
                     }
                   </Menu>
