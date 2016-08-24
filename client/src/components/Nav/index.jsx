@@ -15,7 +15,7 @@ class AppNavBar extends Component {
   }
 
   componentDidMount() {
-
+    
      $.get("/userLoggedInToMakeInst", (resp, err) => {
       console.log('this the the resp to userloggedintomakeinst', resp);
       if (resp[0]==null) {

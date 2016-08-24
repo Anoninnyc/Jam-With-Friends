@@ -95,12 +95,13 @@ $.get("/userLoggedInToMakeInst", (resp, err) => {
     } else {
       const instMap=this.state.mapping;
       const keyPressed= e.key.toUpperCase();
-      const note=instMap[keyPressed][1];
-      const octave=instMap[keyPressed][2];
-      const pd=instMap[keyPressed][3];
-      const type=instMap[keyPressed][4];
+      const sequence=JSON.parse(instMap[keyPressed]);
+      const note=sequence[1];
+      const octave=sequence[2];
+      const pd=sequence[3];
+      const type=sequence[4];
       const combo= `${note}${octave}`;
-
+console.log(sequence, note, octave, pd, type, combo);
       const config = {
         pitchDecay: pd||0.1,
         octaves: 7,
@@ -115,6 +116,8 @@ $.get("/userLoggedInToMakeInst", (resp, err) => {
           attackCurve: 'linear'
         }
       };
+      console.log(instMap, keyPressed, note, octave, pd, type, combo);
+
       const zimit = new MembraneSynth(config).toMaster();
       zimit.triggerAttackRelease(combo, '8n');
       console.log('e info', e.which);
