@@ -102,7 +102,7 @@ class UserMakeInstrument extends Component {
     const key = $(".selectKey option:selected").text();
     const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
-    currentInMemObj[key] = [inst, par1, par2, par3, par4];
+    currentInMemObj[key] = JSON.stringify([inst, par1, par2, par3, par4]);
     if (!par1&&!par2&&!par3&&!par4) {
      // console.log('please make a proper mapping');
       showErrorMessage("#makeInstErrorMessages", 'Please make a Proper Mapping', 'propMapError');
@@ -115,6 +115,7 @@ class UserMakeInstrument extends Component {
         inMemObject: currentInMemObj
       });
     }
+console.log(currentInMemObj);
     const idToAdd = mapKeysToIds[key];
     // console.log('idToAdd', idToAdd);
     $(idToAdd).css("border", "5px solid blue");
@@ -147,9 +148,9 @@ class UserMakeInstrument extends Component {
       });
       empty = true;
       this.props.socket.emit('newInstCreated', currentInMemObj);
-      console.log(`youve created ${JSON.stringify(currentInMemObj)}`);
-      // const final = this.props.userInstruments.concat([currentInMemObj]);
-      // this.props.updateUserInstrument(final);
+      console.log(`youve created ${currentInMemObj}`);
+       const final = this.props.userInstruments.concat([currentInMemObj]);
+       this.props.updateUserInstrument(final);
       showErrorMessage("#makeInstErrorMessages", 'InstrumentMade!', 'makeThat');
       $("#par1").val("A");
       $("#par2").val("1");

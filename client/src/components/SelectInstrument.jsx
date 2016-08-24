@@ -40,7 +40,7 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       >
         {
           instruments.concat(extraInstruments.map(a => (
-             `Your Instrument: ${a.instrumentName}`
+             `Your Instrument: ${a.instrumentName||a.name}`
           ))).map(instrument => (
           instrument[0]==="Y"?<h1>{instrument}</h1>:
             <img

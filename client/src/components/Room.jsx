@@ -34,16 +34,6 @@ class Room extends React.Component {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
   // this will update uniue user instruments with those made in the same session.
-    $.get("/getUserInfo", (resp, err) => {
-      console.log('Resp to RDM:', resp);
-      if (resp[0]==null) {
-        console.log('youre not logged in!');
-      } else {
-         console.log('resp1,resp2', resp[0], resp[1]);
-        this.props.logIn(JSON.stringify(resp[0]), resp[1]);
-      }
-    });
-
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     this.props.socket.emit('add as listener', this.props.params.roomId);
@@ -194,6 +184,8 @@ class Room extends React.Component {
   }
 
   selectInstrument(index) {
+    console.log('selecting instrument')
+    console.log('instruments to debug undefined', instruments,index);
     this.setState({ instrument: instruments[index] });
     if (this.state.connected) {
       this.props.socket.emit('select instrument', {
@@ -228,7 +220,7 @@ class Room extends React.Component {
                 index => {
                   this.setState({
                     mapping: this.props.userInstruments.map(a => (
-                      // console.log('heres the error', a);
+                       
                       {
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
@@ -242,7 +234,7 @@ class Room extends React.Component {
                       }
                     ))[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (
-                       `Your Instrument: ${a.instrumentName}`
+                       `Your Instrument: ${a.instrumentName||a.name}`
                     )))[index]
                   });
                 }
