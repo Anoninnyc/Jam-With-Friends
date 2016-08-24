@@ -55,7 +55,7 @@ class App extends Component {
          user: this.state.user,
          userInstruments: this.state.userInstruments,
          updateUserInstrument: this.updateUserInstrument,
-        socket: io()
+         socket: io()
        })
     ));
     return (
