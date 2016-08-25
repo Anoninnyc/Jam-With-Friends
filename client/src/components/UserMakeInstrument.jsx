@@ -262,6 +262,8 @@ class UserMakeInstrument extends Component {
   }
 
   render() {
+    const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+    const octaves = [1, 2, 3, 4, 5, 6, 7];
     return (
       <div id="UserMakeInstrumentRoom">
         <h1>Make Instrument Here!</h1>
@@ -284,7 +286,7 @@ class UserMakeInstrument extends Component {
             <MenuItem value={"L"} primaryText="L" />
           </DropDownMenu>
         </div>
-        <RaisedButton label="Delete key" onClick={this.deleteKey} /><br />
+        <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /><br />
         <h2>Step Two - Set Your Parameters</h2><br />
 
         Note
@@ -309,13 +311,10 @@ class UserMakeInstrument extends Component {
           onChange={this.handleOctaveChange}
           autoWidth={false}
         >
-          <MenuItem value={1} primaryText="1" />
-          <MenuItem value={2} primaryText="2" />
-          <MenuItem value={3} primaryText="3" />
-          <MenuItem value={4} primaryText="4" />
-          <MenuItem value={5} primaryText="5" />
-          <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />
+
+        {octaves.map(mi => (
+          <MenuItem value={`${mi}`} primaryText={`${mi}`} />
+        ))}
         </DropDownMenu>
 
 
@@ -350,7 +349,8 @@ class UserMakeInstrument extends Component {
         <TextField
           onClick={this.killKeypress}
           ref="instName"
-          hintText="Enter instName here"
+          hintText="Only Letters and Numbers Please"
+          floatingLabelText="Name your Instrument"
         />
         <br />
 
