@@ -1,6 +1,7 @@
 html {
   width: 100%;
   height: 100%;
+  font-family: 'Roboto', 'Arial', 'sans-serif'
 }
 
 body {
@@ -107,13 +108,6 @@ body {
   top: 20%;
   left: 25%;
   margin: 0 auto;
-}
-
-#display-inst-name {
-  text-align: center;
-  margin: 0 auto;
-  color: #2FD2DE;
-  text-shadow: #2e2e2e 0 4px 5px;
 }
 
 @keyframes bounce {
