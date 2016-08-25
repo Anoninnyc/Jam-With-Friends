@@ -15,7 +15,7 @@ const InstrumentIcon = (props) => {
     case 'kickdrum':
       return <KickDrumIcon {...propsCopy} />;
     default:
-      return <h1>Your own instrument</h1>;
+      return <h1>Custom instrument</h1>;
   }
 };
 
