@@ -125,8 +125,8 @@ class UserMakeInstrument extends Component {
     } else {
       this.setState({
         noteValue: "A",
-        octaveValue: "1",
-        PDValue: "0.1",
+        octaveValue: 1,
+        PDValue: 0.1,
         typeValue: "sine",
         inMemObject: currentInMemObj
       });
@@ -347,10 +347,10 @@ class UserMakeInstrument extends Component {
         </DropDownMenu> <br />
 
         <RaisedButton label="Map That" onClick={this.mapThat} /><br />
-        <TextField
+        <TextField 
+          onClick= {this.killKeypress}
           ref="instName"
           hintText="Enter instName here"
-          onChange={this.killKeypress}
         />
         <br />
 
