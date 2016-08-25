@@ -109,9 +109,8 @@ sequelize
     console.log('An error occurred while creating the table:', err);
   });
 
-
 module.exports = {
   users,
   PrivateRooms,
-  instruments
+  instruments,
 };

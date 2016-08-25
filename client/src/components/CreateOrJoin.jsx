@@ -223,7 +223,6 @@ class CreateOrJoin extends Component {
   }
 
   render() {
-    console.log(this.props.userInstruments, 'the users instruments');
     return (
       <div className="create-or-join-view">
         <div

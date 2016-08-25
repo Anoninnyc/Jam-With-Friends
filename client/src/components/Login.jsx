@@ -10,7 +10,7 @@ class Login extends Component {
   helperLogin() {
     const user=$('#UserNameLogin').val();
     const pass= $('#UserNamePass').val();
-    $.post("/login", { user: user, pass: pass }, (resp) => {
+    $.post("/login", { user, pass, }, (resp) => {
       console.log(typeof resp, resp, 'resp!');
       if (typeof resp !=='string') {
         console.log(resp, this.props.updateUserInstrument);
@@ -29,7 +29,7 @@ class Login extends Component {
         <TextField floatingLabelText="Password" hintText="Watch caps lock" id="UserNamePass" type="password" /><br />
         <RaisedButton label="Login" onClick={() => { this.helperLogin(); }} / >
         <Link to="signup"><RaisedButton label="Click to signup" /></Link>
-        <div id="LIMessages"><br /> </div>
+        <div id="LIMessages"><br /></div>
       </div>
     );
   }
@@ -37,8 +37,8 @@ class Login extends Component {
 
 Login.propTypes = {
   params: React.PropTypes.object,
-  updateUserInstrument: React.PropTypes.func.isRequired,
-  logIn: React.PropTypes.func.isRequired,
+  updateUserInstrument: React.PropTypes.func,
+  logIn: React.PropTypes.func,
 };
 
 Login.contextTypes = {

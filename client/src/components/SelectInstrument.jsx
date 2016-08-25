@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { instruments } from '../instruments/store';
 
 const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extraInstruments }) => {
-  console.log('you also have these instruments', extraInstruments);
   size = size || 'normal';
   const fixCarouselHeight = () => { window.dispatchEvent(new Event('resize')); };
   const styleSize = {
@@ -26,6 +25,7 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       startIndex++;
     }
   }
+  console.log('extraInstruments', extraInstruments);
   return (
     <div style={{ textAlign: "center" }}>
       <Carousel
@@ -39,9 +39,10 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
         wrapAround
       >
         {
-          instruments.concat(extraInstruments.map(a => {
-            return `Your Instrument: ${a.instrumentName}`;
-          })).map(instrument => (
+          instruments.concat(extraInstruments.map(a => (
+             `Your Instrument: ${a.instrumentName||a.name}`
+          ))).map(instrument => (
+          instrument[0]==="Y"?<h1>{instrument}</h1>:
             <img
               src={`/assets/${instrument}.svg`}
               alt={instrument}

@@ -9,6 +9,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
+import { mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Room extends React.Component {
   componentDidMount() {
     connectionManager.setup(this.props.params.roomId);
     connectionManager.onStatusChange(this.updateConnection);
-
+    // this will update uniue user instruments with those made in the same session.
     // event listener for keypress
     window.addEventListener('keypress', this.handleKeypress);
     this.props.socket.emit('add as listener', this.props.params.roomId);
@@ -76,14 +77,15 @@ class Room extends React.Component {
         }));
       }
     } else {
-      const instMap=this.state.mapping;
-      const keyPressed= e.key.toUpperCase();
-      const note=instMap[keyPressed][1];
-      const octave=instMap[keyPressed][2];
-      const pd=instMap[keyPressed][3];
-      const type=instMap[keyPressed][4];
-      const combo= `${note}${octave}`;
-
+      const instMap = this.state.mapping;
+      const keyPressed = e.key.toUpperCase();
+      const sequence = JSON.parse(instMap[keyPressed]);
+      const note = sequence[1];
+      const octave = sequence[2];
+      const pd = sequence[3];
+      const type = sequence[4];
+      const combo = `${note}${octave}`;
+      // console.log(sequence, note, octave, pd, type, combo);
       const config = {
         pitchDecay: pd||0.1,
         octaves: 7,
@@ -98,9 +100,19 @@ class Room extends React.Component {
           attackCurve: 'linear'
         }
       };
+      // console.log(instMap, keyPressed, note, octave, pd, type, combo);
+
       const zimit = new MembraneSynth(config).toMaster();
       zimit.triggerAttackRelease(combo, '8n');
-      console.log('e info', e.which);
+      console.log('e info', e.which, e.key);
+
+      const keyBlack=e.key.toUpperCase();
+      $(mapKeysToIds[keyBlack]).animate({
+        backgroundColor: "black",
+      }, 20).animate({
+        backgroundColor: "white",
+      }, 20);
+
       if (this.state.startJam) {
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
@@ -117,12 +129,9 @@ class Room extends React.Component {
       data = JSON.parse(data);
       if (store[data.instrument]) {
         store[data.instrument](data.keyPressed);
-        console.log('youre OK if this is showing!', data.notesToPlay);
       } else {
-        const info=data.notesToPlay;
-        const combo=info[0];
-        console.log('youre good if this is showing!', data.notesToPlay);
-
+        const info = data.notesToPlay;
+        const combo = info[0];
         const config = {
           pitchDecay: info[1]||0.1,
           octaves: 7,
@@ -195,7 +204,8 @@ class Room extends React.Component {
   }
 
   render() {
-    console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
+    const uiNames=this.props.userInstruments.map(a => (a.instrumentName));
+     console.log('what you want', uiNames, 'tsi', 'current instrument', this.state.instrument);
 
     return (
       <div>
@@ -208,6 +218,7 @@ class Room extends React.Component {
         {
           this.state.startJam ?
             <JamRoom
+              extraInstruments={this.props.userInstruments}
               instrument={this.state.instrument}
               peers={this.state.peers}
               onReselect={this.selectInstrument}
@@ -219,24 +230,23 @@ class Room extends React.Component {
                   this.setState({
                     mapping: this.props.userInstruments.map(a => (
                       {
-                        A: JSON.parse(a.A),
-                        S: JSON.parse(a.S),
-                        D: JSON.parse(a.D),
-                        F: JSON.parse(a.F),
-                        G: JSON.parse(a.G),
-                        H: JSON.parse(a.H),
-                        J: JSON.parse(a.J),
-                        K: JSON.parse(a.K),
-                        L: JSON.parse(a.L)
+                        A: typeof a === 'string'?JSON.parse(a.A): a.A,
+                        S: typeof a === 'string'?JSON.parse(a.S): a.S,
+                        D: typeof a === 'string'?JSON.parse(a.D): a.D,
+                        F: typeof a === 'string'?JSON.parse(a.F): a.F,
+                        G: typeof a === 'string'?JSON.parse(a.G): a.G,
+                        H: typeof a === 'string'?JSON.parse(a.H): a.H,
+                        J: typeof a === 'string'?JSON.parse(a.J): a.J,
+                        K: typeof a === 'string'?JSON.parse(a.K): a.K,
+                        L: typeof a === 'string'?JSON.parse(a.L): a.L,
                       }
                     ))[index - 3],
                     instrument: instruments.concat(this.props.userInstruments.map(a => (
-                       `Your Instrument: ${a.instrumentName}`
+                       `Your Instrument: ${a.instrumentName||a.name}`
                     )))[index]
                   });
                 }
               }
-              handleSelect={this.selectInstrument}
 
               handleClick={this.handleStart}
               size="normal"
@@ -250,7 +260,8 @@ class Room extends React.Component {
 Room.propTypes = {
   params: React.PropTypes.object,
   userInstruments: React.PropTypes.func.isRequired,
-  socket: React.PropTypes.object
+  socket: React.PropTypes.object,
+  logIn: React.PropTypes.func
 };
 
 Room.contextTypes = {

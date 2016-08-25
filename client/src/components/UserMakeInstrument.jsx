@@ -1,10 +1,12 @@
 // Tones
 import React, { Component } from 'react';
 import { MembraneSynth } from "tone";
-// Material.UI
+// Components
+import TextField from 'material-ui/TextField';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
-
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
 
@@ -12,6 +14,11 @@ class UserMakeInstrument extends Component {
 
   constructor(props) {
     super(props);
+    this.handleNoteChange=this.handleNoteChange.bind(this);
+    this.handleKeyChange=this.handleKeyChange.bind(this);
+    this.handleOctaveChange=this.handleOctaveChange.bind(this);
+    this.handlePDChange=this.handlePDChange.bind(this);
+    this.handleTypeChange=this.handleTypeChange.bind(this);
     this.deleteKey = this.deleteKey.bind(this);
     this.mapThat = this.mapThat.bind(this);
     this.changeInst = this.changeInst.bind(this);
@@ -20,9 +27,15 @@ class UserMakeInstrument extends Component {
     this.logIn = this.props.logIn.bind(this);
     this.makeInstrument = this.makeInstrument.bind(this);
     this.state = {
+      noteValue: "A",
+      keyValue: "A",
+      octaveValue: 1,
+      PDValue: 0.1,
+      typeValue: "sine",
       inMemObject: {},
       instrument: "MembraneSynth",
       tryingToName: true,
+
     };
   }
 
@@ -32,14 +45,11 @@ class UserMakeInstrument extends Component {
       this.sampleSound();
     });
 
-    $.get("/userLoggedInToMakeInst", (resp, err) => {
-    //  console.log(resp);
-      if (resp.length === 0) {
-       // console.log('youre not logged in!');
+    $.get("/getUserInfo", (resp, err) => {
+      console.log('this the the resp to userloggedintomakeinst', resp);
+      if (resp[0] === null) {
+        console.log('youre not logged in!');
         this.context.router.push("login");
-      } else {
-       // console.log('resp1,resp2', resp[0], resp[1]);
-        this.logIn(resp[0], resp[1]);
       }
     });
   }
@@ -51,17 +61,20 @@ class UserMakeInstrument extends Component {
   keyHelper(ID) {
   //  console.log(this.state.tryingToName);
     if (!this.state.tryingToName) {
-     // console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
-      const keyInfo = this.state.inMemObject[mapIdsToKeys[ID]];
-     // console.log('keyinfo', keyInfo, keyInfo===undefined);
+      console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
+      const keyInfo = JSON.parse(this.state.inMemObject[mapIdsToKeys[ID]]);
       if (keyInfo === undefined) {
         showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
       } else {
-        $("#par1").val(keyInfo[1]);
-        $("#par2").val(keyInfo[2]);
-        $("#par3").val(keyInfo[3]);
-        $("#par4").val(keyInfo[4]);
+        this.setState({
+          noteValue: keyInfo[1],
+          octaveValue: keyInfo[2],
+          PDValue: keyInfo[3],
+          typeValue: keyInfo[4],
+        });
+
         this.sampleSound();
+
         $(ID).animate({
           backgroundColor: "black",
         }, 20).animate({
@@ -72,13 +85,11 @@ class UserMakeInstrument extends Component {
   }
 
   sampleSound() {
-    const par1 = $("#par1 option:selected").text();
-    const par2 = $("#par2 option:selected").text();
-    const par3 = Number($("#par3").val());
-    const par4 = $("#par4 option:selected").text();
+    const par1 = this.state.noteValue;
+    const par2 = this.state.octaveValue;
+    const par3 = this.state.PDValue;
+    const par4 = this.state.typeValue;
     const combo = `${par1}${par2}`;
-    const inst = $(".selectInst option:selected").text();
-    console.log(`play a ${combo} sound on the ${inst}`);
     const config = {
       pitchDecay: par3||0.1,
       octaves: 7,
@@ -98,34 +109,35 @@ class UserMakeInstrument extends Component {
   }
 
   mapThat() {
-    const par1 = $("#par1 option:selected").text();
-    const par2 = $("#par2 option:selected").text();
-    const par3 = $("#par3").val();
-    const par4 = $("#par4 option:selected").text();
-    const key = $(".selectKey option:selected").text();
-    const inst = $(".selectInst option:selected").text();
+    console.log(this.state.noteValue);
+    const par1 = this.state.noteValue;
+    const par2 = this.state.octaveValue;
+    const par3 = this.state.PDValue;
+    const par4 = this.state.typeValue;
+    const key = this.state.keyValue;
+    const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
-    currentInMemObj[key] = [inst, par1, par2, par3, par4];
+    currentInMemObj[key] = JSON.stringify([inst, par1, par2, par3, par4]);
     if (!par1&&!par2&&!par3&&!par4) {
      // console.log('please make a proper mapping');
       showErrorMessage("#makeInstErrorMessages", 'Please make a Proper Mapping', 'propMapError');
     } else {
-      $("#par1").val("A");
-      $("#par2").val("1");
-      $("#par3").val("0.1");
-      $("#par4").val("sine");
       this.setState({
+        noteValue: "A",
+        octaveValue: 1,
+        PDValue: 0.1,
+        typeValue: "sine",
         inMemObject: currentInMemObj
       });
+      console.log(currentInMemObj);
+      const idToAdd = mapKeysToIds[key];
+      $(idToAdd).css("border", "5px solid blue");
     }
-    const idToAdd = mapKeysToIds[key];
-    // console.log('idToAdd', idToAdd);
-    $(idToAdd).css("border", "5px solid blue");
   }
 
 
   makeInstrument() {
-    const name = $("#userInstName").val();
+    const name = this.refs.instName.getValue();
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj.name = name;
     currentInMemObj.userName = this.props.user;
@@ -142,13 +154,15 @@ class UserMakeInstrument extends Component {
     } else if (empty) {
       showErrorMessage("#makeInstErrorMessages", 'Pls map some keys', 'npi');
      // console.log('youve not mapped any keys!!!');
+    } else if (/\W/.test(name)===true) {
+      showErrorMessage("#makeInstErrorMessages", 'Letters and numbers only please!', 'regexErr');
     } else {
       this.setState({
         inMemObject: {}
       });
       empty = true;
       this.props.socket.emit('newInstCreated', currentInMemObj);
-      console.log(`youve created ${JSON.stringify(currentInMemObj)}`);
+      console.log(`youve created ${currentInMemObj}`);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#makeInstErrorMessages", 'InstrumentMade!', 'makeThat');
@@ -161,7 +175,7 @@ class UserMakeInstrument extends Component {
   }
 
   deleteKey() {
-    const keyToDelete = $(".selectKey option:selected").text();
+    const keyToDelete = this.state.keyValue;
     // console.log( "you want to delete"+ $(".selectKey option:selected").text());
     const newInMemObj = this.state.inMemObject;
     delete newInMemObj[keyToDelete];
@@ -172,6 +186,29 @@ class UserMakeInstrument extends Component {
     const idToClear = mapKeysToIds[keyToDelete];
   //  console.log('idToAdd', idToClear);
     $(idToClear).css("border", "2px solid black");
+  }
+
+  handleNoteChange(event, index, value) {
+    console.log(value);
+    this.setState({ noteValue: value });
+  }
+  handleKeyChange(event, index, value) {
+    console.log(value);
+    this.setState({ keyValue: value });
+  }
+
+  handleOctaveChange(event, index, value) {
+    console.log(value);
+    this.setState({ octaveValue: value });
+  }
+  handleTypeChange(event, index, value) {
+    console.log(value);
+    this.setState({ typeValue: value });
+  }
+
+  handlePDChange(event, index, value) {
+    console.log(value);
+    this.setState({ PDValue: value });
   }
 
   killKeypress() {
@@ -188,7 +225,6 @@ class UserMakeInstrument extends Component {
     console.log("keypress should be enabled");
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
-        console.log(e.which);
         if (e.which === 97) {
           this.keyHelper("#1");
         } else if (e.which === 115) {
@@ -225,85 +261,105 @@ class UserMakeInstrument extends Component {
   }
 
   render() {
-    console.log('userInstruments', this.props.userInstruments);
+    const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+    const octaves = [1, 2, 3, 4, 5, 6, 7];
     return (
       <div id="UserMakeInstrumentRoom">
-        <h1>Make Instrument here!</h1>
+        <h1>Make Instrument Here!</h1>
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
-           Select a Key to map to:
-          <form>
-            <select name="keys">
-              <option value="A">A</option>
-              <option value="S">S</option>
-              <option value="D">D</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-              <option value="H">H</option>
-              <option value="J">J</option>
-              <option value="K">K</option>
-              <option value="L">L</option>
-            </select>
-          </form>
+          <h1>Step One: Select a Key to map to </h1>
+          <DropDownMenu
+            value={this.state.keyValue}
+            onChange={this.handleKeyChange}
+            autoWidth={false}
+          >
+            <MenuItem value={"A"} primaryText="A" />
+            <MenuItem value={"S"} primaryText="S" />
+            <MenuItem value={"D"} primaryText="D" />
+            <MenuItem value={"F"} primaryText="F" />
+            <MenuItem value={"G"} primaryText="G" />
+            <MenuItem value={"H"} primaryText="H" />
+            <MenuItem value={"J"} primaryText="J" />
+            <MenuItem value={"K"} primaryText="K" />
+            <MenuItem value={"L"} primaryText="L" />
+          </DropDownMenu>
         </div>
-        <RaisedButton label="Delete key" onClick={this.deleteKey} />
-        Select Some parameters:<br />
+        <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /><br />
+        <h2>Step Two: Set Your Parameters</h2><br />
 
-        Note:
-        <select className="par" id="par1">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
-        </select><br />
+        Note
+        <DropDownMenu
+          value={this.state.noteValue}
+          onChange={this.handleNoteChange}
+          autoWidth={false}
+        >
+          <MenuItem value={"A"} primaryText="A" />
+          <MenuItem value={"B"} primaryText="B" />
+          <MenuItem value={"C"} primaryText="C" />
+          <MenuItem value={"D"} primaryText="D" />
+          <MenuItem value={"E"} primaryText="E" />
+          <MenuItem value={"F"} primaryText="F" />
+          <MenuItem value={"G"} primaryText="G" />
+        </DropDownMenu>
+
 
         Octave
-        <select className="par" id="par2">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="4">5</option>
-          <option value="4">6</option>
-          <option value="4">7</option>
-        </select><br />
+        <DropDownMenu
+          value={this.state.octaveValue}
+          onChange={this.handleOctaveChange}
+          autoWidth={false}
+        >
+          <MenuItem value={1} primaryText="1" />
+          <MenuItem value={2} primaryText="2" />
+          <MenuItem value={3} primaryText="3" />
+          <MenuItem value={4} primaryText="4" />
+          <MenuItem value={5} primaryText="5" />
+          <MenuItem value={6} primaryText="6" />
+          <MenuItem value={7} primaryText="7" />     
+        </DropDownMenu>
 
-        pitchDecay:
-        <select className="par" id="par3">
-          <option value="0.1">0.1</option>
-          <option value="0.2">0.2</option>
-          <option value="0.3">0.3</option>
-          <option value="0.4">0.4</option>
-          <option value="0.5">0.5</option>
-          <option value="0.6">0.6</option>
-          <option value="0.7">0.7</option>
-          <option value="0.8">0.8</option>
-          <option value="0.9">0.9</option>
-          <option value="1">1</option>
-          <option value="1.1">1.1</option>
-          <option value="1.2">1.2</option>
-          <option value="1.3">1.3</option>
-          <option value="1.4">1.4</option>
-          <option value="1.5">1.5</option>
-        </select><br />
-        Sound Type:
-        <select className="par" id="par4">
-          <option value="sine">sine</option>
-          <option value="square">square</option>
-          <option value="sawtooth">sawtooth</option>
-          <option value="triangle">triangle</option>
-        </select> <br />
 
-        <RaisedButton label="Map That" onClick={this.mapThat} /><br />
-        Name instrument:<input id="userInstName" onClick={this.killKeypress} /> <br /><br /> <br />
+        Pitch Decay
+        <DropDownMenu
+          value={this.state.PDValue}
+          onChange={this.handlePDChange}
+          autoWidth={false}
+        >
+          <MenuItem value={0.1} primaryText="0.1" />
+          <MenuItem value={0.2} primaryText="0.2" />
+          <MenuItem value={0.3} primaryText="0.3" />
+          <MenuItem value={0.4} primaryText="0.4" />
+          <MenuItem value={0.5} primaryText="0.5" />
+          <MenuItem value={0.6} primaryText="0.6" />
+          <MenuItem value={0.7} primaryText="0.7" />
+        </DropDownMenu>
+
+        Sound Type
+        <DropDownMenu
+          value={this.state.typeValue}
+          onChange={this.handleTypeChange}
+          autoWidth={false}
+        >
+          <MenuItem value={"sine"} primaryText="sine" />
+          <MenuItem value={"square"} primaryText="square" />
+          <MenuItem value={"sawtooth"} primaryText="sawtooth" />
+          <MenuItem value={"triangle"} primaryText="triangle" />
+        </DropDownMenu> <br />
+        <h1> Step Three </h1>
+        <RaisedButton label="Map Sound to Key" onClick={this.mapThat} /><br />
+        <TextField
+          onClick={this.killKeypress}
+          ref="instName"
+          hintText="Only Letters and Numbers Please"
+          floatingLabelText="Name your Instrument"
+        />
+        <br />
+
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
-        Your current Instrument in JSON form: <br />
-        {JSON.stringify(this.state.inMemObject)}<br />
-        Your current Instrument in Piano form:
-        <div onClick={this.addKeypress}>
+        <br />
+        Your current Instrument in Piano form (click to play):
+        <div id="testPiano" onClick={this.addKeypress} >
           <UserOwnInstrument />
         </div>
         <div id="makeInstErrorMessages" />
@@ -314,11 +370,10 @@ class UserMakeInstrument extends Component {
 
 UserMakeInstrument.propTypes = {
   params: React.PropTypes.object,
-  logIn: React.PropTypes.func.isRequired,
-  userInstruments: React.PropTypes.array.isRequired,
-  updateUserInstrument: React.PropTypes.func.isRequired,
-  user: React.PropTypes.string.isRequired,
-  socket: React.PropTypes.object
+  logIn: React.PropTypes.func,
+  userInstruments: React.PropTypes.array,
+  updateUserInstrument: React.PropTypes.func,
+  user: React.PropTypes.object,
 };
 
 UserMakeInstrument.contextTypes = {
