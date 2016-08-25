@@ -470,6 +470,7 @@ font-size: 30px;
   position:absolute;
   top:30%;
   left:50%;
+  text-align:center;
 }
 
 #selectKeys {
@@ -531,9 +532,8 @@ input:invalid {
 #testPiano {
   position:relative;
   top:30%;
-  left:40%;
  }
-
+ 
  #loginContent {
   position:absolute;
   top:30%;

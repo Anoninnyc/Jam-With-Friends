@@ -176,7 +176,7 @@ class UserMakeInstrument extends Component {
   }
 
   deleteKey() {
-    const keyToDelete = $(".selectKey option:selected").text();
+    const keyToDelete = this.state.keyValue;
     // console.log( "you want to delete"+ $(".selectKey option:selected").text());
     const newInMemObj = this.state.inMemObject;
     delete newInMemObj[keyToDelete];
@@ -264,10 +264,10 @@ class UserMakeInstrument extends Component {
   render() {
     return (
       <div id="UserMakeInstrumentRoom">
-        <h1>Make Instrument here!</h1>
+        <h1>Make Instrument Here!</h1>
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
-           Select a Key to map to:
+          <h1>First- Select a Key to map to </h1>
           <DropDownMenu
             value={this.state.keyValue}
             onChange={this.handleKeyChange}
@@ -285,9 +285,9 @@ class UserMakeInstrument extends Component {
           </DropDownMenu>
         </div>
         <RaisedButton label="Delete key" onClick={this.deleteKey} /><br />
-        <h2>Set Your parameters</h2><br />
+        <h2>Step Two - Set Your Parameters</h2><br />
 
-        Note:
+        Note
         <DropDownMenu
           value={this.state.noteValue}
           onChange={this.handleNoteChange}
@@ -303,7 +303,7 @@ class UserMakeInstrument extends Component {
         </DropDownMenu>
 
 
-        Octave:
+        Octave
         <DropDownMenu
           value={this.state.octaveValue}
           onChange={this.handleOctaveChange}
@@ -319,7 +319,7 @@ class UserMakeInstrument extends Component {
         </DropDownMenu>
 
 
-        Pitch Decay:
+        Pitch Decay
         <DropDownMenu
           value={this.state.PDValue}
           onChange={this.handlePDChange}
@@ -334,7 +334,7 @@ class UserMakeInstrument extends Component {
           <MenuItem value={0.7} primaryText="0.7" />
         </DropDownMenu>
 
-        Sound Type:
+        Sound Type
         <DropDownMenu
           value={this.state.typeValue}
           onChange={this.handleTypeChange}
@@ -345,10 +345,10 @@ class UserMakeInstrument extends Component {
           <MenuItem value={"sawtooth"} primaryText="sawtooth" />
           <MenuItem value={"triangle"} primaryText="triangle" />
         </DropDownMenu> <br />
-
-        <RaisedButton label="Map That" onClick={this.mapThat} /><br />
-        <TextField 
-          onClick= {this.killKeypress}
+        <h1> Step 3 </h1>
+        <RaisedButton label="Map Sound to Key" onClick={this.mapThat} /><br />
+        <TextField
+          onClick={this.killKeypress}
           ref="instName"
           hintText="Enter instName here"
         />
@@ -356,7 +356,7 @@ class UserMakeInstrument extends Component {
 
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
-        Your current Instrument in Piano form:
+        Your current Instrument in Piano form (click to play):
         <div id="testPiano" onClick={this.addKeypress} >
         <UserOwnInstrument />
         </div>
