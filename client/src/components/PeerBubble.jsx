@@ -38,7 +38,8 @@ const PeerBubble = ({ peer, handleClick, self, extraInstruments }) => (
 PeerBubble.propTypes = {
   peer: React.PropTypes.object.isRequired,
   handleClick: React.PropTypes.func.isRequired,
-  self: React.PropTypes.bool
+  self: React.PropTypes.bool,
+  extraInstruments: React.PropTypes.array
 };
 
 export default PeerBubble;

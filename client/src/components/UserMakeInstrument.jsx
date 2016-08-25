@@ -357,7 +357,7 @@ class UserMakeInstrument extends Component {
         <br />
         Your current Instrument in Piano form (click to play):
         <div id="testPiano" onClick={this.addKeypress} >
-        <UserOwnInstrument />
+          <UserOwnInstrument />
         </div>
         <div id="makeInstErrorMessages" />
       </div>

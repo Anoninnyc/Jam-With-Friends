@@ -9,7 +9,6 @@ const PeerBar = ({ peers, toggleInviteView, toggleSelectView, extraInstruments }
   for (let i = 0; i < inviteNumber; i++) {
     inviteArray.push(i);
   }
-  console.log('ei', extraInstruments);
   return (
     <div className="peer-bar">
       {

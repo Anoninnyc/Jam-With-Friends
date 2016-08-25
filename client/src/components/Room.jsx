@@ -228,7 +228,7 @@ class Room extends React.Component {
               handleSelect={
                 index => {
                   this.setState({
-                    mapping: this.props.userInstruments.map(a => (    
+                    mapping: this.props.userInstruments.map(a => (
                       {
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
