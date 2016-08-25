@@ -12,6 +12,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Dialog from 'material-ui/Dialog';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class CreateOrJoin extends Component {
       privateRooms: [],
       openPrivRoomMenu: false,
       togglePrivateRoom: false,
+      radioButtonVal: 'public',
+      showMustBeLoggedIn: false,
     };
     // Create room form logic
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
@@ -50,7 +53,9 @@ class CreateOrJoin extends Component {
     this.handleTapPrivRoomClose = this.handleTapPrivRoomClose.bind(this);
 
     // Error for not logged in
-    this.handleMustBeLoggedInClose = this.handleMustBeLoggedInClose.bind(this);
+    this.handleCloseMustBeLoggedIn = this.handleCloseMustBeLoggedIn.bind(this);
+    // navigate to login from error dialogue
+    this.navigateToLogin = this.navigateToLogin.bind(this);
   }
 
   componentDidMount() {
@@ -231,23 +236,34 @@ class CreateOrJoin extends Component {
 
   handlePrivateRoomToggle(e, value) {
     e.preventDefault();
-    if (value === 'private' && this.state.loggedIn) {
-      console.log('You must be logged in, dingus');
-      return;
-    }
-    if (value === 'public') {
+    if (value === 'private' && !this.props.loggedIn) {
       this.setState({
         togglePrivateRoom: false,
+        radioButtonVal: 'public',
+        showMustBeLoggedIn: true,
+      });
+      console.log('You must be logged in, dingus');
+    } else if (value === 'public') {
+      this.setState({
+        togglePrivateRoom: false,
+        radioButtonVal: 'public',
       });
     } else {
       this.setState({
         togglePrivateRoom: true,
+        radioButtonVal: 'private',
       });
     }
   }
 
-  handleMustBeLoggedInClose() {
+  handleCloseMustBeLoggedIn() {
+    this.setState({
+      showMustBeLoggedIn: false,
+    });
+  }
 
+  navigateToLogin() {
+    this.context.router.push('/login');
   }
 
   render() {
@@ -295,9 +311,9 @@ class CreateOrJoin extends Component {
           }
           <RadioButtonGroup
             name="shipSpeed"
-            defaultSelected="public"
             onChange={this.handlePrivateRoomToggle}
             style={{ width: '50%', margin: '0 auto', display: 'flex' }}
+            valueSelected={this.state.radioButtonVal}
           >
             <RadioButton
               value="public"
@@ -351,6 +367,22 @@ class CreateOrJoin extends Component {
                 </Popover>
               </div>
             : null
+          }
+          {
+            this.state.showMustBeLoggedIn
+            ?
+              <Dialog
+                title="You must be logged in to use this feature!"
+                open={this.state.showMustBeLoggedIn}
+                onRequestClose={this.handleCloseMustBeLoggedIn}
+              >
+                Click outside the box to close thise window or click here to go to login page <RaisedButton
+                  onClick={this.navigateToLogin}
+                  label="Login"
+                />
+              </Dialog>
+            :
+              null
           }
         </div>
         <div
