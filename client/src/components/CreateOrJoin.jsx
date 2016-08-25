@@ -11,6 +11,8 @@ import { Table, TableBody, TableFooter, TableHeader,
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Dialog from 'material-ui/Dialog';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -24,26 +26,36 @@ class CreateOrJoin extends Component {
       rooms: [],
       privateRooms: [],
       openPrivRoomMenu: false,
+      togglePrivateRoom: false,
+      radioButtonVal: 'public',
+      showMustBeLoggedIn: false,
     };
-    // create room form logic
+    // Create room form logic
     this.handleCreateRoomSubmit = this.handleCreateRoomSubmit.bind(this);
     this.handleCreateRoomChange = this.handleCreateRoomChange.bind(this);
     this.handleCreatePrivateRoomSubmit = this.handleCreatePrivateRoomSubmit.bind(this);
     this.handleCreatePrivateRoomChange = this.handleCreatePrivateRoomChange.bind(this);
     this.showRoomTakenErrorMessage = this.showRoomTakenErrorMessage.bind(this);
-    // create a private room
+    // Create a private room
     this.handleSendToPrivRoom = this.handleSendToPrivRoom.bind(this);
+    // Toggle create public/private rooms
+    this.handlePrivateRoomToggle = this.handlePrivateRoomToggle.bind(this);
 
-    // join a room on click
+    // Join a room on click
     this.handleRowClick = this.handleRowClick.bind(this);
 
-    // needed to remove socket event listeners
+    // Needed to remove socket event listeners
     this.updateRooms = this.updateRooms.bind(this);
     this.checkErrorStates = this.checkErrorStates.bind(this);
 
     // Material UI popover logic
     this.handleTapPrivRoom = this.handleTapPrivRoom.bind(this);
     this.handleTapPrivRoomClose = this.handleTapPrivRoomClose.bind(this);
+
+    // Error for not logged in
+    this.handleCloseMustBeLoggedIn = this.handleCloseMustBeLoggedIn.bind(this);
+    // navigate to login from error dialogue
+    this.navigateToLogin = this.navigateToLogin.bind(this);
   }
 
   componentDidMount() {
@@ -222,52 +234,118 @@ class CreateOrJoin extends Component {
     this.props.socket.emit('create room', data);
   }
 
+  handlePrivateRoomToggle(e, value) {
+    e.preventDefault();
+    if (value === 'private' && !this.props.loggedIn) {
+      this.setState({
+        togglePrivateRoom: false,
+        radioButtonVal: 'public',
+        showMustBeLoggedIn: true,
+      });
+      console.log('You must be logged in, dingus');
+    } else if (value === 'public') {
+      this.setState({
+        togglePrivateRoom: false,
+        radioButtonVal: 'public',
+      });
+    } else {
+      this.setState({
+        togglePrivateRoom: true,
+        radioButtonVal: 'private',
+      });
+    }
+  }
+
+  handleCloseMustBeLoggedIn() {
+    this.setState({
+      showMustBeLoggedIn: false,
+    });
+  }
+
+  navigateToLogin() {
+    this.context.router.push('/login');
+  }
+
   render() {
     return (
       <div className="create-or-join-view">
         <div
           id="create-room-view"
           style={{
-            position: 'absolute',
-            top: '20%',
-            left: '50%',
-            transform: 'translate(-65%, -50%)',
+            width: '80%',
+            position: 'relative',
+            margin: '0 auto',
             textAlign: 'center',
           }}
         >
-          <div>
-            If you can't think of a good room name, just click "Create Room broh"
-             and we will provide you with a random room name.
-          </div>
-          <form onSubmit={this.handleCreateRoomSubmit}>
-            <TextField
-              hintText="Enter a Room Name..."
-              onChange={this.handleCreateRoomChange}
-              errorText={this.checkErrorStates()}
+          {
+            !this.state.togglePrivateRoom
+            ?
+              <div className="create-public-room" style={{ margin: '1% auto' }}>
+                <form onSubmit={this.handleCreateRoomSubmit}>
+                  <TextField
+                    hintText="Enter a Room Name..."
+                    onChange={this.handleCreateRoomChange}
+                    errorText={this.checkErrorStates()}
+                  />
+                  <RaisedButton
+                    onClick={this.handleCreateRoomSubmit}
+                    label="Create Public Room"
+                  />
+                </form>
+              </div>
+            :
+              <div className="create-private-room" style={{ margin: '1% auto' }}>
+                <form onSubmit={this.handleCreatePrivateRoomSubmit}>
+                  <TextField
+                    hintText="Enter a Private Room Name..."
+                    onChange={this.handleCreatePrivateRoomChange}
+                    errorText={this.checkErrorStates()}
+                  />
+                  <RaisedButton
+                    onClick={this.handleCreatePrivateRoomSubmit}
+                    label="Create Private Room"
+                  />
+                </form>
+              </div>
+          }
+          <RadioButtonGroup
+            name="shipSpeed"
+            onChange={this.handlePrivateRoomToggle}
+            style={{ width: '50%', margin: '0 auto', display: 'flex' }}
+            valueSelected={this.state.radioButtonVal}
+          >
+            <RadioButton
+              value="public"
+              label="Public"
+              style={{ width: '45%', margin: '0 auto', marginBottom: 16 }}
             />
-            <RaisedButton
-              onClick={this.handleCreateRoomSubmit}
-              label="Create Room broh"
+            <RadioButton
+              value="private"
+              label="Private"
+              style={{ width: '45%', margin: '0 auto', marginBottom: 16 }}
             />
-          </form>
-          <div>
-            Create a private room here.  Name it anything you want!
-          </div>
-          <form onSubmit={this.handleCreatePrivateRoomSubmit}>
-            <TextField
-              hintText="Enter a Private Room Name..."
-              onChange={this.handleCreatePrivateRoomChange}
-              errorText={this.checkErrorStates()}
-            />
-            <RaisedButton
-              onClick={this.handleCreatePrivateRoomSubmit}
-              label="Create Private Room broh"
-            />
-          </form>
+          </RadioButtonGroup>
+          {
+            !this.state.togglePrivateRoom
+            ?
+              <div>
+                This room is open to the public for anyone to join.
+                  It will be displayed in the open room table below.
+                  If you can't think of a good room name,
+                   just click "Create Room broh" and we will provide you with a random room name.
+              </div>
+            :
+              <div>
+              Noone will be able to join this room unless you give them the link personally.
+                We will store the url created for you and you can reuse the room as long as you are signed in.
+                  Name it anything you want!
+              </div>
+          }
           {
             this.props.loggedIn
             ?
-              <div className="old-private-rooms">
+              <div className="old-private-rooms" style={{ margin: '2% auto' }}>
                 <RaisedButton
                   onTouchTap={this.handleTapPrivRoom}
                   label="Click to view your old private rooms"
@@ -290,20 +368,34 @@ class CreateOrJoin extends Component {
               </div>
             : null
           }
+          {
+            this.state.showMustBeLoggedIn
+            ?
+              <Dialog
+                title="You must be logged in to use this feature!"
+                open={this.state.showMustBeLoggedIn}
+                onRequestClose={this.handleCloseMustBeLoggedIn}
+              >
+                Click outside the box to close thise window or click here to go to login page <RaisedButton
+                  onClick={this.navigateToLogin}
+                  label="Login"
+                />
+              </Dialog>
+            :
+              null
+          }
         </div>
         <div
           id="join-room-view"
           style={{
-            position: 'absolute',
-            top: '60%',
-            left: '50%',
-            transform: 'translate(-65%, -50%)',
-            textAlign: 'center'
+            position: 'relative',
+            margin: '10% auto',
+            textAlign: 'center',
           }}
         >
           <div>
             Have a link already?  Just paste it into your url bar!
-            Otherwise, checkout the open rooms below.  Click to join!
+            Otherwise, checkout the open rooms below.  Click a row to join!
           </div>
           <div id="join-view-room">
             <Table
