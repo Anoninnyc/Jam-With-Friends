@@ -66,8 +66,6 @@ class UserMakeInstrument extends Component {
       if (keyInfo === undefined) {
         showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
       } else {
-        
-
         this.setState({
           noteValue: keyInfo[1],
           octaveValue: keyInfo[2],
@@ -166,8 +164,8 @@ class UserMakeInstrument extends Component {
       empty = true;
       this.props.socket.emit('newInstCreated', currentInMemObj);
       console.log(`youve created ${currentInMemObj}`);
-       const final = this.props.userInstruments.concat([currentInMemObj]);
-       this.props.updateUserInstrument(final);
+      const final = this.props.userInstruments.concat([currentInMemObj]);
+      this.props.updateUserInstrument(final);
       showErrorMessage("#makeInstErrorMessages", 'InstrumentMade!', 'makeThat');
       $("#par1").val("A");
       $("#par2").val("1");
@@ -228,7 +226,6 @@ class UserMakeInstrument extends Component {
     console.log("keypress should be enabled");
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
-        
         if (e.which === 97) {
           this.keyHelper("#1");
         } else if (e.which === 115) {
@@ -354,7 +351,8 @@ class UserMakeInstrument extends Component {
           ref="instName"
           hintText="Enter instName here"
           onChange={this.killKeypress}
-        /><br />
+        />
+        <br />
 
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
