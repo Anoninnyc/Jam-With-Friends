@@ -154,7 +154,7 @@ class CreateOrJoin extends Component {
       return;
     }
     let roomName;
-    if (this.state.createRoomVal !== '') {
+    if (this.state.createPrivRoomVal !== '') {
       roomName = `${shortid.generate()}-${this.state.createPrivRoomVal}`;
     } else {
       roomName = `${shortid.generate()}-${shortid.generate()}`;
