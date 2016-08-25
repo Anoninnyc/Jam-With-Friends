@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-import shortid from 'shortid';
 
 // material ui components
 import RaisedButton from 'material-ui/RaisedButton';
@@ -25,19 +24,19 @@ const paperStyle = {
 
 const LandingPage = () => (
   <div id="landingPage">
-    <Paper style={paperStyle} zDepth={3} circle={true}>
-    <div className="greeting">WELCOME TO TBD!</div>
-    <section className="divider">
-      <Divider />
-    </section>
-    <section className="createRoom">
-      <Link to="/createorjoin">
-        <RaisedButton
-          label="Start"
-          style={materialStyles}
-        />
-      </Link>
-    </section>
+    <Paper style={paperStyle} zDepth={3}>
+      <div className="greeting">WELCOME TO TBD!</div>
+      <section className="divider">
+        <Divider />
+      </section>
+      <section className="createRoom">
+        <Link to="/createorjoin">
+          <RaisedButton
+            label="Start"
+            style={materialStyles}
+          />
+        </Link>
+      </section>
     </Paper>
   </div>
 );

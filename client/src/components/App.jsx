@@ -80,15 +80,9 @@ class App extends Component {
        })
     ));
     return (
-<<<<<<< HEAD
-     <div>
-        <Nav logOut={this.logOut} user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
-        {
-=======
-      <div style={{ width: '100%', height: '100%' }}>
+     <div style={{ width: '100%', height: '100%' }}>
         <Nav userInstruments={this.state.userInstruments} logIn={this.logIn} logOut={this.logOut} user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
        {
->>>>>>> Restyle landing page and nav
           this.props.children ?
             <section className="child">
               {children}
