@@ -470,6 +470,7 @@ font-size: 30px;
   position:absolute;
   top:30%;
   left:50%;
+  text-align:center;
 }
 
 #selectKeys {
@@ -525,21 +526,22 @@ input:invalid {
 #signupContent {
    position:absolute;
    top:30%;
+   left:40%;
  }
 
 #testPiano {
   position:relative;
   top:30%;
-  left:40%;
  }
-
+ 
  #loginContent {
   position:absolute;
   top:30%;
+  left:40%;
  }
 
  #UserMakeInstrumentRoom {
-  position:absolute;
+  position:static;
   top:30%;
   left:50%;
  }
@@ -547,7 +549,7 @@ input:invalid {
 
  #selectKeys {
   position:absolute;
-   top:30%;
+  top:30%;
   left:50%;
  }
 
@@ -569,4 +571,8 @@ input:invalid {
 
 .beatBox.selected {
   background-color: black;
+}
+
+#UOIInRoom {
+  text-align:center;
 }

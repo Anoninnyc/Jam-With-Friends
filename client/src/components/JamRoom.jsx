@@ -7,6 +7,7 @@ import Drums from './Drums';
 import PeerBar from './PeerBar';
 import Invite from './Invite';
 import SelectInstrument from './SelectInstrument';
+import { instruments } from '../instruments/store';
 
 class JamRoom extends Component {
   constructor(props) {
@@ -29,16 +30,17 @@ class JamRoom extends Component {
   }
 
   render() {
-    console.log('inst your currently using', this.props.instrument);
+    console.log(this.props.extraInstruments);
     return (
       <div id="jamroom">
         <div id="display-inst-name"><h1>You are playing {this.props.instrument}</h1></div>
         <div>
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}
-          {this.props.instrument.slice(0, 4) === "Your"? <UserOwnInstrument /> :null}
+          {this.props.instrument.slice(0, 4) === "Your"? <div id="UOIInRoom"><UserOwnInstrument /></div> :null}
         </div>
         <PeerBar
+          extraInstruments={this.props.extraInstruments}
           peers={this.props.peers}
           toggleInviteView={this.toggleInviteView}
           toggleSelectView={this.toggleSelectView}
@@ -49,6 +51,29 @@ class JamRoom extends Component {
           onRequestClose={this.toggleSelectView}
         >
           <SelectInstrument
+            extraInstruments={this.props.extraInstruments}
+            handleSelect={
+              index => {
+                this.setState({
+                  mapping: this.props.extraInstruments.map(a => (
+                    {
+                      A: typeof a === 'string'?JSON.parse(a.A): a.A,
+                      S: typeof a === 'string'?JSON.parse(a.S): a.S,
+                      D: typeof a === 'string'?JSON.parse(a.D): a.D,
+                      F: typeof a === 'string'?JSON.parse(a.F): a.F,
+                      G: typeof a === 'string'?JSON.parse(a.G): a.G,
+                      H: typeof a === 'string'?JSON.parse(a.H): a.H,
+                      J: typeof a === 'string'?JSON.parse(a.J): a.J,
+                      K: typeof a === 'string'?JSON.parse(a.K): a.K,
+                      L: typeof a === 'string'?JSON.parse(a.L): a.L,
+                    }
+                  ))[index - 3],
+                  instrument: instruments.concat(this.props.extraInstruments.map(a => (
+                     `Your Instrument: ${a.instrumentName||a.name}`
+                  )))[index]
+                });
+              }
+            }
             handleSelect={this.props.onReselect}
             handleClick={this.toggleSelectView}
             size="inset"
@@ -63,7 +88,8 @@ class JamRoom extends Component {
 JamRoom.propTypes = {
   instrument: React.PropTypes.string.isRequired,
   peers: React.PropTypes.array.isRequired,
-  onReselect: React.PropTypes.func.isRequired
+  onReselect: React.PropTypes.func.isRequired,
+  extraInstruments: React.PropTypes.array
 };
 
 export default JamRoom;

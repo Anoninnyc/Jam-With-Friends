@@ -110,5 +110,5 @@ sequelize
 module.exports = {
   users,
   PrivateRooms,
-  instruments
+  instruments,
 };
