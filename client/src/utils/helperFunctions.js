@@ -42,6 +42,34 @@ function showErrorMessage(appendTo, message, id) {
       'L': '#9',
     };
 
-module.exports.mapIdsToKeys=mapIdsToKeys;
-module.exports.mapKeysToIds=mapKeysToIds;
-module.exports.showErrorMessage=showErrorMessage;
+const mapPianoKeysToIds={
+  'A': '#1',
+  'S': '#2',
+  'D': '#3',
+  'F': '#4',
+  'G': '#5',
+  'H': '#6',
+  'J': '#7',
+  'K': '#8',
+  'L': '#9',
+  ';': '#10',
+  "'": '#11',
+};
+
+const mapBlackPianoKeysToIds= {
+  'W': '#thir',
+  'E': '#fourt',
+  'T': '#fift',
+  'Y': '#sixt',
+  'U': '#sevent',
+  'O': '#eight',
+  'P': '#ninet',
+};
+
+module.exports={
+  mapPianoKeysToIds,
+  mapIdsToKeys,
+  mapKeysToIds,
+  showErrorMessage,
+  mapBlackPianoKeysToIds,
+};

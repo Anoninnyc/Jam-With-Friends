@@ -38,8 +38,8 @@
 
 #userPiano {
   position: relative;
-  top: 370px;
-  left:280px;
+
+  left:430px;
   margin: 0 auto;
 }
 
@@ -249,51 +249,51 @@
 
 #thir {
  position: absolute;
-  left:5.2%;
-  top:-0.59%;
+  left:2.5%;
+  top:-0.5%;
 }
 
 #fourt {
   position: absolute;
-  left:13.7%;
-  top:-0.59%;
+  left:6.2%;
+  top:-0.5%;
 }
 
 #fift {
   position: absolute;
-  left:30.7%;
-  top:-0.59%;
+  left:13%;
+  top:-0.5%;
 
 }
 
 #sixt {
   position: absolute;
-  left:38.5%;
-  top:-0.59%;
+  left:16.7%;
+  top:-0.5%;
 }
 
 #sevent {
   position: absolute;
-  left:47%;
-  top:-0.59%;
+  left:20.5%;
+  top:-0.5%;
 }
 
 #eight {
   position: absolute;
-  left:64%;
-  top:-0.59%;
+  left:27.5%;
+  top:-0.5%;
 }
 
 #ninet {
   position: absolute;
-  left:72%;
-  top:-0.59%;
+  left:31.5%;
+  top:-0.5%;
 }
 
 #twenty {
   position: absolute;
   left:89%;
-  top:-0.59%;
+  top:-0.5%;
 }
 
 #pianoInst {
