@@ -29,7 +29,17 @@ class AppNavBar extends Component {
           titleStyle={{ color: '#E8AEB7' }}
           onTitleTouchTap={() => { this.context.router.push('/'); }}
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
+<<<<<<< HEAD
           iconElementRight={<NavMenuIcon id="menuicon"/>}
+=======
+          iconElementRight={
+            <NavMenuIcon
+              id="menuicon"
+              loggedIn={this.props.loggedIn}
+              clearSessions={this.clearSessions}
+            />
+          }
+>>>>>>> Restyle landing page and nav
         />
       </div>
     ); }
