@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { instruments } from '../instruments/store';
 
 const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extraInstruments }) => {
-  console.log('you also have these instruments', extraInstruments);
   size = size || 'normal';
   const fixCarouselHeight = () => { window.dispatchEvent(new Event('resize')); };
   const styleSize = {

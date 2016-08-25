@@ -60,10 +60,10 @@ class App extends Component {
   }
 
   logOut() {
-   // console.log('Main logout being called');
     this.setState({
       loggedIn: false,
       user: "",
+      userInstruments: [],
     });
   }
 

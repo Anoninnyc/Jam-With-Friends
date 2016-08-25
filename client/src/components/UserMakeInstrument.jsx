@@ -75,7 +75,6 @@ class UserMakeInstrument extends Component {
 
         this.sampleSound();
 
-
         $(ID).animate({
           backgroundColor: "black",
         }, 20).animate({
