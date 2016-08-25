@@ -1,39 +1,58 @@
-#roche {
-  background-image: url('http://bit.ly/2aMzQ3b');
-  position: absolute;
+html {
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-size: cover;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.greeting {
+  margin: 0 auto;
+  text-align: center;
+  color: #090809;
+  padding-top: 40px;
+  padding-bottom: 6px;
+  font-size: 24px;
+}
+
+.createRoom {
+  margin: 2% auto;
+  height: 60%;
+  position: relative;
 }
 
 #landingPage {
-  position:absolute;
-  height: 100%;
-  width: 100%;
-  background-image: url("https://thumbs.dreamstime.com/z/musical-background-6057899.jpg");
-}
-
-#landingPage h1 {
-  margin: 0 auto;
   text-align: center;
+  height: 90%;
+  width: 100%;
+  background: url(/assets/background_500.png) repeat center bottom;
 }
 
-.joinRoom, .createRoom {
-  margin: 2% auto;
+#back {
+  position: absolute;
+  left: 50%;
+  height: 60%;
+  width: 40%;
+  transform: translate(-50%, 30%);
+  background-color: rgba(255,255,255,0.9);
 }
 
 #landingPage .divider {
-  width: 25%;
-  margin: 2% auto;
+  width: 75%;
+  margin: 0 auto;
 }
 
 #jamroom{
-  position: absolute;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-size: cover;
 }
 
 #userPiano {
@@ -432,22 +451,10 @@
 font-size: 30px;
 }
 
-
-#callToAction {
-  position:absolute;
-  font-size: 45px;
-  font-weight: bold ;
-  top: 55%;
-  left: 36%;
-  font-family: Impact, Charcoal, sans-serif;
-}
-
 #introText {
   padding:7px;
   border-radius:20%;
   color:white;
-  border:0.007px solid transparent;
-  background-image:url('http://bit.ly/2b2ePzs');
   width:350px;
   position:absolute;
   font-size: 15px;
@@ -484,8 +491,8 @@ input:invalid {
 }
 
 .child {
+  height: 100%;
   margin: 0 auto;
-  padding: 5%;
 }
 
 .beatSequencer {
