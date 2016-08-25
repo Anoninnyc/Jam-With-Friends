@@ -16,6 +16,9 @@ class UserMakeInstrument extends Component {
     super(props);
     this.handleNoteChange=this.handleNoteChange.bind(this);
     this.handleKeyChange=this.handleKeyChange.bind(this);
+    this.handleOctaveChange=this.handleOctaveChange.bind(this);
+    this.handlePDChange=this.handlePDChange.bind(this);
+    this.handleTypeChange=this.handleTypeChange.bind(this);
     this.deleteKey = this.deleteKey.bind(this);
     this.mapThat = this.mapThat.bind(this);
     this.changeInst = this.changeInst.bind(this);
@@ -24,8 +27,11 @@ class UserMakeInstrument extends Component {
     this.logIn = this.props.logIn.bind(this);
     this.makeInstrument = this.makeInstrument.bind(this);
     this.state = {
-      noteValue: 1,
-      keyValue:1,
+      noteValue: "A",
+      keyValue: "A",
+      octaveValue: 1,
+      PDValue: 0.1,
+      typeValue: "sine",
       inMemObject: {},
       instrument: "MembraneSynth",
       tryingToName: true,
@@ -55,17 +61,23 @@ class UserMakeInstrument extends Component {
   keyHelper(ID) {
   //  console.log(this.state.tryingToName);
     if (!this.state.tryingToName) {
-     // console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
+      console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
       const keyInfo = JSON.parse(this.state.inMemObject[mapIdsToKeys[ID]]);
-     // console.log('keyinfo', keyInfo, keyInfo===undefined);
       if (keyInfo === undefined) {
         showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
       } else {
-        $("#par1").val(keyInfo[1]);
-        $("#par2").val(keyInfo[2]);
-        $("#par3").val(keyInfo[3]);
-        $("#par4").val(keyInfo[4]);
+        
+
+        this.setState({
+          noteValue: keyInfo[1],
+          octaveValue: keyInfo[2],
+          PDValue: keyInfo[3],
+          typeValue: keyInfo[4],
+        });
+
         this.sampleSound();
+
+
         $(ID).animate({
           backgroundColor: "black",
         }, 20).animate({
@@ -76,13 +88,11 @@ class UserMakeInstrument extends Component {
   }
 
   sampleSound() {
-    const par1 = $("#par1 option:selected").text();
-    const par2 = $("#par2 option:selected").text();
-    const par3 = Number($("#par3").val());
-    const par4 = $("#par4 option:selected").text();
+    const par1 = this.state.noteValue;
+    const par2 = this.state.octaveValue;
+    const par3 = this.state.PDValue;
+    const par4 = this.state.typeValue;
     const combo = `${par1}${par2}`;
-    const inst = $(".selectInst option:selected").text();
-    console.log(`play a ${combo} sound on the ${inst}`);
     const config = {
       pitchDecay: par3||0.1,
       octaves: 7,
@@ -103,11 +113,11 @@ class UserMakeInstrument extends Component {
 
   mapThat() {
     console.log(this.state.noteValue);
-    const par1 = $("#par1 option:selected").text();
-    const par2 = $("#par2 option:selected").text();
-    const par3 = $("#par3").val();
-    const par4 = $("#par4 option:selected").text();
-    const key = $(".selectKey option:selected").text();
+    const par1 = this.state.noteValue;
+    const par2 = this.state.octaveValue;
+    const par3 = this.state.PDValue;
+    const par4 = this.state.typeValue;
+    const key = this.state.keyValue;
     const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj[key] = JSON.stringify([inst, par1, par2, par3, par4]);
@@ -115,18 +125,17 @@ class UserMakeInstrument extends Component {
      // console.log('please make a proper mapping');
       showErrorMessage("#makeInstErrorMessages", 'Please make a Proper Mapping', 'propMapError');
     } else {
-      $("#par1").val("A");
-      $("#par2").val("1");
-      $("#par3").val("0.1");
-      $("#par4").val("sine");
       this.setState({
+        noteValue: "A",
+        octaveValue: "1",
+        PDValue: "0.1",
+        typeValue: "sine",
         inMemObject: currentInMemObj
       });
+      console.log(currentInMemObj);
+      const idToAdd = mapKeysToIds[key];
+      $(idToAdd).css("border", "5px solid blue");
     }
-    console.log(currentInMemObj);
-    const idToAdd = mapKeysToIds[key];
-    // console.log('idToAdd', idToAdd);
-    $(idToAdd).css("border", "5px solid blue");
   }
 
 
@@ -183,10 +192,26 @@ class UserMakeInstrument extends Component {
   }
 
   handleNoteChange(event, index, value) {
+    console.log(value);
     this.setState({ noteValue: value });
   }
   handleKeyChange(event, index, value) {
-    this.setState({ noteValue: value });
+    console.log(value);
+    this.setState({ keyValue: value });
+  }
+
+  handleOctaveChange(event, index, value) {
+    console.log(value);
+    this.setState({ octaveValue: value });
+  }
+  handleTypeChange(event, index, value) {
+    console.log(value);
+    this.setState({ typeValue: value });
+  }
+
+  handlePDChange(event, index, value) {
+    console.log(value);
+    this.setState({ PDValue: value });
   }
 
   killKeypress() {
@@ -203,7 +228,7 @@ class UserMakeInstrument extends Component {
     console.log("keypress should be enabled");
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
-        console.log(e.which);
+        
         if (e.which === 97) {
           this.keyHelper("#1");
         } else if (e.which === 115) {
@@ -240,31 +265,30 @@ class UserMakeInstrument extends Component {
   }
 
   render() {
-    console.log('userInstruments', this.props.userInstruments);
     return (
       <div id="UserMakeInstrumentRoom">
         <h1>Make Instrument here!</h1>
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
            Select a Key to map to:
-         <DropDownMenu
-          value={this.state.noteValue}
-          onChange={this.handleNoteChange}
-          autoWidth={false}
-        >
-          <MenuItem value={1} primaryText="A" />
-          <MenuItem value={2} primaryText="S" />
-          <MenuItem value={3} primaryText="D" />
-          <MenuItem value={4} primaryText="F" />
-          <MenuItem value={5} primaryText="G" />
-          <MenuItem value={6} primaryText="H" />
-          <MenuItem value={7} primaryText="J" />
-          <MenuItem value={8} primaryText="H" />
-          <MenuItem value={9} primaryText="J" />
-        </DropDownMenu>
+          <DropDownMenu
+            value={this.state.keyValue}
+            onChange={this.handleKeyChange}
+            autoWidth={false}
+          >
+            <MenuItem value={"A"} primaryText="A" />
+            <MenuItem value={"S"} primaryText="S" />
+            <MenuItem value={"D"} primaryText="D" />
+            <MenuItem value={"F"} primaryText="F" />
+            <MenuItem value={"G"} primaryText="G" />
+            <MenuItem value={"H"} primaryText="H" />
+            <MenuItem value={"J"} primaryText="J" />
+            <MenuItem value={"K"} primaryText="K" />
+            <MenuItem value={"L"} primaryText="L" />
+          </DropDownMenu>
         </div>
         <RaisedButton label="Delete key" onClick={this.deleteKey} /><br />
-        Select Some parameters:<br />
+        <h2>Set Your parameters</h2><br />
 
         Note:
         <DropDownMenu
@@ -272,52 +296,58 @@ class UserMakeInstrument extends Component {
           onChange={this.handleNoteChange}
           autoWidth={false}
         >
-          <MenuItem value={1} primaryText="A" />
-          <MenuItem value={2} primaryText="B" />
-          <MenuItem value={3} primaryText="C" />
-          <MenuItem value={4} primaryText="D" />
-          <MenuItem value={5} primaryText="E" />
-          <MenuItem value={6} primaryText="F" />
-          <MenuItem value={7} primaryText="G" />
+          <MenuItem value={"A"} primaryText="A" />
+          <MenuItem value={"B"} primaryText="B" />
+          <MenuItem value={"C"} primaryText="C" />
+          <MenuItem value={"D"} primaryText="D" />
+          <MenuItem value={"E"} primaryText="E" />
+          <MenuItem value={"F"} primaryText="F" />
+          <MenuItem value={"G"} primaryText="G" />
         </DropDownMenu>
 
 
-        Octave
-        <select className="par" id="par2">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="4">5</option>
-          <option value="4">6</option>
-          <option value="4">7</option>
-        </select><br />
+        Octave:
+        <DropDownMenu
+          value={this.state.octaveValue}
+          onChange={this.handleOctaveChange}
+          autoWidth={false}
+        >
+          <MenuItem value={1} primaryText="1" />
+          <MenuItem value={2} primaryText="2" />
+          <MenuItem value={3} primaryText="3" />
+          <MenuItem value={4} primaryText="4" />
+          <MenuItem value={5} primaryText="5" />
+          <MenuItem value={6} primaryText="6" />
+          <MenuItem value={7} primaryText="7" />
+        </DropDownMenu>
 
-        pitchDecay:
-        <select className="par" id="par3">
-          <option value="0.1">0.1</option>
-          <option value="0.2">0.2</option>
-          <option value="0.3">0.3</option>
-          <option value="0.4">0.4</option>
-          <option value="0.5">0.5</option>
-          <option value="0.6">0.6</option>
-          <option value="0.7">0.7</option>
-          <option value="0.8">0.8</option>
-          <option value="0.9">0.9</option>
-          <option value="1">1</option>
-          <option value="1.1">1.1</option>
-          <option value="1.2">1.2</option>
-          <option value="1.3">1.3</option>
-          <option value="1.4">1.4</option>
-          <option value="1.5">1.5</option>
-        </select><br />
+
+        Pitch Decay:
+        <DropDownMenu
+          value={this.state.PDValue}
+          onChange={this.handlePDChange}
+          autoWidth={false}
+        >
+          <MenuItem value={0.1} primaryText="0.1" />
+          <MenuItem value={0.2} primaryText="0.2" />
+          <MenuItem value={0.3} primaryText="0.3" />
+          <MenuItem value={0.4} primaryText="0.4" />
+          <MenuItem value={0.5} primaryText="0.5" />
+          <MenuItem value={0.6} primaryText="0.6" />
+          <MenuItem value={0.7} primaryText="0.7" />
+        </DropDownMenu>
+
         Sound Type:
-        <select className="par" id="par4">
-          <option value="sine">sine</option>
-          <option value="square">square</option>
-          <option value="sawtooth">sawtooth</option>
-          <option value="triangle">triangle</option>
-        </select> <br />
+        <DropDownMenu
+          value={this.state.typeValue}
+          onChange={this.handleTypeChange}
+          autoWidth={false}
+        >
+          <MenuItem value={"sine"} primaryText="sine" />
+          <MenuItem value={"square"} primaryText="square" />
+          <MenuItem value={"sawtooth"} primaryText="sawtooth" />
+          <MenuItem value={"triangle"} primaryText="triangle" />
+        </DropDownMenu> <br />
 
         <RaisedButton label="Map That" onClick={this.mapThat} /><br />
         <TextField
@@ -329,8 +359,8 @@ class UserMakeInstrument extends Component {
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
         Your current Instrument in Piano form:
-        <div onClick={this.addKeypress}>
-          <UserOwnInstrument />
+        <div id="testPiano" onClick={this.addKeypress} >
+        <UserOwnInstrument />
         </div>
         <div id="makeInstErrorMessages" />
       </div>

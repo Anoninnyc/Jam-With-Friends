@@ -541,7 +541,7 @@ input:invalid {
  }
 
  #UserMakeInstrumentRoom {
-  position:absolute;
+  position:static;
   top:30%;
   left:50%;
  }
