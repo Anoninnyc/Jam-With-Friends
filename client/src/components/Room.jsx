@@ -193,16 +193,12 @@ class Room extends React.Component {
   }
 
   selectInstrument(index) {
-  const totalInsts=instruments.concat(this.props.userInstruments.map(a => (a.instrumentName)));
-    console.log('index', index);
-    console.log('instruments to debug undefined', totalInsts, index);
-
-    this.setState({ instrument: totalInsts[index] });
+    this.setState({ instrument: instruments[index] });
     if (this.state.connected) {
       this.props.socket.emit('select instrument', {
         roomId: this.props.params.roomId,
         id: connectionManager.id(),
-        instrument: totalInsts[index]
+        instrument: instruments[index]
       });
     }
   }
