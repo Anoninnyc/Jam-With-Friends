@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
 // Utils
-import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
+import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -96,13 +96,7 @@ class UserMakeInstrument extends Component {
       oscillator: {
         type: par4,
       },
-      envelope: {
-        attack: 0.001,
-        decay: 0.1,
-        sustain: 0.1,
-        release: 2,
-        attackCurve: 'linear'
-      }
+      envelope: envelopeValue
     };
     const zimit = new MembraneSynth(config).toMaster();
     zimit.triggerAttackRelease(combo, '8n');
@@ -316,9 +310,8 @@ class UserMakeInstrument extends Component {
           <MenuItem value={4} primaryText="4" />
           <MenuItem value={5} primaryText="5" />
           <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />     
+          <MenuItem value={7} primaryText="7" />  
         </DropDownMenu>
-
 
         Pitch Decay
         <DropDownMenu

@@ -9,7 +9,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
-import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds } from '../utils/helperFunctions';
+import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -112,13 +112,7 @@ class Room extends React.Component {
         oscillator: {
           type: type,
         },
-        envelope: {
-          attack: 0.001,
-          decay: 0.1,
-          sustain: 0.1,
-          release: 2,
-          attackCurve: 'linear'
-        }
+        envelope: envelopeValue
       };
       // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
@@ -158,13 +152,7 @@ class Room extends React.Component {
           oscillator: {
             type: info[2],
           },
-          envelope: {
-            attack: 0.001,
-            decay: 0.1,
-            sustain: 0.1,
-            release: 2,
-            attackCurve: 'linear'
-          }
+          envelope: envelopeValue
         };
         const zimit = new MembraneSynth(config).toMaster();
         zimit.triggerAttackRelease(combo, '8n');
