@@ -16,7 +16,9 @@ const NavMenuIcon = (props) => (
     }
 
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+    className="menu"
+    menuStyle={{ backgroundColor: 'rgba(184, 225, 255, 0.5)', color: '#6F8695' }}
   >
     {!props.loggedIn?<MenuItem
       primaryText="Login"

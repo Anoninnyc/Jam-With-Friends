@@ -80,8 +80,8 @@ class App extends Component {
        })
     ));
     return (
-      <div>
-        <Nav userInstruments={this.state.userInstruments} logIn={this.logIn} logOut={this.logOut} user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
+     <div>
+        <Nav logOut={this.logOut} user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
         {
           this.props.children ?
             <section className="child">
