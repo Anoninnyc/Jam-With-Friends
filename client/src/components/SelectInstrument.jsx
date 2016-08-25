@@ -25,6 +25,7 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       startIndex++;
     }
   }
+  console.log('extraInstruments', extraInstruments);
   return (
     <div style={{ textAlign: "center" }}>
       <Carousel

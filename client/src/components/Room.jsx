@@ -219,6 +219,7 @@ class Room extends React.Component {
         {
           this.state.startJam ?
             <JamRoom
+              extraInstruments={this.props.userInstruments}
               instrument={this.state.instrument}
               peers={this.state.peers}
               onReselect={this.selectInstrument}

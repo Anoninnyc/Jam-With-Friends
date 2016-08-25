@@ -2,19 +2,20 @@ import React from 'react';
 
 import PeerBubble from './PeerBubble';
 
-const PeerBar = ({ peers, toggleInviteView, toggleSelectView }) => {
+const PeerBar = ({ peers, toggleInviteView, toggleSelectView, extraInstruments }) => {
 
   const inviteNumber = 4 - peers.length;
   const inviteArray = [];
   for (let i = 0; i < inviteNumber; i++) {
     inviteArray.push(i);
   }
+  console.log('ei', extraInstruments);
   return (
     <div className="peer-bar">
       {
         peers.map((peer, index) => (
           <div key={peer.peerId}>
-            <PeerBubble peer={peer} handleClick={toggleSelectView} self={index === 0} />
+            <PeerBubble extraInstruments={extraInstruments} peer={peer} handleClick={toggleSelectView} self={index === 0} />
           </div>
         ))
       }

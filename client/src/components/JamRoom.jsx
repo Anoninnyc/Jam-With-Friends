@@ -29,6 +29,7 @@ class JamRoom extends Component {
   }
 
   render() {
+    console.log(this.props.extraInstruments);
     return (
       <div id="jamroom">
         <div id="display-inst-name"><h1>You are playing {this.props.instrument}</h1></div>
@@ -38,6 +39,7 @@ class JamRoom extends Component {
           {this.props.instrument.slice(0, 4) === "Your"? <div id="UOIInRoom"><UserOwnInstrument /></div> :null}
         </div>
         <PeerBar
+          extraInstruments={this.props.extraInstruments}
           peers={this.props.peers}
           toggleInviteView={this.toggleInviteView}
           toggleSelectView={this.toggleSelectView}
@@ -48,6 +50,7 @@ class JamRoom extends Component {
           onRequestClose={this.toggleSelectView}
         >
           <SelectInstrument
+            extraInstruments={this.props.extraInstruments}
             handleSelect={this.props.onReselect}
             handleClick={this.toggleSelectView}
             size="inset"
