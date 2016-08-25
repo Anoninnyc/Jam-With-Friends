@@ -38,7 +38,6 @@
 
 #userPiano {
   position: relative;
-
   left:430px;
   margin: 0 auto;
 }
@@ -263,7 +262,6 @@
   position: absolute;
   left:13%;
   top:-0.5%;
-
 }
 
 #sixt {
