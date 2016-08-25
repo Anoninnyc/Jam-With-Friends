@@ -572,3 +572,7 @@ input:invalid {
 .beatBox.selected {
   background-color: black;
 }
+
+#UOIInRoom {
+  text-align:center;
+}
