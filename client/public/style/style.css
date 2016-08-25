@@ -44,9 +44,9 @@
 
 #userDrums {
   position: relative;
-  top: 370px;
-  left:450px;
-  margin:auto;
+  top: 40%;
+  left: 25%;
+  margin: auto;
 }
 
 .friendInstrument {

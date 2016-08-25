@@ -29,8 +29,6 @@ class Piano extends Component {
         <div className="blackKey" id="sevent" />
         <div className="blackKey" id="eight" />
         <div className="blackKey" id="ninet" />
-        <div className="blackKey" id="twenty" />
-
       </div>
     );
   }
