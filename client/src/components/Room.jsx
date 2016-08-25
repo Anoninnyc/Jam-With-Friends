@@ -193,8 +193,10 @@ class Room extends React.Component {
   }
 
   selectInstrument(index) {
-    console.log('selecting instrument')
-    console.log('instruments to debug undefined', instruments,index);
+  const uiNames=this.props.userInstruments.map(a => (a.instrumentName));
+// const allInstruments=
+    console.log('selecting instrument');
+    console.log('instruments to debug undefined', instruments, index);
     this.setState({ instrument: instruments[index] });
     if (this.state.connected) {
       this.props.socket.emit('select instrument', {
@@ -206,7 +208,8 @@ class Room extends React.Component {
   }
 
   render() {
-    // console.log(this.props.userInstruments, this.state.instrument, this.state.mapping, 'the users instruments');
+    const uiNames=this.props.userInstruments.map(a => (a.instrumentName));
+     console.log('what you want', uiNames, 'tsi', 'current instrument', this.state.instrument);
 
     return (
       <div>
@@ -229,8 +232,7 @@ class Room extends React.Component {
               handleSelect={
                 index => {
                   this.setState({
-                    mapping: this.props.userInstruments.map(a => (
-                       
+                    mapping: this.props.userInstruments.map(a => (    
                       {
                         A: typeof a === 'string'?JSON.parse(a.A): a.A,
                         S: typeof a === 'string'?JSON.parse(a.S): a.S,
