@@ -72,6 +72,17 @@ const envelopeValue= {
   attackCurve: 'linear'
 };
 
+const mapDrumIDToSounds= {
+  '#urC': 'sound',
+  '#nextC': 'sound',
+  '#brDrum': 'sound',
+  '#rsDrum': 'sound',
+  '#lsDrum': 'sound',
+  '#tomDrum': 'sound',
+  '#urCymbal': 'sound',
+};
+
+
 module.exports={
   mapPianoKeysToIds,
   mapIdsToKeys,
@@ -79,4 +90,5 @@ module.exports={
   showErrorMessage,
   mapBlackPianoKeysToIds,
   envelopeValue,
+  mapDrumIDToSounds,
 };

@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { mapDrumIDToSounds } from '../utils/helperFunctions'
+import Tone from 'Tone'
+
 
 class Drums extends Component {
   helper(ID) {
+// Run mapDrumIDToSounds
+
     $(ID).animate({
       backgroundColor: "silver",
     }, 50).animate({
       backgroundColor: "transparent"
     }, 50);
   }
+
   render() {
     return (
       <div id="userDrums">
