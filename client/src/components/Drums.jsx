@@ -10,15 +10,15 @@ class Drums extends Component {
   }
   render() {
     return (
-      <div id = "userDrums">
-        <img id = "cs" src="../../../style/DrumParts/completeSet.png" />
-	      <div onClick={() => { console.log('ll'), this.helper("#urC"); }} id="urC" />
-	      <div onClick={() => { console.log('ll'), this.helper("#nextC"); }} id="nextC" />
-	      <div onClick={() => { console.log('ll'), this.helper("#brDrum"); }} id="brDrum" />
-	      <div onClick={() => { console.log('ll'),this.helper("#rsDrum"); }} id="rsDrum" />
-	      <div onClick={() => { console.log('ll'),this.helper("#lsDrum"); }} id="lsDrum" />
-	      <div onClick={() => { console.log('ll'),this.helper("#tomDrum"); }} id="tomDrum" />
-	      <div onClick={() => { console.log('ll'), this.helper("#urCymbal"); }} id="urCymbal" />
+      <div id="userDrums">
+        <img id="cs" src="../../../style/DrumParts/completeSet.png" />
+	      <div onClick={() => { this.helper("#urC"); }} id="urC" />
+	      <div onClick={() => { this.helper("#nextC"); }} id="nextC" />
+	      <div onClick={() => { this.helper("#brDrum"); }} id="brDrum" />
+	      <div onClick={() => { this.helper("#rsDrum"); }} id="rsDrum" />
+	      <div onClick={() => { this.helper("#lsDrum"); }} id="lsDrum" />
+	      <div onClick={() => { this.helper("#tomDrum"); }} id="tomDrum" />
+	      <div onClick={() => { this.helper("#urCymbal"); }} id="urCymbal" />
       </div>
     );
   }

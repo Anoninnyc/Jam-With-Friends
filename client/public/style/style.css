@@ -327,10 +327,10 @@
 #brDrum {
   position: absolute;
   border-radius: 100%;
-  background-color: black;
+  background-color: none;
   width: 102px;
   height: 102px;
-  border: 1px solid black;
+  border: 1px solid transparent;
   top: 61%;
   left: 8%;
 }
