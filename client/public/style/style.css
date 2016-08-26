@@ -74,14 +74,13 @@ body {
 
 #userPiano {
   position: relative;
-  left:430px;
   margin: 0 auto;
 }
 
 #userDrums {
   position: relative;
-  top: 40%;
-  left: 25%;
+  margin: auto;
+  position: relative;
   margin: auto;
 }
 
@@ -329,6 +328,11 @@ body {
   background-color: red;
  left:20%;
 }
+.instrumentContainer {
+   -webkit-box-align:center;
+   -webkit-box-pack:center;
+   display:-webkit-box;
+ }
 
 /*DRUMS!!!*/
 #cs {
