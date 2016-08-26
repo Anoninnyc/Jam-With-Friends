@@ -350,6 +350,17 @@ position: relative;
   left: 70px;
 }
 
+#kickDrum {
+  position: relative;
+  border-radius: 100%;
+  background-color: none;
+  width: 20px;
+  height: 20px;
+  border: solid transparent;
+  top: -238px;
+  left: 252px;
+}
+
 #nextC {
   position: absolute;
   border-radius: 100%;

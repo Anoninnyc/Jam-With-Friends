@@ -7,7 +7,6 @@ class Drums extends Component {
 // Run mapDrumIDToSounds
 // document.getElementById('audiotag1').play();
 
-
     $(ID).animate({
       backgroundColor: "silver",
     }, 50).animate({
@@ -26,6 +25,7 @@ class Drums extends Component {
         <div onClick={() => { this.helper("#lsDrum"); }} id="lsDrum" />
         <div onClick={() => { this.helper("#tomDrum"); }} id="tomDrum" />
         <div onClick={() => { this.helper("#urCymbal"); }} id="urCymbal" />
+        <div onClick={() => { this.helper("#kickDrum"); }} id="kickDrum" />
       </div>
     );
   }
