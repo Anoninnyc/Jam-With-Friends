@@ -315,7 +315,7 @@ class UserMakeInstrument extends Component {
           <MenuItem value={4} primaryText="4" />
           <MenuItem value={5} primaryText="5" />
           <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />  
+          <MenuItem value={7} primaryText="7" />
 
         </DropDownMenu>
 
