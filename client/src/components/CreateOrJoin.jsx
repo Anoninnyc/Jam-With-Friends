@@ -12,6 +12,7 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 
 class CreateOrJoin extends Component {
@@ -268,7 +269,12 @@ class CreateOrJoin extends Component {
 
   render() {
     return (
+      <div className="lobby-container">
       <div className="lobby">
+        <div className="greeting">Green Room</div>
+        <section className="divider green-room-divider">
+          <Divider />
+        </section>
         <div
           id="create-room-view"
           style={{
@@ -389,8 +395,9 @@ class CreateOrJoin extends Component {
           id="join-room-view"
           style={{
             position: 'relative',
-            margin: '10% auto',
+            margin: '0 auto',
             textAlign: 'center',
+            padding: '0 10%',
           }}
         >
           <div>
@@ -449,6 +456,7 @@ class CreateOrJoin extends Component {
             </Table>
           </div>
         </div>
+      </div>
       </div>
     );
   }
