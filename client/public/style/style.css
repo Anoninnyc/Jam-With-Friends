@@ -46,6 +46,12 @@ body {
   margin: 0 auto;
 }
 
+.green-room-divider {
+  width: 60%;
+  margin: 0 auto;
+  color: #E18335;
+}
+
 .createRoom {
   margin: 2% auto;
   height: 60%;
@@ -53,8 +59,16 @@ body {
 }
 
 .lobby {
-  width: 80%;
-  margin: 0 10%;
+  width: 70%;
+  margin: 0 auto;
+  background: white;
+  height: 100%;
+}
+
+.lobby-container {
+  width: 100%;
+  height: 100%;
+  background: url(/assets/background_500.png) repeat center bottom;
 }
 
 .helpButton {
