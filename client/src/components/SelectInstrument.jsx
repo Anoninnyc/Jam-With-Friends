@@ -19,12 +19,25 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       buttonText: "Done"
     }
   };
+  // why a while loop?  maybe for loop?
   let startIndex = 0;
+  // own instrument will be the instrument name if it is a pre-built instrument, and will a the string 'Your instrument is: instrument' otherwise.
   if (ownInstrument) {
-    while (instruments[startIndex] !== ownInstrument) {
-      startIndex++;
+    if (ownInstrument[0] === 'Y') {
+      // console.log(extraInstruments[startIndex - instruments.length].instrumentName !== ownInstrument.slice(17));
+      startIndex = instruments.length;
+      while (extraInstruments[startIndex - instruments.length].instrumentName !== ownInstrument.slice(17)) {
+        startIndex++;
+      }
+    } else {
+      while (instruments[startIndex] !== ownInstrument) {
+        startIndex++;
+      }
     }
+  } else {
+    console.log('There was an error.  Own instrument is undefined');
   }
+
   console.log('extraInstruments', extraInstruments);
   return (
     <div style={{ textAlign: "center" }}>
