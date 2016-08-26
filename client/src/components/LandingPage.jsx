@@ -28,7 +28,7 @@ const paperStyle = {
 const LandingPage = () => (
   <div id="landingPage">
     <Paper style={paperStyle} zDepth={3}>
-      <div className="greeting">Welcome to TBD!</div>
+      <div className="greeting">Welcome to Jam with Friends!</div>
       <section className="divider">
         <Divider />
       </section>

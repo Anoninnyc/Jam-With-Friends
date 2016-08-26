@@ -57,9 +57,19 @@ body {
   margin: 0 10%;
 }
 
+.helpButton {
+  height: 50px;
+}
+
 #jamroom{
   width: 100%;
   height: 100%;
+}
+
+#laser {
+  text-align: center;
+  width: 100%;
+  height: 300px;
 }
 
 #userPiano {

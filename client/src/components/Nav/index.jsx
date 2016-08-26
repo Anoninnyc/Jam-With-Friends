@@ -32,8 +32,8 @@ class AppNavBar extends Component {
       <div className="nav">
         <AppBar
           showMenuIconButton={false}
-          title="tbd"
-          titleStyle={{ color: '#E8AEB7' }}
+          title="Jam with Friends"
+          titleStyle={{ color: '#E8AEB7', cursor: 'pointer', flex: '' }}
           onTitleTouchTap={() => { this.context.router.push('/'); }}
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', height: '100%' }}
           iconElementRight={
