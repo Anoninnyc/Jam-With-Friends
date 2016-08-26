@@ -8,7 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
 // Utils
-import { showErrorMessage, mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
+import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -59,28 +59,24 @@ class UserMakeInstrument extends Component {
   }
 
   keyHelper(ID) {
-  //  console.log(this.state.tryingToName);
-    if (!this.state.tryingToName) {
-      console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
-      const keyInfo = JSON.parse(this.state.inMemObject[mapIdsToKeys[ID]]);
-      if (keyInfo === undefined) {
-        showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
-      } else {
-        this.setState({
-          noteValue: keyInfo[1],
-          octaveValue: keyInfo[2],
-          PDValue: keyInfo[3],
-          typeValue: keyInfo[4],
-        });
+    const keyMapped = this.state.inMemObject[mapIdsToKeys[ID]];
+    if (!this.state.tryingToName && keyMapped) {
+      console.log(keyMapped);
+      const keyInfo = JSON.parse(keyMapped);
+      this.setState({
+        noteValue: keyInfo[1],
+        octaveValue: keyInfo[2],
+        PDValue: keyInfo[3],
+        typeValue: keyInfo[4],
+      });
 
-        this.sampleSound();
+      this.sampleSound();
 
-        $(ID).animate({
-          backgroundColor: "black",
-        }, 20).animate({
-          backgroundColor: "white",
-        }, 20);
-      }
+      $(ID).animate({
+        backgroundColor: "black",
+      }, 20).animate({
+        backgroundColor: "white",
+      }, 20);
     }
   }
 
@@ -96,13 +92,7 @@ class UserMakeInstrument extends Component {
       oscillator: {
         type: par4,
       },
-      envelope: {
-        attack: 0.001,
-        decay: 0.1,
-        sustain: 0.1,
-        release: 2,
-        attackCurve: 'linear'
-      }
+      envelope: envelopeValue
     };
     const zimit = new MembraneSynth(config).toMaster();
     zimit.triggerAttackRelease(combo, '8n');
@@ -158,13 +148,13 @@ class UserMakeInstrument extends Component {
     //   }
     // }
     if (name.length === 0) {
-      showErrorMessage("#makeInstErrorMessages", 'Pls name your instrument', 'npo');
+      showErrorMessage("#nameInstErrMessage", 'Pls name your instrument', 'npo');
     //  console.log('you need to name it something!');
     } else if (empty) {
-      showErrorMessage("#makeInstErrorMessages", 'Pls map some keys', 'npi');
+      showErrorMessage("#nameInstErrMessage", 'Pls map some keys', 'npi');
      // console.log('youve not mapped any keys!!!');
     } else if (/\W/.test(name)===true) {
-      showErrorMessage("#makeInstErrorMessages", 'Letters and numbers only please!', 'regexErr');
+      showErrorMessage("#nameInstErrMessage", 'Letters and numbers only please!', 'regexErr');
     } else {
       this.setState({
         inMemObject: {}
@@ -277,7 +267,7 @@ class UserMakeInstrument extends Component {
         <h1>Make Instrument Here!</h1>
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
-          <h1>Step One: Select a Key to map to </h1>
+          <h1>Step One: Select a Key To Map To </h1>
           <DropDownMenu
             value={this.state.keyValue}
             onChange={this.handleKeyChange}
@@ -325,9 +315,9 @@ class UserMakeInstrument extends Component {
           <MenuItem value={4} primaryText="4" />
           <MenuItem value={5} primaryText="5" />
           <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />
-        </DropDownMenu>
+          <MenuItem value={7} primaryText="7" />  
 
+        </DropDownMenu>
 
         Pitch Decay
         <DropDownMenu
@@ -364,10 +354,10 @@ class UserMakeInstrument extends Component {
           floatingLabelText="Name your Instrument"
         />
         <br />
-
+        <div id="nameInstErrMessage" />
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
-        Your current Instrument in Piano form (click to play):
+        <h2>Click your instrument to play!</h2>
         <div id="testPiano" onClick={this.addKeypress} >
           <UserOwnInstrument />
         </div>

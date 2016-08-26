@@ -10,7 +10,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
-import { mapIdsToKeys, mapKeysToIds } from '../utils/helperFunctions';
+import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -69,7 +69,28 @@ class Room extends React.Component {
 
   handleKeypress(e) {
     if (store[this.state.instrument]) {
+      console.log('e.key',e.key);
       store[this.state.instrument](e.key);
+
+      const keyBlack=e.key.toUpperCase();
+
+      if (mapPianoKeysToIds[keyBlack]) {
+            $(mapPianoKeysToIds[keyBlack]).animate({
+              backgroundColor: "black",
+            }, 20).animate({
+              backgroundColor: "white",
+            }, 20);
+      }
+
+      if (mapBlackPianoKeysToIds[keyBlack]) {
+            $(mapBlackPianoKeysToIds[keyBlack]).animate({
+              backgroundColor: "white",
+            }, 20).animate({
+              backgroundColor: "black",
+            }, 20);
+      }
+
+
       if (this.state.startJam) {
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
@@ -93,13 +114,7 @@ class Room extends React.Component {
         oscillator: {
           type,
         },
-        envelope: {
-          attack: 0.001,
-          decay: 0.1,
-          sustain: 0.1,
-          release: 2,
-          attackCurve: 'linear'
-        }
+        envelope: envelopeValue
       };
       // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
@@ -139,13 +154,7 @@ class Room extends React.Component {
           oscillator: {
             type: info[2],
           },
-          envelope: {
-            attack: 0.001,
-            decay: 0.1,
-            sustain: 0.1,
-            release: 2,
-            attackCurve: 'linear'
-          }
+          envelope: envelopeValue
         };
         const zimit = new MembraneSynth(config).toMaster();
         zimit.triggerAttackRelease(combo, '8n');

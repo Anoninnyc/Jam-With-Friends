@@ -74,16 +74,14 @@ body {
 
 #userPiano {
   position: relative;
-  top: 370px;
-  left:280px;
   margin: 0 auto;
 }
 
 #userDrums {
   position: relative;
-  top: 370px;
-  left:450px;
-  margin:auto;
+  margin: auto;
+  position: relative;
+  margin: auto;
 }
 
 .friendInstrument {
@@ -278,51 +276,50 @@ body {
 
 #thir {
  position: absolute;
-  left:5.2%;
-  top:-0.59%;
+ left:34px;
+ top:-0.8%;
 }
 
 #fourt {
   position: absolute;
-  left:13.7%;
-  top:-0.59%;
+  left:87px;
+  top:-0.8%;
 }
 
 #fift {
   position: absolute;
-  left:30.7%;
-  top:-0.59%;
-
+  left: 195px;
+  top:-0.8%;
 }
 
 #sixt {
   position: absolute;
-  left:38.5%;
-  top:-0.59%;
+  left: 247px;
+  top:-0.8%;
 }
 
 #sevent {
   position: absolute;
-  left:47%;
-  top:-0.59%;
+  left:300px;
+  top:-0.8%;
 }
 
 #eight {
   position: absolute;
-  left:64%;
-  top:-0.59%;
+  left:408px;
+  top:-0.8%;
 }
 
 #ninet {
   position: absolute;
-  left:72%;
-  top:-0.59%;
+ left:460px;
+  top:-0.8%;
 }
 
 #twenty {
   position: absolute;
-  left:89%;
-  top:-0.59%;
+  
+  top:-0.5%;
 }
 
 #pianoInst {
@@ -331,83 +328,103 @@ body {
   background-color: red;
  left:20%;
 }
+.instrumentContainer {
+   -webkit-box-align:center;
+   -webkit-box-pack:center;
+   display:-webkit-box;
+ }
 
 /*DRUMS!!!*/
+#cs {
+position: relative;
+}
+
 #urC {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:142px;
- height:142px;
- border:0.0001px solid transparent;
- top:8%;
- left:14%;
+  position: relative;
+  border-radius: 100%;
+  background-color: none;
+  width: 142px;
+  height: 142px;
+  border: 0.001px solid transparent;
+  top: -330px;
+  left: 70px;
+}
+
+#kickDrum {
+  position: relative;
+  border-radius: 100%;
+  background-color: none;
+  width: 20px;
+  height: 20px;
+  border: solid transparent;
+  top: -238px;
+  left: 252px;
 }
 
 #nextC {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:95px;
- height:95px;
- border:0.0001px solid transparent;
- top:44%;
- left:13%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 95px;
+  height: 95px;
+  border: 0.001px solid transparent;
+  top: 160px;
+  left: 65px;
 }
 
 #brDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:102px;
- height:102px;
- border:0.0001px solid transparent;
- top:61%;
- left:24%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 102px;
+  height: 102px;
+  border: 0.001px solid transparent;
+  top: 220px;
+  left: 117px;
 }
 
 #rsDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:63px;
- height:63px;
- border:0.0001px solid transparent;
- top:43%;
- left:36%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 63px;
+  height: 63px;
+  border: 0.001px solid transparent;
+  top: 155px;
+  left: 178px;
 }
 
 #lsDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:77px;
- height:77px;
- border:0.0001px solid transparent;
- top:41%;
- left:52%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 77px;
+  height: 77px;
+  border: 0.001px solid transparent;
+  top: 147px;
+  left: 256px;
 }
 
 #tomDrum{
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:135px;
- height:135px;
- border:0.0001px solid transparent;
- top:56%;
- left:62%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 135px;
+  height: 135px;
+  border: 0.001px solid transparent;
+  top: 200px;
+  left: 305px;
 }
 
 #urCymbal{
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:141px;
- height:141px;
- border:0.0001px solid transparent;
- top:18%;
- left:65.5%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 141px;
+  height: 141px;
+  border: 0.001px solid transparent;
+  top: 67px;
+  left: 323px;
 }
 
 .instrument {
@@ -458,7 +475,7 @@ body {
 
 
 #lpButton {
-font-size: 30px;
+  font-size: 30px;
 }
 
 #introText {

@@ -9,7 +9,7 @@ class Piano extends Component {
 
   render() {
     return (
-      <div>
+      <div id="userPiano">
         <div className="key" id="1" />
         <div className="key" id="2" />
         <div className="key" id="3" />
@@ -20,8 +20,6 @@ class Piano extends Component {
         <div className="key" id="8" />
         <div className="key" id="9" />
         <div className="key" id="10" />
-        <div className="key" id="11" />
-        <div className="key" id="12" />
         <div className="blackKey" id="thir" />
         <div className="blackKey" id="fourt" />
         <div className="blackKey" id="fift" />
@@ -29,8 +27,6 @@ class Piano extends Component {
         <div className="blackKey" id="sevent" />
         <div className="blackKey" id="eight" />
         <div className="blackKey" id="ninet" />
-        <div className="blackKey" id="twenty" />
-
       </div>
     );
   }
