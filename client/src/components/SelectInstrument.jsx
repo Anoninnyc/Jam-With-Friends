@@ -41,13 +41,13 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
         {
           instruments.concat(extraInstruments.map(a => (
              `Your Instrument: ${a.instrumentName||a.name}`
-          ))).map(instrument => (
-          instrument[0]==="Y"?<h1>{instrument}</h1>:
+          ))).map((instrument, index) => (
+          instrument[0]==="Y"?<h1 key={index}>{instrument}</h1>:
             <img
               src={`/assets/${instrument}.svg`}
               alt={instrument}
               onLoad={fixCarouselHeight}
-              key={instrument}
+              key={index}
             />
           ))
         }

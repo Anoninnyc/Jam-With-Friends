@@ -16,7 +16,9 @@ const NavMenuIcon = (props) => (
     }
 
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+    className="menu"
+    menuStyle={{ backgroundColor: 'rgba(184, 225, 255, 0.5)', color: '#6F8695' }}
   >
     {!props.loggedIn?<MenuItem
       primaryText="Login"
@@ -26,9 +28,10 @@ const NavMenuIcon = (props) => (
       primaryText="Sign up"
       containerElement={<Link to="/signup" />}
     />:null}
-    {!props.loggedIn?<a href="/auth/facebook"><MenuItem
+    {!props.loggedIn?<MenuItem
       primaryText="LI with facebook!"
-    /></a>:null}
+      onClick={props.FBAuth}
+    />:null}
     {props.loggedIn?<MenuItem
       onClick={props.clearSessions}
       primaryText="Signout!"
@@ -43,6 +46,7 @@ const NavMenuIcon = (props) => (
 
 NavMenuIcon.propTypes = {
   loggedIn: React.PropTypes.bool,
+  FBAuth: React.PropTypes.func,
   clearSessions: React.PropTypes.func,
 };
 

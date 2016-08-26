@@ -268,7 +268,7 @@ class CreateOrJoin extends Component {
 
   render() {
     return (
-      <div className="create-or-join-view">
+      <div className="lobby">
         <div
           id="create-room-view"
           style={{
@@ -360,7 +360,7 @@ class CreateOrJoin extends Component {
                   <Menu onItemTouchTap={this.handleSendToPrivRoom}>
                     {
                       this.state.privateRooms.map((room, key) => (
-                        <MenuItem value={room.slice(9)} primaryText={room.slice(9)} />
+                        <MenuItem value={room.slice(9)} primaryText={room.slice(9)} key={key} />
                       ))
                     }
                   </Menu>
