@@ -142,12 +142,21 @@ class UserMakeInstrument extends Component {
     currentInMemObj.name = name;
     currentInMemObj.userName = this.props.user;
     let empty = true;
-    for (const key in currentInMemObj) {
-      if (key.length === 1) {
-       // console.log('a key exists!');
+
+    const keys = Object.keys(currentInMemObj);
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i].length === 1) {
         empty = false;
       }
     }
+    // in case something breaks --- this was refactored into the above for loop:
+
+    // for (const key in currentInMemObj) {
+    //   if (key.length === 1) {
+    //    // console.log('a key exists!');
+    //     empty = false;
+    //   }
+    // }
     if (name.length === 0) {
       showErrorMessage("#makeInstErrorMessages", 'Pls name your instrument', 'npo');
     //  console.log('you need to name it something!');
@@ -316,7 +325,7 @@ class UserMakeInstrument extends Component {
           <MenuItem value={4} primaryText="4" />
           <MenuItem value={5} primaryText="5" />
           <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />     
+          <MenuItem value={7} primaryText="7" />
         </DropDownMenu>
 
 
@@ -350,7 +359,7 @@ class UserMakeInstrument extends Component {
         <RaisedButton label="Map Sound to Key" onClick={this.mapThat} /><br />
         <TextField
           onClick={this.killKeypress}
-          ref="instName"
+          ref={"instName"}
           hintText="Only Letters and Numbers Please"
           floatingLabelText="Name your Instrument"
         />
@@ -370,10 +379,11 @@ class UserMakeInstrument extends Component {
 
 UserMakeInstrument.propTypes = {
   params: React.PropTypes.object,
-  logIn: React.PropTypes.func,
+  socket: React.PropTypes.object,
   userInstruments: React.PropTypes.array,
+  logIn: React.PropTypes.func,
   updateUserInstrument: React.PropTypes.func,
-  user: React.PropTypes.object,
+  user: React.PropTypes.string,
 };
 
 UserMakeInstrument.contextTypes = {
