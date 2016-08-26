@@ -1,39 +1,65 @@
-#roche {
-  background-image: url('http://bit.ly/2aMzQ3b');
-  position: absolute;
+html {
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-size: cover;
+  font-family: 'Roboto', 'Arial', 'sans-serif'
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.child {
+  height: 90%;
+  margin: 0 auto;
+}
+
+.nav {
+  width: 100%;
+  height: 10%;
 }
 
 #landingPage {
-  position:absolute;
+  text-align: center;
   height: 100%;
   width: 100%;
-  background-image: url("https://thumbs.dreamstime.com/z/musical-background-6057899.jpg");
+  background: url(/assets/background_500.png) repeat center bottom;
 }
 
-#landingPage h1 {
+.greeting {
   margin: 0 auto;
   text-align: center;
-}
-
-.joinRoom, .createRoom {
-  margin: 2% auto;
+  color: #E18335;
+  padding-top: 40px;
+  padding-bottom: 6px;
+  font-size: 32px;
 }
 
 #landingPage .divider {
-  width: 25%;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.createRoom {
   margin: 2% auto;
+  height: 60%;
+  position: relative;
+}
+
+.lobby {
+  width: 80%;
+  margin: 0 10%;
 }
 
 #jamroom{
-  position: absolute;
   width: 100%;
   height: 100%;
-  background-size: 100%;
-  background-size: cover;
 }
 
 #userPiano {
@@ -82,13 +108,6 @@
   top: 20%;
   left: 25%;
   margin: 0 auto;
-}
-
-#display-inst-name {
-  text-align: center;
-  margin: 0 auto;
-  color: #2FD2DE;
-  text-shadow: #2e2e2e 0 4px 5px;
 }
 
 @keyframes bounce {
@@ -433,22 +452,10 @@ position: relative;
   font-size: 30px;
 }
 
-
-#callToAction {
-  position:absolute;
-  font-size: 45px;
-  font-weight: bold ;
-  top: 55%;
-  left: 36%;
-  font-family: Impact, Charcoal, sans-serif;
-}
-
 #introText {
   padding:7px;
   border-radius:20%;
   color:white;
-  border:0.007px solid transparent;
-  background-image:url('http://bit.ly/2b2ePzs');
   width:350px;
   position:absolute;
   font-size: 15px;
@@ -482,11 +489,6 @@ position: relative;
 
 input:invalid {
   border: 1px solid red;
-}
-
-.child {
-  margin: 0 auto;
-  padding: 5%;
 }
 
 .beatSequencer {

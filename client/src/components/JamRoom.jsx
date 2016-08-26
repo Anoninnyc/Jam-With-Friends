@@ -33,7 +33,6 @@ class JamRoom extends Component {
     console.log(this.props.extraInstruments);
     return (
       <div id="jamroom">
-        <div id="display-inst-name"><h1>You are playing {this.props.instrument}</h1></div>
         <div>
           {this.props.instrument === 'drums' ? <Drums /> : null}
           {this.props.instrument === 'piano' ? <Piano /> : null}

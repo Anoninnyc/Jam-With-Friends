@@ -1,6 +1,7 @@
 // Modules
 import React from 'react';
 import { MembraneSynth } from "tone";
+import $ from 'jquery';
 // Components
 import SelectInstrument from './SelectInstrument';
 import JamRoom from './JamRoom';
@@ -111,7 +112,7 @@ class Room extends React.Component {
         pitchDecay: pd||0.1,
         octaves: 7,
         oscillator: {
-          type: type,
+          type,
         },
         envelope: envelopeValue
       };
@@ -214,7 +215,7 @@ class Room extends React.Component {
 
   render() {
     const uiNames=this.props.userInstruments.map(a => (a.instrumentName));
-     console.log('what you want', uiNames, 'tsi', 'current instrument', this.state.instrument);
+    console.log('what you want', uiNames, 'tsi', 'current instrument', this.state.instrument);
 
     return (
       <div>
@@ -268,7 +269,7 @@ class Room extends React.Component {
 
 Room.propTypes = {
   params: React.PropTypes.object,
-  userInstruments: React.PropTypes.func.isRequired,
+  userInstruments: React.PropTypes.array,
   socket: React.PropTypes.object,
   logIn: React.PropTypes.func
 };
