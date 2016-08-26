@@ -268,7 +268,7 @@ class CreateOrJoin extends Component {
 
   render() {
     return (
-      <div className="create-or-join-view">
+      <div className="lobby">
         <div
           id="create-room-view"
           style={{
