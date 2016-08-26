@@ -265,9 +265,9 @@ class UserMakeInstrument extends Component {
     return (
       <div id="UserMakeInstrumentRoom">
         <h1>Make Instrument Here!</h1>
-        <div id="currentInst" /> <br />
+        <div id="currentInst" />
         <div className="selectKey" id="selectKeys_${id}">
-          <h1>Step One: Select a Key To Map To </h1>
+          <h2>Step One: Select a Key To Map To </h2>
           <DropDownMenu
             value={this.state.keyValue}
             onChange={this.handleKeyChange}
@@ -284,8 +284,8 @@ class UserMakeInstrument extends Component {
             <MenuItem value={"L"} primaryText="L" />
           </DropDownMenu>
         </div>
-        <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /><br />
-        <h2>Step Two: Set Your Parameters</h2><br />
+        <div id="deleteKey"> <RaisedButton id="deleteKeyAgain"  label="Delete Key Mapping" onClick={this.deleteKey} /></div>
+        <h2>Step Two: Set Your Parameters</h2>
 
         Note
         <DropDownMenu
@@ -344,8 +344,8 @@ class UserMakeInstrument extends Component {
           <MenuItem value={"square"} primaryText="square" />
           <MenuItem value={"sawtooth"} primaryText="sawtooth" />
           <MenuItem value={"triangle"} primaryText="triangle" />
-        </DropDownMenu> <br />
-        <h1> Step Three </h1>
+        </DropDownMenu> <br /><br />
+        <text id="step3">Step Three: </text>
         <RaisedButton label="Map Sound to Key" onClick={this.mapThat} /><br />
         <TextField
           onClick={this.killKeypress}
@@ -356,7 +356,6 @@ class UserMakeInstrument extends Component {
         <br />
         <div id="nameInstErrMessage" />
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
-        <br />
         <h2>Click your instrument to play!</h2>
         <div id="testPiano" onClick={this.addKeypress} >
           <UserOwnInstrument />
