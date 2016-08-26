@@ -21,12 +21,8 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
   };
   // why a while loop?  maybe for loop?
   let startIndex = 0;
-  // own i
+  // own instrument will be the instrument name if it is a pre-built instrument, and will a the string 'Your instrument is: instrument' otherwise.
   if (ownInstrument) {
-    console.log('start');
-    console.log('ownInstrument: ', ownInstrument);
-    console.log('instruments: ', instruments);
-    console.log('extraInstruments: ', extraInstruments);
     if (ownInstrument[0] === 'Y') {
       // console.log(extraInstruments[startIndex - instruments.length].instrumentName !== ownInstrument.slice(17));
       startIndex = instruments.length;
@@ -36,11 +32,10 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
     } else {
       while (instruments[startIndex] !== ownInstrument) {
         startIndex++;
-      };  
+      }
     }
-    console.log('done');
   } else {
-    console.log('Nope!')
+    console.log('There was an error.  Own instrument is undefined');
   }
 
   console.log('extraInstruments', extraInstruments);
