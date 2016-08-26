@@ -14,6 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
+import Paper from 'material-ui/Paper';
 
 class CreateOrJoin extends Component {
   constructor(props) {
@@ -270,7 +271,14 @@ class CreateOrJoin extends Component {
   render() {
     return (
       <div className="lobby-container">
-      <div className="lobby">
+      <Paper
+        style={{
+          width: '70%',
+          margin: '0 auto',
+          height: '100%',
+        }}
+        zDepth={3}
+      >
         <div className="greeting">Green Room</div>
         <section className="divider green-room-divider">
           <Divider />
@@ -456,7 +464,7 @@ class CreateOrJoin extends Component {
             </Table>
           </div>
         </div>
-      </div>
+      </Paper>
       </div>
     );
   }
