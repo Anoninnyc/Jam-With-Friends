@@ -5,6 +5,6 @@
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 yum -y install nodejs npm --enablerepo=epel
 yum -y install mysql-server git curl
-cp /home/ec2-user/.env /var/app/current -iv
+cp /home/ec2-user/.env /var/app/current -ivf # no prompt, it's faster
 
 npm install -g forever
