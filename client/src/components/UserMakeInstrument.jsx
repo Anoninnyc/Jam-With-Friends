@@ -148,13 +148,13 @@ class UserMakeInstrument extends Component {
     //   }
     // }
     if (name.length === 0) {
-      showErrorMessage("#makeInstErrorMessages", 'Pls name your instrument', 'npo');
+      showErrorMessage("#nameInstErrMessage", 'Pls name your instrument', 'npo');
     //  console.log('you need to name it something!');
     } else if (empty) {
-      showErrorMessage("#makeInstErrorMessages", 'Pls map some keys', 'npi');
+      showErrorMessage("#nameInstErrMessage", 'Pls map some keys', 'npi');
      // console.log('youve not mapped any keys!!!');
     } else if (/\W/.test(name)===true) {
-      showErrorMessage("#makeInstErrorMessages", 'Letters and numbers only please!', 'regexErr');
+      showErrorMessage("#nameInstErrMessage", 'Letters and numbers only please!', 'regexErr');
     } else {
       this.setState({
         inMemObject: {}
@@ -267,7 +267,7 @@ class UserMakeInstrument extends Component {
         <h1>Make Instrument Here!</h1>
         <div id="currentInst" /> <br />
         <div className="selectKey" id="selectKeys_${id}">
-          <h1>Step One: Select a Key to map to </h1>
+          <h1>Step One: Select a Key To Map To </h1>
           <DropDownMenu
             value={this.state.keyValue}
             onChange={this.handleKeyChange}
@@ -354,6 +354,7 @@ class UserMakeInstrument extends Component {
           floatingLabelText="Name your Instrument"
         />
         <br />
+        <div id="nameInstErrMessage" /> 
 
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
