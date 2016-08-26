@@ -501,11 +501,13 @@ position: relative;
 }
 
 #UserMakeInstrumentRoom {
-  position:absolute;
-  top:30%;
-  left:50%;
-  text-align:center;
+  position: static;
+    top: 30%;
+    left: 50%;
+    margin: 0px;
+    background: url(/assets/background_500.png) repeat center bottom;
 }
+
 
 #selectKeys {
   position:absolute;
@@ -604,6 +606,18 @@ input:invalid {
 
 #UOIInRoom {
   text-align:center;
+}
+
+
+div#deleteKey {
+    position: relative;
+    left: 140px;
+    top: -35px;
+}
+
+text#step3 {
+  font-size: 150%;
+  font-weight: bold;
 }
 
 .custom-inst-icon {
