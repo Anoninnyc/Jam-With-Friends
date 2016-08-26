@@ -267,120 +267,120 @@ class UserMakeInstrument extends Component {
     const octaves = [1, 2, 3, 4, 5, 6, 7];
     return (
       <div id="roomContainer">
-      <div id="UserMakeInstrumentRoom">
-      <Paper
-          style={{
-            width: '70%',
-            margin: '0 auto',
-            height: '100%',
-          }}
-          zDepth={3}
-        >
-
-        <h1 id="UMIHeader">Make Instrument Here!</h1>
-        <div id="currentInst" />
-        <div className="selectKey" id="selectKeys_${id}">
-          <h2 className="step">Step One: Select a Key To Map To </h2>
-          <DropDownMenu
-            id="stepOneMenu"
-            value={this.state.keyValue}
-            onChange={this.handleKeyChange}
-            autoWidth={false}
+        <div id="UserMakeInstrumentRoom">
+          <Paper
+            style={{
+              width: '70%',
+              margin: '0 auto',
+              height: '100%',
+            }}
+            zDepth={3}
           >
-            <MenuItem value={"A"} primaryText="A" />
-            <MenuItem value={"S"} primaryText="S" />
-            <MenuItem value={"D"} primaryText="D" />
-            <MenuItem value={"F"} primaryText="F" />
-            <MenuItem value={"G"} primaryText="G" />
-            <MenuItem value={"H"} primaryText="H" />
-            <MenuItem value={"J"} primaryText="J" />
-            <MenuItem value={"K"} primaryText="K" />
-            <MenuItem value={"L"} primaryText="L" />
-          </DropDownMenu>
-        </div>
-        <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
-        <h2 className="step">Step Two: Set Your Parameters</h2>
-        <div id="UMIParams">
-        Note
-        <DropDownMenu
-          value={this.state.noteValue}
-          onChange={this.handleNoteChange}
-          autoWidth={false}
-        >
-          <MenuItem value={"A"} primaryText="A" />
-          <MenuItem value={"B"} primaryText="B" />
-          <MenuItem value={"C"} primaryText="C" />
-          <MenuItem value={"D"} primaryText="D" />
-          <MenuItem value={"E"} primaryText="E" />
-          <MenuItem value={"F"} primaryText="F" />
-          <MenuItem value={"G"} primaryText="G" />
-        </DropDownMenu>
+            <br />
+            <h1 id="UMIHeader">Make Instrument Here!</h1>
+            <Divider />
+            <div id="currentInst" />
+            <div className="selectKey" id="selectKeys_${id}">
+              <h2 className="step">Step One: Select a Key To Map To </h2>
+              <DropDownMenu
+                id="stepOneMenu"
+                value={this.state.keyValue}
+                onChange={this.handleKeyChange}
+                autoWidth={false}
+              >
+                <MenuItem value={"A"} primaryText="A" />
+                <MenuItem value={"S"} primaryText="S" />
+                <MenuItem value={"D"} primaryText="D" />
+                <MenuItem value={"F"} primaryText="F" />
+                <MenuItem value={"G"} primaryText="G" />
+                <MenuItem value={"H"} primaryText="H" />
+                <MenuItem value={"J"} primaryText="J" />
+                <MenuItem value={"K"} primaryText="K" />
+                <MenuItem value={"L"} primaryText="L" />
+              </DropDownMenu>
+            </div>
+            <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
+            <h2 className="step">Step Two: Set Your Parameters</h2>
+            <div id="UMIParams">
+            Note
+              <DropDownMenu
+                value={this.state.noteValue}
+                onChange={this.handleNoteChange}
+                autoWidth={false}
+              >
+                <MenuItem value={"A"} primaryText="A" />
+                <MenuItem value={"B"} primaryText="B" />
+                <MenuItem value={"C"} primaryText="C" />
+                <MenuItem value={"D"} primaryText="D" />
+                <MenuItem value={"E"} primaryText="E" />
+                <MenuItem value={"F"} primaryText="F" />
+                <MenuItem value={"G"} primaryText="G" />
+              </DropDownMenu>
 
 
-        Octave
-        <DropDownMenu
-          value={this.state.octaveValue}
-          onChange={this.handleOctaveChange}
-          autoWidth={false}
-        >
-          <MenuItem value={1} primaryText="1" />
-          <MenuItem value={2} primaryText="2" />
-          <MenuItem value={3} primaryText="3" />
-          <MenuItem value={4} primaryText="4" />
-          <MenuItem value={5} primaryText="5" />
-          <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />
+            Octave
+              <DropDownMenu
+                value={this.state.octaveValue}
+                onChange={this.handleOctaveChange}
+                autoWidth={false}
+              >
+                <MenuItem value={1} primaryText="1" />
+                <MenuItem value={2} primaryText="2" />
+                <MenuItem value={3} primaryText="3" />
+                <MenuItem value={4} primaryText="4" />
+                <MenuItem value={5} primaryText="5" />
+                <MenuItem value={6} primaryText="6" />
+                <MenuItem value={7} primaryText="7" />
+              </DropDownMenu>
 
-        </DropDownMenu>
-
-        Pitch Decay
-        <DropDownMenu
-          value={this.state.PDValue}
-          onChange={this.handlePDChange}
-          autoWidth={false}
-        >
-          <MenuItem value={0.1} primaryText="0.1" />
-          <MenuItem value={0.2} primaryText="0.2" />
-          <MenuItem value={0.3} primaryText="0.3" />
-          <MenuItem value={0.4} primaryText="0.4" />
-          <MenuItem value={0.5} primaryText="0.5" />
-          <MenuItem value={0.6} primaryText="0.6" />
-          <MenuItem value={0.7} primaryText="0.7" />
-        </DropDownMenu>
+            Pitch Decay
+              <DropDownMenu
+                value={this.state.PDValue}
+                onChange={this.handlePDChange}
+                autoWidth={false}
+              >
+                <MenuItem value={0.1} primaryText="0.1" />
+                <MenuItem value={0.2} primaryText="0.2" />
+                <MenuItem value={0.3} primaryText="0.3" />
+                <MenuItem value={0.4} primaryText="0.4" />
+                <MenuItem value={0.5} primaryText="0.5" />
+                <MenuItem value={0.6} primaryText="0.6" />
+                <MenuItem value={0.7} primaryText="0.7" />
+              </DropDownMenu>
 
         Sound Type
-        <DropDownMenu
-          value={this.state.typeValue}
-          onChange={this.handleTypeChange}
-          autoWidth={false}
-        >
-          <MenuItem value={"sine"} primaryText="sine" />
-          <MenuItem value={"square"} primaryText="square" />
-          <MenuItem value={"sawtooth"} primaryText="sawtooth" />
-          <MenuItem value={"triangle"} primaryText="triangle" />
-        </DropDownMenu>
-        </div> <br /><br />
-        <div id='s3c'><text >Step Three: </text>
-        <RaisedButton id='mapSToKey' label="Map Sound to Key" onClick={this.mapThat} /><br />
+              <DropDownMenu
+                value={this.state.typeValue}
+                onChange={this.handleTypeChange}
+                autoWidth={false}
+              >
+                <MenuItem value={"sine"} primaryText="sine" />
+                <MenuItem value={"square"} primaryText="square" />
+                <MenuItem value={"sawtooth"} primaryText="sawtooth" />
+                <MenuItem value={"triangle"} primaryText="triangle" />
+              </DropDownMenu>
+            </div> <br /><br />
+            <div id="s3c"><text >Step Three: </text>
+              <RaisedButton id="mapSToKey" label="Map Sound to Key" onClick={this.mapThat} /><br />
+            </div>
+            <div id="instNames">
+              <TextField
+                onClick={this.killKeypress}
+                ref={"instName"}
+                hintText="Only Letters and Numbers Please"
+                floatingLabelText="Name your Instrument"
+              />
+              <br />
+              <div id="nameInstErrMessage" />
+              <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
+            </div>
+            <h2 className="step">Click your instrument to play!</h2>
+            <div id="testPiano" onClick={this.addKeypress} >
+              <UserOwnInstrument />
+            </div>
+            <div id="makeInstErrorMessages" />
+          </Paper>
         </div>
-        <div id='instNames'>
-        <TextField
-          onClick={this.killKeypress}
-          ref={"instName"}
-          hintText="Only Letters and Numbers Please"
-          floatingLabelText="Name your Instrument"
-        />
-        <br />
-        <div id="nameInstErrMessage" />
-        <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
-        </div>
-        <h2 className="step">Click your instrument to play!</h2>
-        <div id="testPiano" onClick={this.addKeypress} >
-          <UserOwnInstrument />
-        </div>
-        <div id="makeInstErrorMessages" />
-      </Paper>
-      </div>
       </div>
     );
   }
