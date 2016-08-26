@@ -7,6 +7,9 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
+
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
@@ -263,7 +266,17 @@ class UserMakeInstrument extends Component {
     const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const octaves = [1, 2, 3, 4, 5, 6, 7];
     return (
+      <div id='roomContainer'>
       <div id="UserMakeInstrumentRoom">
+      <Paper
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            height: '100%',
+          }}
+          zDepth={3}
+        >
+
         <h1>Make Instrument Here!</h1>
         <div id="currentInst" />
         <div className="selectKey" id="selectKeys_${id}">
@@ -284,7 +297,7 @@ class UserMakeInstrument extends Component {
             <MenuItem value={"L"} primaryText="L" />
           </DropDownMenu>
         </div>
-        <div id="deleteKey"> <RaisedButton id="deleteKeyAgain"  label="Delete Key Mapping" onClick={this.deleteKey} /></div>
+        <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
         <h2>Step Two: Set Your Parameters</h2>
 
         Note
@@ -361,6 +374,8 @@ class UserMakeInstrument extends Component {
           <UserOwnInstrument />
         </div>
         <div id="makeInstErrorMessages" />
+      </Paper>
+      </div>
       </div>
     );
   }

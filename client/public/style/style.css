@@ -501,11 +501,13 @@ position: relative;
 }
 
 #UserMakeInstrumentRoom {
-  position:absolute;
-  top:30%;
-  left:50%;
-  text-align:center;
+  position: static;
+    top: 30%;
+    left: 50%;
+    margin: 0px;
+    background: url(/assets/background_500.png) repeat center bottom;
 }
+
 
 #selectKeys {
   position:absolute;
