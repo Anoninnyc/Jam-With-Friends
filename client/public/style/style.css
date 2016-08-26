@@ -606,6 +606,7 @@ input:invalid {
   text-align:center;
 }
 
+
 div#deleteKey {
     position: relative;
     left: 140px;
@@ -615,4 +616,16 @@ div#deleteKey {
 text#step3 {
   font-size: 150%;
   font-weight: bold;
+
+}
+
+.custom-inst-icon {
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  height: 50%;
+  font-size: 1.4rem;
+  color: white;
+  bottom: 130px;
+  left: 65px;
 }

@@ -10,7 +10,7 @@ const PeerBubble = ({ peer, handleClick, self, extraInstruments }) => (
     <KickDrumIcon style={{ width: 200, height: 'auto' }} />
     {
       peer.instrument ?
-        <div>
+        <div style={{ position: 'relative' }}>
           <InstrumentIcon
             instrument={peer.instrument}
             className="jamroom-instrument"
