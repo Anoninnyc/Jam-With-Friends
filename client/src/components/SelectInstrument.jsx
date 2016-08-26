@@ -21,10 +21,26 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
   };
   let startIndex = 0;
   if (ownInstrument) {
-    while (instruments[startIndex] !== ownInstrument) {
-      startIndex++;
+    console.log('start');
+    console.log('ownInstrument: ', ownInstrument);
+    console.log('instruments: ', instruments);
+    console.log('extraInstruments: ', extraInstruments);
+    if (ownInstrument[0] === 'Y') {
+      // console.log(extraInstruments[startIndex - 3].instrumentName !== ownInstrument.slice(17));
+      startIndex = instruments.length;
+      while (extraInstruments[startIndex - 3].instrumentName !== ownInstrument.slice(17)) {
+        startIndex++;
+      }
+    } else {
+      while (instruments[startIndex] !== ownInstrument) {
+        startIndex++;
+      };  
     }
+    console.log('done');
+  } else {
+    console.log('Nope!')
   }
+
   console.log('extraInstruments', extraInstruments);
   return (
     <div style={{ textAlign: "center" }}>
