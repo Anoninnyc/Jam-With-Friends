@@ -334,26 +334,27 @@ body {
 #cs {
 position: relative;
 }
+
 #urC {
-    position: relative;
-    border-radius: 100%;
-    background-color: none;
-    width: 142px;
-    height: 142px;
-    border: 1px solid black;
-    top: -325px;
-    left: 4.55%;
+  position: relative;
+  border-radius: 100%;
+  background-color: none;
+  width: 142px;
+  height: 142px;
+  border: 0.001px solid transparent;
+  top: -330px;
+  left: 70px;
 }
 
 #nextC {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:95px;
- height:95px;
- border:1px solid black;
- top:44%;
- left:4.25%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 95px;
+  height: 95px;
+  border: 0.001px solid transparent;
+  top: 160px;
+  left: 65px;
 }
 
 #brDrum {
@@ -362,53 +363,53 @@ position: relative;
   background-color: none;
   width: 102px;
   height: 102px;
-  border: 1px solid black;
-  top: 61%;
-  left: 8%;
+  border: 0.001px solid transparent;
+  top: 220px;
+  left: 117px;
 }
 
 #rsDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:63px;
- height:63px;
- border:1px solid black;
- top:43%;
- left:12%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 63px;
+  height: 63px;
+  border: 0.001px solid transparent;
+  top: 155px;
+  left: 178px;
 }
 
 #lsDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:77px;
- height:77px;
- border:1px solid black;
- top:41%;
- left:17.3%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 77px;
+  height: 77px;
+  border: 0.001px solid transparent;
+  top: 147px;
+  left: 256px;
 }
 
 #tomDrum{
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:135px;
- height:135px;
- border:1px solid black;
- top:56%;
- left:21%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 135px;
+  height: 135px;
+  border: 0.001px solid transparent;
+  top: 200px;
+  left: 305px;
 }
 
 #urCymbal{
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:141px;
- height:141px;
- border:1px solid black;
- top:18%;
- left:22%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: none;
+  width: 141px;
+  height: 141px;
+  border: 0.001px solid transparent;
+  top: 67px;
+  left: 323px;
 }
 
 .instrument {
