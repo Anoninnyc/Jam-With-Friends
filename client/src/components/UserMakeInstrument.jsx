@@ -59,25 +59,24 @@ class UserMakeInstrument extends Component {
   }
 
   keyHelper(ID) {
-  const keyMapped = this.state.inMemObject[mapIdsToKeys[ID]];
+    const keyMapped = this.state.inMemObject[mapIdsToKeys[ID]];
     if (!this.state.tryingToName && keyMapped) {
       console.log(keyMapped);
       const keyInfo = JSON.parse(keyMapped);
-        this.setState({
-          noteValue: keyInfo[1],
-          octaveValue: keyInfo[2],
-          PDValue: keyInfo[3],
-          typeValue: keyInfo[4],
-        });
+      this.setState({
+        noteValue: keyInfo[1],
+        octaveValue: keyInfo[2],
+        PDValue: keyInfo[3],
+        typeValue: keyInfo[4],
+      });
 
-        this.sampleSound();
+      this.sampleSound();
 
-        $(ID).animate({
-          backgroundColor: "black",
-        }, 20).animate({
-          backgroundColor: "white",
-        }, 20);
-      }
+      $(ID).animate({
+        backgroundColor: "black",
+      }, 20).animate({
+        backgroundColor: "white",
+      }, 20);
     }
   }
 
