@@ -19,16 +19,18 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       buttonText: "Done"
     }
   };
+  // why a while loop?  maybe for loop?
   let startIndex = 0;
+  // own i
   if (ownInstrument) {
     console.log('start');
     console.log('ownInstrument: ', ownInstrument);
     console.log('instruments: ', instruments);
     console.log('extraInstruments: ', extraInstruments);
     if (ownInstrument[0] === 'Y') {
-      // console.log(extraInstruments[startIndex - 3].instrumentName !== ownInstrument.slice(17));
+      // console.log(extraInstruments[startIndex - instruments.length].instrumentName !== ownInstrument.slice(17));
       startIndex = instruments.length;
-      while (extraInstruments[startIndex - 3].instrumentName !== ownInstrument.slice(17)) {
+      while (extraInstruments[startIndex - instruments.length].instrumentName !== ownInstrument.slice(17)) {
         startIndex++;
       }
     } else {
