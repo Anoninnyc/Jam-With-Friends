@@ -7,6 +7,9 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
+
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';
 
@@ -263,11 +266,21 @@ class UserMakeInstrument extends Component {
     const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const octaves = [1, 2, 3, 4, 5, 6, 7];
     return (
+      <div id='roomContainer'>
       <div id="UserMakeInstrumentRoom">
+      <Paper
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            height: '100%',
+          }}
+          zDepth={3}
+        >
+
         <h1>Make Instrument Here!</h1>
-        <div id="currentInst" /> <br />
+        <div id="currentInst" />
         <div className="selectKey" id="selectKeys_${id}">
-          <h1>Step One: Select a Key To Map To </h1>
+          <h2>Step One: Select a Key To Map To </h2>
           <DropDownMenu
             value={this.state.keyValue}
             onChange={this.handleKeyChange}
@@ -284,8 +297,8 @@ class UserMakeInstrument extends Component {
             <MenuItem value={"L"} primaryText="L" />
           </DropDownMenu>
         </div>
-        <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /><br />
-        <h2>Step Two: Set Your Parameters</h2><br />
+        <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
+        <h2>Step Two: Set Your Parameters</h2>
 
         Note
         <DropDownMenu
@@ -315,7 +328,7 @@ class UserMakeInstrument extends Component {
           <MenuItem value={4} primaryText="4" />
           <MenuItem value={5} primaryText="5" />
           <MenuItem value={6} primaryText="6" />
-          <MenuItem value={7} primaryText="7" />  
+          <MenuItem value={7} primaryText="7" />
 
         </DropDownMenu>
 
@@ -344,8 +357,8 @@ class UserMakeInstrument extends Component {
           <MenuItem value={"square"} primaryText="square" />
           <MenuItem value={"sawtooth"} primaryText="sawtooth" />
           <MenuItem value={"triangle"} primaryText="triangle" />
-        </DropDownMenu> <br />
-        <h1> Step Three </h1>
+        </DropDownMenu> <br /><br />
+        <text id="step3">Step Three: </text>
         <RaisedButton label="Map Sound to Key" onClick={this.mapThat} /><br />
         <TextField
           onClick={this.killKeypress}
@@ -356,12 +369,13 @@ class UserMakeInstrument extends Component {
         <br />
         <div id="nameInstErrMessage" />
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
-        <br />
         <h2>Click your instrument to play!</h2>
         <div id="testPiano" onClick={this.addKeypress} >
           <UserOwnInstrument />
         </div>
         <div id="makeInstErrorMessages" />
+      </Paper>
+      </div>
       </div>
     );
   }

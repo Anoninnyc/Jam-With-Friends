@@ -406,6 +406,7 @@ class CreateOrJoin extends Component {
               margin: '0 auto',
               textAlign: 'center',
               padding: '0 10%',
+              marginTop: '10%',
             }}
           >
             <div>
