@@ -21,7 +21,6 @@ class Piano extends Component {
         <div className="key" id="8" />
         <div className="key" id="9" />
         <div className="key" id="10" />
-        <div className="key" id="11" />
         <div className="blackKey" id="thir" />
         <div className="blackKey" id="fourt" />
         <div className="blackKey" id="fift" />

@@ -7,6 +7,7 @@ const Synth = new AudioSynth(context);
 Synth.setOscWave(1);
 
 function playNote(keyPressed) {
+    console.log(keyPressed.charCodeAt(0), keyPressed);
   keyPressed = keyPressed.charCodeAt(0);
   if (keyToNote[keyPressed]) {
     const key = keyToNote[keyPressed][0];
@@ -27,7 +28,6 @@ const keyToNote = {
   107: ['C', 5],
   108: ['D', 5],
   59: ['E', 5],
-  39: ['F', 5],
   13: ['G', 5],
   119: ['C#', 4],
   101: ['D#', 4],

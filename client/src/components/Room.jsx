@@ -68,6 +68,7 @@ class Room extends React.Component {
 
   handleKeypress(e) {
     if (store[this.state.instrument]) {
+      console.log('e.key',e.key);
       store[this.state.instrument](e.key);
 
       const keyBlack=e.key.toUpperCase();
