@@ -354,11 +354,10 @@ class UserMakeInstrument extends Component {
           floatingLabelText="Name your Instrument"
         />
         <br />
-        <div id="nameInstErrMessage" /> 
-
+        <div id="nameInstErrMessage" />
         <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
         <br />
-        Your current Instrument in Piano form (click to play):
+        <h2>Click your instrument to play!</h2>
         <div id="testPiano" onClick={this.addKeypress} >
           <UserOwnInstrument />
         </div>
