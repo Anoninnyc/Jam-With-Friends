@@ -59,13 +59,10 @@ class UserMakeInstrument extends Component {
   }
 
   keyHelper(ID) {
-  //  console.log(this.state.tryingToName);
-    if (!this.state.tryingToName) {
-      console.log(ID, mapIdsToKeys[ID], this.state.inMemObject);
-      const keyInfo = JSON.parse(this.state.inMemObject[mapIdsToKeys[ID]]);
-      if (keyInfo === undefined) {
-        showErrorMessage("#makeInstErrorMessages", 'Please Map To This Key', 'nonExistentMapError');
-      } else {
+  const keyMapped = this.state.inMemObject[mapIdsToKeys[ID]];
+    if (!this.state.tryingToName && keyMapped) {
+      console.log(keyMapped);
+      const keyInfo = JSON.parse(keyMapped);
         this.setState({
           noteValue: keyInfo[1],
           octaveValue: keyInfo[2],
