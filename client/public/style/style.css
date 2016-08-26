@@ -577,6 +577,7 @@ input:invalid {
 #testPiano {
   position:relative;
   top:30%;
+  text-align:center;
  }
  
  #loginContent {
@@ -627,11 +628,14 @@ div#deleteKey {
     position: relative;
     left: 140px;
     top: -35px;
+    text-align:center;
 }
 
 text#step3 {
   font-size: 150%;
   font-weight: bold;
+  position: relative;
+  left: 200px;
 }
 
 .custom-inst-icon {
@@ -643,4 +647,32 @@ text#step3 {
   color: white;
   bottom: 130px;
   left: 65px;
+}
+
+.step {
+  position: relative;
+  text-align: center;
+}
+
+#UMIHeader{
+  text-align: center;
+  margin:0 auto;
+}
+
+#stepOneMenu{
+ text-align: center;
+ left: 300px;
+}
+
+#mapSToKey{
+ text-align: center;
+}
+#s3c {
+  text-align: center;
+}
+#instNames {
+  text-align: center;
+}
+#UMIParams {
+  text-align: center;
 }
