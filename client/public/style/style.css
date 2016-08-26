@@ -310,7 +310,7 @@
  height:142px;
  border:0.0001px solid transparent;
  top:8%;
- left:14%;
+ left: 4.55%;
 }
 
 #nextC {
@@ -321,18 +321,18 @@
  height:95px;
  border:0.0001px solid transparent;
  top:44%;
- left:13%;
+ left:4.25%;
 }
 
 #brDrum {
- position:absolute;
- border-radius:100%;
- background-color: none;
- width:102px;
- height:102px;
- border:0.0001px solid transparent;
- top:61%;
- left:24%;
+  position: absolute;
+  border-radius: 100%;
+  background-color: black;
+  width: 102px;
+  height: 102px;
+  border: 1px solid black;
+  top: 61%;
+  left: 8%;
 }
 
 #rsDrum {
@@ -343,7 +343,7 @@
  height:63px;
  border:0.0001px solid transparent;
  top:43%;
- left:36%;
+ left:12%;
 }
 
 #lsDrum {
@@ -354,7 +354,7 @@
  height:77px;
  border:0.0001px solid transparent;
  top:41%;
- left:52%;
+ left:17.3%;
 }
 
 #tomDrum{
@@ -365,7 +365,7 @@
  height:135px;
  border:0.0001px solid transparent;
  top:56%;
- left:62%;
+ left:21%;
 }
 
 #urCymbal{
@@ -376,7 +376,7 @@
  height:141px;
  border:0.0001px solid transparent;
  top:18%;
- left:65.5%;
+ left:22%;
 }
 
 .instrument {
