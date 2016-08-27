@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import $ from "jquery";
 import { Link } from 'react-router';
+import Paper from 'material-ui/Paper';
 import { showErrorMessage } from '../utils/helperFunctions';
 
 class Signup extends Component {
@@ -34,11 +35,22 @@ class Signup extends Component {
   render() {
     return (
       <div id="signupContent">
-        <TextField floatingLabelText="UserName" hintText="Must be 7+ characters" id="UserNameSignUp" type="text" /><br />
-        <TextField floatingLabelText="Password" hintText="Must be 7+ characters" id="UserNamePass" type="password" /><br />
-        <RaisedButton label="Signup" onClick={() => { this.helperSignup(); }} />
-        <Link to="/login" ><RaisedButton label="Click to Login Instead" /> </Link >
-        <div id="SIMessages"><br /> </div>
+        <Paper
+          style={{
+            width: '70%',
+            margin: '0 auto',
+            height: '100%',
+          }}
+          zDepth={3}
+        >
+          <div id="SIFields">
+            <TextField floatingLabelText="UserName" hintText="Must be 7+ characters" id="UserNameSignUp" type="text" /><br />
+            <TextField floatingLabelText="Password" hintText="Must be 7+ characters" id="UserNamePass" type="password" /><br />
+            <RaisedButton label="Signup" onClick={() => { this.helperSignup(); }} />
+            <Link to="/login" ><RaisedButton label="Click to Login Instead" /> </Link >
+            <div id="SIMessages"><br /> </div>
+          </div>
+        </Paper>
       </div>
     );
   }

@@ -569,10 +569,13 @@ input:invalid {
 }
 
 #signupContent {
-   position:absolute;
-   top:30%;
-   left:40%;
- }
+  position: absolute;
+    width: 100%;
+    margin: 0px;
+    background: url(/assets/background_500.png) repeat center bottom;
+    height: 100%;
+    text-align: center;
+}
 
 #testPiano {
   position:relative;
@@ -580,11 +583,7 @@ input:invalid {
   text-align:center;
  }
  
- #loginContent {
-  position:absolute;
-  top:30%;
-  left:40%;
- }
+ 
 
  #UserMakeInstrumentRoom {
   position:static;
@@ -677,4 +676,26 @@ text#step3 {
 }
 #UMIParams {
   text-align: center;
+}
+
+
+#loginContent{
+  position: absolute;
+  width: 100%;
+  margin: 0px;
+  background: url(/assets/background_500.png) repeat center bottom;
+  height: 100%;
+  text-align: center;
+}
+
+#LIFields{
+  position: absolute;
+  top: 30%;
+  left: 35%;
+}
+
+#SIFields{
+  position: absolute;
+  top: 30%;
+  left: 35%;
 }
