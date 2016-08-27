@@ -570,11 +570,11 @@ input:invalid {
 
 #signupContent {
   position: absolute;
-    width: 100%;
-    margin: 0px;
-    background: url(/assets/background_500.png) repeat center bottom;
-    height: 100%;
-    text-align: center;
+  width: 100%;
+  margin: 0px;
+  background: url(/assets/background_500.png) repeat center bottom;
+  height: 100%;
+  text-align: center;
 }
 
 #testPiano {
