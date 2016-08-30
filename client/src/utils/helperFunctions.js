@@ -82,6 +82,19 @@ const mapDrumIDToSounds= {
   '#urCymbal': 'sound',
 };
 
+const soundConfig = (type, PD) => (
+
+  {
+    pitchDecay: PD||0.1,
+    octaves: 7,
+    oscillator: {
+      type,
+    },
+    envelope: envelopeValue
+  }
+
+ );
+
 
 module.exports={
   mapPianoKeysToIds,
@@ -91,4 +104,5 @@ module.exports={
   mapBlackPianoKeysToIds,
   envelopeValue,
   mapDrumIDToSounds,
+  soundConfig,
 };

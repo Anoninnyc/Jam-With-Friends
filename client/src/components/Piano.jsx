@@ -8,27 +8,21 @@ Synth.setOscWave(1);
 class Piano extends Component {
 
   render() {
+    const oneTen= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const teens= ["thir", "fourt", "fift", "sixt", "sevent", "eight", "ninet"];
     return (
       <div id="userPiano">
-        <div className="key" id="1" />
-        <div className="key" id="2" />
-        <div className="key" id="3" />
-        <div className="key" id="4" />
-        <div className="key" id="5" />
-        <div className="key" id="6" />
-        <div className="key" id="7" />
-        <div className="key" id="8" />
-        <div className="key" id="9" />
-        <div className="key" id="10" />
-        <div className="blackKey" id="thir" />
-        <div className="blackKey" id="fourt" />
-        <div className="blackKey" id="fift" />
-        <div className="blackKey" id="sixt" />
-        <div className="blackKey" id="sevent" />
-        <div className="blackKey" id="eight" />
-        <div className="blackKey" id="ninet" />
+
+  {oneTen.map(num => (
+    <div className="key" id={num} />
+    ))}
+  
+ {teens.map(num => (
+   <div className="blackKey" id={num} />
+    ))}
+
       </div>
-    );
+);
   }
 }
 // <div className="key" id="12" />
@@ -98,4 +92,16 @@ $(document).keypress((e) => {
 });
 
 export default Piano;
+
+
+   // <div className="key" id="1" />
+   //      <div className="key" id="2" />
+   //      <div className="key" id="3" />
+   //      <div className="key" id="4" />
+   //      <div className="key" id="5" />
+   //      <div className="key" id="6" />
+   //      <div className="key" id="7" />
+   //      <div className="key" id="8" />
+   //      <div className="key" id="9" />
+   //      <div className="key" id="10" />
 

@@ -10,7 +10,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
-import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, envelopeValue } from '../utils/helperFunctions';
+import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, envelopeValue, soundConfig } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -108,14 +108,7 @@ class Room extends React.Component {
       const type = sequence[4];
       const combo = `${note}${octave}`;
       // console.log(sequence, note, octave, pd, type, combo);
-      const config = {
-        pitchDecay: pd||0.1,
-        octaves: 7,
-        oscillator: {
-          type,
-        },
-        envelope: envelopeValue
-      };
+      const config = soundConfig(pd, type);
       // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
       const zimit = new MembraneSynth(config).toMaster();
@@ -148,14 +141,7 @@ class Room extends React.Component {
       } else {
         const info = data.notesToPlay;
         const combo = info[0];
-        const config = {
-          pitchDecay: info[1]||0.1,
-          octaves: 7,
-          oscillator: {
-            type: info[2],
-          },
-          envelope: envelopeValue
-        };
+        const config = soundConfig(info[1],info[2]);
         const zimit = new MembraneSynth(config).toMaster();
         zimit.triggerAttackRelease(combo, '8n');
       }
