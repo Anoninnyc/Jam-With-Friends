@@ -264,7 +264,9 @@ class UserMakeInstrument extends Component {
 
   render() {
     const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+    const notes =["A", "B", "C", "D", "E", "F", "G"];
     const octaves = [1, 2, 3, 4, 5, 6, 7];
+    const pd=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
     return (
       <div id="roomContainer">
         <div id="UserMakeInstrumentRoom">
@@ -288,15 +290,11 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleKeyChange}
                 autoWidth={false}
               >
-                <MenuItem value={"A"} primaryText="A" />
-                <MenuItem value={"S"} primaryText="S" />
-                <MenuItem value={"D"} primaryText="D" />
-                <MenuItem value={"F"} primaryText="F" />
-                <MenuItem value={"G"} primaryText="G" />
-                <MenuItem value={"H"} primaryText="H" />
-                <MenuItem value={"J"} primaryText="J" />
-                <MenuItem value={"K"} primaryText="K" />
-                <MenuItem value={"L"} primaryText="L" />
+
+              {keys.map(key => (
+                <MenuItem value={key} primaryText={key} />
+                ))}
+
               </DropDownMenu>
             </div>
             <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
@@ -308,13 +306,9 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleNoteChange}
                 autoWidth={false}
               >
-                <MenuItem value={"A"} primaryText="A" />
-                <MenuItem value={"B"} primaryText="B" />
-                <MenuItem value={"C"} primaryText="C" />
-                <MenuItem value={"D"} primaryText="D" />
-                <MenuItem value={"E"} primaryText="E" />
-                <MenuItem value={"F"} primaryText="F" />
-                <MenuItem value={"G"} primaryText="G" />
+              {notes.map(note => (
+                <MenuItem value={note} primaryText={note} />
+                ))}
               </DropDownMenu>
 
 
@@ -324,13 +318,9 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleOctaveChange}
                 autoWidth={false}
               >
-                <MenuItem value={1} primaryText="1" />
-                <MenuItem value={2} primaryText="2" />
-                <MenuItem value={3} primaryText="3" />
-                <MenuItem value={4} primaryText="4" />
-                <MenuItem value={5} primaryText="5" />
-                <MenuItem value={6} primaryText="6" />
-                <MenuItem value={7} primaryText="7" />
+              {octaves.map(num => (
+                <MenuItem value={num} primaryText={num} />
+                ))}
               </DropDownMenu>
 
             Pitch Decay
@@ -339,13 +329,9 @@ class UserMakeInstrument extends Component {
                 onChange={this.handlePDChange}
                 autoWidth={false}
               >
-                <MenuItem value={0.1} primaryText="0.1" />
-                <MenuItem value={0.2} primaryText="0.2" />
-                <MenuItem value={0.3} primaryText="0.3" />
-                <MenuItem value={0.4} primaryText="0.4" />
-                <MenuItem value={0.5} primaryText="0.5" />
-                <MenuItem value={0.6} primaryText="0.6" />
-                <MenuItem value={0.7} primaryText="0.7" />
+              {pd.map(num => (
+                <MenuItem value={num} primaryText={num} />
+                ))}
               </DropDownMenu>
 
         Sound Type
@@ -404,3 +390,13 @@ UserMakeInstrument.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
 export default UserMakeInstrument;
+
+
+
+// <MenuItem value={1} primaryText="1" />
+                // <MenuItem value={2} primaryText="2" />
+                // <MenuItem value={3} primaryText="3" />
+                // <MenuItem value={4} primaryText="4" />
+                // <MenuItem value={5} primaryText="5" />
+                // <MenuItem value={6} primaryText="6" />
+                // <MenuItem value={7} primaryText="7" />

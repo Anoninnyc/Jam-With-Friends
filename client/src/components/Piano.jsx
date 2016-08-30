@@ -16,7 +16,7 @@ class Piano extends Component {
   {oneTen.map(num => (
     <div className="key" id={num} />
     ))}
-  
+
  {teens.map(num => (
    <div className="blackKey" id={num} />
     ))}

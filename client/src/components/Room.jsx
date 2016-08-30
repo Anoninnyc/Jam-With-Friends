@@ -108,7 +108,7 @@ class Room extends React.Component {
       const type = sequence[4];
       const combo = `${note}${octave}`;
       // console.log(sequence, note, octave, pd, type, combo);
-      const config = soundConfig(pd, type);
+      const config = soundConfig(type, pd);
       // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
       const zimit = new MembraneSynth(config).toMaster();
