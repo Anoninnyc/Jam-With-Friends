@@ -28,7 +28,7 @@ const mapIdsToKeys= {
   '#9': 'L',
 };
 
-const mapKeysToIds= {
+const mapKeysToIds={
   'A': '#1',
   'S': '#2',
   'D': '#3',
@@ -64,7 +64,7 @@ const mapBlackPianoKeysToIds= {
   'P': '#ninet',
 };
 
-const envelopeValue= {
+const envelopeValue={
   attack: 0.001,
   decay: 0.1,
   sustain: 0.1,
@@ -72,7 +72,7 @@ const envelopeValue= {
   attackCurve: 'linear'
 };
 
-const mapDrumIDToSounds= {
+const mapDrumIDToSounds={
   '#urC': 'sound',
   '#nextC': 'sound',
   '#brDrum': 'sound',
@@ -95,6 +95,32 @@ const soundConfig = (type, PD) => (
 
  );
 
+const mapPianoKeyPress={
+  97: "#1",
+  115: "#2",
+  100: "#3",
+  102: "#4",
+  103: "#5",
+  104: "#6",
+  106: "#7",
+  107: "#8",
+  108: "#9",
+  59: "#10",
+  39: "#11",
+  13: "#12",
+};
+
+const mapBlackPianoKeyPress={
+  119: "#thir",
+  101: "#fourt",
+  116: "#fift",
+  121: "#sixt",
+  117: "#sevent",
+  111: "#eight",
+  112: "#ninet",
+  93: "#twenty",
+};
+
 
 module.exports={
   mapPianoKeysToIds,
@@ -105,4 +131,6 @@ module.exports={
   envelopeValue,
   mapDrumIDToSounds,
   soundConfig,
+  mapPianoKeyPress,
+  mapBlackPianoKeyPress,
 };

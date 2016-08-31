@@ -116,6 +116,7 @@ class Room extends React.Component {
       console.log('e info', e.which, e.key);
 
       const keyBlack=e.key.toUpperCase();
+      
       $(mapKeysToIds[keyBlack]).animate({
         backgroundColor: "black",
       }, 20).animate({
