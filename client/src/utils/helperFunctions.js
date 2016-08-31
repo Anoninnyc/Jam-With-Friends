@@ -16,7 +16,7 @@ function showErrorMessage(appendTo, message, id) {
 
 // UserMakeInstrument.jsx
 
-const mapIdsToKeys= {
+const mapIdsToKeys = {
   '#1': 'A',
   '#2': 'S',
   '#3': 'D',
@@ -28,7 +28,7 @@ const mapIdsToKeys= {
   '#9': 'L',
 };
 
-const mapKeysToIds={
+const mapKeysToIds = {
   'A': '#1',
   'S': '#2',
   'D': '#3',
@@ -40,7 +40,7 @@ const mapKeysToIds={
   'L': '#9',
 };
 
-const mapPianoKeysToIds={
+const mapPianoKeysToIds = {
   'A': '#1',
   'S': '#2',
   'D': '#3',
@@ -54,7 +54,7 @@ const mapPianoKeysToIds={
   "'": '#11',
 };
 
-const mapBlackPianoKeysToIds= {
+const mapBlackPianoKeysToIds = {
   'W': '#thir',
   'E': '#fourt',
   'T': '#fift',
@@ -64,7 +64,7 @@ const mapBlackPianoKeysToIds= {
   'P': '#ninet',
 };
 
-const envelopeValue={
+const envelopeValue = {
   attack: 0.001,
   decay: 0.1,
   sustain: 0.1,
@@ -72,7 +72,7 @@ const envelopeValue={
   attackCurve: 'linear'
 };
 
-const mapDrumIDToSounds={
+const mapDrumIDToSounds = {
   '#urC': 'sound',
   '#nextC': 'sound',
   '#brDrum': 'sound',
@@ -95,7 +95,7 @@ const soundConfig = (type, PD) => (
 
  );
 
-const mapPianoKeyPress={
+const mapPianoKeyPress = {
   97: "#1",
   115: "#2",
   100: "#3",
@@ -110,7 +110,7 @@ const mapPianoKeyPress={
   13: "#12",
 };
 
-const mapBlackPianoKeyPress={
+const mapBlackPianoKeyPress = {
   119: "#thir",
   101: "#fourt",
   116: "#fift",
@@ -121,22 +121,22 @@ const mapBlackPianoKeyPress={
   93: "#twenty",
 };
 
-const keys=["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+const keys = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
 
-const notes =["A", "B", "C", "D", "E", "F", "G"];
+const notes = ["A", "B", "C", "D", "E", "F", "G"];
 
 const octaves = [1, 2, 3, 4, 5, 6, 7];
 
-const pd=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+const pd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
 
-const paperStyle={
+const paperStyle = {
   width: '70%',
   margin: '0 auto',
   height: '100%',
 };
 
 
-module.exports={
+module.exports = {
   mapPianoKeysToIds,
   mapIdsToKeys,
   mapKeysToIds,

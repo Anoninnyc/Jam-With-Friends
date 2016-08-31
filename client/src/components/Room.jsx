@@ -1,7 +1,7 @@
 // Modules
 import React from 'react';
 import { MembraneSynth } from "tone";
-import $ from 'jquery';
+
 // Components
 import SelectInstrument from './SelectInstrument';
 import JamRoom from './JamRoom';

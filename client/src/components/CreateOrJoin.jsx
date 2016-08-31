@@ -16,6 +16,9 @@ import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 import Paper from 'material-ui/Paper';
 
+// Helper
+import { paperStyle } from '../utils/helperFunctions';
+
 class CreateOrJoin extends Component {
   constructor(props) {
     super(props);
@@ -272,11 +275,7 @@ class CreateOrJoin extends Component {
     return (
       <div className="lobby-container">
         <Paper
-          style={{
-            width: '70%',
-            margin: '0 auto',
-            height: '100%',
-          }}
+          style={paperStyle}
           zDepth={3}
         >
           <div className="greeting">Green Room</div>
