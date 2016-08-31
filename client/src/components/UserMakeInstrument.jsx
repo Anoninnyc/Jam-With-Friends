@@ -12,7 +12,7 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';
+import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -85,16 +85,12 @@ class UserMakeInstrument extends Component {
   }
 
   sampleSound() {
-    const par1 = this.state.noteValue;
-    const par2 = this.state.octaveValue;
-    const par3 = this.state.PDValue;
-    const par4 = this.state.typeValue;
-    const combo = `${par1}${par2}`;
+    const combo = `${this.state.noteValue}${this.state.octaveValue}`;
     const config = {
-      pitchDecay: par3||0.1,
+      pitchDecay: this.state.PDValue||0.1,
       octaves: 7,
       oscillator: {
-        type: par4,
+        type: this.state.typeValue,
       },
       envelope: envelopeValue
     };
@@ -224,28 +220,11 @@ class UserMakeInstrument extends Component {
   }
 
   addKeypress() {
-    console.log(this, 'this in addkeypress');
-    console.log("keypress should be enabled");
+    console.log("Keypress should be enabled");
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
-        if (e.which === 97) {
-          this.keyHelper("#1");
-        } else if (e.which === 115) {
-          this.keyHelper("#2");
-        } else if (e.which === 100) {
-          this.keyHelper("#3");
-        } else if (e.which === 102) {
-          this.keyHelper("#4");
-        } else if (e.which === 103) {
-          this.keyHelper("#5");
-        } else if (e.which === 104) {
-          this.keyHelper("#6");
-        } else if (e.which === 106) {
-          this.keyHelper("#7");
-        } else if (e.which === 107) {
-          this.keyHelper("#8");
-        } else if (e.which === 108) {
-          this.keyHelper("#9");
+        if (mapPianoKeyPress[e.which]) {
+          this.keyHelper(mapPianoKeyPress[e.which]);
         }
       });
       this.setState({
@@ -311,8 +290,6 @@ class UserMakeInstrument extends Component {
                 <MenuItem value={note} primaryText={note} />
                 ))}
               </DropDownMenu>
-
-
             Octave
               <DropDownMenu
                 value={this.state.octaveValue}
