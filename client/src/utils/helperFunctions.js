@@ -1,6 +1,5 @@
 // Utils!
 
-import $ from 'jquery';
 
 function showErrorMessage(appendTo, message, id) {
   $(appendTo)
@@ -129,12 +128,27 @@ const octaves = [1, 2, 3, 4, 5, 6, 7];
 
 const pd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
 
+const oneTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const teens = ["thir", "fourt", "fift", "sixt", "sevent", "eight", "ninet"];
+
+
+
 const paperStyle = {
   width: '70%',
   margin: '0 auto',
   height: '100%',
 };
 
+
+const animateInst = (ID, color1, color2, ms) => {
+  console.log('runHelper');
+  $(ID).animate({
+    backgroundColor: color1,
+  }, ms).animate({
+    backgroundColor: color2
+  }, ms);
+};
 
 module.exports = {
   mapPianoKeysToIds,
@@ -151,5 +165,8 @@ module.exports = {
   notes,
   octaves,
   pd,
-  paperStyle
+  paperStyle,
+  animateInst,
+  oneTen,
+  teens,
 };

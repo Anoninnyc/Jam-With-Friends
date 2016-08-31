@@ -12,7 +12,7 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
+import { animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -75,12 +75,7 @@ class UserMakeInstrument extends Component {
       });
 
       this.sampleSound();
-
-      $(ID).animate({
-        backgroundColor: "black",
-      }, 20).animate({
-        backgroundColor: "white",
-      }, 20);
+      animateInst(ID, "black", "white", 20);
     }
   }
 

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import { Buffer } from "tone";
-// import { mapDrumIDToSounds } from '../utils/helperFunctions';
+ import { animateInst } from '../utils/helperFunctions';
 
 class Drums extends Component {
-  helper(ID) {
-// Run mapDrumIDToSounds
-// document.getElementById('audiotag1').play();
 
-    $(ID).animate({
-      backgroundColor: "silver",
-    }, 50).animate({
-      backgroundColor: "transparent"
-    }, 50);
+  helper(ID) {
+    console.log('hit drum');
+    animateInst(ID, "silver", "transparent", 50);
   }
 
   render() {

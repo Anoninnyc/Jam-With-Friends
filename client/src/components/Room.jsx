@@ -10,7 +10,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
-import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, soundConfig } from '../utils/helperFunctions';
+import { animateInst, mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, soundConfig } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -75,19 +75,11 @@ class Room extends React.Component {
       const keyBlack=e.key.toUpperCase();
 
       if (mapPianoKeysToIds[keyBlack]) {
-            $(mapPianoKeysToIds[keyBlack]).animate({
-              backgroundColor: "black",
-            }, 20).animate({
-              backgroundColor: "white",
-            }, 20);
+        animateInst(mapPianoKeysToIds[keyBlack], "black", "white", 20);
       }
 
       if (mapBlackPianoKeysToIds[keyBlack]) {
-            $(mapBlackPianoKeysToIds[keyBlack]).animate({
-              backgroundColor: "white",
-            }, 20).animate({
-              backgroundColor: "black",
-            }, 20);
+        animateInst(mapBlackPianoKeysToIds[keyBlack], "white", "black", 20);
       }
 
 
@@ -117,11 +109,7 @@ class Room extends React.Component {
 
       const keyBlack=e.key.toUpperCase();
 
-      $(mapKeysToIds[keyBlack]).animate({
-        backgroundColor: "black",
-      }, 20).animate({
-        backgroundColor: "white",
-      }, 20);
+      animateInst(mapKeysToIds[keyBlack], "black", "white", 20);
 
       if (this.state.startJam) {
         connectionManager.sendMessage(JSON.stringify({

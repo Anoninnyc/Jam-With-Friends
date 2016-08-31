@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import AudioSynth from 'audiosynth';
-import { mapPianoKeyPress, mapBlackPianoKeyPress } from '../utils/helperFunctions';
+import { mapPianoKeyPress, mapBlackPianoKeyPress, animateInst, oneTen, teens } from '../utils/helperFunctions';
 
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 const Synth = new AudioSynth(context);
 Synth.setOscWave(1);
-
-
-const oneTen= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const teens= ["thir", "fourt", "fift", "sixt", "sevent", "eight", "ninet"];
 
 const Piano = () => (
 
@@ -30,19 +26,11 @@ const Piano = () => (
 // <div className="key" id="12" />
 
 function keyHelper(ID) {
-  $(ID).animate({
-    backgroundColor: "black",
-  }, 20).animate({
-    backgroundColor: "white",
-  }, 20);
+  animateInst(ID, "black", "white", 20);
 }
 
 function blackKeyHelper(ID) {
-  $(ID).animate({
-    backgroundColor: "white",
-  }, 20).animate({
-    backgroundColor: "black",
-  }, 20);
+  animateInst(ID, "white", "black", 20);
 }
 
 $(document).keypress((e) => {
