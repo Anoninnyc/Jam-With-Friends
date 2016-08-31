@@ -112,6 +112,7 @@ class Room extends React.Component {
       animateInst(mapKeysToIds[keyBlack], "black", "white", 20);
 
       if (this.state.startJam) {
+        console.log('gonna send them keyInfo');
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
           keyPressed: e.key,
@@ -128,9 +129,10 @@ class Room extends React.Component {
       if (store[data.instrument]) {
         store[data.instrument](data.keyPressed);
       } else {
+        console.log('received the following!', data.notesToPlay);
         const info = data.notesToPlay;
         const combo = info[0];
-        const config = soundConfig(info[1], info[2]);
+        const config = soundConfig(info[2], info[1]);
         const zimit = new MembraneSynth(config).toMaster();
         zimit.triggerAttackRelease(combo, '8n');
       }
