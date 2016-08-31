@@ -168,7 +168,7 @@ class UserMakeInstrument extends Component {
       console.log(`youve created ${currentInMemObj}`);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
-      showErrorMessage("#makeInstErrorMessages", 'InstrumentMade!', 'makeThat');
+      showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
       $("#par1").val("A");
       $("#par2").val("1");
       $("#par3").val("0.1");
@@ -359,7 +359,7 @@ class UserMakeInstrument extends Component {
               />
               <br />
               <div id="nameInstErrMessage" />
-              <RaisedButton label="Make the instrument broh" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
+              <RaisedButton label="Make the instrument" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br />
             </div>
             <h2 className="step">Click your instrument to play!</h2>
             <div id="testPiano" onClick={this.addKeypress} >

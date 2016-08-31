@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import AudioSynth from 'audiosynth';
+import { mapPianoKeyPress, mapBlackPianoKeyPress } from '../utils/helperFunctions';
+
 
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const context = new AudioContext();
 const Synth = new AudioSynth(context);
 Synth.setOscWave(1);
-import { mapPianoKeyPress, mapBlackPianoKeyPress } from '../utils/helperFunctions';
 
 
 const oneTen= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

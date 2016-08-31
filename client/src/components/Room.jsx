@@ -69,7 +69,7 @@ class Room extends React.Component {
 
   handleKeypress(e) {
     if (store[this.state.instrument]) {
-      console.log('e.key',e.key);
+      console.log('e.key', e.key);
       store[this.state.instrument](e.key);
 
       const keyBlack=e.key.toUpperCase();
@@ -116,7 +116,7 @@ class Room extends React.Component {
       console.log('e info', e.which, e.key);
 
       const keyBlack=e.key.toUpperCase();
-      
+
       $(mapKeysToIds[keyBlack]).animate({
         backgroundColor: "black",
       }, 20).animate({
