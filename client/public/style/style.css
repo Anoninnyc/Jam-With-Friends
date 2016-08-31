@@ -515,10 +515,10 @@ position: relative;
 
 #UserMakeInstrumentRoom {
   position: static;
-    top: 30%;
-    left: 50%;
-    margin: 0px;
-    background: url(/assets/background_500.png) repeat center bottom;
+  top: 30%;
+  left: 50%;
+  margin: 0px;
+  background: url(/assets/background_500.png) repeat center bottom;
 }
 
 
@@ -617,10 +617,10 @@ input:invalid {
 
 
 div#deleteKey {
-    position: relative;
-    left: 140px;
-    top: -35px;
-    text-align:center;
+  position: relative;
+  left: 140px;
+  top: -35px;
+  text-align:center;
 }
 
 text#step3 {
