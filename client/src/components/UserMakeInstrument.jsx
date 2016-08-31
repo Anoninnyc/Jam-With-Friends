@@ -12,7 +12,7 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
+import { paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -213,7 +213,6 @@ class UserMakeInstrument extends Component {
   killKeypress() {
     console.log("keypress should be killed");
     $(document).off();
-    $(document).off("keypress");
     this.setState({
       tryingToName: true,
     });
@@ -243,19 +242,11 @@ class UserMakeInstrument extends Component {
   }
 
   render() {
-    const keys =["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-    const notes =["A", "B", "C", "D", "E", "F", "G"];
-    const octaves = [1, 2, 3, 4, 5, 6, 7];
-    const pd=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
     return (
       <div id="roomContainer">
         <div id="UserMakeInstrumentRoom">
           <Paper
-            style={{
-              width: '70%',
-              margin: '0 auto',
-              height: '100%',
-            }}
+            style={paperStyle}
             zDepth={3}
           >
             <br />

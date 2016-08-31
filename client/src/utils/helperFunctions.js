@@ -121,6 +121,20 @@ const mapBlackPianoKeyPress={
   93: "#twenty",
 };
 
+const keys=["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+
+const notes =["A", "B", "C", "D", "E", "F", "G"];
+
+const octaves = [1, 2, 3, 4, 5, 6, 7];
+
+const pd=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+
+const paperStyle={
+  width: '70%',
+  margin: '0 auto',
+  height: '100%',
+};
+
 
 module.exports={
   mapPianoKeysToIds,
@@ -133,4 +147,9 @@ module.exports={
   soundConfig,
   mapPianoKeyPress,
   mapBlackPianoKeyPress,
+  keys,
+  notes,
+  octaves,
+  pd,
+  paperStyle
 };

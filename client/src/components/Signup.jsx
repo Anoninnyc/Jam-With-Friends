@@ -4,15 +4,12 @@ import TextField from 'material-ui/TextField';
 import $ from "jquery";
 import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
-import { showErrorMessage } from '../utils/helperFunctions';
+import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
 
 class Signup extends Component {
   helperSignup() {
     const user = $('#UserNameSignUp').val();
     const pass = $('#UserNamePass').val();
-
-    // console.log(user, pass, 'regex text', /\W/.test(user) === true, /\W/.test(pass) === true);
-
     if (user.length<7) {
       showErrorMessage("#SIMessages", 'Username must be 7+ characters', "notLongEnough");
     } else if (pass.length<7) {
@@ -36,11 +33,7 @@ class Signup extends Component {
     return (
       <div id="signupContent">
         <Paper
-          style={{
-            width: '70%',
-            margin: '0 auto',
-            height: '100%',
-          }}
+          style={paperStyle}
           zDepth={3}
         >
           <div id="SIFields">

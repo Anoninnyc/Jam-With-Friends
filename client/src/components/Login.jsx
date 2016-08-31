@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import { Link } from 'react-router';
 import $ from 'jquery';
 import Paper from 'material-ui/Paper';
-import { showErrorMessage } from '../utils/helperFunctions';
+import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
 
 class Login extends Component {
 
@@ -27,11 +27,7 @@ class Login extends Component {
     return (
       <div id="loginContent">
         <Paper
-          style={{
-            width: '70%',
-            margin: '0 auto',
-            height: '100%',
-          }}
+          style={paperStyle}
           zDepth={3}
         >
           <div id="LIFields">

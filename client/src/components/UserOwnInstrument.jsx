@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-const keys=["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+import { keys } from '../utils/helperFunctions';
+
 const UserOwnInstrument = () => (
   <div>
    {keys.map((key, idx) => (
