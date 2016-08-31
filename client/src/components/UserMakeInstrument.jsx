@@ -255,7 +255,7 @@ class UserMakeInstrument extends Component {
               autoWidth={false}
             >
               {keys.map(key => (
-                <MenuItem value={key} primaryText={key} />
+                <MenuItem key={key} value={key} primaryText={key} />
                 ))}
             </DropDownMenu>
             <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
@@ -269,7 +269,7 @@ class UserMakeInstrument extends Component {
                 autoWidth={false}
               >
               {notes.map(note => (
-                <MenuItem value={note} primaryText={note} />
+                <MenuItem key={note} value={note} primaryText={note} />
                 ))}
               </DropDownMenu>
 
@@ -281,7 +281,7 @@ class UserMakeInstrument extends Component {
               >
 
               {octaves.map(num => (
-                <MenuItem value={num} primaryText={num} />
+                <MenuItem key={num} value={num} primaryText={num} />
                 ))}
 
               </DropDownMenu>
@@ -294,7 +294,7 @@ class UserMakeInstrument extends Component {
               >
 
               {pd.map(num => (
-                <MenuItem value={num} primaryText={num} />
+                <MenuItem key={num} value={num} primaryText={num} />
                 ))}
 
               </DropDownMenu>
@@ -306,7 +306,7 @@ class UserMakeInstrument extends Component {
                 autoWidth={false}
               >
               {types.map(type => (
-                <MenuItem value={type} primaryText={type} />
+                <MenuItem key={type} value={type} primaryText={type} />
                 ))}
               </DropDownMenu>
 
