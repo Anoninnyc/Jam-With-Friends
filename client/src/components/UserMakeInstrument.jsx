@@ -2,13 +2,14 @@
 import React, { Component } from 'react';
 import { MembraneSynth } from "tone";
 // Components
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
+
 
 // Utils
 import { showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue } from '../utils/helperFunctions';

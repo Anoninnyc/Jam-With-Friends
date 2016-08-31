@@ -10,7 +10,7 @@ import Help from './Help';
 // Util
 import connectionManager from '../rtc';
 import { store, instruments } from '../instruments/store';
-import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, envelopeValue, soundConfig } from '../utils/helperFunctions';
+import { mapKeysToIds, mapPianoKeysToIds, mapBlackPianoKeysToIds, soundConfig } from '../utils/helperFunctions';
 
 class Room extends React.Component {
   constructor(props) {
@@ -141,7 +141,7 @@ class Room extends React.Component {
       } else {
         const info = data.notesToPlay;
         const combo = info[0];
-        const config = soundConfig(info[1],info[2]);
+        const config = soundConfig(info[1], info[2]);
         const zimit = new MembraneSynth(config).toMaster();
         zimit.triggerAttackRelease(combo, '8n');
       }
