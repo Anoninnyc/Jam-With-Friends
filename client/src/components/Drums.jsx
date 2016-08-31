@@ -15,17 +15,13 @@ class Drums extends Component {
   }
 
   render() {
+    const drumParts=["urC", "nextC", "brDrum", "rsDrum", "lsDrum", "tomDrum", "urCymbal", "kickDrum"];
     return (
       <div id="userDrums">
         <img id="cs" src="../../../style/DrumParts/completeSet.png" />
-        <div onClick={() => { this.helper("#urC"); }} id="urC" />
-        <div onClick={() => { this.helper("#nextC"); }} id="nextC" />
-        <div onClick={() => { this.helper("#brDrum"); }} id="brDrum" />
-        <div onClick={() => { this.helper("#rsDrum"); }} id="rsDrum" />
-        <div onClick={() => { this.helper("#lsDrum"); }} id="lsDrum" />
-        <div onClick={() => { this.helper("#tomDrum"); }} id="tomDrum" />
-        <div onClick={() => { this.helper("#urCymbal"); }} id="urCymbal" />
-        <div onClick={() => { this.helper("#kickDrum"); }} id="kickDrum" />
+        {drumParts.map(drumName => (
+          <div onClick={() => { this.helper(`#${drumName}`); }} id={drumName} />
+         ))}
       </div>
     );
   }
