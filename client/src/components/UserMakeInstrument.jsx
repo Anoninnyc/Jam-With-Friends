@@ -128,9 +128,9 @@ class UserMakeInstrument extends Component {
     currentInMemObj.userName = this.props.user;
     let empty = true;
 
-    const keys = Object.keys(currentInMemObj);
-    for (let i = 0; i < keys.length; i++) {
-      if (keys[i].length === 1) {
+    const keysForInst = Object.keys(currentInMemObj);
+    for (let i = 0; i < keysForInst.length; i++) {
+      if (keysForInst[i].length === 1) {
         empty = false;
       }
     }
@@ -256,12 +256,9 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleKeyChange}
                 autoWidth={false}
               >
-
               {keys.map(key => (
                 <MenuItem value={key} primaryText={key} />
                 ))}
-
-
               </DropDownMenu>
             </div>
             <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
@@ -305,7 +302,7 @@ class UserMakeInstrument extends Component {
 
               </DropDownMenu>
 
-        Sound Type
+            Sound Type
               <DropDownMenu
                 value={this.state.typeValue}
                 onChange={this.handleTypeChange}
@@ -361,13 +358,3 @@ UserMakeInstrument.childContextTypes = {
   muiTheme: React.PropTypes.object.isRequired,
 };
 export default UserMakeInstrument;
-
-
-
-// <MenuItem value={1} primaryText="1" />
-                // <MenuItem value={2} primaryText="2" />
-                // <MenuItem value={3} primaryText="3" />
-                // <MenuItem value={4} primaryText="4" />
-                // <MenuItem value={5} primaryText="5" />
-                // <MenuItem value={6} primaryText="6" />
-                // <MenuItem value={7} primaryText="7" />
