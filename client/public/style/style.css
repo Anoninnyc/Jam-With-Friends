@@ -665,19 +665,9 @@ text#step3 {
  left: 300px;
 }
 
-#mapSToKey{
- text-align: center;
-}
-#s3c {
+#instNames, #UMIParams, #s3c, #mapSToKey {
   text-align: center;
 }
-#instNames {
-  text-align: center;
-}
-#UMIParams {
-  text-align: center;
-}
-
 
 #loginContent{
   position: absolute;
@@ -688,14 +678,9 @@ text#step3 {
   text-align: center;
 }
 
-#LIFields{
+#LIFields, #SIFields{
   position: absolute;
   top: 30%;
   left: 35%;
 }
 
-#SIFields{
-  position: absolute;
-  top: 30%;
-  left: 35%;
-}
