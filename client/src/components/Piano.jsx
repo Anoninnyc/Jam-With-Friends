@@ -23,35 +23,12 @@ const Piano = () => (
   </div>
 );
 
-// <div className="key" id="12" />
-
-function keyHelper(ID) {
-  animateInst(ID, "black", "white", 20);
-}
-
-function blackKeyHelper(ID) {
-  animateInst(ID, "white", "black", 20);
-}
-
 $(document).keypress((e) => {
   if (mapPianoKeyPress[e.which]) {
-    keyHelper(mapPianoKeyPress[e.which]);
+    animateInst(mapPianoKeyPress[e.which], "black", "white", 20);
   } else if (mapBlackPianoKeyPress[e.which]) {
-    blackKeyHelper(mapBlackPianoKeyPress[e.which]);
+    animateInst(mapBlackPianoKeyPress[e.which], "white", "black", 20);
   }
 });
 
 export default Piano;
-
-
-   // <div className="key" id="1" />
-   //      <div className="key" id="2" />
-   //      <div className="key" id="3" />
-   //      <div className="key" id="4" />
-   //      <div className="key" id="5" />
-   //      <div className="key" id="6" />
-   //      <div className="key" id="7" />
-   //      <div className="key" id="8" />
-   //      <div className="key" id="9" />
-   //      <div className="key" id="10" />
-

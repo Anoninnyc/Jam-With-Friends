@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import { Link } from 'react-router';
 import NavMenuIcon from './NavMenuIcon';
 
 class AppNavBar extends Component {
