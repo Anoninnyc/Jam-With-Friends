@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Buffer } from "tone";
- import { animateInst } from '../utils/helperFunctions';
+import { animateInst, mapDrumIDToSounds } from '../utils/helperFunctions';
+import { store } from '../instruments/store';
 
 class Drums extends Component {
 
   helper(ID) {
-    console.log('hit drum');
+    store.drums(mapDrumIDToSounds[ID]);
     animateInst(ID, "silver", "transparent", 50);
   }
 

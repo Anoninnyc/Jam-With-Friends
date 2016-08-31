@@ -72,13 +72,14 @@ const envelopeValue = {
 };
 
 const mapDrumIDToSounds = {
-  '#urC': 'sound',
-  '#nextC': 'sound',
-  '#brDrum': 'sound',
-  '#rsDrum': 'sound',
-  '#lsDrum': 'sound',
-  '#tomDrum': 'sound',
-  '#urCymbal': 'sound',
+  '#urC': 'm',
+  '#nextC': 'l',
+  '#brDrum': 'q',
+  '#rsDrum': 'g',
+  '#lsDrum': 'f',
+  '#tomDrum': 'j',
+  '#urCymbal': 'm',
+  '#kickDrum': 'h',
 };
 
 const soundConfig = (type, PD) => (
