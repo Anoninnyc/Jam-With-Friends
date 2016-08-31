@@ -13,11 +13,11 @@ const Piano = () => (
   <div id="userPiano">
 
   {oneTen.map(num => (
-    <div className="key" id={num} />
+    <div key={num} className="key" id={num} />
     ))}
 
  {teens.map(num => (
-   <div className="blackKey" id={num} />
+   <div key={num} className="blackKey" id={num} />
     ))}
 
   </div>
