@@ -1,5 +1,10 @@
+// Modules
+
 import React from 'react';
 import { Link } from 'react-router';
+
+// Material.UI
+
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -32,9 +37,8 @@ const NavMenuIcon = ({ loggedIn, FBAuth, clearSessions }) => (
           primaryText="Sign up"
           containerElement={<Link to="/signup" />}
         />
-
         <MenuItem
-          primaryText="LI with facebook!"
+          primaryText="LI with facebook"
           onClick={FBAuth}
         />
       </div>
@@ -42,11 +46,11 @@ const NavMenuIcon = ({ loggedIn, FBAuth, clearSessions }) => (
       <div>
         <MenuItem
           onClick={clearSessions}
-          primaryText="Signout!"
+          primaryText="Signout"
           containerElement={<Link to="/" />}
         />
         <MenuItem
-          primaryText="Make your own instrument!"
+          primaryText="Make your own instrument"
           containerElement={<Link to="/MakeInstrument" />}
         />
       </div>}

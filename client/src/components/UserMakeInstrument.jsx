@@ -12,7 +12,7 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
+import { types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -247,30 +247,27 @@ class UserMakeInstrument extends Component {
             <br />
             <h1 id="UMIHeader">Make Instrument Here!</h1>
             <Divider />
-            <div id="currentInst" />
-            <div className="selectKey" id="selectKeys_${id}">
-              <h2 className="step">Step One: Select a Key To Map To </h2>
-              <DropDownMenu
-                id="stepOneMenu"
-                value={this.state.keyValue}
-                onChange={this.handleKeyChange}
-                autoWidth={false}
-              >
+            <h2 className="step">Step One: Select a Key To Map To </h2>
+            <DropDownMenu
+              id="stepOneMenu"
+              value={this.state.keyValue}
+              onChange={this.handleKeyChange}
+              autoWidth={false}
+            >
               {keys.map(key => (
                 <MenuItem value={key} primaryText={key} />
                 ))}
-              </DropDownMenu>
-            </div>
+            </DropDownMenu>
             <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
             <h2 className="step">Step Two: Set Your Parameters</h2>
             <div id="UMIParams">
+
             Note
               <DropDownMenu
                 value={this.state.noteValue}
                 onChange={this.handleNoteChange}
                 autoWidth={false}
               >
-
               {notes.map(note => (
                 <MenuItem value={note} primaryText={note} />
                 ))}
@@ -308,13 +305,13 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleTypeChange}
                 autoWidth={false}
               >
-                <MenuItem value={"sine"} primaryText="sine" />
-                <MenuItem value={"square"} primaryText="square" />
-                <MenuItem value={"sawtooth"} primaryText="sawtooth" />
-                <MenuItem value={"triangle"} primaryText="triangle" />
+              {types.map(type => (
+                <MenuItem value={type} primaryText={type} />
+                ))}
               </DropDownMenu>
+
             </div> <br /><br />
-            <div id="s3c"><text >Step Three: </text>
+            <div id="s3c"><text id="step3" >Step Three: </text>
               <RaisedButton id="mapSToKey" label="Map Sound to Key" onClick={this.mapThat} /><br />
             </div>
             <div id="instNames">

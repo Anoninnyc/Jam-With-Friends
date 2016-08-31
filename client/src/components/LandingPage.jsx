@@ -1,7 +1,8 @@
+// Modules
 import React from 'react';
 import { Link } from 'react-router';
 
-// material ui components
+// Material.UI
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';

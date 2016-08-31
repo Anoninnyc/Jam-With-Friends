@@ -1,10 +1,14 @@
+
+// Modules
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
 import { Link } from 'react-router';
 import $ from 'jquery';
-import Paper from 'material-ui/Paper';
 import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
+
+// Material.UI
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 class Login extends Component {
 

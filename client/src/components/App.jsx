@@ -1,11 +1,12 @@
+// Modules
 import React, { Component } from 'react';
-
 import io from 'socket.io-client';
 
-// for future material ui use
+// Material.UI
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+// Components
 import Nav from '../components/Nav';
 
 class App extends Component {
@@ -80,7 +81,7 @@ class App extends Component {
        })
     ));
     return (
-     <div style={{ width: '100%', height: '100%' }}>
+      <div style={{ width: '100%', height: '100%' }}>
         <Nav userInstruments={this.state.userInstruments} logIn={this.logIn} logOut={this.logOut} user={this.state.user} loggedIn={this.state.loggedIn} title={'tbd'} />
        {
           this.props.children ?

@@ -1,5 +1,7 @@
 // Modules
 import React from 'react';
+
+// Material.UI
 import Popover from 'material-ui/Popover';
 import IconButton from 'material-ui/IconButton';
 

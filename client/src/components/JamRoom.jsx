@@ -1,6 +1,5 @@
+// Modules
 import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-
 import Piano from './Piano';
 import UserOwnInstrument from './UserOwnInstrument';
 import Drums from './Drums';
@@ -8,6 +7,9 @@ import PeerBar from './PeerBar';
 import Invite from './Invite';
 import SelectInstrument from './SelectInstrument';
 import { instruments } from '../instruments/store';
+
+// Material.UI
+import Dialog from 'material-ui/Dialog';
 
 class JamRoom extends Component {
   constructor(props) {

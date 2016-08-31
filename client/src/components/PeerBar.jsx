@@ -1,5 +1,6 @@
+// Modules
 import React from 'react';
-
+// Material.UI
 import PeerBubble from './PeerBubble';
 
 const PeerBar = ({ peers, toggleInviteView, toggleSelectView, extraInstruments }) => {

@@ -1,4 +1,8 @@
+// Modules
+
 import React, { Component } from 'react';
+
+// Material.UI
 import AppBar from 'material-ui/AppBar';
 import NavMenuIcon from './NavMenuIcon';
 

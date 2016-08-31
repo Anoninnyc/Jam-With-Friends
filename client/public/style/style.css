@@ -501,7 +501,6 @@ position: relative;
   font-size: 15px;
   font-weight: bold;
   size:20px;
-
 }
 
 #link-window {
@@ -592,12 +591,6 @@ input:invalid {
  }
 
 
- #selectKeys {
-  position:absolute;
-  top:30%;
-  left:50%;
- }
-
  #Welcome {
   position:absolute;
   color:white;
@@ -634,7 +627,6 @@ text#step3 {
   font-size: 150%;
   font-weight: bold;
   position: relative;
-  left: 200px;
 }
 
 .custom-inst-icon {

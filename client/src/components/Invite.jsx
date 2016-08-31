@@ -1,7 +1,12 @@
+// Modules
+
 import React from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+
+// Material.UI
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import CopyToClipboard from 'react-copy-to-clipboard';
+
 
 const Invite = ({ open, onRequestClose }) => (
   <Dialog

@@ -13,7 +13,7 @@ function showErrorMessage(appendTo, message, id) {
     });
 }
 
-// UserMakeInstrument.jsx
+// UserMakeInstrument Piano & regular Piano.
 
 const mapIdsToKeys = {
   '#1': 'A',
@@ -63,38 +63,6 @@ const mapBlackPianoKeysToIds = {
   'P': '#ninet',
 };
 
-const envelopeValue = {
-  attack: 0.001,
-  decay: 0.1,
-  sustain: 0.1,
-  release: 2,
-  attackCurve: 'linear'
-};
-
-const mapDrumIDToSounds = {
-  '#urC': 'm',
-  '#nextC': 'l',
-  '#brDrum': 'q',
-  '#rsDrum': 'g',
-  '#lsDrum': 'f',
-  '#tomDrum': 'j',
-  '#urCymbal': 'm',
-  '#kickDrum': 'h',
-};
-
-const soundConfig = (type, PD) => (
-
-  {
-    pitchDecay: PD||0.1,
-    octaves: 7,
-    oscillator: {
-      type,
-    },
-    envelope: envelopeValue
-  }
-
- );
-
 const mapPianoKeyPress = {
   97: "#1",
   115: "#2",
@@ -121,6 +89,52 @@ const mapBlackPianoKeyPress = {
   93: "#twenty",
 };
 
+// reference arrays for piano
+
+const oneTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const teens = ["thir", "fourt", "fift", "sixt", "sevent", "eight", "ninet"];
+
+// For sound config- UMI
+const envelopeValue = {
+  attack: 0.001,
+  decay: 0.1,
+  sustain: 0.1,
+  release: 2,
+  attackCurve: 'linear'
+};
+
+const soundConfig = (type, PD) => (
+
+  {
+    pitchDecay: PD||0.1,
+    octaves: 7,
+    oscillator: {
+      type,
+    },
+    envelope: envelopeValue
+  }
+
+ );
+
+
+// Drums!
+
+const mapDrumIDToSounds = {
+  '#urC': 'm',
+  '#nextC': 'l',
+  '#brDrum': 'q',
+  '#rsDrum': 'g',
+  '#lsDrum': 'f',
+  '#tomDrum': 'j',
+  '#urCymbal': 'm',
+  '#kickDrum': 'h',
+};
+
+const drumParts=["urC", "nextC", "brDrum", "rsDrum", "lsDrum", "tomDrum", "urCymbal", "kickDrum"];
+
+// UserMakeInstrument Reference Arrays
+
 const keys = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
 
 const notes = ["A", "B", "C", "D", "E", "F", "G"];
@@ -129,12 +143,9 @@ const octaves = [1, 2, 3, 4, 5, 6, 7];
 
 const pd = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
 
-const oneTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const types = ["sine", "square", "sawtooth", "triangle"];
 
-const teens = ["thir", "fourt", "fift", "sixt", "sevent", "eight", "ninet"];
-
-
-
+// paperStyle
 const paperStyle = {
   width: '70%',
   margin: '0 auto',
@@ -170,4 +181,6 @@ module.exports = {
   animateInst,
   oneTen,
   teens,
+  drumParts,
+  types,
 };
