@@ -261,6 +261,7 @@ class UserMakeInstrument extends Component {
                 <MenuItem value={key} primaryText={key} />
                 ))}
 
+
               </DropDownMenu>
             </div>
             <div id="deleteKey"> <RaisedButton label="Delete Key Mapping" onClick={this.deleteKey} /></div>
@@ -272,19 +273,23 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleNoteChange}
                 autoWidth={false}
               >
+
               {notes.map(note => (
                 <MenuItem value={note} primaryText={note} />
                 ))}
               </DropDownMenu>
+
             Octave
               <DropDownMenu
                 value={this.state.octaveValue}
                 onChange={this.handleOctaveChange}
                 autoWidth={false}
               >
+
               {octaves.map(num => (
                 <MenuItem value={num} primaryText={num} />
                 ))}
+
               </DropDownMenu>
 
             Pitch Decay
@@ -293,9 +298,11 @@ class UserMakeInstrument extends Component {
                 onChange={this.handlePDChange}
                 autoWidth={false}
               >
+
               {pd.map(num => (
                 <MenuItem value={num} primaryText={num} />
                 ))}
+
               </DropDownMenu>
 
         Sound Type
