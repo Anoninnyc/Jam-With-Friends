@@ -125,9 +125,10 @@ class Room extends React.Component {
   handleStart() {
     this.setState({ startJam: true });
     connectionManager.onMessage(data => {
+      console.log('data!!', data);
       data = JSON.parse(data);
       if (store[data.instrument]) {
-        store[data.instrument](data.keyPressed);
+        data.instrument==='drums'?store.drums(data.idToPlay):store[data.instrument](data.keyPressed);
       } else {
         console.log('received the following!', data.notesToPlay);
         const info = data.notesToPlay;
