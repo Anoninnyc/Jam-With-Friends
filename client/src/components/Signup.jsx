@@ -7,6 +7,7 @@ import Paper from 'material-ui/Paper';
 import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
 
 class Signup extends Component {
+  
   helperSignup() {
     const user = $('#UserNameSignUp').val();
     const pass = $('#UserNamePass').val();

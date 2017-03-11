@@ -43,7 +43,7 @@ class Login extends Component {
           <div id="LIFields">
             <TextField floatingLabelText="UserName" hintText="Watch caps lock" id="UserNameLogin" /><br />
             <TextField floatingLabelText="Password" hintText="Watch caps lock" id="UserNamePass" type="password" /><br />
-            <RaisedButton label="Login" onClick={this.helperLogin} / >
+            <RaisedButton label="Login" onClick={()=>{this.helperLogin();}} / >
             <Link to="signup"><RaisedButton label="Click to signup" /></Link>
             <RaisedButton id="FBLogin" onClick={this.FBAuth} label="Login with Facebook" />
             <div id="LIMessages"><br /></div>
