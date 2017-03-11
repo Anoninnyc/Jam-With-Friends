@@ -95,6 +95,7 @@ class Room extends React.Component {
     } else {
       const instMap = this.state.mapping;
       const keyPressed = e.key.toUpperCase();
+      console.log("undefined??", instMap[keyPressed]);
       const sequence = JSON.parse(instMap[keyPressed]);
       if (sequence === null){
         return;
