@@ -8,6 +8,10 @@ import Invite from './Invite';
 import SelectInstrument from './SelectInstrument';
 import { instruments } from '../instruments/store';
 
+ const parseNote = (note, a) => {
+   return typeof a === 'string' ? JSON.parse(a[note]) : a[note];
+ }
+ 
 // Material.UI
 import Dialog from 'material-ui/Dialog';
 
@@ -62,19 +66,14 @@ class JamRoom extends Component {
             handleSelect={
               index => {
                 this.setState({
-                  mapping: this.props.extraInstruments.map(a => (
-                    {
-                      A: typeof a === 'string'?JSON.parse(a.A): a.A,
-                      S: typeof a === 'string'?JSON.parse(a.S): a.S,
-                      D: typeof a === 'string'?JSON.parse(a.D): a.D,
-                      F: typeof a === 'string'?JSON.parse(a.F): a.F,
-                      G: typeof a === 'string'?JSON.parse(a.G): a.G,
-                      H: typeof a === 'string'?JSON.parse(a.H): a.H,
-                      J: typeof a === 'string'?JSON.parse(a.J): a.J,
-                      K: typeof a === 'string'?JSON.parse(a.K): a.K,
-                      L: typeof a === 'string'?JSON.parse(a.L): a.L,
-                    }
-                  ))[index - 3],
+                  mapping: this.props.extraInstruments.map(a => {
+                   const letters = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
+                   const obj = {};
+                   letters.forEach(letter => {
+                     obj[letter] = parseNote(letter, a)
+                   });
+                   return obj;
+                 })[index - 3],
                   instrument: instruments.concat(this.props.extraInstruments.map(a => (
                      `Your Instrument: ${a.instrumentName||a.name}`
                   )))[index]

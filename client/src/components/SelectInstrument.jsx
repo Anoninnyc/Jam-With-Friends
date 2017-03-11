@@ -35,7 +35,7 @@ const SelectInstrument = ({ handleSelect, handleClick, size, ownInstrument, extr
       }
     }
   } else {
-    console.log('There was an error.  Own instrument is undefined');
+   // console.log('There was an error.  Own instrument is undefined');
   }
 
  // console.log('extraInstruments', extraInstruments);
