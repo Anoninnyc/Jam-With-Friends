@@ -23,7 +23,7 @@ class Login extends Component {
     $.post("/login", { user, pass, }, (resp) => {
       console.log(typeof resp, resp, 'resp!');
       if (typeof resp !=='string') {
-        console.log(resp, this.props.updateUserInstrument);
+        // console.log(resp, this.props.updateUserInstrument);
         this.props.logIn(user, resp);
         this.context.router.push('/');
       } else {
