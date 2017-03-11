@@ -125,7 +125,7 @@ class UserMakeInstrument extends Component {
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj.instrumentName = name;
     currentInMemObj.userName = this.props.user
-    console.log('uuu', this.props.user)
+    // console.log('uuu', this.props.user)
     let empty = true;
 
     const keysForInst = Object.keys(currentInMemObj);
@@ -145,7 +145,7 @@ class UserMakeInstrument extends Component {
       this.setState({inMemObject: {}});
       this.props.socket.emit('newInstCreated', currentInMemObj);
 
-      console.log(`youve created ${currentInMemObj} as opposed to`, this.props.userInstruments);
+      // console.log(`youve created ${currentInMemObj} as opposed to`, this.props.userInstruments);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
