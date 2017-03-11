@@ -7,11 +7,8 @@ import PeerBar from './PeerBar';
 import Invite from './Invite';
 import SelectInstrument from './SelectInstrument';
 import { instruments } from '../instruments/store';
+import { parseNote } from '../utils/helperFunctions';
 
- const parseNote = (note, a) => {
-   return typeof a === 'string' ? JSON.parse(a[note]) : a[note];
- }
- 
 // Material.UI
 import Dialog from 'material-ui/Dialog';
 
@@ -70,7 +67,7 @@ class JamRoom extends Component {
                    const letters = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
                    const obj = {};
                    letters.forEach(letter => {
-                     obj[letter] = parseNote(letter, a)
+                     obj[letter] = parseNote(letter, a);
                    });
                    return obj;
                  })[index - 3],

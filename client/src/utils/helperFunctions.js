@@ -23,6 +23,9 @@ function showErrorMessage(appendTo, message, id) {
 
 
 // UserMakeInstrument Piano & regular Piano.
+const parseNote = (note, a) => {
+   return typeof a === 'string' ? JSON.parse(a[note]) : a[note];
+ };
 
 const mapIdsToKeys = {
   '#1': 'A',
@@ -205,7 +208,6 @@ const isLoggedIn = (x, replace, callback) => {
 
 
 
-
 module.exports = {
   mapPianoKeysToIds,
   mapIdsToKeys,
@@ -230,4 +232,5 @@ module.exports = {
   buttonStyles,
   display,
   isLoggedIn,
+  parseNote,
 };

@@ -95,7 +95,7 @@ export default function (room) {
     });
 
     peer.on('connect', () => {
-      console.log('peer.on(connect');
+     // console.log('peer.on(connect');
       peers[remote] = peer;
       if (number < sockets.length - 1) {
         startConnection(sockets, ++number, selfId);
