@@ -9,7 +9,7 @@ import SelectInstrument from './SelectInstrument';
 import { instruments } from '../instruments/store';
 import { parseNote } from '../utils/helperFunctions';
 
-// Material.UI
+//  Material.UI
 import Dialog from 'material-ui/Dialog';
 
 class JamRoom extends Component {
