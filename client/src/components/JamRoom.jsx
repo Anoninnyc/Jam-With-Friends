@@ -7,7 +7,7 @@ import PeerBar from './PeerBar';
 import Invite from './Invite';
 import SelectInstrument from './SelectInstrument';
 import { instruments } from '../instruments/store';
-import { parseNote } from '../utils/helperFunctions';
+import { parseNote, keys } from '../utils/helperFunctions';
 
 //  Material.UI
 import Dialog from 'material-ui/Dialog';
@@ -64,12 +64,11 @@ class JamRoom extends Component {
               index => {
                 this.setState({
                   mapping: this.props.extraInstruments.map(a => {
-                   const letters = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-                   const obj = {};
-                   letters.forEach(letter => {
-                     obj[letter] = parseNote(letter, a);
+                   const keysMapped = {};
+                   keys.forEach(key => {
+                     obj[key] = parseNote(key, a);
                    });
-                   return obj;
+                   return keysMapped;
                  })[index - 3],
                   instrument: instruments.concat(this.props.extraInstruments.map(a => (
                      `Your Instrument: ${a.instrumentName||a.name}`
