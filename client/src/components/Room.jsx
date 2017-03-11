@@ -96,6 +96,9 @@ class Room extends React.Component {
       const instMap = this.state.mapping;
       const keyPressed = e.key.toUpperCase();
       const sequence = JSON.parse(instMap[keyPressed]);
+      if (sequence === null){
+        return;
+      }
       const note = sequence[1];
       const octave = sequence[2];
       const pd = sequence[3];
@@ -127,7 +130,7 @@ class Room extends React.Component {
   handleStart() {
     this.setState({ startJam: true });
     connectionManager.onMessage(data => {
-      console.log('data recieved!!', data);
+     // console.log('data recieved!!', data);
       data = JSON.parse(data);
       if (store[data.instrument]) {
         data.instrument==='drums'?store.drums(data.idToPlay):store[data.instrument](data.keyPressed);

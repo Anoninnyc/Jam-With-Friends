@@ -115,7 +115,7 @@ export default function (room) {
     console.log("recieve connection and this is socket:", socket);
 
     socket.on('offer', data => {
-      console.log("this offer", data);
+      console.log("Offer", data);
       // bad fix for preventing signalling multiple times and with destroyed connections
       if (data.to === selfId && !peer.connected && !peer.destroyed) {
         remote = data.by;
