@@ -29,5 +29,5 @@ module.exports = grunt => {
 
   // grunt shell:addAndDeploy:Message_Here
 
-  grunt.registerTask('default', ['uglify', 'cssmin']);
+  grunt.registerTask('ugly', ['uglify', 'cssmin']);
 }

@@ -13,7 +13,7 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { display,types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles } from '../utils/helperFunctions';
+import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -195,7 +195,7 @@ class UserMakeInstrument extends Component {
   }
 
   killKeypress() {
-    console.log("keypress should be killed");
+    // console.log("keypress should be killed");
     $(document).off();
     this.setState({
       tryingToName: true,
@@ -203,7 +203,7 @@ class UserMakeInstrument extends Component {
   }
 
   addKeypress() {
-    console.log("Keypress should be enabled");
+    // console.log("Keypress should be enabled");
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
         if (mapPianoKeyPress[e.which]) {

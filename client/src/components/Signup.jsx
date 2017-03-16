@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import $ from "jquery";
+// import $ from "jquery";
 import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
 import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
 
 class Signup extends Component {
-  
+
   helperSignup() {
     const user = $('#UserNameSignUp').val();
     const pass = $('#UserNamePass').val();
@@ -19,7 +19,6 @@ class Signup extends Component {
       showErrorMessage("#SIMessages", 'Letters and Numbers Only!', "regexError");
     } else {
       $.post("/signup", { user, pass }, resp => {
-        console.log(resp, "resp to signup!!")
         if (resp === "SuccessSignup") {
           this.props.logIn(user, []);
           this.context.router.push('/');
