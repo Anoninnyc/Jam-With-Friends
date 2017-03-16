@@ -45,17 +45,6 @@ class UserMakeInstrument extends Component {
   }
 
 
-  componentWillMount() {
-
-     $.get("/isLoggedIn", (resp, err) => {
-      if (resp==="continue"){
-        console.log('you should be here!!!');
-      } else {
-        this.context.router.push("login");
-      }
-    });
-  }
-
   componentWillUnmount() {
     $(document).off();
   }
