@@ -26,7 +26,7 @@ class UserMakeInstrument extends Component {
     this.handleTypeChange=this.handleTypeChange.bind(this);
     this.deleteKey = this.deleteKey.bind(this);
     this.mapThat = this.mapThat.bind(this);
-    this.changeInst = this.changeInst.bind(this);
+    //this.changeInst = this.changeInst.bind(this);
     this.killKeypress = this.killKeypress.bind(this);
     this.addKeypress = this.addKeypress.bind(this);
     this.logIn = this.props.logIn.bind(this);
@@ -205,14 +205,14 @@ class UserMakeInstrument extends Component {
     }
   }
 
-  changeInst() {
-    console.log("inst changed");
-    $(".par").val("");
-    const inst = $(".selectInst option:selected").text();
-    this.setState({
-      instrument: inst
-    });
-  }  
+  // changeInst() {
+  //   console.log("inst changed");
+  //   $(".par").val("");
+  //   const inst = $(".selectInst option:selected").text();
+  //   this.setState({
+  //     instrument: inst
+  //   });
+  // }
 
   render() {
     return (
@@ -244,7 +244,7 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleNoteChange}
                 autoWidth={false}
               >
-              {display(notes)}
+                {display(notes)}
               </DropDownMenu>
 
             Octave
@@ -253,7 +253,7 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleOctaveChange}
                 autoWidth={false}
               >
-              {display(octaves)}
+                {display(octaves)}
               </DropDownMenu>
 
             Pitch Decay
@@ -262,7 +262,7 @@ class UserMakeInstrument extends Component {
                 onChange={this.handlePDChange}
                 autoWidth={false}
               >
-              {display(pd)}
+                {display(pd)}
               </DropDownMenu>
 
             Sound Type
@@ -271,7 +271,7 @@ class UserMakeInstrument extends Component {
                 onChange={this.handleTypeChange}
                 autoWidth={false}
               >
-              {display(types)}
+                {display(types)}
               </DropDownMenu>
 
             </div> <br /><br />
@@ -288,14 +288,14 @@ class UserMakeInstrument extends Component {
               <br />
               <div id="nameInstErrMessage" />
               <RaisedButton label="Make the instrument" style={{ postion: "absolute", top: "50%" }} onClick={this.makeInstrument} /><br /><br />
-                <Link to="/createorjoin">
-            <RaisedButton id="goToCreate"
-              label="Start Jamming!"
-              style={{ postion: "absolute", top: "50%" }}
-            />
-            </Link>
+              <Link to="/createorjoin">
+                <RaisedButton
+                  id="goToCreate"
+                  label="Start Jamming!"
+                  style={{ postion: "absolute", top: "50%" }}
+                />
+              </Link>
             </div>
-            
             <h2 className="step">Click your instrument to play!</h2>
             <div id="testPiano" onClick={this.addKeypress} >
               <UserOwnInstrument />
