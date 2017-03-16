@@ -13,15 +13,21 @@ module.exports = grunt => {
         command: mess => ['grunt uglify', 'git add .', 'git commit -m' + mess, 'git push heroku master -f'].join('&&')
       }
     },
+    cssmin: {
+      target: {
+        files: {
+          'client/public/style/styleMin.css': ['client/public/style/style.css'],
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
 
   // grunt shell:addAndDeploy:Message_Here
 
-  grunt.registerTask('testGrunt', () => {
-    console.log('testing grunt!');
-  });
-};
+  grunt.registerTask('default', ['uglify', 'cssmin']);
+}

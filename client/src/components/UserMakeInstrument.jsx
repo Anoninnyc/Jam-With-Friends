@@ -49,12 +49,11 @@ class UserMakeInstrument extends Component {
 
      $.get("/isLoggedIn", (resp, err) => {
       if (resp==="continue"){
-        console.log('you should be here!!!')
+        console.log('you should be here!!!');
       } else {
         this.context.router.push("login");
       }
     });
-
   }
 
   componentWillUnmount() {
@@ -94,10 +93,10 @@ class UserMakeInstrument extends Component {
 
   mapThat() {
    console.log(this.state.noteValue);
-    const par1 = this.state.noteValue
-    const par2 = this.state.octaveValue
+    const par1 = this.state.noteValue;
+    const par2 = this.state.octaveValue;
     const par3 = this.state.PDValue;
-    const par4 =  this.state.typeValue;
+    const par4 = this.state.typeValue;
     const key = this.state.keyValue;
     const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
@@ -124,7 +123,7 @@ class UserMakeInstrument extends Component {
     const name = this.refs.instName.getValue();
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj.instrumentName = name;
-    currentInMemObj.userName = this.props.user
+    currentInMemObj.userName = this.props.user;
     // console.log('uuu', this.props.user)
     let empty = true;
 

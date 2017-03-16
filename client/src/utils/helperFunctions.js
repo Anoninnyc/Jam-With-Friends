@@ -7,6 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 function showErrorMessage(appendTo, message, id) {
+  if (!($("#"+id).length)){
   $(appendTo)
     .append('<div id='+ '"'+id+ '"' + '>'+ message+' </div>')
     .hide()
@@ -16,6 +17,7 @@ function showErrorMessage(appendTo, message, id) {
       $(`#${id}`).remove();
       next();
     });
+  }
 }
 
 
