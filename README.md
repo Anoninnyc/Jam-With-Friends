@@ -1,15 +1,8 @@
-# tbd
+# Jam With Friends
 
-## Deployment
+Jam out with your friends using virtual instruments over a lightnight-fast WebRTC connection.
 
-#### Prepare a source bundle
-
-* run `bash scripts/archive.sh`
-* then upload it to AWS
-
-#### Prepare environment
-
-* ssh into AWS
-* as a sudo user, `cd` into the path of deployed files. Then run:
-  * `bash scripts/install.sh`
-  * `bash scripts/start.sh`
+## Installation and setup requirements
+* Install required dependencies after cloning repo
+  * `npm install`
+* Provision database (MySQL) either locally or as deployed addon, then add database env variables.
