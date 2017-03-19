@@ -24,9 +24,9 @@ const Help = ({ handleOpen, showPopover, anchorEl, handleClose }) => (
       canAutoPosition={false}
     >
       <p style={{ height: 350, width: 250, margin: 20, textAlign: 'center', display: 'inline-block' }}>
-        Select an instrument to play and press start when you are ready.
-        Use your keyboard to play your instrument.
-        Invite your friends to jam with you by clicking on the &#xFF0B; symbol and sharing the link.
+        Select an instrument to play and press start, if you haven't already done so.
+        Use your keyboard to play the piano, laserbells, or any custom instruments. To play the drumset, click on individual drums.
+        Invite your friends to jam with you by clicking on the &#xFF0B; symbol and sharing or mailing the link.
       </p>
     </Popover>
   </div>
