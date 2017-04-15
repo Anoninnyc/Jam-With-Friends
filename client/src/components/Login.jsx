@@ -10,6 +10,14 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
 class Login extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      userName:null,
+      passWord:null,
+    };
+    this.helperLogin = this.helperLogin.bind(this);  
+  }
 
   FBAuth(e) {
     e.preventDefault();
@@ -17,9 +25,7 @@ class Login extends Component {
     linkTag[0].click();
   }
 
-  helperLogin() {
-    const user=$('#UserNameLogin').val();
-    const pass= $('#UserNamePass').val();
+  helperLogin(user,pass) {
     $.post("/login", { user, pass, }, (resp) => {
       if (typeof resp !=='string') {
         this.props.logIn(user, resp);
@@ -30,6 +36,15 @@ class Login extends Component {
     });
   }
 
+
+  handleChange(property,evt) {
+    console.log("this", this);
+    let target = evt.target.value;
+    const newState  = {};
+    newState[property] = target;
+    this.setState(newState);
+  }
+
   render() {
     return (
       <div id="loginContent">
@@ -38,9 +53,9 @@ class Login extends Component {
           zDepth={3}
         >
           <div id="LIFields">
-            <TextField floatingLabelText="UserName" hintText="Watch caps lock" id="UserNameLogin" /><br />
-            <TextField floatingLabelText="Password" hintText="Watch caps lock" id="UserNamePass" type="password" /><br />
-            <RaisedButton label="Login" onClick={() => { this.helperLogin(); }} / >
+            <TextField onChange = {this.handleChange.bind(this,"userName")} floatingLabelText="UserName" hintText="Watch caps lock" /><br />
+            <TextField onChange = {this.handleChange.bind(this,"passWord")} floatingLabelText="Password" hintText="Watch caps lock" type="password" /><br />
+            <RaisedButton label="Login" onClick={() => { this.helperLogin(this.state.userName,this.state.passWord); }} / >
             <Link to="signup"><RaisedButton label="Click to signup" /></Link>
             <RaisedButton id="FBLogin" onClick={this.FBAuth} label="Login with Facebook" />
             <div id="LIMessages"><br /></div>

@@ -4,7 +4,6 @@
   "description": "Play digital instruments, like Jam with Chrome",
   "main": "server/index.js",
   "scripts": {
-    "prestart": "npm install",
     "start": "npm run back-end",
     "front-end": "webpack --watch",
     "back-end": "nodemon server/index.js",

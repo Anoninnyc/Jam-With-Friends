@@ -8,7 +8,13 @@ const db_name = process.env.heroku_db_name;
 
 const sequelize = new Sequelize(db_name, db_user, db_password, {
   host: db_host,
-  dialect: 'postgres' /*'mysql'*/
+  dialect: 'postgres' /*'mysql'*/,
+  ssl: true,
+  dialectOptions: {
+    ssl: {
+      require: true
+    }
+  }
 });
 
 module.exports = {
