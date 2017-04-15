@@ -111,6 +111,9 @@ class UserMakeInstrument extends Component {
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
+      console.log("Is this mutated??", initialUMIState);
+      initialUMIState.activeKeys = {};
+      initialUMIState.inMemObject = {};
       this.setState(initialUMIState);
     }
   }

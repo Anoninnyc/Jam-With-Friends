@@ -82,8 +82,6 @@ class Room extends React.Component {
       if (mapBlackPianoKeysToIds[keyBlack]) {
         animateInst(mapBlackPianoKeysToIds[keyBlack], "white", "black", 20);
       }
-
-
       if (this.state.startJam) {
        // console.log("sending something!");
         connectionManager.sendMessage(JSON.stringify({
@@ -95,36 +93,29 @@ class Room extends React.Component {
     } else {
       const instMap = this.state.mapping;
       const keyPressed = e.key.toUpperCase();
-      if ( instMap[keyPressed] === undefined){
+      if (instMap[keyPressed] === undefined) {
         return;
       }
       const sequence = JSON.parse(instMap[keyPressed]);
-      if (sequence === null){
+      if (sequence === null) {
         return;
       }
-      const note = sequence[1];
-      const octave = sequence[2];
-      const pd = sequence[3];
-      const type = sequence[4];
-      const combo = `${note}${octave}`;
-      // console.log(sequence, note, octave, pd, type, combo);
-      const config = soundConfig(type, pd);
-      // console.log(instMap, keyPressed, note, octave, pd, type, combo);
 
+      const combo = `${sequence[1]}${sequence[2]}`;
+      const config = soundConfig(sequence[4], sequence[3]);
       const zimit = new MembraneSynth(config).toMaster();
       zimit.triggerAttackRelease(combo, '8n');
-      // console.log('e info', e.which, e.key);
 
       const keyBlack=e.key.toUpperCase();
 
-      animateInst(mapKeysToIds[keyBlack], "black", "white", 20);
+      animateInst(`#${mapKeysToIds[keyBlack]}`, "black", "white", 20);
 
       if (this.state.startJam) {
        // console.log('gonna send keyInfo');
         connectionManager.sendMessage(JSON.stringify({
           instrument: this.state.instrument,
           keyPressed: e.key,
-          notesToPlay: [combo, pd, type],
+          notesToPlay: [combo, sequence[3], sequence[4]],
         }));
       }
     }

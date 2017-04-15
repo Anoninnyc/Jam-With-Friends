@@ -199,6 +199,10 @@ body {
   text-align: center;
 }
 
+.peer:hover{
+  cursor: pointer;
+}
+
 .peer-name {
   color: white;
   position: absolute;
@@ -641,9 +645,8 @@ text#step3 {
 }
 
 #LIFields, #SIFields{
-  position: absolute;
+  position: relative;
   top: 30%;
-  left: 35%;
 }
 
 p#explainer {

@@ -5,12 +5,15 @@ const UserOwnInstrument = props => (
 
   <div>
     {keys.map((key, idx) => {
-      const isActive = props.activeKeys[idx+1]?"highlightedBorderKey":"";
+      let isActive="";
+      if (props.activeKeys) {
+        isActive = props.activeKeys[idx+1]?"highlightedBorderKey":"";
+      }
       return <div className={`key ${isActive}`} key={idx+1} id={idx+1}>{key}</div>;
     })}
   </div>
 
-  );
+ );
 
 export default UserOwnInstrument;
 
