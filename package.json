@@ -62,7 +62,7 @@
     "react-copy-to-clipboard": "^4.2.3",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",
-    "react-tap-event-plugin": "^1.0.0",
+    "react-tap-event-plugin": "^2.0.1",
     "sequelize": "^3.24.1",
     "shortid": "^2.2.6",
     "simple-peer": "^6.0.5",

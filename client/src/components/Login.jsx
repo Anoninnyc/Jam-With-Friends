@@ -10,11 +10,11 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
 class Login extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      userName:null,
-      passWord:null,
+      userName: null,
+      passWord: null,
     };
     this.helperLogin = this.helperLogin.bind(this);  
   }
@@ -37,8 +37,8 @@ class Login extends Component {
   }
 
 
-  handleChange(property,evt) {
-    console.log("this", this);
+  handleChange(property, evt) {
+    // console.log("this", this);
     let target = evt.target.value;
     const newState  = {};
     newState[property] = target;
@@ -53,8 +53,8 @@ class Login extends Component {
           zDepth={3}
         >
           <div id="LIFields">
-            <TextField onChange = {this.handleChange.bind(this,"userName")} floatingLabelText="UserName" hintText="Watch caps lock" /><br />
-            <TextField onChange = {this.handleChange.bind(this,"passWord")} floatingLabelText="Password" hintText="Watch caps lock" type="password" /><br />
+            <TextField onChange={this.handleChange.bind(this, "userName")} floatingLabelText="UserName" hintText="Watch caps lock" /><br />
+            <TextField onChange={this.handleChange.bind(this, "passWord")} floatingLabelText="Password" hintText="Watch caps lock" type="password" /><br />
             <RaisedButton label="Login" onClick={() => { this.helperLogin(this.state.userName,this.state.passWord); }} / >
             <Link to="signup"><RaisedButton label="Click to signup" /></Link>
             <RaisedButton id="FBLogin" onClick={this.FBAuth} label="Login with Facebook" />

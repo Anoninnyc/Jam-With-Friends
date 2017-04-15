@@ -112,6 +112,17 @@ const mapBlackPianoKeyPress = {
   93: "#twenty",
 };
 
+const initialUMIState = {
+  noteValue: "A",
+  keyValue: "A",
+  octaveValue: 1,
+  PDValue: 0.1,
+  typeValue: "sine",
+  inMemObject: {},
+  tryingToName: true,
+  activeKeys: [],
+};
+
 // reference arrays for piano
 
 const oneTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -196,19 +207,16 @@ const animateInst = (ID, color1, color2, ms) => {
 
 const isLoggedIn = (x, replace, callback) => {
   $.get("/isLoggedIn", (resp, err) => {
-      console.log(resp, err);
+      //console.log(resp, err);
       if (resp === "continue") {
-        console.log('Executing cb');
+        //console.log('Executing cb');
         callback();
       } else {
-        console.log('Need to be logged in!');
+        //console.log('Need to be logged in!');
         location.replace('/login');
       }
     });
 };
-
-
-
 
 module.exports = {
   mapPianoKeysToIds,
@@ -235,4 +243,5 @@ module.exports = {
   display,
   isLoggedIn,
   parseNote,
+  initialUMIState,
 };

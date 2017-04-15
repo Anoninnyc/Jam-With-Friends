@@ -13,35 +13,19 @@ import UserOwnInstrument from './UserOwnInstrument';
 
 
 // Utils
-import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles } from '../utils/helperFunctions';
+import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles, initialUMIState } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
   constructor(props) {
     super(props);
-    this.handleNoteChange=this.handleNoteChange.bind(this);
-    this.handleKeyChange=this.handleKeyChange.bind(this);
-    this.handleOctaveChange=this.handleOctaveChange.bind(this);
-    this.handlePDChange=this.handlePDChange.bind(this);
-    this.handleTypeChange=this.handleTypeChange.bind(this);
     this.deleteKey = this.deleteKey.bind(this);
     this.mapThat = this.mapThat.bind(this);
-    //this.changeInst = this.changeInst.bind(this);
     this.killKeypress = this.killKeypress.bind(this);
     this.addKeypress = this.addKeypress.bind(this);
     this.logIn = this.props.logIn.bind(this);
     this.makeInstrument = this.makeInstrument.bind(this);
-    this.state = {
-      noteValue: "A",
-      keyValue: "A",
-      octaveValue: 1,
-      PDValue: 0.1,
-      typeValue: "sine",
-      inMemObject: {},
-      instrument: "MembraneSynth",
-      tryingToName: true,
-
-    };
+    this.state = initialUMIState;
   }
 
 
@@ -60,7 +44,6 @@ class UserMakeInstrument extends Component {
         PDValue: keyInfo[3],
         typeValue: keyInfo[4],
       });
-
       this.sampleSound();
       animateInst(ID, "black", "white", 20);
     }
@@ -87,6 +70,7 @@ class UserMakeInstrument extends Component {
     const par3 = this.state.PDValue;
     const par4 = this.state.typeValue;
     const key = this.state.keyValue;
+    console.log(this.state);
     const inst = "N/A";
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj[key] = JSON.stringify([inst, par1, par2, par3, par4]);
@@ -104,6 +88,9 @@ class UserMakeInstrument extends Component {
       console.log(currentInMemObj);
       const idToAdd = mapKeysToIds[key];
       $(idToAdd).css("border", "5px solid blue");
+      this.setState({
+        activeKeys:this.state.activeKeys.concat([idToAdd]);
+      })
     }
   }
 
@@ -115,7 +102,7 @@ class UserMakeInstrument extends Component {
     currentInMemObj.userName = this.props.user;
     // console.log('uuu', this.props.user)
     let empty = true;
-
+// Done to avoid React Warning
     const keysForInst = Object.keys(currentInMemObj);
     for (let i = 0; i < keysForInst.length; i++) {
       if (keysForInst[i].length === 1) {
@@ -130,17 +117,12 @@ class UserMakeInstrument extends Component {
     } else if (/\W/.test(name)===true) {
       showErrorMessage("#nameInstErrMessage", 'Letters and numbers only please!', 'regexErr');
     } else {
-      this.setState({inMemObject: {}});
       this.props.socket.emit('newInstCreated', currentInMemObj);
-
       // console.log(`youve created ${currentInMemObj} as opposed to`, this.props.userInstruments);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
-      $("#par1").val("A");
-      $("#par2").val("1");
-      $("#par3").val("0.1");
-      $("#par4").val("sine");
+      this.setState(initialUMIState);
       $(".key").css("border", "2px solid black");
     }
   }
@@ -159,28 +141,12 @@ class UserMakeInstrument extends Component {
     $(idToClear).css("border", "2px solid black");
   }
 
-  handleNoteChange(event, index, value) {
-    console.log(value);
-    this.setState({ noteValue: value });
-  }
-  handleKeyChange(event, index, value) {
-    console.log(value);
-    this.setState({ keyValue: value });
-  }
-
-  handleOctaveChange(event, index, value) {
-    console.log(value);
-    this.setState({ octaveValue: value });
-  }
-  
-  handleTypeChange(event, index, value) {
-    console.log(value);
-    this.setState({ typeValue: value });
-  }
-
-  handlePDChange(event, index, value) {
-    console.log(value);
-    this.setState({ PDValue: value });
+  handleChange(property, evt) {
+   // console.log("state", this.state, property, evt.target.innerHTML);
+    const target = evt.target.innerHTML;
+    const newState = {};
+    newState[property] = Number(target)===Number(target)?Number(target):target;
+    this.setState(newState);
   }
 
   killKeypress() {
@@ -205,15 +171,6 @@ class UserMakeInstrument extends Component {
     }
   }
 
-  // changeInst() {
-  //   console.log("inst changed");
-  //   $(".par").val("");
-  //   const inst = $(".selectInst option:selected").text();
-  //   this.setState({
-  //     instrument: inst
-  //   });
-  // }
-
   render() {
     return (
       <div id="roomContainer">
@@ -229,7 +186,7 @@ class UserMakeInstrument extends Component {
             <h2 className="step">Step One: Select a Key To Map To </h2>
             <DropDownMenu
               value={this.state.keyValue}
-              onChange={this.handleKeyChange}
+              onChange={this.handleChange.bind(this, "keyValue")}
               autoWidth={false}
             >
               {display(keys)}
@@ -241,7 +198,7 @@ class UserMakeInstrument extends Component {
             Note
               <DropDownMenu
                 value={this.state.noteValue}
-                onChange={this.handleNoteChange}
+                onChange={this.handleChange.bind(this, "noteValue")}
                 autoWidth={false}
               >
                 {display(notes)}
@@ -250,7 +207,7 @@ class UserMakeInstrument extends Component {
             Octave
               <DropDownMenu
                 value={this.state.octaveValue}
-                onChange={this.handleOctaveChange}
+                onChange={this.handleChange.bind(this, "octaveValue")}
                 autoWidth={false}
               >
                 {display(octaves)}
@@ -259,7 +216,7 @@ class UserMakeInstrument extends Component {
             Pitch Decay
               <DropDownMenu
                 value={this.state.PDValue}
-                onChange={this.handlePDChange}
+                onChange={this.handleChange.bind(this, "PDValue")}
                 autoWidth={false}
               >
                 {display(pd)}
@@ -268,7 +225,7 @@ class UserMakeInstrument extends Component {
             Sound Type
               <DropDownMenu
                 value={this.state.typeValue}
-                onChange={this.handleTypeChange}
+                onChange={this.handleChange.bind(this, "typeValue")}
                 autoWidth={false}
               >
                 {display(types)}
@@ -298,7 +255,7 @@ class UserMakeInstrument extends Component {
             </div>
             <h2 className="step">Click your instrument to play!</h2>
             <div id="testPiano" onClick={this.addKeypress} >
-              <UserOwnInstrument />
+              <UserOwnInstrument activeKeys = {this.state.activeKeys} />
             </div>
             <div id="makeInstErrorMessages" />
           </Paper>

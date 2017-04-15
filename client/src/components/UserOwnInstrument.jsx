@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { keys } from '../utils/helperFunctions';
 
-const UserOwnInstrument = () => (
+const UserOwnInstrument = props => (
   <div>
    {keys.map((key, idx) => (
      <div className="key" key={idx+1} id={idx+1}>{key}</div>
