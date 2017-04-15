@@ -1,5 +1,13 @@
 module.exports = grunt => {
   grunt.initConfig({
+    watch: {
+      files: './client/src/components/*.js',
+      tasks: ['uglify'],
+      options: {
+        nospawn: true,
+        livereload: true,
+      }
+    },
     uglify: {
       my_target: {
         files: {
@@ -25,6 +33,7 @@ module.exports = grunt => {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   // grunt shell:addAndDeploy:Message_Here

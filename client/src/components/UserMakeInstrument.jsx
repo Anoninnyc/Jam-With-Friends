@@ -11,7 +11,6 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
 
-
 // Utils
 import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles, initialUMIState } from '../utils/helperFunctions';
 
@@ -20,14 +19,13 @@ class UserMakeInstrument extends Component {
   constructor(props) {
     super(props);
     this.deleteKey = this.deleteKey.bind(this);
-    this.mapThat = this.mapThat.bind(this);
+    this.mapKey = this.mapKey.bind(this);
     this.killKeypress = this.killKeypress.bind(this);
     this.addKeypress = this.addKeypress.bind(this);
     this.logIn = this.props.logIn.bind(this);
     this.makeInstrument = this.makeInstrument.bind(this);
     this.state = initialUMIState;
   }
-
 
   componentWillUnmount() {
     $(document).off();
@@ -63,34 +61,25 @@ class UserMakeInstrument extends Component {
     zimit.triggerAttackRelease(combo, '8n');
   }
 
-  mapThat() {
-   console.log(this.state.noteValue);
-    const par1 = this.state.noteValue;
-    const par2 = this.state.octaveValue;
-    const par3 = this.state.PDValue;
-    const par4 = this.state.typeValue;
-    const key = this.state.keyValue;
+  mapKey({ noteValue, octaveValue, PDValue, typeValue, keyValue }) {
     console.log(this.state);
-    const inst = "N/A";
-    const currentInMemObj = this.state.inMemObject;
-    currentInMemObj[key] = JSON.stringify([inst, par1, par2, par3, par4]);
-    if (!par1&&!par2&&!par3&&!par4) {
-     // console.log('please make a proper mapping');
+    const inMemObject = this.state.inMemObject;
+    inMemObject[keyValue] = JSON.stringify(["N/A", noteValue, octaveValue, PDValue, typeValue]);
+    if (!noteValue&&!octaveValue&&!PDValue&&!typeValue) {
       showErrorMessage("#makeInstErrorMessages", 'Please make a Proper Mapping', 'propMapError');
     } else {
+      console.log(inMemObject);
+      const idToAdd = mapKeysToIds[keyValue];
+      const activeKeys = this.state.activeKeys;
+      activeKeys[idToAdd] = true;
       this.setState({
         noteValue: "A",
         octaveValue: 1,
         PDValue: 0.1,
         typeValue: "sine",
-        inMemObject: currentInMemObj
+        inMemObject,
+        activeKeys,
       });
-      console.log(currentInMemObj);
-      const idToAdd = mapKeysToIds[key];
-      $(idToAdd).css("border", "5px solid blue");
-      this.setState({
-        activeKeys:this.state.activeKeys.concat([idToAdd]);
-      })
     }
   }
 
@@ -123,22 +112,24 @@ class UserMakeInstrument extends Component {
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
       this.setState(initialUMIState);
-      $(".key").css("border", "2px solid black");
     }
   }
 
   deleteKey() {
     const keyToDelete = this.state.keyValue;
     // console.log( "you want to delete"+ $(".selectKey option:selected").text());
-    const newInMemObj = this.state.inMemObject;
-    delete newInMemObj[keyToDelete];
-    this.setState({
-      inMemObject: newInMemObj,
-    });
+    const inMemObject = this.state.inMemObject;
+    delete inMemObject[keyToDelete];
 
     const idToClear = mapKeysToIds[keyToDelete];
-  //  console.log('idToAdd', idToClear);
-    $(idToClear).css("border", "2px solid black");
+    const activeKeys = this.state.activeKeys;
+    delete activeKeys[idToClear];
+
+    console.log("the first", inMemObject);
+    this.setState({
+      activeKeys,
+      inMemObject,
+    });
   }
 
   handleChange(property, evt) {
@@ -233,7 +224,7 @@ class UserMakeInstrument extends Component {
 
             </div> <br /><br />
             <div id="s3c"><text id="step3" >Step Three: </text>
-              <RaisedButton id="mapSToKey" label="Map Sound to Key" onClick={this.mapThat} /><br />
+              <RaisedButton id="mapSToKey" label="Map Sound to Key" onClick={() =>{ this.mapKey(this.state); }} /><br />
             </div>
             <div id="instNames">
               <TextField
@@ -255,7 +246,7 @@ class UserMakeInstrument extends Component {
             </div>
             <h2 className="step">Click your instrument to play!</h2>
             <div id="testPiano" onClick={this.addKeypress} >
-              <UserOwnInstrument activeKeys = {this.state.activeKeys} />
+              <UserOwnInstrument activeKeys={this.state.activeKeys} />
             </div>
             <div id="makeInstErrorMessages" />
           </Paper>

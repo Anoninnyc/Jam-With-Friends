@@ -51,15 +51,15 @@ const buttonStyles = {
 };
 
 const mapKeysToIds = {
-  'A': '#1',
-  'S': '#2',
-  'D': '#3',
-  'F': '#4',
-  'G': '#5',
-  'H': '#6',
-  'J': '#7',
-  'K': '#8',
-  'L': '#9',
+  'A': 1,
+  'S': 2,
+  'D': 3,
+  'F': 4,
+  'G': 5,
+  'H': 6,
+  'J': 7,
+  'K': 8,
+  'L': 9,
 };
 
 const mapPianoKeysToIds = {
@@ -120,7 +120,7 @@ const initialUMIState = {
   typeValue: "sine",
   inMemObject: {},
   tryingToName: true,
-  activeKeys: [],
+  activeKeys: {},
 };
 
 // reference arrays for piano

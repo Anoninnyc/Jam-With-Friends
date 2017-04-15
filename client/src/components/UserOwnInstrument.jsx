@@ -1,12 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { keys } from '../utils/helperFunctions';
 
 const UserOwnInstrument = props => (
+
   <div>
-   {keys.map((key, idx) => (
-     <div className="key" key={idx+1} id={idx+1}>{key}</div>
-    ))}
+    {keys.map((key, idx) => {
+      const isActive = props.activeKeys[idx+1]?"highlightedBorderKey":"";
+      return <div className={`key ${isActive}`} key={idx+1} id={idx+1}>{key}</div>;
+    })}
   </div>
+
   );
 
 export default UserOwnInstrument;
+
+UserOwnInstrument.propTypes = {
+  activeKeys: React.PropTypes.object,
+};

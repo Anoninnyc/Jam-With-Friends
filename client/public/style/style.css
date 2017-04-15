@@ -677,3 +677,8 @@ div#menuHeader {
 #UMIPaper{
   text-align: center;
 }
+
+
+.highlightedBorderKey {
+  border: 5px solid blue;
+}
