@@ -27,7 +27,7 @@ const LandingPage = () => (
       <div className="greeting">Welcome to</div>
       <br />
       <div id="appName"> Jam with Friends! </div>
-      <p id="explainer">Jam out with your friends using virtual instruments over a lightnight-fast WebRTC connection.</p>
+      <p id="explainer">Jam out with your friends using virtual instruments over a lightning-fast WebRTC connection.</p>
       <section className="divider">
         <Divider />
       </section>

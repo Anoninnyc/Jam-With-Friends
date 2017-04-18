@@ -1,7 +1,6 @@
 // Modules
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-//import $ from 'jquery';
 import { showErrorMessage, paperStyle } from '../utils/helperFunctions';
 
 // Material.UI
@@ -16,7 +15,7 @@ class Login extends Component {
       userName: null,
       passWord: null,
     };
-    this.helperLogin = this.helperLogin.bind(this);  
+    this.helperLogin = this.helperLogin.bind(this);
   }
 
   FBAuth(e) {
@@ -25,7 +24,7 @@ class Login extends Component {
     linkTag[0].click();
   }
 
-  helperLogin(user,pass) {
+  helperLogin(user, pass) {
     $.post("/login", { user, pass, }, (resp) => {
       if (typeof resp !=='string') {
         this.props.logIn(user, resp);
@@ -39,8 +38,8 @@ class Login extends Component {
 
   handleChange(property, evt) {
     // console.log("this", this);
-    let target = evt.target.value;
-    const newState  = {};
+    const target = evt.target.value;
+    const newState = {};
     newState[property] = target;
     this.setState(newState);
   }
@@ -55,7 +54,7 @@ class Login extends Component {
           <div id="LIFields">
             <TextField onChange={this.handleChange.bind(this, "userName")} floatingLabelText="UserName" hintText="Watch caps lock" /><br />
             <TextField onChange={this.handleChange.bind(this, "passWord")} floatingLabelText="Password" hintText="Watch caps lock" type="password" /><br />
-            <RaisedButton label="Login" onClick={() => { this.helperLogin(this.state.userName,this.state.passWord); }} / >
+            <RaisedButton label="Login" onClick={() => { this.helperLogin(this.state.userName, this.state.passWord); }} / >
             <Link to="signup"><RaisedButton label="Click to signup" /></Link>
             <RaisedButton id="FBLogin" onClick={this.FBAuth} label="Login with Facebook" />
             <div id="LIMessages"><br /></div>

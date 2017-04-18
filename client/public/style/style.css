@@ -53,9 +53,8 @@ body {
 }
 
 .createRoom {
-  margin: 2% auto;
-  height: 60%;
   position: relative;
+  top: 20px;
 }
 
 .lobby {
@@ -661,9 +660,6 @@ div#appName {
   color: orange;
 }
 
-section.createRoom {
-  top: -50px;
-}
 
 img.defImages {
   width: 100%;
@@ -684,4 +680,16 @@ div#menuHeader {
 
 .highlightedBorderKey {
   border: 5px solid blue;
+}
+
+.enableKeyPress{
+  cursor: pointer;
+}
+
+.onPress {
+  color: green;
+}
+
+.offPress{
+  color: red;
 }

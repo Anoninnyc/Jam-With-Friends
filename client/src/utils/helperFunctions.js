@@ -121,6 +121,7 @@ const initialUMIState = {
   inMemObject: {},
   tryingToName: true,
   activeKeys: {},
+  instName: null,
 };
 
 // reference arrays for piano

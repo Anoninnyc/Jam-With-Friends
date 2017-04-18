@@ -34,7 +34,7 @@ class Signup extends Component {
     }
   }
 
-  handleChange(property,evt) {
+  handleChange(property, evt) {
     //console.log("this", this);
     const target = evt.target.value;
     const newState = {};

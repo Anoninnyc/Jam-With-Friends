@@ -30,17 +30,17 @@ export default function (room) {
     selfId = sockets.pop().peerId;
     // if first one in room, done
     if (sockets.length === 0) {
-      console.log("first in room");
+   //   console.log("first in room");
       emitter.emit('connected');
     } else {
-      console.log("not first in room");
+    //  console.log("not first in room");
       startConnection(sockets, 0);
     }
   });
 
   // new socket joined, receive the connection
   socket.on('new peer', () => {
-    console.log("recieve connection");
+  //  console.log("recieve connection");
     receiveConnection();
   });
 
@@ -79,11 +79,11 @@ export default function (room) {
   /* ------------ Helper functions ------------ */
 
   function startConnection(sockets, number) {
-    console.log("running startConnection function and this is socket:", socket);
+   // console.log("running startConnection function and this is socket:", socket);
     const peer = new SimplePeer(Object.assign(options, { initiator: true }));
     const remote = sockets[number].peerId;
     peer.on('signal', data => {
-      console.log("I'm sending the offer!", socket.id, "here is data:", data);
+    //  console.log("I'm sending the offer!", socket.id, "here is data:", data);
       socket.emit('offer', { offer: data, by: socket.id, to: remote });
     });
 
@@ -112,10 +112,10 @@ export default function (room) {
   function receiveConnection() {
     const peer = new SimplePeer(Object.assign(options, { initiator: false }));
     let remote;
-    console.log("recieve connection and this is socket:", socket);
+   // console.log("recieve connection and this is socket:", socket);
 
     socket.on('offer', data => {
-      console.log("Offer", data);
+     // console.log("Offer", data);
       // bad fix for preventing signalling multiple times and with destroyed connections
       if (data.to === selfId && !peer.connected && !peer.destroyed) {
         remote = data.by;
@@ -125,12 +125,12 @@ export default function (room) {
     });
 
     peer.on('signal', data => {
-      console.log("signaling", data);
+    //  console.log("signaling", data);
       socket.emit('answer', { answer: data, by: socket.id, to: remote });
     });
 
     peer.on('connect', () => {
-      console.log('second peer on connect');
+   //   console.log('second peer on connect');
       peers[remote] = peer;
     });
 

@@ -62,7 +62,7 @@ class UserMakeInstrument extends Component {
   }
 
   mapKey({ noteValue, octaveValue, PDValue, typeValue, keyValue }) {
-    console.log(this.state);
+   // console.log("this.state", this.state);
     const inMemObject = this.state.inMemObject;
     inMemObject[keyValue] = JSON.stringify(["N/A", noteValue, octaveValue, PDValue, typeValue]);
     if (!noteValue&&!octaveValue&&!PDValue&&!typeValue) {
@@ -91,7 +91,7 @@ class UserMakeInstrument extends Component {
     currentInMemObj.userName = this.props.user;
     // console.log('uuu', this.props.user)
     let empty = true;
-// Done to avoid React Warning
+    // Done to avoid React Warning
     const keysForInst = Object.keys(currentInMemObj);
     for (let i = 0; i < keysForInst.length; i++) {
       if (keysForInst[i].length === 1) {
@@ -111,7 +111,7 @@ class UserMakeInstrument extends Component {
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
-      console.log("Is this mutated??", initialUMIState);
+      // console.log("Is this mutated?", initialUMIState);
       initialUMIState.activeKeys = {};
       initialUMIState.inMemObject = {};
       this.setState(initialUMIState);
@@ -120,7 +120,6 @@ class UserMakeInstrument extends Component {
 
   deleteKey() {
     const keyToDelete = this.state.keyValue;
-    // console.log( "you want to delete"+ $(".selectKey option:selected").text());
     const inMemObject = this.state.inMemObject;
     delete inMemObject[keyToDelete];
 
@@ -128,7 +127,7 @@ class UserMakeInstrument extends Component {
     const activeKeys = this.state.activeKeys;
     delete activeKeys[idToClear];
 
-    console.log("the first", inMemObject);
+   // console.log("inMemObject", inMemObject);
     this.setState({
       activeKeys,
       inMemObject,
@@ -247,8 +246,10 @@ class UserMakeInstrument extends Component {
                 />
               </Link>
             </div>
-            <h2 className="step">Click your instrument to play!</h2>
-            <div id="testPiano" onClick={this.addKeypress} >
+            <h3 className="step">
+              Click <span onClick={this.addKeypress} className={this.state.tryingToName?"enableKeyPress offPress":"enableKeyPress onPress"}>HERE</span> to enable keypress and play your instrument!
+            </h3>
+            <div id="testPiano">
               <UserOwnInstrument activeKeys={this.state.activeKeys} />
             </div>
             <div id="makeInstErrorMessages" />
