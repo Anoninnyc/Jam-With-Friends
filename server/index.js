@@ -383,7 +383,7 @@ app.get('/auth/facebook/callback',
 );
 
 
-app.get('/isLoggedIn', (req,res)=> {
+app.get('/isLoggedIn', (req, res)=> {
 console.log(req.session, "REQ.SESSION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 let passport=req.session.passport?req.session.passport.user:req.session.passport;
   if (passport===undefined && req.session.userName===undefined) {

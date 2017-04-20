@@ -90,6 +90,10 @@ body {
   margin: 0 auto;
 }
 
+.instInstructions {
+  text-align: center;
+}
+
 #userDrums {
   position: relative;
   margin: auto;
@@ -198,10 +202,6 @@ body {
   text-align: center;
 }
 
-.peer:hover{
-  cursor: pointer;
-}
-
 .peer-name {
   color: white;
   position: absolute;
@@ -215,6 +215,7 @@ body {
   position: absolute;
   bottom: 60px;
   left: 5px;
+  cursor: pointer;
 }
 
 #selectInstrumentRoom {
@@ -693,3 +694,13 @@ div#menuHeader {
 .offPress{
   color: red;
 }
+
+.roomRow {
+  cursor: pointer;
+}
+
+.umiKEYS > div > div{
+  text-align: center;
+  padding: 0px !important;
+}
+

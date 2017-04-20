@@ -445,7 +445,7 @@ class CreateOrJoin extends Component {
                 >
                   {
                     this.state.rooms.map((row, index) => (
-                      <TableRow key={index} selected={row.selected}>
+                      <TableRow className="roomRow" key={index} selected={row.selected}>
                         <TableRowColumn>{index + 1}</TableRowColumn>
                         <TableRowColumn>{row.roomName}</TableRowColumn>
                         <TableRowColumn>{`${row.numPeople} out of 4`}</TableRowColumn>

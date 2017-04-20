@@ -185,7 +185,7 @@ function display(par) {
 
   return par.map(
     type => (
-      <MenuItem key={type} value={type} primaryText={type} />
+      <MenuItem key={type} value={type} primaryText={type} className="umiKEYS" />
     )
   );
 };

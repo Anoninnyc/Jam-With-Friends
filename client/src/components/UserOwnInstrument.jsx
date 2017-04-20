@@ -11,6 +11,7 @@ const UserOwnInstrument = props => (
       }
       return <div className={`key ${isActive}`} key={idx+1} id={idx+1}>{key}</div>;
     })}
+    {props.activeKeys?null:<div className="instInstructions"> Play custom instruments using your keyboard </div>}
   </div>
 
  );

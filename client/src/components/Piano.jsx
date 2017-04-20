@@ -12,13 +12,14 @@ const Piano = () => (
 
   <div id="userPiano">
 
-  {oneTen.map(num => (
-    <div key={num} className="key" id={num} />
+    {oneTen.map(num => (
+      <div key={num} className="key" id={num} />
     ))}
 
- {teens.map(num => (
-   <div key={num} className="blackKey" id={num} />
+    {teens.map(num => (
+      <div key={num} className="blackKey" id={num} />
     ))}
+    <div className="instInstructions"> Play piano using your keyboard </div>
 
   </div>
 );
