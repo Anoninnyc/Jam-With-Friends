@@ -223,14 +223,14 @@ io.on('connection', socket => {
 
   socket.on('offer', offer => {
     console.log("I'm getting this offer", offer);
-    io.to(`/#${offer.to}`).emit('offer', offer);
+  //  io.to(`/#${offer.to}`).emit('offer', offer);
     io.to(`${offer.to}`).emit('offer', offer);
     // io.to(`${offer.by}`).emit('offer', offer);
   });
 
   socket.on('answer', answer => {
     console.log("I'm giving this answer", answer);
-    io.to(`/#${answer.to}`).emit('answer', answer);
+ //   io.to(`/#${answer.to}`).emit('answer', answer);
     io.to(`${answer.to}`).emit('answer', answer);
     // io.to(`${answer.by}`).emit('answer', answer);
   });
@@ -244,7 +244,7 @@ io.on('connection', socket => {
 
   socket.on('get rooms info', id => {
     // send info to populate creaorjoin open room table
-    io.to(`/#${id}`).emit('give rooms info', getRoomsInfo(rooms));
+ //   io.to(`/#${id}`).emit('give rooms info', getRoomsInfo(rooms));
     io.to(`${id}`).emit('give rooms info', getRoomsInfo(rooms));
   });
 
@@ -275,7 +275,7 @@ io.on('connection', socket => {
   });
 
   socket.on('request peer info', data => {
-    io.to(`/#${data.socketId}`).emit('receive peer info', JSON.stringify(rooms[data.roomId]));
+    io.to(`${data.socketId}`).emit('receive peer info', JSON.stringify(rooms[data.roomId]));
   });
 
   function getRoomsInfo(roomObj) {
