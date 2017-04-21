@@ -390,9 +390,9 @@ app.get("/getUserInfo", (req, res) => {
     // console.log("Passport statement line FROM getUserInfo passport:", passport, "person:", person);
 
     users.findOne({ where: { id: person.user } }).then(fbUser => {
-      //console.log('tryingtoFind', fbUser);
+      // console.log('tryingtoFind', fbUser);
       const fbUserName= fbUser.dataValues.userName;
-      console.log("this is the user we're trying to find instruments for", fbUserName);
+     // console.log("this is the user we're trying to find instruments for", fbUserName);
       instruments.findAll({ where: { userName: fbUserName } }).then(
         userInstruments => (
            userInstruments.map(a => a.dataValues)

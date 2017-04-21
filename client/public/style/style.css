@@ -700,8 +700,8 @@ div#menuHeader {
   cursor: pointer;
 }
 
-.umiKEYS > div > div{
+/* To do: Increase specificity here with ID & use single selector to override; */
+.umiKEYS > div > div {
   text-align: center;
   padding: 0px !important;
 }
-
