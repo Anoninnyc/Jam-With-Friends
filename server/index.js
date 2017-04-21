@@ -237,7 +237,7 @@ io.on('connection', socket => {
   socket.on('newInstCreated', instrument => {
    // console.log('this is a brand new instrument', instrument);
     instruments.create(instrument).then(instrumentEntry => {
-   //   console.log(instrumentEntry.dataValues, ' got entered');
+     console.log(instrumentEntry.dataValues, ' got entered');
     });
   });
 
