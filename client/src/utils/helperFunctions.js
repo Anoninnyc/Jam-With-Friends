@@ -1,11 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
 import MenuItem from 'material-ui/MenuItem';
 
 
 // Utils!
 
 
+
+// General Error message
 function showErrorMessage(appendTo, message, id) {
   if (!($("#"+id).length)){
   $(appendTo)
@@ -21,13 +22,11 @@ function showErrorMessage(appendTo, message, id) {
 }
 
 
-
-
-
 // UserMakeInstrument Piano & regular Piano.
 const parseNote = (note, a) => {
    return typeof a === 'string' ? JSON.parse(a[note]) : a[note];
  };
+
 
 const mapIdsToKeys = {
   '#1': 'A',
@@ -41,25 +40,16 @@ const mapIdsToKeys = {
   '#9': 'L',
 };
 
-const buttonStyles = {
-  color: '#6F8695',
-  width: 120,
-  height: 30,
-  position: 'absolute',
-  top: '50%',
-  transform: 'translate(-50%, -50%)'
-};
-
 const mapKeysToIds = {
-  'A': 1,
-  'S': 2,
-  'D': 3,
-  'F': 4,
-  'G': 5,
-  'H': 6,
-  'J': 7,
-  'K': 8,
-  'L': 9,
+  A: 1,
+  S: 2,
+  D: 3,
+  F: 4,
+  G: 5,
+  H: 6,
+  J: 7,
+  K: 8,
+  L: 9,
 };
 
 const mapPianoKeysToIds = {
@@ -182,15 +172,14 @@ const types = ["sine", "square", "sawtooth", "triangle"];
 
 
 function display(par) {
-
   return par.map(
     type => (
       <MenuItem key={type} value={type} primaryText={type} className="umiKEYS" />
     )
   );
-};
+}
 
-// paperStyle
+
 const paperStyle = {
   width: '70%',
   margin: '0 auto',
@@ -206,18 +195,29 @@ const animateInst = (ID, color1, color2, ms) => {
   }, ms);
 };
 
+
+//Auth for UMI
 const isLoggedIn = (x, replace, callback) => {
   $.get("/isLoggedIn", (resp, err) => {
-      //console.log(resp, err);
       if (resp === "continue") {
-        //console.log('Executing cb');
         callback();
       } else {
-        //console.log('Need to be logged in!');
         location.replace('/login');
       }
     });
 };
+
+
+// Landing Page
+const buttonStyles = {
+  color: '#6F8695',
+  width: 120,
+  height: 30,
+  position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%)'
+};
+
 
 module.exports = {
   mapPianoKeysToIds,

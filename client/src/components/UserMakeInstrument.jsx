@@ -7,12 +7,11 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import DropDownMenu from 'material-ui/DropDownMenu';
-import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserOwnInstrument from './UserOwnInstrument';
 
 // Utils
-import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, buttonStyles, initialUMIState } from '../utils/helperFunctions';
+import { display, types, animateInst, paperStyle, keys, notes, octaves, pd, showErrorMessage, mapIdsToKeys, mapKeysToIds, envelopeValue, mapPianoKeyPress, initialUMIState } from '../utils/helperFunctions';
 
 class UserMakeInstrument extends Component {
 
@@ -32,9 +31,10 @@ class UserMakeInstrument extends Component {
   }
 
   keyHelper(ID) {
+    // This will render visual notes and call audio rendering method...
     const keyMapped = this.state.inMemObject[mapIdsToKeys[ID]];
     if (!this.state.tryingToName && keyMapped) {
-      console.log(keyMapped);
+      // console.log("Playing", keyMapped);
       const keyInfo = JSON.parse(keyMapped);
       this.setState({
         noteValue: keyInfo[1],
@@ -48,6 +48,7 @@ class UserMakeInstrument extends Component {
   }
 
   sampleSound() {
+    // Audio rendering method
     const combo = `${this.state.noteValue}${this.state.octaveValue}`;
     const config = {
       pitchDecay: this.state.PDValue||0.1,
@@ -62,13 +63,13 @@ class UserMakeInstrument extends Component {
   }
 
   mapKey({ noteValue, octaveValue, PDValue, typeValue, keyValue }) {
-   // console.log("this.state", this.state);
+    // Map key to sound in test instrument
     const inMemObject = this.state.inMemObject;
     inMemObject[keyValue] = JSON.stringify(["N/A", noteValue, octaveValue, PDValue, typeValue]);
     if (!noteValue&&!octaveValue&&!PDValue&&!typeValue) {
       showErrorMessage("#makeInstErrorMessages", 'Please make a Proper Mapping', 'propMapError');
     } else {
-      console.log(inMemObject);
+      //console.log(inMemObject);
       const idToAdd = mapKeysToIds[keyValue];
       const activeKeys = this.state.activeKeys;
       activeKeys[idToAdd] = true;
@@ -85,11 +86,14 @@ class UserMakeInstrument extends Component {
 
 
   makeInstrument() {
+    // Create instrument (if no errors)
+    // ToDo -condense this method
     const name = this.refs.instName.getValue();
     const currentInMemObj = this.state.inMemObject;
     currentInMemObj.instrumentName = name;
+    // TODO: Set username based off of sessions
     currentInMemObj.userName = this.props.user;
-    // console.log('uuu', this.props.user)
+
     let empty = true;
     // Done to avoid React Warning
     const keysForInst = Object.keys(currentInMemObj);
@@ -103,15 +107,13 @@ class UserMakeInstrument extends Component {
       showErrorMessage("#nameInstErrMessage", 'Pls name your instrument', 'npo');
     } else if (empty) {
       showErrorMessage("#nameInstErrMessage", 'Pls map some keys', 'npi');
-    } else if (/\W/.test(name)===true) {
+    } else if (/\W/.test(name)) {
       showErrorMessage("#nameInstErrMessage", 'Letters and numbers only please!', 'regexErr');
     } else {
       this.props.socket.emit('newInstCreated', currentInMemObj);
-      // console.log(`youve created ${currentInMemObj} as opposed to`, this.props.userInstruments);
       const final = this.props.userInstruments.concat([currentInMemObj]);
       this.props.updateUserInstrument(final);
       showErrorMessage("#nameInstErrMessage", 'Instrument Made!', 'makeThat');
-      // console.log("Is this mutated?", initialUMIState);
       initialUMIState.activeKeys = {};
       initialUMIState.inMemObject = {};
       this.setState(initialUMIState);
@@ -119,6 +121,7 @@ class UserMakeInstrument extends Component {
   }
 
   deleteKey() {
+    // Undo a mapping
     const keyToDelete = this.state.keyValue;
     const inMemObject = this.state.inMemObject;
     delete inMemObject[keyToDelete];
@@ -135,6 +138,7 @@ class UserMakeInstrument extends Component {
   }
 
   handleChange(property, evt) {
+    // Handle change for audio parameters
    // console.log("state", this.state, property, evt.target.innerHTML);
     const target = evt.target.innerHTML;
     const newState = {};
@@ -142,16 +146,11 @@ class UserMakeInstrument extends Component {
     this.setState(newState);
   }
 
-  killKeypress() {
-    // console.log("keypress should be killed");
-    $(document).off();
-    this.setState({
-      tryingToName: true,
-    });
-  }
+
 
   addKeypress() {
-    // console.log("Keypress should be enabled");
+    // This and subsequent method exist so that, when naming the instrument, instrument doesn't play
+    // Todo consolidate methods- i.e. this.setState({tryingToName:!this.state.tryingToName})
     if (this.state.tryingToName) {
       $(document).keypress((e) => {
         if (mapPianoKeyPress[e.which]) {
@@ -162,6 +161,13 @@ class UserMakeInstrument extends Component {
         tryingToName: false,
       });
     }
+  }
+
+  killKeypress() {
+    $(document).off();
+    this.setState({
+      tryingToName: true,
+    });
   }
 
   render() {
@@ -247,7 +253,11 @@ class UserMakeInstrument extends Component {
               </Link>
             </div>
             <h3 className="step">
-              Click <span onClick={this.addKeypress} className={this.state.tryingToName?"enableKeyPress offPress":"enableKeyPress onPress"}>HERE</span> to enable keypress and play your instrument!
+              Click
+                <span
+                  onClick={this.state.tryingToName?this.addKeypress:this.killKeypress}
+                  className={this.state.tryingToName?"enableKeyPress offPress":"enableKeyPress onPress"}
+                > HERE</span> to {this.state.tryingToName?"enable":"disable"} keypress{this.state.tryingToName?" and play your instrument!":"."}
             </h3>
             <div id="testPiano">
               <UserOwnInstrument activeKeys={this.state.activeKeys} />
