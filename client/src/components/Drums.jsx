@@ -18,7 +18,7 @@ class Drums extends Component {
   render() {
     return (
       <div id="userDrums">
-        <img id="cs" src="../../../style/DrumParts/completeSet.png" />
+        <img id="cs" src="../../../assets/completeSet.png" />
         {drumParts.map(drumName => (
           <div onClick={() => { this.helper(`#${drumName}`); }} id={drumName} />
          ))}
