@@ -25,7 +25,7 @@ const users = sequelize.define('user', {
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log('It worked!');
+    console.log('sequelize worked for users');
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
@@ -45,7 +45,7 @@ users.hasMany(PrivateRooms);
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log('It worked!');
+    console.log('sequelize worked for rooms');
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
@@ -103,7 +103,7 @@ sequelize
 sequelize
   .sync({ force: false })
   .then(err => {
-    console.log('It worked!');
+    console.log('sequelize worked for instruments');
   }, err => {
     console.log('An error occurred while creating the table:', err);
   });
