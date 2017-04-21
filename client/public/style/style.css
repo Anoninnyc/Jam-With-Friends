@@ -626,6 +626,7 @@ text#step3 {
   color: white;
   bottom: 130px;
   left: 65px;
+  cursor: pointer;
 }
 
 #UMIHeader{
