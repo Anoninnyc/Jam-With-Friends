@@ -462,7 +462,7 @@ app.get('/getprivaterooms', (req, res) => {
 
 app.get('*', (req, res) => {
   console.log('req.session', req.session);
-  const pathToIndex = path.join(pathToStaticDir, 'index.html');
+  const pathToIndex = path.join(pathToStaticDir, 'index.min.html');
   res.status(200).sendFile(pathToIndex);
 });
 
