@@ -31,14 +31,11 @@ app.use(cookieParser());
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use('/public', express.static(__dirname + '/../client/public'/*, {maxAge:'1d'}*/));
-//app.use(express.static(__dirname + '/client/public'));
 
 const pathToStaticDir = path.resolve(__dirname, '..', 'client/public');
-
 app.use(express.static(pathToStaticDir/*, {maxAge:"1d"}*/));
 app.use(express.static(pathToStaticDir, { redirect: false }));
-//
+
 /* Auth */
 app.use(expressSession({
   secret: process.env.Client_Secret,
@@ -46,6 +43,8 @@ app.use(expressSession({
   saveUninitialized: true
 }));
 
+
+// Facebook !
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -56,11 +55,11 @@ const fbConfig = {
 };
 
 passport.use(new FacebookStrategy(fbConfig, (accessToken, refreshToken, profile, done) => {
-  //console.log('this is the profile', profile);
+  // console.log('This is the FB profile', profile);
   users.findAll({ where: { facebookId: profile.id } })
     .then(user => {
       if (user.length > 0) {
-        //console.log('user already exists', user[0]);
+        // console.log('User already exists:', user[0]);
         return done(null, user);
       } else {
         return users.create({
@@ -69,8 +68,8 @@ passport.use(new FacebookStrategy(fbConfig, (accessToken, refreshToken, profile,
           facebookId: profile.id,
           token: accessToken,
         }).then(entry => {
-          //console.log('this is entry for a newly added user', entry.dataValues.id);
-         // console.log(entry.dataValues, ' got entered', entry);
+          // console.log('This is entry for a newly added user', entry.dataValues.id);
+         // console.log(entry.dataValues, ' was entered', entry);
           return done(null, entry.dataValues.id);
         });
       }
@@ -81,16 +80,16 @@ passport.use(new FacebookStrategy(fbConfig, (accessToken, refreshToken, profile,
 // serialize and deserialize
 passport.serializeUser((user, done) => {
   const final = typeof user==="number"?user:user[0].dataValues.id;
-  //console.log('this is the user param serializing', user);
+  // console.log('this is the user param serializing', user);
   done(null, final);
 });
 
 passport.deserializeUser((id, done) => {
-  //console.log('this is id in deserialize', id);
+  // console.log('this is id in deserialize', id);
   users.findAll({ where: { id } })
     .then(found => {
       const values = found[0].dataValues;
-      //console.log('Trying to "deserialize" this user', values);
+      // console.log('Trying to "deserialize" this user', values);
       done(null, id);
     });
 });
@@ -148,7 +147,7 @@ io.on('connection', socket => {
       // console.log('room is succ and is...', rooms[roomId], "allRooms", rooms);
 
       socket.on('disconnect', () => {
-        console.log("**********DISCONNECTING!**********", "rooms:", rooms, "roomId", roomId);
+      //  console.log("***DISCONNECTING***", "rooms:", rooms, "roomId:", roomId);
         const socketsInRoom = rooms[roomId];
         const id = socket.id;
         if (!socketsInRoom){
@@ -217,16 +216,12 @@ io.on('connection', socket => {
 
   socket.on('offer', offer => {
   //  console.log("I'm getting this offer", offer);
-  //  io.to(`/#${offer.to}`).emit('offer', offer);
     io.to(`${offer.to}`).emit('offer', offer);
-    // io.to(`${offer.by}`).emit('offer', offer);
   });
 
   socket.on('answer', answer => {
   //  console.log("I'm giving this answer", answer);
- //   io.to(`/#${answer.to}`).emit('answer', answer);
     io.to(`${answer.to}`).emit('answer', answer);
-    // io.to(`${answer.by}`).emit('answer', answer);
   });
 
   socket.on('newInstCreated', instrument => {
@@ -238,7 +233,6 @@ io.on('connection', socket => {
 
   socket.on('get rooms info', id => {
     // send info to populate creaorjoin open room table
- //   io.to(`/#${id}`).emit('give rooms info', getRoomsInfo(rooms));
     io.to(`${id}`).emit('give rooms info', getRoomsInfo(rooms));
   });
 
@@ -288,6 +282,7 @@ io.on('connection', socket => {
   }
 });
 
+
 /* Routes */
 app.get('/logout', (req, res) => {
   console.log('mysession', req.session);
@@ -310,9 +305,7 @@ app.post('/login', (req, res) => {
       console.log('BadLogin');
       res.send("");
     } else {
-      //console.log(person[0], 'Person[0]!!!');
       const hash = bcrypt.hashSync(req.body.pass, person[0].dataValues.salt);
-
       users.findAll({
         where: {
           userName: req.body.user,
@@ -376,25 +369,25 @@ app.get('/auth/facebook/callback',
 );
 
 
-app.get('/isLoggedIn', (req, res)=> {
+app.get('/isLoggedIn', (req, res) => {
 //  console.log("req.session", req.session);
-let passport=req.session.passport?req.session.passport.user:req.session.passport;
+  let passport = req.session.passport?req.session.passport.user:req.session.passport;
   if (passport===undefined && req.session.userName===undefined) {
-    console.log('*********************** this person should not be able to acces UMI');
+    // console.log('This user should not be able to access UMI');
     res.send(null);
   } else {
-    console.log('*********************** this person should be able to acces UMI');
+    // console.log('This user should be able to access UMI');
     res.send("continue");
   }
-})
+});
 
 app.get("/getUserInfo", (req, res) => {
   const person=req.session.userName||req.session.passport;
 //  console.log("person:",person,"req.session:", req.session);
-let passport=req.session.passport!==undefined?req.session.passport.user:req.session.passport;
+   let passport = req.session.passport!==undefined?req.session.passport.user:req.session.passport;
 
   if (passport) {
-    console.log(" *************************passport statement line FROM getuserINFO passport:", passport,"person:", person);
+    // console.log("Passport statement line FROM getUserInfo passport:", passport, "person:", person);
 
     users.findOne({ where: { id: person.user } }).then(fbUser => {
       //console.log('tryingtoFind', fbUser);
@@ -404,7 +397,7 @@ let passport=req.session.passport!==undefined?req.session.passport.user:req.sess
         userInstruments => (
            userInstruments.map(a => a.dataValues)
         )).then(userInstrumentsList => {
-          console.log( userInstrumentsList, ':userInsts we found!!!!!!!!!!');
+          // console.log(userInstrumentsList, 'userInsts we found');
           res.status(200).send([fbUserName, userInstrumentsList]);
         });
     });
@@ -413,7 +406,7 @@ let passport=req.session.passport!==undefined?req.session.passport.user:req.sess
         userInstruments => (
            userInstruments.map(a => a.dataValues)
         )).then(userInstrumentsList => {
-          //console.log(person, userInstrumentsList, 'userInsts');
+          // console.log(person, userInstrumentsList, 'userInsts');
           res.status(200).send([person, userInstrumentsList]);
         });
   }
@@ -422,7 +415,7 @@ let passport=req.session.passport!==undefined?req.session.passport.user:req.sess
 app.post('/makeprivateroom', (req, res) => {
   if (!req.session.userName && !req.session.passport) {
     res.send('you must be logged in');
-    console.log('User must be logged in to make private room');
+    // console.log('User must be logged in to make private room');
   } else {
     console.log('making private rooms');
     users.findOne({
@@ -465,7 +458,8 @@ app.get('/getprivaterooms', (req, res) => {
     res.send(privateRooms.map(room => room.url));
   });
 });
-//
+
+
 app.get('*', (req, res) => {
   console.log('req.session', req.session);
   const pathToIndex = path.join(pathToStaticDir, 'index.html');
