@@ -14,10 +14,6 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 require("dotenv").config();
 
-setInterval(() => {
-  http.get("http://jamwithfriends.herokuapp.com/");
-  console.log("*************PINGED!!**********");
-}, 300000);
 
 /* Init */
 const app = express();
@@ -25,13 +21,11 @@ const server = http.createServer(app);
 const io = socketIO.listen(server);
 
 /* DB  */
-
- 
 const users = require('./db/models').users;
 const instruments = require('./db/models').instruments;
 const PrivateRooms = require('./db/models').PrivateRooms;
 
-//
+
 /* Middleware */
 app.use(cookieParser());
 app.use(logger('dev'));
@@ -47,10 +41,11 @@ app.use(express.static(pathToStaticDir, { redirect: false }));
 //
 /* Auth */
 app.use(expressSession({
-  secret: 'keyboardCat',
+  secret: process.env.Client_Secret,
   resave: true,
   saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
