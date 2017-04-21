@@ -130,7 +130,7 @@ io.on('connection', socket => {
   });
 
   socket.on('join', roomId => {
-    console.log("socket.id", socket.id, 'JOINING!', "roomId:", roomId, "Rooms", rooms);
+   // console.log("socket.id", socket.id, "roomId:", roomId, "Rooms:", rooms);
     // does room exist?
     if (!rooms[roomId]) {
       io.to(socket.id).emit('invalid room');
@@ -140,7 +140,7 @@ io.on('connection', socket => {
     } else {
       socket.join(roomId);
       rooms[roomId].push({ peerId: socket.id, instrument: 'piano' });
-      console.log('room is succ and is...', rooms[roomId], "allRooms", rooms);
+      // console.log('room is succ and is...', rooms[roomId], "All Rooms:", rooms);
 
       // update open rooms table
       io.emit('give rooms info', getRoomsInfo(rooms));
@@ -150,7 +150,7 @@ io.on('connection', socket => {
       // emit message to other sockets in room
       socket.broadcast.to(roomId).emit('new peer');
 
-      console.log('room is succ and is...', rooms[roomId], "allRooms", rooms);
+      // console.log('room is succ and is...', rooms[roomId], "allRooms", rooms);
 
       socket.on('disconnect', () => {
         console.log("**********DISCONNECTING!**********", "rooms:", rooms, "roomId", roomId);
@@ -186,26 +186,25 @@ io.on('connection', socket => {
 
   socket.on('exit room', data => {
     const room = rooms[data.roomId];
-    console.log("EXITING ROOM", "All rooms", rooms, "room", room);
+    // console.log("EXITING ROOM", "All rooms", rooms, "room", room);
     if (room !== undefined) {
       // check to make sure peer is in room and get index of peer
       for (var i = 0; i < room.length; i++) {
         if (room[i].peerId === data.id) {
-          console.log("SPLICING!!");
           room.splice(i, 1);
           socket.leave(data.roomId);
-          console.log(rooms[data.roomId]);
+         // console.log("rooms[data.roomId]",rooms[data.roomId]);
           socket.broadcast.to(data.roomId).emit('remove connection', data.id);
-          console.log("Again, here are the rooms!", rooms);
+          console.log("Rooms:", rooms);
           // delete room if empty
           if (room.length === 0) {
-            console.log("the last peer in room left!");
+           // console.log("The last peer in room left!");
             delete rooms[data.roomId];
             delete listenerRooms[data.roomId];
             delete privRooms[data.roomId];
           } else {
             // give updated list of peer info
-            console.log("one peer left, some remain");
+           // console.log("One peer left, some remain");
             io.to(listenerRooms[data.roomId]).emit('receive peer info', JSON.stringify(room));
           }
           // update open rooms table
@@ -222,23 +221,23 @@ io.on('connection', socket => {
   });
 
   socket.on('offer', offer => {
-    console.log("I'm getting this offer", offer);
+  //  console.log("I'm getting this offer", offer);
   //  io.to(`/#${offer.to}`).emit('offer', offer);
     io.to(`${offer.to}`).emit('offer', offer);
     // io.to(`${offer.by}`).emit('offer', offer);
   });
 
   socket.on('answer', answer => {
-    console.log("I'm giving this answer", answer);
+  //  console.log("I'm giving this answer", answer);
  //   io.to(`/#${answer.to}`).emit('answer', answer);
     io.to(`${answer.to}`).emit('answer', answer);
     // io.to(`${answer.by}`).emit('answer', answer);
   });
 
   socket.on('newInstCreated', instrument => {
-    console.log('this is a brand new instrument', instrument);
+   // console.log('this is a brand new instrument', instrument);
     instruments.create(instrument).then(instrumentEntry => {
-      console.log(instrumentEntry.dataValues, ' got entered');
+   //   console.log(instrumentEntry.dataValues, ' got entered');
     });
   });
 
@@ -301,7 +300,6 @@ app.get('/logout', (req, res) => {
     delete req.session.userName;
   }
   req.logout();
-  console.log('mysession after logout', req.session);
   res.sendStatus(200);
 });
 
@@ -384,7 +382,7 @@ app.get('/auth/facebook/callback',
 
 
 app.get('/isLoggedIn', (req, res)=> {
-console.log(req.session, "REQ.SESSION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+//  console.log("req.session", req.session);
 let passport=req.session.passport?req.session.passport.user:req.session.passport;
   if (passport===undefined && req.session.userName===undefined) {
     console.log('*********************** this person should not be able to acces UMI');
@@ -397,7 +395,7 @@ let passport=req.session.passport?req.session.passport.user:req.session.passport
 
 app.get("/getUserInfo", (req, res) => {
   const person=req.session.userName||req.session.passport;
-  console.log("person:",person,"req.session:", req.session);
+//  console.log("person:",person,"req.session:", req.session);
 let passport=req.session.passport!==undefined?req.session.passport.user:req.session.passport;
 
   if (passport) {
@@ -416,7 +414,6 @@ let passport=req.session.passport!==undefined?req.session.passport.user:req.sess
         });
     });
   } else {
-    console.log(" *************************else statement line FROM getuserINFO");
     instruments.findAll({ where: { userName: person } }).then(
         userInstruments => (
            userInstruments.map(a => a.dataValues)
